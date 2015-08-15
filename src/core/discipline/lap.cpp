@@ -22,10 +22,15 @@ void rfc::Lap::setTimeEnd(const Time &timeEndNew) {
 	timeEnd = timeEndNew;
 } /* end of 'Lap::setTimeEnd' function */
 
+/* set new winner state flag */
+void rfc::Lap::setWinnerFlag(const bool newState) {
+	isWinner = newState;
+} /* end of 'Lap::setWinnerFlag' function */
+
 /* set pushpin by id penalty */
 void rfc::Lap::setPinPenalty(long id, long valueNew) {
-	timePenalty -= pinsPenalty[id];
-	timePenalty += valueNew;
+	timePenalty -= Time(pinsPenalty[id]);
+	timePenalty += Time(valueNew);
 	pinsPenalty[id] = valueNew;
 } /* end of 'Lap::setPinPenalty' function */
 
@@ -53,3 +58,8 @@ const rfc::Time& rfc::Lap::getTimePenalty() const {
 const std::vector<long>& rfc::Lap::getPins() const {
 	return pinsPenalty;
 } /* end of 'rfc::Lap::getPins' function */
+
+/* get result lap time with penalty statistics */
+rfc::Time rfc::Lap::getTimeResult() const {
+	return (timeEnd - timeStart) + timePenalty;
+} /* end of 'Lap::getTimeResult' function */

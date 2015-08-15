@@ -19,3 +19,9 @@ rfc::Man::Man(const std::string &lastName,
 	lastName(lastName), firstName(firstName)
 {
 } /* end of 'Man' constructor */
+
+/* defualt constructor */
+rfc::Team::Team(const ulong teamId) :
+	id(teamId)
+{
+} /* end of 'Team' constructor */

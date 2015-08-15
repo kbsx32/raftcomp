@@ -19,28 +19,44 @@ namespace rfc {
 	private:
 		double seconds;   /* current timer state value in seconds */
 
+	public:
+		/* infinity constant time */
+		static constexpr double infinity = -1;
+
+		/* default constructor.
+		 * by defualt sets infinity time.
+		 */
+		Time();
+
+		/* constructor by hour, minute, seconds and milliseconds */
+		Time(long hour, long min, long sec, long millisec);
+
 		/* constructor by time in seconds.
 		 * argument:
 		 *   double sec - new time in seconds.
 		 */
 		Time(double sec);
 
-	public:
-		/* defualt constructor */
-		Time();
-
 		/* set time function.
 		 * returns: self-reference.
 		 */
 		Time& set(long hour, long min, long sec, long millisec);
 
+		/* sum two times operator */
+		Time operator+(const Time &timeAdd) const;
+
 		/* substract two times operator */
-		Time operator-(Time &timeSub) const;
+		Time operator-(const Time &timeSub) const;
 
 		/* sum two times operator */
-		Time& operator+=(double seconds);
+		Time& operator+=(const Time &timeAdd);
 		/* substract two times operator */
-		Time& operator-=(double seconds);
+		Time& operator-=(const Time &timeSub);
+
+		/* compare times operator */
+		bool operator>(const Time &time1);
+		/* compare times operator */
+		bool operator<(const Time &time1);
 
 		/*
 		 * get values functions

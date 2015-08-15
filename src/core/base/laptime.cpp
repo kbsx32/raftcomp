@@ -1,7 +1,9 @@
-#include "time.h"
+#include "laptime.h"
 
 /* defualt constructor */
-rfc::Time::Time() {
+rfc::Time::Time() :
+	seconds(infinity)
+{
 } /* end of 'Time' constructor */
 
 /* constructor by time in seconds.
@@ -11,6 +13,11 @@ rfc::Time::Time() {
 rfc::Time::Time(double sec) :
 	seconds(sec)
 {
+} /* end of 'Time' constructor */
+
+/* constructor by hour, minute, seconds and milliseconds */
+rfc::Time::Time(long hour, long min, long sec, long millisec) {
+	set(hour, min, sec, millisec);
 } /* end of 'Time' constructor */
 
 /* set time function.
@@ -23,8 +30,13 @@ rfc::Time& rfc::Time::set(long hour, long min, long sec, long millisec) {
 	return *this;
 } /* end of 'Time::set' function */
 
+/* sum two times operator */
+rfc::Time rfc::Time::operator+(const Time &timeAdd) const {
+	return Time(seconds + timeAdd.seconds);
+} /* end of 'Time::operator-' function */
+
 /* substract two times operator */
-rfc::Time rfc::Time::operator-(Time &timeSub) const {
+rfc::Time rfc::Time::operator-(const Time &timeSub) const {
 	return Time(seconds - timeSub.seconds);
 } /* end of 'Time::operator-' function */
 
@@ -49,13 +61,23 @@ long rfc::Time::getHours() const {
 } /* end of 'rfc::Time::getHours' function */
 
 /* sum two times operator */
-rfc::Time& rfc::Time::operator+=(double secondsAdd) {
-	seconds += secondsAdd;
+rfc::Time& rfc::Time::operator+=(const Time &timeAdd) {
+	seconds += timeAdd.seconds;
 	return *this;
 } /* end of 'operator+=' function */
 
 /* substract two times operator */
-rfc::Time& rfc::Time::operator-=(double secondsSub) {
-	seconds -= secondsSub;
+rfc::Time& rfc::Time::operator-=(const Time &timeSub) {
+	seconds -= timeSub.seconds;
 	return *this;
-}
+} /* end of 'operator-=' function */
+
+/* compare times operator */
+bool rfc::Time::operator>(const Time &time1) {
+	return seconds > time1.seconds;
+} /* end of 'Time::operator>' function */
+
+/* compare times operator */
+bool rfc::Time::operator<(const Time &time1) {
+	return seconds < time1.seconds;
+} /* end of 'Time::operator<' function */

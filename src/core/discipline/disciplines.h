@@ -14,17 +14,46 @@
 
 /* 'raftcomp' support namespace */
 namespace rfc {
-	/* redifinition of disciplines */
-	typedef lap DiscQualify;
-	typedef lap DiscSlalom;
-	typedef lap DiscLongRace;
+	/* disciplines namespace */
+	namespace disc {
 
-	/* parallel sprint discipline declaration */
-	class DiscSprint {
-		std::vector<Lap> laps;  /* sprint laps */
+		/* redifinition of disciplines */
+		typedef Lap Qualify;
+		typedef Lap LongRace;
 
-		// void addNewLap(const Lap &lap);
-	};
+		/* parallel sprint discipline declaration */
+		class Sprint {
+		public:
+			/* define laps type */
+			enum class LapType {
+				LAP_UNKNOWN,
+				LAP_1_32,
+				LAP_1_16,
+				LAP_1_8,
+				LAP_1_4,
+				LAP_1_2,
+				FINAL_A,
+				FINAL_B
+			}; /* end of 'LapType' enum class */
+
+		private:
+			std::map<LapType, Lap> laps;			/* sprint laps */
+
+		public:
+			/* add new lap function */
+			void addNewLap(const LapType Type, const Lap &lap);
+
+			/* get lap info */
+			Lap& getLapInfo(const LapType Type);
+		}; /* end of 'DiscSprint' class */
+
+		/* slalom discipline class declaration */
+		class Slalom {
+		private:
+			static constexpr long triesCnt = 2; /* count of slalom tries */
+			Lap laps[triesCnt];					/* two slalom tries lap */
+		}; /* end of 'Slalom' class */
+	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
 
 #endif /* RFC_DISCIPLINES_H */

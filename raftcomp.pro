@@ -14,17 +14,23 @@ TEMPLATE = app
 
 SOURCES += \
     src/main_client.cpp \
-    src/core/team_man.cpp \
-    src/core/time.cpp \
-    src/core/lap.cpp
+    src/core/team.cpp \
+    src/core/dispatcher.cpp \
+    src/core/discipline/disciplines.cpp \
+    src/core/discipline/lap.cpp \
+    src/core/base/laptime.cpp \
+    src/gui/lap_table.cpp
 
 HEADERS  += \
-    src/core/raftcomp.h \
     src/core/team.h \
-    src/core/lap.h \
-    src/core/time.h \
     src/core/def.h \
-    src/core/disciplines.h
+    src/core/dispatcher.h \
+    src/core/discipline/disciplines.h \
+    src/core/discipline/lap.h \
+    src/core/base/laptime.h \
+    src/gui/lap_table.h \
+    src/gui/gui.h \
+    src/raftcomp.h
 
 FORMS    +=
 

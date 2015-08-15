@@ -11,7 +11,7 @@
 #define RFC_LAP_H_
 
 #include <vector>
-#include "time.h"
+#include "../def.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
@@ -22,6 +22,7 @@ namespace rfc {
 			timeEnd,						/* end lap time */
 			timePenalty;                    /* penalty time */
 
+		bool isWinner;                      /* winner flag */
 		std::vector<long> pinsPenalty;		/* pins penalties */
 
 	public:
@@ -32,6 +33,9 @@ namespace rfc {
 		void setTimeStart(const Time &timeStartNew);
 		/* set end lap time */
 		void setTimeEnd(const Time &timeEndNew);
+
+		/* set new winner state flag */
+		void setWinnerFlag(const bool newState = true);
 
 		/* set pushpin by id penalty */
 		void setPinPenalty(long id, long valueNew);
@@ -45,6 +49,9 @@ namespace rfc {
 
 		/* get penalty lap time */
 		const Time& getTimePenalty() const;
+
+		/* get result lap time with penalty statistics */
+		Time getTimeResult() const;
 
 		/* get pins stats array */
 		const std::vector<long>& getPins() const;

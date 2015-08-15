@@ -9,33 +9,29 @@
 #include <QApplication>
 
 #include <QLabel>
+#include <QTableView>
 
-#include "core/raftcomp.h"
+#include "raftcomp.h"
 
 /* entry point function */
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
-	QLabel qLab;
+	rfc::gui::LapTable ltable;
+	rfc::Lap lap;
 
-	qLab.setText("hell");
-	qLab.show();
+	rfc::Team tm0(16);
+	tm0.men.push_back(rfc::Man("chuy", "sa"));
+	tm0.men.push_back(rfc::Man("kuz", "re"));
 
-	rfc::raftcomp rf;
-	rfc::Lap lp;
+	ltable.addLapInfo(&tm0, lap);
 
-	rfc::Time time0, time1, time;
+	rfc::Team tm1(32);
+	tm1.men.push_back(rfc::Man("pon", "na"));
+	tm1.men.push_back(rfc::Man("bel", "vv"));
+	ltable.addLapInfo(&tm1, lap);
 
-	time0.set(1, 55, 30, 902);
-	time1.set(1, 55, 30, 903);
-
-	time = time1 - time0;
-
-	int
-		h = time.getHours(),
-		m = time.getMinutes(),
-		s = time.getSeconds(),
-		ms = time.getMilliSec();
+	ltable.show();
 
 	return app.exec();
 } /* end of 'main' function */
