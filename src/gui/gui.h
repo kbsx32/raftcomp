@@ -11,6 +11,7 @@
 #define RFC_GUI_H
 
 #include "lap_table.h"
+#include "mandat.h"
 
 #endif /* RFC_GUI_H */
 

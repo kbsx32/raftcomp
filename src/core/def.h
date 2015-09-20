@@ -15,9 +15,12 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <QString>
 
-/* time class support */
+/* base project classes */
+#include "base/rstring.h"
 #include "base/laptime.h"
+#include "base/exception.h"
 
 typedef unsigned long ulong;
 

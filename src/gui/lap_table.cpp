@@ -32,20 +32,20 @@ void rfc::gui::LapTable::eraseTable() {
 /* set table item function */
 void rfc::gui::LapTable::setTableItem(const ulong row,
 									  const ulong column,
-									  const std::string &string) {
-	QTableWidgetItem *item = new QTableWidgetItem(string.c_str());
+									  const String &string) {
+	QTableWidgetItem *item = new QTableWidgetItem(string.data());
 	setItem(row, column, item);
 } /* end of 'gui::LapTable::addTableItem' function */
 
 /* add new info to table */
-void rfc::gui::LapTable::addLapInfo(const Team *team, const Lap &Lap) {
+void rfc::gui::LapTable::addLapInfo(const Team *team, const Lap &lap) {
 	setRowCount(rowCount() + 1);
 
 	/* write team id */
-	setTableItem(rowCount() - 1, 0, std::to_string(team->id));
+	setTableItem(rowCount() - 1, 0, QString::number(team->id));
 
 	/* set team men names */
-	std::string names;
+	String names;
 	for (const auto &man : team->men)
 		names += man.lastName + ", ";
 	setTableItem(rowCount() - 1, 1, names);

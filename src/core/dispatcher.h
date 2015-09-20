@@ -63,6 +63,10 @@ namespace rfc {
 	public:
 		/* prepare count of sprints function */
 		void setSprintStartLap(const disc::Sprint::LapType lapType);
+
+		/* prepare count of sprints function */
+		void setSprintStartLap(const ulong teamsCnt);
+
 		/* prepare teams info to parallel sprint */
 		void prepareSprintLap(const disc::Sprint::LapType lapType);
 

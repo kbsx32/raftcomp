@@ -13,13 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += \
-    src/main_client.cpp \
     src/core/team.cpp \
     src/core/dispatcher.cpp \
     src/core/discipline/disciplines.cpp \
     src/core/discipline/lap.cpp \
     src/core/base/laptime.cpp \
-    src/gui/lap_table.cpp
+    src/gui/lap_table.cpp \
+    src/gui/mandat.cpp \
+    src/core/base/exception.cpp \
+    src/main.cpp \
+    src/core/base/rstring.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -30,8 +33,12 @@ HEADERS  += \
     src/core/base/laptime.h \
     src/gui/lap_table.h \
     src/gui/gui.h \
-    src/raftcomp.h
+    src/raftcomp.h \
+    src/gui/mandat.h \
+    src/core/base/exception.h \
+    src/core/base/rstring.h
 
-FORMS    +=
+# FORMS    +=
 
-QMAKE_CXXFLAGS += -std=c++11 -msse2
+QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -msse2

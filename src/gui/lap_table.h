@@ -31,7 +31,7 @@ namespace rfc {
 			/* set table item function */
 			void setTableItem(const ulong row,
 							  const ulong column,
-							  const std::string &string);
+							  const String &string);
 
 			/* erase all data from table */
 			void eraseTable();

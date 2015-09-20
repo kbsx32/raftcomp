@@ -21,7 +21,7 @@ namespace rfc {
 	/* single man class declaration */
 	class Man {
 	public:
-		std::string
+		String
 			lastName,       		/* man family name  */
 			firstName;				/*   and first name */
 
@@ -30,9 +30,9 @@ namespace rfc {
 		Man();
 
 		/* constructor by names */
-		Man(const std::string &lastName,
-			const std::string &firstName );
-	}; /* end of 'man' class */
+		Man(const String &lastName,
+			const String &firstName );
+	}; /* end of 'Man' class */
 
 	/* team class declaration */
 	class Team {
@@ -49,6 +49,8 @@ namespace rfc {
 		/* defualt constructor */
 		Team(const ulong teamId = 0);
 
+		/* saving to file full progress */
+		void saveToFile(const String &fileName);
 	}; /* end of 'team' class */
 } /* end of 'rfc' namespace' */
 

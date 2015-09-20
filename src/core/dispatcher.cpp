@@ -37,6 +37,11 @@ void rfc::CompDispatcher::setStage(const Stage newStage) {
 	stage = newStage;
 } /* end of 'CompDispatcher::setStage' function */
 
+/* prepare teams info to first parallel sprint. */
+void rfc::CompDispatcher::setSprintStartLap(const ulong teamsCnt) {
+	;
+} /* end of 'rfc::CompDispatcher::prepareSprintLapFirst' function */
+
 /* prepare count of sprints function */
 void rfc::CompDispatcher::setSprintStartLap(const disc::Sprint::LapType lapType) {
 	assert(stage == Stage::SPRINT);
