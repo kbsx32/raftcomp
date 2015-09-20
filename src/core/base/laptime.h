@@ -11,6 +11,8 @@
 #ifndef RFC_TIME_H
 #define RFC_TIME_H
 
+#include "rstring.h"
+
 /* 'raftcomp' support namespace */
 namespace rfc {
 
@@ -73,6 +75,17 @@ namespace rfc {
 
 		/* get current time hour function */
 		long getHours() const;
+
+		/* get time in string format
+		 * default format is:
+		 *		"hh:mm::ss'ddd",
+		 * where:
+		 *		hh - hour,
+		 *		mm - minures,
+		 *		ss - seconds,
+		 *		ddd - miliseconds.
+		 */
+		String getTimeString() const;
 	}; /* end of 'time' class */
 } /* end of 'rfc' namespace */
 

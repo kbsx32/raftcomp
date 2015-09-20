@@ -63,3 +63,8 @@ const std::vector<long>& rfc::Lap::getPins() const {
 rfc::Time rfc::Lap::getTimeResult() const {
 	return (timeEnd - timeStart) + timePenalty;
 } /* end of 'Lap::getTimeResult' function */
+
+/* get pushpins count */
+ulong rfc::Lap::getPinsCount() const {
+	return pinsPenalty.size();
+} /* end of 'Lap::getPinsCount' function */

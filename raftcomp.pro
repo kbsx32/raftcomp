@@ -22,7 +22,8 @@ SOURCES += \
     src/gui/mandat.cpp \
     src/core/base/exception.cpp \
     src/main.cpp \
-    src/core/base/rstring.cpp
+    src/core/base/rstring.cpp \
+    src/gui/lap_table_team.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -36,9 +37,10 @@ HEADERS  += \
     src/raftcomp.h \
     src/gui/mandat.h \
     src/core/base/exception.h \
-    src/core/base/rstring.h
+    src/core/base/rstring.h \
+    src/gui/lap_table_team.h
 
 # FORMS    +=
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder
 QMAKE_CXXFLAGS += -msse2

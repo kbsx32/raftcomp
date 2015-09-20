@@ -34,6 +34,9 @@ namespace rfc {
 
 		/* get const char * array function */
 		const char * data() const;
+
+		/* QString get function */
+		const QString &getQString() const;
 	}; /* end of 'String' class */
 } /* end of 'rfc' namespace */
 

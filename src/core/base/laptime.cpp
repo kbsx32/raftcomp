@@ -81,3 +81,20 @@ bool rfc::Time::operator>(const Time &time1) {
 bool rfc::Time::operator<(const Time &time1) {
 	return seconds < time1.seconds;
 } /* end of 'Time::operator<' function */
+
+/* get time in string format
+ * default format is:
+ *		"hh:mm::ss'ddd",
+ * where:
+ *		hh - hour,
+ *		mm - minures,
+ *		ss - seconds,
+ *		ddd - miliseconds.
+ */
+rfc::String rfc::Time::getTimeString() const {
+	return
+		QString::number(getHours())	+ QString(":")
+	+	QString::number(getMinutes())	+ QString(":")
+	+	QString::number(getSeconds())	+ QString("'")
+	+	QString::number(getMilliSec());
+} /* end of 'Time::getTimeString' function */

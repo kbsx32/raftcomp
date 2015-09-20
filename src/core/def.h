@@ -30,5 +30,11 @@ namespace rfc {
 	typedef ulong TeamId;
 } /* end of 'rfc' namespace */
 
+/* Column static cast redefinition
+ * argument:
+ *		VALUE - column type from enum class.
+ */
+#define ENUM_CAST(VALUE) static_cast<ulong>(VALUE)
+
 #endif /* RFC_DEF_H */
 

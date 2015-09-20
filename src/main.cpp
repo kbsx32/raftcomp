@@ -20,23 +20,25 @@ int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
 	try {
-		/*
 		rfc::Lap lap;
 
 		rfc::Team tm0(16);
-		tm0.men.push_back(rfc::Man("chuy", "sa"));
-		tm0.men.push_back(rfc::Man("kuz", "re"));
-
-		ltable.addLapInfo(&tm0, lap);
+		tm0.men.push_back(rfc::Man("feder", "evgeny"));
+		tm0.men.push_back(rfc::Man("ponomareva", "natalia"));
+		tm0.men.push_back(rfc::Man("alexeeva", "valentina"));
+		rfc::gui::LapTable ltable(&lap);
+		ltable.addTeamInfo(&tm0, &tm0.discQualif);
 
 		rfc::Team tm1(32);
-		tm1.men.push_back(rfc::Man("pon", "na"));
-		tm1.men.push_back(rfc::Man("bel", "vv"));
-		ltable.addLapInfo(&tm1, lap);
+		tm1.men.push_back(rfc::Man("chuyneshena", "svetlana"));
+		tm1.men.push_back(rfc::Man("smirnova", "anna"));
+		tm1.men.push_back(rfc::Man("belousova", "victoria"));
 
-		// ltable.show();
-		*/
+		ltable.addTeamInfo(&tm1, &tm1.discQualif);
 
+		ltable.show();
+
+		/*
 		QDir qd;
 		qd.mkdir("data");
 
@@ -50,19 +52,17 @@ int main(int argc, char *argv[]) {
 
 		rfc::Mandat mand;
 		mand.show();
-
+		*/
+		return app.exec();
 	} catch (const rfc::Exception &ex) {
-		QLabel qlab("hell");
-		qlab.show();
-
-		QLabel ql(ex.getText());
-		// ql
 		QMessageBox *qmb = new QMessageBox(QString("rfc error"),
 						(QString)ex.getText(),
 						QMessageBox::Icon::Critical,
 						QMessageBox::Button::Ok, 0, 0);
 		qmb->exec();
+
+		delete qmb;
 	}
 
-	return app.exec();
+	return 0;
 } /* end of 'main' function */

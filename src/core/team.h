@@ -31,7 +31,7 @@ namespace rfc {
 
 		/* constructor by names */
 		Man(const String &lastName,
-			const String &firstName );
+			const String &firstName);
 	}; /* end of 'Man' class */
 
 	/* team class declaration */

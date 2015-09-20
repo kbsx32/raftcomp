@@ -34,3 +34,8 @@ rfc::String::String(const char * const &str) :
 const char * rfc::String::data() const {
 	return toLatin1().data();
 } /* end of 'String::data' function */
+
+/* QString get function */
+const QString &rfc::String::getQString() const {
+	return *this;
+} /* end of 'getQString' function */

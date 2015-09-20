@@ -13,6 +13,7 @@
 #include <QTableWidget>
 
 #include "../core/dispatcher.h"
+#include "lap_table_team.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
@@ -23,21 +24,32 @@ namespace rfc {
 		{
 			Q_OBJECT
 
+			friend class LapTableTeam; /* get permissions for Lap table team */
+			Lap *lap = nullptr;	/* linked to table lap */
+
+		public:
+			/* set table item function */
+			void setItemText(const ulong row,
+							 const ulong column,
+							 const String &string);
+
+			/* set table item time function */
+			void setItemTime(const ulong row,
+							 const ulong column,
+							 const Time &time);
+
 		public:
 			/* default constructor */
-			explicit LapTable(QWidget *widgParent = nullptr);
+			explicit LapTable(Lap *lap, QWidget *widgParent = nullptr);
 
-
-			/* set table item function */
-			void setTableItem(const ulong row,
-							  const ulong column,
-							  const String &string);
+			/* class destructor */
+			~LapTable();
 
 			/* erase all data from table */
 			void eraseTable();
 
 			/* add new info to table */
-			void addLapInfo(const Team *team, const Lap &Lap);
+			void addTeamInfo(Team *team, Lap *teamLap);
 
 		signals:
 		public slots:

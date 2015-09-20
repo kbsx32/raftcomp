@@ -22,7 +22,7 @@ namespace rfc {
 			timeEnd,						/* end lap time */
 			timePenalty;                    /* penalty time */
 
-		bool isWinner;                      /* winner flag */
+		bool isWinner;                      /* winner flag for parallel sprints */
 		std::vector<long> pinsPenalty;		/* pins penalties */
 
 	public:
@@ -39,8 +39,12 @@ namespace rfc {
 
 		/* set pushpin by id penalty */
 		void setPinPenalty(long id, long valueNew);
-		/* set pushpin by id penalty */
+		/* set pushpins count */
 		void setPinsCount(int cnt);
+
+
+		/* get pushpins count */
+		ulong getPinsCount() const;
 
 		/* get start lap time */
 		const Time& getTimeStart() const;
