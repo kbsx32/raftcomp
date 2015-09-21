@@ -14,8 +14,8 @@
 #include "lap_table.h"
 
 /* default constructor */
-rfc::gui::LapTable::LapTable(Lap *lap, QWidget *widgParent) :
-	lap(lap),
+rfc::gui::LapTable::LapTable(const disc::Type type, QWidget *widgParent) :
+	lapType(type),
 	QTableWidget(widgParent)
 {
 	/* import column types */
@@ -64,10 +64,10 @@ void rfc::gui::LapTable::setItemTime(const ulong row,
 } /* end of 'gui::LapTable::setItemTime' function */
 
 /* add new info to table */
-void rfc::gui::LapTable::addTeamInfo(Team *team, Lap *teamLap) {
+void rfc::gui::LapTable::addTeamInfo(Team *team) {
 	setRowCount(rowCount() + 1);
 
-	new LapTableTeam(team, this, teamLap, rowCount() - 1);
+	new LapTableTeam(team, this, rowCount() - 1);
 } /* end of 'gui::LapTable::addLapInfo' function */
 
 /* class destructor */

@@ -18,16 +18,14 @@
  * arguments:
  *   team : connected source team
  *   table : connected table to get TableItem Widgets
- *   lap : lap info ( count of pushpins, etc. ) for current team for current ride.
  *   row : team row in table.
  */
-rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table,
-									 Lap *lap, ulong row) :
+rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table, ulong row) :
 	team(team),
 	tableRow(row),
 	lapTable(table),
-	teamLap(lap),
 	QObject(table)
+	// teamLap(team)
 {
 	/* write team id */
 	lapTable->setItemText(tableRow, ENUM_CAST(ColumnType::TEAM_ID), QString::number(team->id));
@@ -41,6 +39,7 @@ rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table,
 	// ((QWidget *)qtwd)->setEnabled(false);
 	// qtwd->set
 
+	/* set other values to table */
 	lapTable->setItemText(tableRow, ENUM_CAST(ColumnType::TEAM_HUMEN), names);
 
 	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_START), teamLap->getTimeStart());
@@ -48,20 +47,18 @@ rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table,
 	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_DISTANCE),
 						  teamLap->getTimeEnd() - teamLap->getTimeStart());
 	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_RESULT), teamLap->getTimeResult());
+
 	// lapTable->timerEvent();
 	/*
 	PINS
 	PENALTY_OTHER
 	PENALTY_SUM
-	TIME_START
-	TIME_END
-	TIME_DISTANCE
-	TIME_RESULT
 	PLACE
 	SCORE
 	*/
 
 	/* pins table init */
+	/*
 	QTableWidget *tablePins = new QTableWidget(1, lapTable->lap->getPinsCount());
 	tablePins->setColumnCount(4);
 	tablePins->horizontalHeader()->hide();
@@ -73,5 +70,6 @@ rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table,
 	tablePins->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	tablePins->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	lapTable->setCellWidget(tableRow, ENUM_CAST(ColumnType::PINS), tablePins);
+	*/
 } /* end of 'gui::LapTableTeam' class constructor */
 

@@ -7,13 +7,35 @@
  */
 
 #include "disciplines.h"
+#include "lap.h"
 
-/* add new lap function */
-void rfc::disc::Sprint::addNewLap(const LapType Type, const Lap &lap) {
-	laps[Type] = lap;
-} /* end of 'DiscSprint::addNewLap' function */
+/* default constructor */
+rfc::disc::Type::Type(const TypeDisc disc) :
+	typeDisc(disc)
+{
+} /* end of 'disc::Type' constructor */
 
-/* get lap info */
-rfc::Lap& rfc::disc::Sprint::getLapInfo(const LapType Type) {
-	return laps[Type];
-} /* end of 'DiscSprint::GetLapInfp' function */
+/* constructor for sprint */
+rfc::disc::Type::Type(const TypeSprint sprint) :
+	typeDisc(disc::TypeDisc::SPRINT),
+	typeSprint(sprint)
+{
+} /* end of 'disc::Type' constructor */
+
+/* get lap function */
+rfc::Lap *rfc::disc::Races::getLap(const ulong teamId, const Type type) {
+	switch (type.typeDisc) {
+		case TypeDisc::QUALIFY:
+			return qualify[teamId];
+		case TypeDisc::LONG_RACE:
+			return longRace[teamId];
+		case TypeDisc::SLALOM_0:
+			return slalom0[teamId];
+		case TypeDisc::SLALOM_1:
+			return slalom1[teamId];
+		case TypeDisc::SPRINT:
+			return sprint[ENUM_CAST(type.typeSprint)][teamId];
+	}
+
+	return nullptr;
+} /* end of 'Races::getLap' function */

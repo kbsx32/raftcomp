@@ -9,7 +9,9 @@
 #include "lap.h"
 
 /* default constructor */
-rfc::Lap::Lap() {
+rfc::Lap::Lap(const disc::Type type) :
+	type(type)
+{
 } /* end of 'Lap' constructor */
 
 /* set start time */

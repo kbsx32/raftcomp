@@ -24,8 +24,8 @@ namespace rfc {
 		{
 			Q_OBJECT
 
-			friend class LapTableTeam; /* get permissions for Lap table team */
-			Lap *lap = nullptr;	/* linked to table lap */
+			friend class LapTableTeam;				/* get permissions for Lap table team */
+			disc::Type lapType;						/* linked to table lap */
 
 		public:
 			/* set table item function */
@@ -40,7 +40,7 @@ namespace rfc {
 
 		public:
 			/* default constructor */
-			explicit LapTable(Lap *lap, QWidget *widgParent = nullptr);
+			explicit LapTable(const disc::Type lapType, QWidget *widgParent = nullptr);
 
 			/* class destructor */
 			~LapTable();
@@ -49,7 +49,7 @@ namespace rfc {
 			void eraseTable();
 
 			/* add new info to table */
-			void addTeamInfo(Team *team, Lap *teamLap);
+			void addTeamInfo(Team *team);
 
 		signals:
 		public slots:

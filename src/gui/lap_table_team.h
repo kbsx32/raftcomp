@@ -54,10 +54,9 @@ namespace rfc {
 			 * arguments:
 			 *   team : connected source team
 			 *   table : connected table to get TableItem Widgets
-			 *   lap : lap info ( count of pushpins, etc. ) for current team for current ride.
 			 *   row : team row in table.
 			 */
-			LapTableTeam(Team *team, LapTable *table, Lap *lap, ulong row);
+			LapTableTeam(Team *team, LapTable *table, ulong row);
 		}; /* end of 'LapTableTeam' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

@@ -13,10 +13,15 @@
 #include <vector>
 #include "../def.h"
 
+#include "disciplines.h"
+
 /* 'raftcomp' support namespace */
 namespace rfc {
+
 	/* Single template discipline lap class */
 	class Lap {
+		disc::Type type;					/* discipline lap type */
+
 		Time
 			timeStart,						/* start lap time */
 			timeEnd,						/* end lap time */
@@ -27,7 +32,7 @@ namespace rfc {
 
 	public:
 		/* default constructor */
-		Lap();
+		Lap(const disc::Type type);
 
 		/* set start lap time */
 		void setTimeStart(const Time &timeStartNew);

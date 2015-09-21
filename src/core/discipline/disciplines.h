@@ -10,49 +10,66 @@
 #ifndef RFC_DISCIPLINES_H
 #define RFC_DISCIPLINES_H
 
-#include "lap.h"
+#include "../def.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
+	/* forward declaration of lap class */
+	class Lap;
+
 	/* disciplines namespace */
 	namespace disc {
 
-		/* redifinition of disciplines */
-		typedef Lap Qualify;
-		typedef Lap LongRace;
+		/* all disciplines types */
+		enum class TypeDisc {
+			QUALIFY,
+			SPRINT,
+			SLALOM_0,
+			SLALOM_1,
+			LONG_RACE
+		}; /* end of 'LapType' enum class */
 
-		/* parallel sprint discipline declaration */
-		class Sprint {
+		/* sprint lap types */
+		enum class TypeSprint {
+			SPRINT_1_32,
+			SPRINT_1_16,
+			SPRINT_1_8,
+			SPRINT_1_4,
+			SPRINT_1_2,
+			FINAL_B,
+			FINAL_A
+		}; /* end of 'TypeSprint' enum class */
+
+		/* class collector for types */
+		class Type {
 		public:
-			/* define laps type */
-			enum class LapType {
-				LAP_UNKNOWN,
-				LAP_1_32,
-				LAP_1_16,
-				LAP_1_8,
-				LAP_1_4,
-				LAP_1_2,
-				FINAL_A,
-				FINAL_B
-			}; /* end of 'LapType' enum class */
-
-		private:
-			std::map<LapType, Lap> laps;			/* sprint laps */
+			TypeDisc typeDisc;
+			TypeSprint typeSprint;
 
 		public:
-			/* add new lap function */
-			void addNewLap(const LapType Type, const Lap &lap);
+			/* constructor for usual discipline */
+			Type(const TypeDisc disc);
 
-			/* get lap info */
-			Lap& getLapInfo(const LapType Type);
-		}; /* end of 'DiscSprint' class */
+			/* constructor for sprint */
+			Type(const TypeSprint sprint);
+		}; /* end of 'Type' class */
 
-		/* slalom discipline class declaration */
-		class Slalom {
-		private:
-			static constexpr long triesCnt = 2; /* count of slalom tries */
-			Lap laps[triesCnt];					/* two slalom tries lap */
-		}; /* end of 'Slalom' class */
+		/* full competition race info class */
+		class Races {
+			/* define one 'ride' class */
+			typedef std::map<ulong, Lap *> Ride;	/* (ulong) - team id,
+													 * (Lap *) - team lap info
+													 */
+
+			/* all disciplines info */
+			Ride qualify;
+			std::vector<Ride> sprint;
+			Ride slalom0, slalom1;
+			Ride longRace;
+
+			/* get lap function */
+			Lap * getLap(const ulong teamId, const Type type);
+		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
 
