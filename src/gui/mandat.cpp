@@ -6,7 +6,7 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
-#include "mandat.h"
+#include "gui_mandat.h"
 
 /* class default constructor */
 rfc::Mandat::Mandat() :

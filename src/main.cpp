@@ -20,9 +20,10 @@ int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
 
 	try {
-		rfc::gui::LapTable ltable(rfc::disc::TypeDisc::QUALIFY);
+		rfc::Dispatcher dispatcher;
 
-		/*
+		rfc::gui::Ride ltable(dispatcher, rfc::disc::TypeDisc::QUALIFY);
+
 		rfc::Team tm0(16);
 		tm0.men.push_back(rfc::Man("feder", "evgeny"));
 		tm0.men.push_back(rfc::Man("ponomareva", "natalia"));
@@ -36,7 +37,7 @@ int main(int argc, char *argv[]) {
 		tm1.men.push_back(rfc::Man("belousova", "victoria"));
 
 		ltable.addTeamInfo(&tm1);
-		*/
+
 		ltable.show();
 
 		return app.exec();

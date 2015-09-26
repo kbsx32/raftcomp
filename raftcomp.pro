@@ -18,27 +18,27 @@ SOURCES += \
     src/core/discipline/disciplines.cpp \
     src/core/discipline/lap.cpp \
     src/core/base/laptime.cpp \
-    src/gui/lap_table.cpp \
     src/gui/mandat.cpp \
     src/core/base/exception.cpp \
     src/main.cpp \
     src/core/base/rstring.cpp \
-    src/gui/lap_table_team.cpp
+    src/gui/gui_ride.cpp \
+    src/gui/gui_ride_team.cpp
 
 HEADERS  += \
     src/core/team.h \
     src/core/def.h \
     src/core/dispatcher.h \
     src/core/discipline/disciplines.h \
-    src/core/discipline/lap.h \
     src/core/base/laptime.h \
-    src/gui/lap_table.h \
     src/gui/gui.h \
     src/raftcomp.h \
-    src/gui/mandat.h \
     src/core/base/exception.h \
     src/core/base/rstring.h \
-    src/gui/lap_table_team.h
+    src/gui/gui_ride.h \
+    src/gui/gui_ride_team.h \
+    src/gui/gui_mandat.h \
+    src/core/discipline/ride_team.h
 
 # FORMS    +=
 

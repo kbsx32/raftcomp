@@ -11,15 +11,23 @@
 #include <QHeaderView>
 #include <QScrollBar>
 
-#include "lap_table.h"
+#include "gui_ride.h"
 
-/* default constructor */
-rfc::gui::LapTable::LapTable(const disc::Type type, QWidget *widgParent) :
+/* default constructor.
+ * arguments:
+ *   dispatcher : competiotion dispatcher;
+ *	 lapType : type of lap (QUALIFY, SPRINT, etc.);
+ *   widgParent : parent Qt Widget;
+ */
+rfc::gui::Ride::Ride(
+		Dispatcher &dispatcher,
+		const disc::Type type, QWidget *widgParent) :
 	lapType(type),
-	QTableWidget(widgParent)
+	QTableWidget(widgParent),
+	dispatcher(dispatcher)
 {
 	/* import column types */
-	typedef LapTableTeam::ColumnType ColumnType;
+	typedef RideTeam::ColumnType ColumnType;
 
 	setColumnCount(ENUM_CAST(ColumnType::END) - 1);
 
@@ -39,39 +47,39 @@ rfc::gui::LapTable::LapTable(const disc::Type type, QWidget *widgParent) :
 
 	/* pins table init */
 	/* ... */
-} /* end of 'gui::LapTable' constructor */
+} /* end of 'gui::Ride' constructor */
 
 /* erase all data from table */
-void rfc::gui::LapTable::eraseTable() {
+void rfc::gui::Ride::eraseTable() {
 	clear();
-} /* end of 'gui::LapTable::eraseTable' function */
+} /* end of 'gui::Ride::eraseTable' function */
 
 /* set table item function */
-void rfc::gui::LapTable::setItemText(const ulong row,
+void rfc::gui::Ride::setItemText(const ulong row,
 									 const ulong column,
 									 const String &string) {
 	QTableWidgetItem *item = new QTableWidgetItem((QString)string);
 	setItem(row, column, item);
-} /* end of 'gui::LapTable::setItemText' function */
+} /* end of 'gui::Ride::setItemText' function */
 
 /* set table item function */
-void rfc::gui::LapTable::setItemTime(const ulong row,
+void rfc::gui::Ride::setItemTime(const ulong row,
 									 const ulong column,
 									 const Time &time) {
 	QTableWidgetItem *item = new QTableWidgetItem(time.getTimeString());
 
 	setItem(row, column, item);
-} /* end of 'gui::LapTable::setItemTime' function */
+} /* end of 'gui::Ride::setItemTime' function */
 
 /* add new info to table */
-void rfc::gui::LapTable::addTeamInfo(Team *team) {
+void rfc::gui::Ride::addTeamInfo(Team *team) {
 	setRowCount(rowCount() + 1);
 
-	new LapTableTeam(team, this, rowCount() - 1);
-} /* end of 'gui::LapTable::addLapInfo' function */
+	new RideTeam(dispatcher, team, this, rowCount() - 1);
+} /* end of 'gui::Ride::addLapInfo' function */
 
 /* class destructor */
-rfc::gui::LapTable::~LapTable() {
-} /* End of '~LapTable' class destructor */
+rfc::gui::Ride::~Ride() {
+} /* End of '~Ride' class destructor */
 
 

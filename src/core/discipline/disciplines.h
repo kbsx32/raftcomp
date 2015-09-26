@@ -15,7 +15,7 @@
 /* 'raftcomp' support namespace */
 namespace rfc {
 	/* forward declaration of lap class */
-	class Lap;
+	class RideTeam;
 
 	/* disciplines namespace */
 	namespace disc {
@@ -55,10 +55,10 @@ namespace rfc {
 		}; /* end of 'Type' class */
 
 		/* full competition race info class */
-		class Races {
+		class Rides {
 			/* define one 'ride' class */
-			typedef std::map<ulong, Lap *> Ride;	/* (ulong) - team id,
-													 * (Lap *) - team lap info
+			typedef std::map<ulong, RideTeam *> Ride;	/* (ulong) - team id,
+													 * (RideTeam *) - team lap info
 													 */
 
 			/* all disciplines info */
@@ -67,8 +67,9 @@ namespace rfc {
 			Ride slalom0, slalom1;
 			Ride longRace;
 
+		public:
 			/* get lap function */
-			Lap * getLap(const ulong teamId, const Type type);
+			RideTeam * getLap(const ulong teamId, const Type type);
 		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

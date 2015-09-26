@@ -7,7 +7,7 @@
  */
 
 #include "disciplines.h"
-#include "lap.h"
+#include "ride_team.h"
 
 /* default constructor */
 rfc::disc::Type::Type(const TypeDisc disc) :
@@ -23,7 +23,7 @@ rfc::disc::Type::Type(const TypeSprint sprint) :
 } /* end of 'disc::Type' constructor */
 
 /* get lap function */
-rfc::Lap *rfc::disc::Races::getLap(const ulong teamId, const Type type) {
+rfc::RideTeam *rfc::disc::Rides::getLap(const ulong teamId, const Type type) {
 	switch (type.typeDisc) {
 		case TypeDisc::QUALIFY:
 			return qualify[teamId];
@@ -38,4 +38,4 @@ rfc::Lap *rfc::disc::Races::getLap(const ulong teamId, const Type type) {
 	}
 
 	return nullptr;
-} /* end of 'Races::getLap' function */
+} /* end of 'Rides::getLap' function */

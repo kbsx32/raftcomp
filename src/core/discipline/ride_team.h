@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef RFC_LAP_H_
-#define RFC_LAP_H_
+#ifndef RFC_RIDE_TEAM_H_
+#define RFC_RIDE_TEAM_H_
 
 #include <vector>
 #include "../def.h"
@@ -19,7 +19,7 @@
 namespace rfc {
 
 	/* Single template discipline lap class */
-	class Lap {
+	class RideTeam {
 		disc::Type type;					/* discipline lap type */
 
 		Time
@@ -32,7 +32,7 @@ namespace rfc {
 
 	public:
 		/* default constructor */
-		Lap(const disc::Type type);
+		RideTeam(const disc::Type type);
 
 		/* set start lap time */
 		void setTimeStart(const Time &timeStartNew);
@@ -64,7 +64,7 @@ namespace rfc {
 
 		/* get pins stats array */
 		const std::vector<long>& getPins() const;
-	}; /* end of 'lap' class */
+	}; /* end of 'RideTeam' class */
 } /* end of 'rfc' namespace */
 
-#endif /* RFC_LAP_H_ */
+#endif /* RFC_RIDE_TEAM_H_ */

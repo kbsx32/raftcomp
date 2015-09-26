@@ -11,18 +11,18 @@
 #define RFC_DISPATCHER_H_
 
 #include "team.h"
-#include "discipline/lap.h"
+#include "discipline/ride_team.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
 
 	/* global class support */
-	class CompDispatcher {
+	class Dispatcher : public disc::Rides {
 	public:
 		/* declared teams */
 		std::vector<Team *> teams;
 
-		disc::Races races; /* all races info */
+		// disc::Rides races; /* all races info */
 	public:
 		/* add new team to list */
 		void addTeam(Team *teamNew);
@@ -30,7 +30,7 @@ namespace rfc {
 		Team * getTeam(ulong teamId);
 
 		/* class destructor */
-		~CompDispatcher();
+		~Dispatcher();
 	}; /* end of 'CompDispatcher' class */
 } /* end of 'rfc' namespace' */
 

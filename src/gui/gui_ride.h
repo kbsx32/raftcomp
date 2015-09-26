@@ -7,55 +7,70 @@
  */
 
 #pragma once
-#ifndef RFC_LAP_TABLE_H
-#define RFC_LAP_TABLE_H
+#ifndef RFC_GUI_RIDE_H
+#define RFC_GUI_RIDE_H
 
 #include <QTableWidget>
 
 #include "../core/dispatcher.h"
-#include "lap_table_team.h"
+#include "gui_ride_team.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
 	/* graphical user interface elements namespace */
 	namespace gui {
-		/* 'Lap' table gui representation */
-		class LapTable : public QTableWidget
+		/* 'RideTeam' table gui representation */
+		class Ride : public QTableWidget
 		{
 			Q_OBJECT
 
-			friend class LapTableTeam;				/* get permissions for Lap table team */
-			disc::Type lapType;						/* linked to table lap */
+		private:
+			friend class RideTeam;			/* get permissions for RideTeam table team */
+			disc::Type lapType;				/* linked to table lap */
+			Dispatcher &dispatcher;         /* connected team dispatcher */
 
 		public:
-			/* set table item function */
+			/*
+			 * wraps for QtWidgets in table.
+			 */
+
+			/* set table item function.
+			 * creates QTableWidgetItem. (editable).
+			 */
 			void setItemText(const ulong row,
 							 const ulong column,
 							 const String &string);
 
-			/* set table item time function */
+			/* set table item time function.
+			 * creates QTableWidgetItem. (editable).
+			 * note : later must create QtWidget time-editor.
+			 */
 			void setItemTime(const ulong row,
 							 const ulong column,
 							 const Time &time);
 
 		public:
-			/* default constructor */
-			explicit LapTable(const disc::Type lapType, QWidget *widgParent = nullptr);
+			/* default constructor.
+			 * arguments:
+			 *   dispatcher : competiotion dispatcher;
+			 *	 lapType : type of lap (QUALIFY, SPRINT, etc.);
+			 *   widgParent : parent Qt Widget;
+			 */
+			explicit Ride(
+					Dispatcher &dispatcher,
+					const disc::Type lapType,
+					QWidget *widgParent = nullptr);
 
 			/* class destructor */
-			~LapTable();
+			~Ride();
 
 			/* erase all data from table */
 			void eraseTable();
 
 			/* add new info to table */
 			void addTeamInfo(Team *team);
-
-		signals:
-		public slots:
-
-		}; /* end of 'LapTable' class */
+		}; /* end of 'Ride' class */
 	} /* end of 'gui' namespace */
 }  /* end of 'rfc' namespace */
 
-#endif /* RFC_LAP_TABLE_H */
+#endif /* RFC_GUI_RIDE_H */

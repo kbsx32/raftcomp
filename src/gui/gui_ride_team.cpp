@@ -11,24 +11,25 @@
 #include <QScrollBar>
 #include <QTableWidgetItem>
 
-#include "lap_table_team.h"
-#include "lap_table.h"
+#include "gui_ride_team.h"
+#include "gui_ride.h"
 
 /* default constructor.
  * arguments:
+ *   dispatcher : competition dispatcher;
  *   team : connected source team
  *   table : connected table to get TableItem Widgets
  *   row : team row in table.
  */
-rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table, ulong row) :
+rfc::gui::RideTeam::RideTeam(Dispatcher &dispatcher, Team *team, Ride *rideTable, ulong row) :
 	team(team),
 	tableRow(row),
-	lapTable(table),
-	QObject(table)
-	// teamLap(team)
+	rideTable(rideTable),
+	QObject(rideTable),
+	teamLap(dispatcher.getLap(team->id, rideTable->lapType))
 {
 	/* write team id */
-	lapTable->setItemText(tableRow, ENUM_CAST(ColumnType::TEAM_ID), QString::number(team->id));
+	rideTable->setItemText(tableRow, ENUM_CAST(ColumnType::TEAM_ID), QString::number(team->id));
 
 	/* set team men names */
 	String names;
@@ -40,13 +41,13 @@ rfc::gui::LapTableTeam::LapTableTeam(Team *team, LapTable *table, ulong row) :
 	// qtwd->set
 
 	/* set other values to table */
-	lapTable->setItemText(tableRow, ENUM_CAST(ColumnType::TEAM_HUMEN), names);
+	rideTable->setItemText(tableRow, ENUM_CAST(ColumnType::TEAM_HUMEN), names);
 
-	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_START), teamLap->getTimeStart());
-	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_END), teamLap->getTimeEnd());
-	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_DISTANCE),
+	rideTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_START), teamLap->getTimeStart());
+	rideTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_END), teamLap->getTimeEnd());
+	rideTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_DISTANCE),
 						  teamLap->getTimeEnd() - teamLap->getTimeStart());
-	lapTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_RESULT), teamLap->getTimeResult());
+	rideTable->setItemTime(tableRow, ENUM_CAST(ColumnType::TIME_RESULT), teamLap->getTimeResult());
 
 	// lapTable->timerEvent();
 	/*

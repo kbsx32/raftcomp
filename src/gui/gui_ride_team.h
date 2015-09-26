@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef RFC_LAP_TABLE_TEAM_H
-#define RFC_LAP_TABLE_TEAM_H
+#ifndef RFC_GUI_RIDE_TEAM_H
+#define RFC_GUI_RIDE_TEAM_H
 
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -19,17 +19,17 @@
 namespace rfc {
 	namespace gui {
 		/* forward declaration */
-		class LapTable;
+		class Ride;
 
 		/* single team in 'LapTable' class */
-		class LapTableTeam : QObject
+		class RideTeam : QObject
 		{
 			Q_OBJECT
 
 			Team *team;				/* linked team */
-			Lap *teamLap;           /* team current lap info */
+			rfc::RideTeam *teamLap;	/* team current lap info */
 
-			LapTable *lapTable;		/* linked table */
+			Ride *rideTable;		/* linked table */
 			ulong tableRow;         /* row in table */
 		public:
 			enum class ColumnType {
@@ -45,20 +45,21 @@ namespace rfc {
 				TIME_DISTANCE,  /* distance time */
 				TIME_RESULT,    /* summary time */
 				PLACE,			/* place in lap */
-				SCORE,			/* score given for that place */
+				SCORE,			/* score given for that plaguice */
 				END,            /* Last table slot */
 			}; /* end of 'ColumnType' enum class */
 
 		public:
 			/* default constructor.
 			 * arguments:
-			 *   team : connected source team
-			 *   table : connected table to get TableItem Widgets
-			 *   row : team row in table.
+			 *   dispatcher : competition dispatcher;
+			 *   team : connected source team;
+			 *   rideTable : connected gui table to get TableItem Widgets;
+			 *   row : team row in table 'ride';
 			 */
-			LapTableTeam(Team *team, LapTable *table, ulong row);
-		}; /* end of 'LapTableTeam' class */
+			RideTeam(Dispatcher &dispatcher, Team *team, Ride *rideTable, ulong row);
+		}; /* end of 'RideTeam' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */
 
-#endif /* RFC_LAP_TABLE_TEAM_H */
+#endif /* RFC_GUI_RIDE_TEAM_H */
