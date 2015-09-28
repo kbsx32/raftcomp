@@ -22,20 +22,54 @@ rfc::disc::Type::Type(const TypeSprint sprint) :
 {
 } /* end of 'disc::Type' constructor */
 
+/* class default constructor */
+rfc::disc::Rides::Rides() {
+	;
+} /* end of 'disc::RidesRides' constructor */
+
+/* create or get lap function.
+ * automatically creates new RideTeam lap if
+ * current wasn't create before.
+ * arguments:
+ *     container : 'Ride' map container.
+ *     teamId : team identificator.
+ *     type : 'Ride' type. Needs to init new RideTeam.
+ * returns:
+ *     pointer to RideTeam.
+ */
+rfc::RideTeam * rfc::disc::Rides::lapCreateOrGet(Ride &container, const ulong teamId, const Type type) {
+	RideTeam *ret = container[teamId];
+
+	/* creating new Ride if such not exists */
+	if (ret == nullptr) {
+
+		ret = new RideTeam(type);
+		container[teamId] = ret;
+	}
+
+	return ret;
+} /* end of 'lapCreateOrGet' function */
+
 /* get lap function */
-rfc::RideTeam *rfc::disc::Rides::getLap(const ulong teamId, const Type type) {
+rfc::RideTeam * rfc::disc::Rides::getLap(const ulong teamId, const Type type) {
 	switch (type.typeDisc) {
 		case TypeDisc::QUALIFY:
-			return qualify[teamId];
+			return lapCreateOrGet(qualify, teamId, type.typeDisc);
 		case TypeDisc::LONG_RACE:
-			return longRace[teamId];
+			return lapCreateOrGet(longRace, teamId, type.typeDisc);
 		case TypeDisc::SLALOM_0:
-			return slalom0[teamId];
+			return lapCreateOrGet(slalom0, teamId, type.typeDisc);
 		case TypeDisc::SLALOM_1:
-			return slalom1[teamId];
+			return lapCreateOrGet(slalom1, teamId, type.typeDisc);
 		case TypeDisc::SPRINT:
-			return sprint[ENUM_CAST(type.typeSprint)][teamId];
+			return lapCreateOrGet(sprint[ENUM_CAST(type.typeSprint)], teamId, type.typeDisc);
 	}
 
 	return nullptr;
 } /* end of 'Rides::getLap' function */
+
+/* set lap function */
+void rfc::disc::Rides::setLap(const ulong teamId, const Type type, const RideTeam &lapNew) {
+	RideTeam *ret = getLap(teamId, type);
+	*ret = lapNew;
+} /* end of 'Rides::setLap' function */

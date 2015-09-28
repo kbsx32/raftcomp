@@ -31,8 +31,8 @@ void rfc::RideTeam::setWinnerFlag(const bool newState) {
 
 /* set pushpin by id penalty */
 void rfc::RideTeam::setPinPenalty(long id, long valueNew) {
-	timePenalty -= Time(pinsPenalty[id]);
-	timePenalty += Time(valueNew);
+	timePenalty -= Time().setInSeconds(pinsPenalty[id]);
+	timePenalty += Time().setInSeconds(valueNew);
 	pinsPenalty[id] = valueNew;
 } /* end of 'RideTeam::setPinPenalty' function */
 

@@ -29,6 +29,10 @@ int main(int argc, char *argv[]) {
 		tm0.men.push_back(rfc::Man("ponomareva", "natalia"));
 		tm0.men.push_back(rfc::Man("alexeeva", "valentina"));
 
+		rfc::RideTeam *rt = dispatcher.getLap(16, rfc::disc::TypeDisc::QUALIFY);
+		rt->setTimeStart(rfc::Time(1, 11, 59, 0));
+		rt->setTimeEnd(rfc::Time(1, 30, 58, 0));
+
 		ltable.addTeamInfo(&tm0);
 
 		rfc::Team tm1(32);

@@ -19,11 +19,10 @@ namespace rfc {
 	/* time class */
 	class Time {
 	private:
-		double seconds;   /* current timer state value in seconds */
+		long milliSeconds;   /* current timer state value in seconds */
 
 	public:
-		/* infinity constant time */
-		static constexpr double infinity = -1;
+		bool isInfinity = false;     /* is infinity flag time */
 
 		/* default constructor.
 		 * by defualt sets infinity time.
@@ -31,13 +30,21 @@ namespace rfc {
 		Time();
 
 		/* constructor by hour, minute, seconds and milliseconds */
-		Time(long hour, long min, long sec, long millisec);
+		Time(long hour, long min, long sec = 0, long millisec = 0);
 
-		/* constructor by time in seconds.
+		/* constructor by time in milliseconds.
 		 * argument:
-		 *   double sec - new time in seconds.
+		 *   milliseconds - new time in milliseconds.
+		 *   isInfinity - new state of time ( is infinity time ).
 		 */
-		Time(double sec);
+		Time(long milliseconds, bool isInfinity = false);
+
+		/* set time IN seconds.
+		 * note:
+		 *   time will be set in seconds.
+		 *   last value will be lost.
+		 */
+		Time &setInSeconds(long seconds);
 
 		/* set time function.
 		 * returns: self-reference.
@@ -64,6 +71,20 @@ namespace rfc {
 		 * get values functions
 		 */
 
+	private:
+		/* get current time IN seconds function.
+		 * This function returns all time only in seconds.
+		 * For example - 2 minutes returns 120 seconds.
+		 */
+		long getTimeInSeconds() const;
+
+		/* get current time IN minutes function.
+		 * This function returns all time only in seconds.
+		 * For example - 2 hours returns 120 minutes.
+		 */
+		long getTimeInMinutes() const;
+
+	public:
 		/* get current time mulliseconds function */
 		long getMilliSec() const;
 

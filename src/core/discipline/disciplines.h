@@ -58,8 +58,8 @@ namespace rfc {
 		class Rides {
 			/* define one 'ride' class */
 			typedef std::map<ulong, RideTeam *> Ride;	/* (ulong) - team id,
-													 * (RideTeam *) - team lap info
-													 */
+														 * (RideTeam *) - team lap info
+														 */
 
 			/* all disciplines info */
 			Ride qualify;
@@ -67,9 +67,27 @@ namespace rfc {
 			Ride slalom0, slalom1;
 			Ride longRace;
 
+
+			/* create or get lap function.
+			 * automatically creates new RideTeam lap if
+			 * current wasn't create before.
+			 * arguments:
+			 *   container : 'Ride' map container.
+			 *   teamId : team identificator.
+			 *   type : 'Ride' type. Needs to init new RideTeam.
+			 * returns:
+			 *   pointer to RideTeam.
+			 */
+			rfc::RideTeam* lapCreateOrGet(Ride &container, const ulong teamId, const Type type);
 		public:
+			/* class default constructor */
+			Rides();
+
 			/* get lap function */
 			RideTeam * getLap(const ulong teamId, const Type type);
+
+			/* add to global tables new lap */
+			void setLap(const ulong teamId, const Type type, const RideTeam &lapNew);
 		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
