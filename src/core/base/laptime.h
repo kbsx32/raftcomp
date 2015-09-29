@@ -39,6 +39,12 @@ namespace rfc {
 		 */
 		Time(long milliseconds, bool isInfinity = false);
 
+		/* constructor by time in string.
+		 * string format:
+		 * "hh:MM:ss::mm".
+		 */
+		Time(const String &string);
+
 		/* set time IN seconds.
 		 * note:
 		 *   time will be set in seconds.
@@ -50,6 +56,13 @@ namespace rfc {
 		 * returns: self-reference.
 		 */
 		Time& set(long hour, long min, long sec, long millisec);
+
+		/* set time by string.
+		 * string format:
+		 * "hh:MM:ss::mm".
+		 * returns: self-reference.
+		 */
+		Time& set(const String &string);
 
 		/* sum two times operator */
 		Time operator+(const Time &timeAdd) const;

@@ -1,3 +1,14 @@
+/*
+ * Rafting competition dispatcher program.
+ *
+ * Time class implementation file.
+ *
+ * kbsx32. <kbsx32@yandex.ru>.
+ */
+
+#include <cstdio>
+#include <QStringList>
+
 #include "laptime.h"
 
 /* defualt constructor */
@@ -22,6 +33,31 @@ rfc::Time::Time(long milliSeconds, bool isInfinity) :
 rfc::Time::Time(long hour, long min, long sec, long millisec) {
 	set(hour, min, sec, millisec);
 } /* end of 'Time' constructor */
+
+/* constructor by time in string.
+ * string format:
+ * "hh:MM:ss::mm".
+ */
+rfc::Time::Time(const String &string)
+{
+	set(string);
+} /* end of 'Time' constructor */
+
+/* set time by string.
+ * string format:
+ * "hh:MM:ss::mm".
+ * returns: self-reference.
+ */
+rfc::Time& rfc::Time::set(const String &string)
+{
+	ulong
+		h = 0, m = 0, s = 0, ms = 0;
+
+	std::sscanf(string.data(), "%lu:%lu:%lu'%lu", &h, &m, &s, &ms);
+	set(h, m, s, ms);
+
+	return *this;
+} /* end of 'set' function */
 
 /* set time function.
  * returns: self-reference.
@@ -115,10 +151,10 @@ rfc::String rfc::Time::getTimeString() const {
 		return QString("infinity");
 
 	return
-		QString::number(getHours())	+ QString(":")
-	+	QString::number(getMinutes())	+ QString(":")
-	+	QString::number(getSeconds())	+ QString("'")
-	+	QString::number(getMilliSec());
+		String::toString(getHours())	+ QString(":")
+	+	String::toString(getMinutes())	+ QString(":")
+	+	String::toString(getSeconds())	+ QString("'")
+	+	String::toString(getMilliSec());
 } /* end of 'Time::getTimeString' function */
 
 /* set time IN seconds.

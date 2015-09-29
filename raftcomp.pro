@@ -16,14 +16,14 @@ SOURCES += \
     src/core/team.cpp \
     src/core/dispatcher.cpp \
     src/core/discipline/disciplines.cpp \
-    src/core/discipline/lap.cpp \
     src/core/base/laptime.cpp \
-    src/gui/mandat.cpp \
     src/core/base/exception.cpp \
     src/main.cpp \
     src/core/base/rstring.cpp \
     src/gui/gui_ride.cpp \
-    src/gui/gui_ride_team.cpp
+    src/gui/gui_ride_item.cpp \
+    src/gui/gui_mandat.cpp \
+    src/core/discipline/ride_team.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -36,9 +36,9 @@ HEADERS  += \
     src/core/base/exception.h \
     src/core/base/rstring.h \
     src/gui/gui_ride.h \
-    src/gui/gui_ride_team.h \
     src/gui/gui_mandat.h \
-    src/core/discipline/ride_team.h
+    src/core/discipline/ride_team.h \
+    src/gui/gui_ride_item.h
 
 # FORMS    +=
 

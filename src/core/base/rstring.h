@@ -37,6 +37,13 @@ namespace rfc {
 
 		/* QString get function */
 		const QString &getQString() const;
+
+		/* conversation number to String.
+		 * Adds the leading zeros in empty slots of string.
+		 * for example:
+		 *   to_string(123, 5) --> "00123";
+		 */
+		static String toString(long number, long signsCnt = 2);
 	}; /* end of 'String' class */
 } /* end of 'rfc' namespace */
 

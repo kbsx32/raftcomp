@@ -13,7 +13,7 @@
 #include <QTableWidget>
 
 #include "../core/dispatcher.h"
-#include "gui_ride_team.h"
+#include "gui_ride_item.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
@@ -69,6 +69,14 @@ namespace rfc {
 
 			/* add new info to table */
 			void addTeamInfo(Team *team);
+
+			/* create and put to table ride item widget */
+			void createRideItem(int row, Team *team, RideItem::Type type);
+
+		public slots:
+			/* update table data info */
+			void updateTable();
+
 		}; /* end of 'Ride' class */
 	} /* end of 'gui' namespace */
 }  /* end of 'rfc' namespace */

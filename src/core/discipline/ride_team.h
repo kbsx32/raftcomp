@@ -52,12 +52,15 @@ namespace rfc {
 		ulong getPinsCount() const;
 
 		/* get start lap time */
-		const Time& getTimeStart() const;
+		const Time getTimeStart() const;
 		/* get end lap time */
-		const Time& getTimeEnd() const;
+		const Time getTimeEnd() const;
+
+		/* get 'end-start' lap time */
+		const Time getTimeDistance() const;
 
 		/* get penalty lap time */
-		const Time& getTimePenalty() const;
+		const Time getTimePenalty() const;
 
 		/* get result lap time with penalty statistics */
 		Time getTimeResult() const;

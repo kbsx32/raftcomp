@@ -28,6 +28,23 @@ rfc::Team::Team(const ulong teamId) :
 {
 } /* end of 'Team' constructor */
 
+/* get surnames string function */
+rfc::String rfc::Team::getSurnames()
+{
+	String str;
+
+	for (auto &human : men)
+		str += human.lastName + ", ";
+
+	return str;
+} /* end of 'rfc::Team::getSurnames' function */
+
+/* get surnames string function */
+rfc::String rfc::Team::getIdString()
+{
+	return String::number(id);
+} /* end of 'rfc::Team::getSurnames' function */
+
 /* saving to file full progress */
 void rfc::Team::saveToFile(const String &fileName) {
 	FILE *fOut;

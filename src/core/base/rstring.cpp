@@ -6,6 +6,7 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
+#include <cstdio>
 #include "rstring.h"
 
 /* default constructor */
@@ -39,3 +40,16 @@ const char * rfc::String::data() const {
 const QString &rfc::String::getQString() const {
 	return *this;
 } /* end of 'getQString' function */
+
+/* conversation number to String.
+ * Adds the leading zeros in empty slots of string.
+ * for example:
+ *   to_string(123, 5) --> "00123";
+ */
+rfc::String rfc::String::toString(long number, long signsCnt)
+{
+	char str[16];
+	std::sprintf(str, "%0*ld", (int)signsCnt, number);
+
+	return String(str);
+} /* end of 'String::toString' function */

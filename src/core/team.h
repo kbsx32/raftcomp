@@ -45,6 +45,13 @@ namespace rfc {
 
 		/* saving to file full progress */
 		void saveToFile(const String &fileName);
+
+		/* get surnames string function */
+		String getSurnames();
+
+		/* get team identification string function */
+		String getIdString();
+
 	}; /* end of 'team' class */
 } /* end of 'rfc' namespace' */
 

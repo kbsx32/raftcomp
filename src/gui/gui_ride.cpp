@@ -12,6 +12,7 @@
 #include <QScrollBar>
 
 #include "gui_ride.h"
+#include "gui_ride_item.h"
 
 /* default constructor.
  * arguments:
@@ -27,7 +28,7 @@ rfc::gui::Ride::Ride(
 	dispatcher(dispatcher)
 {
 	/* import column types */
-	typedef RideTeam::ColumnType ColumnType;
+	typedef RideItem::Type ColumnType;
 
 	setColumnCount(ENUM_CAST(ColumnType::END) - 1);
 
@@ -71,12 +72,37 @@ void rfc::gui::Ride::setItemTime(const ulong row,
 	setItem(row, column, item);
 } /* end of 'gui::Ride::setItemTime' function */
 
+/* create and put to table ride item widget */
+void rfc::gui::Ride::createRideItem(int row, Team *team, RideItem::Type type)
+{
+	RideItem *it = new RideItem(team, dispatcher.getLap(team->id, lapType), type);
+	setCellWidget(row, ENUM_CAST(type), it);
+	connect(it, SIGNAL(signalTextEdited()), this, SLOT(updateTable()));
+} /* end of 'Ride::createRideItem' function */
+
 /* add new info to table */
 void rfc::gui::Ride::addTeamInfo(Team *team) {
-	setRowCount(rowCount() + 1);
+	int row = rowCount();
+	setRowCount(row + 1);
 
-	new RideTeam(dispatcher, team, this, rowCount() - 1);
+	/* import column types */
+	typedef RideItem::Type Type;
+
+	for (ulong i = 0; i < ENUM_CAST(Type::END); ++i)
+		createRideItem(row, team, static_cast<Type>(i));
+
 } /* end of 'gui::Ride::addLapInfo' function */
+
+/* update table data info */
+void rfc::gui::Ride::updateTable() {
+	long
+		colCnt = columnCount(),
+		rowCnt = rowCount();
+
+	for (long y = colCnt - 1; y >= 0; --y)
+		for (long x = rowCnt - 1; x >= 0; --x)
+			((RideItem *)cellWidget(x, y))->update();
+} /* end of 'gui::Ride::updateTable' function */
 
 /* class destructor */
 rfc::gui::Ride::~Ride() {

@@ -42,17 +42,22 @@ void rfc::RideTeam::setPinsCount(int cnt) {
 } /* end of 'RideTeam::setPinsCount' function */
 
 /* get start lap time */
-const rfc::Time& rfc::RideTeam::getTimeStart() const {
+const rfc::Time rfc::RideTeam::getTimeStart() const {
 	return timeStart;
 } /* end of 'RideTeam::getTimeStart' function */
 
 /* get end lap time */
-const rfc::Time& rfc::RideTeam::getTimeEnd() const {
+const rfc::Time rfc::RideTeam::getTimeEnd() const {
 	return timeEnd;
 } /* end of 'RideTeam::getTimeEnd' function */
 
+/* get 'end-start' lap time */
+const rfc::Time rfc::RideTeam::getTimeDistance() const {
+	return timeEnd - timeStart;
+} /* end of 'RideTeam::getTimeDistance' function */
+
 /* get penalty lap time */
-const rfc::Time& rfc::RideTeam::getTimePenalty() const {
+const rfc::Time rfc::RideTeam::getTimePenalty() const {
 	return timePenalty;
 } /* end of 'rfc::RideTeam::getTimePenalty' function */
 
