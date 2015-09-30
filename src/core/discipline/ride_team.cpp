@@ -58,7 +58,7 @@ const rfc::Time rfc::RideTeam::getTimeDistance() const {
 
 /* get penalty lap time */
 const rfc::Time rfc::RideTeam::getTimePenalty() const {
-	return timePenalty;
+	return timePenalty + Time().setInSeconds(penaltyOther);
 } /* end of 'rfc::RideTeam::getTimePenalty' function */
 
 /* get pins stats array */
@@ -68,10 +68,20 @@ const std::vector<long>& rfc::RideTeam::getPins() const {
 
 /* get result lap time with penalty statistics */
 rfc::Time rfc::RideTeam::getTimeResult() const {
-	return (timeEnd - timeStart) + timePenalty;
+	return (timeEnd - timeStart) + getTimePenalty();
 } /* end of 'RideTeam::getTimeResult' function */
 
 /* get pushpins count */
 ulong rfc::RideTeam::getPinsCount() const {
 	return pinsPenalty.size();
 } /* end of 'RideTeam::getPinsCount' function */
+
+/* set pushpin by id penalty */
+void rfc::RideTeam::setPenaltyOther(ulong valueNew) {
+	penaltyOther = valueNew;
+} /* end of 'RideTeam::setPenaltyOther' function */
+
+/* set pushpin by id penalty */
+ulong rfc::RideTeam::getPenaltyOther() {
+	return penaltyOther;
+} /* end of 'RideTeam::getPenaltyOther' function */

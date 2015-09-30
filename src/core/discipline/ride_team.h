@@ -30,6 +30,9 @@ namespace rfc {
 		bool isWinner;                      /* winner flag for parallel sprints */
 		std::vector<long> pinsPenalty;		/* pins penalties */
 
+		ulong penaltyOther = 0;             /* other penalties value.
+											 * for example : foulstart, etc.
+											 */
 	public:
 		/* default constructor */
 		RideTeam(const disc::Type type);
@@ -44,6 +47,13 @@ namespace rfc {
 
 		/* set pushpin by id penalty */
 		void setPinPenalty(long id, long valueNew);
+
+		/* set pushpin by id penalty */
+		void setPenaltyOther(ulong valueNew);
+
+		/* set pushpin by id penalty */
+		ulong getPenaltyOther();
+
 		/* set pushpins count */
 		void setPinsCount(int cnt);
 

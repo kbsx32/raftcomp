@@ -24,14 +24,16 @@ int main(int argc, char *argv[]) {
 
 		rfc::gui::Ride ltable(dispatcher, rfc::disc::TypeDisc::QUALIFY);
 
+
 		rfc::Team tm0(16);
 		tm0.men.push_back(rfc::Man("feder", "evgeny"));
 		tm0.men.push_back(rfc::Man("ponomareva", "natalia"));
 		tm0.men.push_back(rfc::Man("alexeeva", "valentina"));
 
-		rfc::RideTeam *rt = dispatcher.getLap(16, rfc::disc::TypeDisc::QUALIFY);
-		rt->setTimeStart(rfc::Time(1, 11, 59, 0));
-		rt->setTimeEnd(rfc::Time(1, 30, 58, 0));
+		rfc::RideTeam *rt0 = dispatcher.getLap(16, rfc::disc::TypeDisc::QUALIFY);
+		rt0->setTimeStart(rfc::Time(1, 11, 59, 0));
+		rt0->setTimeEnd(rfc::Time(1, 30, 58, 0));
+		rt0->setPinsCount(4);
 
 		ltable.addTeamInfo(&tm0);
 
@@ -39,6 +41,11 @@ int main(int argc, char *argv[]) {
 		tm1.men.push_back(rfc::Man("chuinyshena", "svetlana"));
 		tm1.men.push_back(rfc::Man("smirnova", "anna"));
 		tm1.men.push_back(rfc::Man("belousova", "victoria"));
+
+		rfc::RideTeam *rt1 = dispatcher.getLap(32, rfc::disc::TypeDisc::QUALIFY);
+		rt1->setTimeStart(rfc::Time(1, 1, 0, 0));
+		rt1->setTimeEnd(rfc::Time(1, 30, 33, 0));
+		rt1->setPinsCount(4);
 
 		ltable.addTeamInfo(&tm1);
 

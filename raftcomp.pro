@@ -23,7 +23,8 @@ SOURCES += \
     src/gui/gui_ride.cpp \
     src/gui/gui_ride_item.cpp \
     src/gui/gui_mandat.cpp \
-    src/core/discipline/ride_team.cpp
+    src/core/discipline/ride_team.cpp \
+    src/gui/gui_ride_pushpins.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -43,4 +44,3 @@ HEADERS  += \
 # FORMS    +=
 
 QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder
-QMAKE_CXXFLAGS += -msse2

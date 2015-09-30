@@ -13,12 +13,51 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QTextEdit>
+#include <QTableWidget>
 
 #include "../core/dispatcher.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
 	namespace gui {
+
+		/* single pushpin edit */
+		class Pin : public QLineEdit
+		{
+			Q_OBJECT
+
+			const int pinId;	            /* pushpin identificator */
+			rfc::RideTeam * rideTeam;	    /* connected lap */
+
+		public:
+			/* construcotr by pin identificator */
+			Pin(rfc::RideTeam *rideTeam, const int pinNumber);
+
+		signals:
+			/* signal that pin changed */
+			void signalPinChanged();
+		public slots:
+			/* 'onFinishEdit' catcher slot */
+			void slotTextChanged();
+		}; /* end of 'Pin' class */
+
+		/* pushpins class */
+		class PushPins : public QTableWidget
+		{
+			Q_OBJECT
+
+		public:
+			/* default constructor */
+			PushPins(rfc::RideTeam *rideTeam, QWidget *parent = nullptr);
+		signals:
+			/* signal that pin was changer */
+			void signalPinsChanged();
+
+		public slots:
+			/* pins changed slot */
+			void slotPinsChanged();
+		}; /* end of 'PushPins' class */
+
 		class RideItem : public QLineEdit
 		{
 			Q_OBJECT

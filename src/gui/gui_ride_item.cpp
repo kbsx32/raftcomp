@@ -7,7 +7,9 @@
  */
 
 #include <QTableWidgetItem>
-
+#include <QPushButton>
+#include <QLayout>
+// #include <QVer
 #include "gui_ride_item.h"
 
 /* class constructor.
@@ -26,7 +28,13 @@ rfc::gui::RideItem::RideItem(Team *team, RideTeam *lapConnected, Type type) :
 /* update info function */
 void rfc::gui::RideItem::update()
 {
-	// QTextEdit *qTextEdit;
+	PushPins *pins;
+
+	/* set layout */
+	QVBoxLayout *qlay = new QVBoxLayout(this);
+	qlay->setContentsMargins(0, 0, 0, 0);
+	qlay->setSpacing(0);
+	setLayout(qlay);
 
 	switch (type) {
 		case Type::TEAM_ID:		/* team number */
@@ -52,11 +60,11 @@ void rfc::gui::RideItem::update()
 			setText(lap->getTimeResult().getTimeString());
 			break;
 		case Type::PENALTY_OTHER:	/* result penalty */
-			setEnabled(false);
-			setText("not ready");
+			setText(QString::number(lap->getPenaltyOther()));
 			break;
 		case Type::PENALTY_SUM:	/* result penalty */
 			setEnabled(false);
+
 			setText(lap->getTimePenalty().getTimeString());
 			break;
 		case Type::SCORE:			/* score given for that plaguice */
@@ -68,7 +76,12 @@ void rfc::gui::RideItem::update()
 			setEnabled(false);
 			break;
 		case Type::PINS:			/* pushpins */
-			setText("not ready");
+			pins = new PushPins(lap);
+			qlay->addWidget(pins);
+
+			connect(pins, SIGNAL(signalPinsChanged()),
+					this, SLOT(slotTextChanged()));
+
 			break;
 		case Type::END:             /* last table slot */
 			throw Exception("wrong type");
@@ -86,9 +99,8 @@ void rfc::gui::RideItem::slotTextChanged()
 		case Type::TIME_END:   /* summary time */
 			lap->setTimeEnd(Time(text()));
 			break;
-		case Type::PENALTY_OTHER:	/* result penalty */
-			// setEnabled(false);
-			// setText("not ready");
+		case Type::PENALTY_OTHER:	/* penalty other */
+			lap->setPenaltyOther(text().toLong());
 			break;
 		case Type::PINS:			/* pushpins */
 			// setText("not ready");
