@@ -64,7 +64,7 @@ rfc::Time& rfc::Time::set(const String &string)
  */
 rfc::Time& rfc::Time::set(long hour, long min, long sec, long millisec) {
 	/* set value (in seconds) */
-	milliSeconds = ((hour * 60 + min) * 60 + sec) * 1000 + millisec;
+	milliSeconds = ((hour * 60 + min) * 60 + sec) * 100 + millisec;
 
 	return *this;
 } /* end of 'Time::set' function */
@@ -81,7 +81,7 @@ rfc::Time rfc::Time::operator-(const Time &timeSub) const {
 
 /* get current time mulliseconds function */
 long rfc::Time::getMilliSec() const {
-	return milliSeconds % 1000;
+	return milliSeconds % 100;
 } /* end of 'rfc::Time::getMilliSec' function */
 
 /* get current time IN seconds function.
@@ -89,7 +89,7 @@ long rfc::Time::getMilliSec() const {
  * For example - 2 minutes returns 120 seconds.
  */
 long rfc::Time::getTimeInSeconds() const {
-	return (milliSeconds / 1000);
+	return (milliSeconds / 100);
 } /* end of 'rfc::Time::getSeconds' function */
 
 /* get current time seconds function */

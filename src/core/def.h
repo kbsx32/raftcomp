@@ -18,6 +18,7 @@
 #include <QString>
 
 /* base project classes */
+#include "base/memleak.h"
 #include "base/rstring.h"
 #include "base/laptime.h"
 #include "base/exception.h"

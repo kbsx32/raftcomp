@@ -6,12 +6,15 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
+#include <iostream>
 #include <QApplication>
 
 #include <QLabel>
 #include <QTableView>
 #include <QMessageBox>
 #include <QDir>
+
+#include "core/base/memleak.h"
 
 #include "raftcomp.h"
 

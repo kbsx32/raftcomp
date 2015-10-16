@@ -11,6 +11,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = raftcomp
 TEMPLATE = app
 
+debug {
+	DEFINES += RFC_DEBUG
+}
+
+release {
+	DEFINES += RFC_RELEASE RFC_NO_DEBUG
+}
 
 SOURCES += \
     src/core/team.cpp \
@@ -22,9 +29,10 @@ SOURCES += \
     src/core/base/rstring.cpp \
     src/gui/gui_ride.cpp \
     src/gui/gui_ride_item.cpp \
-    src/gui/gui_mandat.cpp \
     src/core/discipline/ride_team.cpp \
-    src/gui/gui_ride_pushpins.cpp
+    src/gui/gui_ride_pushpins.cpp \
+    src/gui/mandat/gui_mandat.cpp \
+    src/core/base/memleak.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -37,9 +45,10 @@ HEADERS  += \
     src/core/base/exception.h \
     src/core/base/rstring.h \
     src/gui/gui_ride.h \
-    src/gui/gui_mandat.h \
     src/core/discipline/ride_team.h \
-    src/gui/gui_ride_item.h
+    src/gui/gui_ride_item.h \
+    src/gui/mandat/gui_mandat.h \
+    src/core/base/memleak.h
 
 # FORMS    +=
 
