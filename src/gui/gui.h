@@ -10,7 +10,7 @@
 #ifndef RFC_GUI_H
 #define RFC_GUI_H
 
-#include "gui_ride.h"
+#include "ridetable/gui_ride.h"
 #include "mandat/gui_mandat.h"
 
 #endif /* RFC_GUI_H */

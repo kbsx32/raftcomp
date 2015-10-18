@@ -30,7 +30,7 @@ rfc::gui::Ride::Ride(
 	/* import column types */
 	typedef RideItem::Type ColumnType;
 
-	setColumnCount(ENUM_CAST(ColumnType::END) - 1);
+	setColumnCount(ENUM_CAST(ColumnType::END));
 
 	/* set headers */
 	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TEAM_ID),			new QTableWidgetItem("id"));

@@ -1,7 +1,7 @@
 /*
  * Rafting competition dispatcher program.
  *
- * Gui lap table declaration file.
+ * Mandat comission teams widget declaration file.
  *
  * kbsx32. <kbsx32@yandex.ru>.
  */

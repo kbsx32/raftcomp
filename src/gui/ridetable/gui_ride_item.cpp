@@ -31,18 +31,20 @@ rfc::gui::RideItem::RideItem(Team *team, RideTeam *lapConnected, Type type, QWid
 
 	connect(this, SIGNAL(editingFinished()), this, SLOT(slotTextChanged()));
 	update();
+
+	if (type == Type::PINS)
+	{
+		PushPins *pins = new PushPins(lap);
+
+		layout()->addWidget(pins);
+		connect(pins, SIGNAL(signalPinsChanged()),
+				this, SLOT(slotTextChanged()));
+	}
 } /* end of 'gui::RideItem::RideItem' constructor */
 
 /* update info function */
 void rfc::gui::RideItem::update()
 {
-	PushPins *pins;
-
-
-	/* clearing layout */
-	while (!layout()->isEmpty())
-		layout()->removeItem(layout()->itemAt(0));
-
 	switch (type) {
 		case Type::TEAM_ID:		/* team number */
 			setEnabled(false);
@@ -83,13 +85,13 @@ void rfc::gui::RideItem::update()
 			setEnabled(false);
 			break;
 		case Type::PINS:			/* pushpins */
-			pins = new PushPins(lap);
-
-			layout()->addWidget(pins);
-
-			connect(pins, SIGNAL(signalPinsChanged()),
-					this, SLOT(slotTextChanged()));
-
+			/* push pins are on '0' position always */
+			if (layout()->count() > 0)
+			{
+				PushPins *pushPins = (PushPins *)layout()->itemAt(0)->widget();
+				if (pushPins != nullptr)
+					pushPins->update();
+			}
 			break;
 		case Type::END:             /* last table slot */
 			throw Exception("wrong type");
@@ -111,7 +113,7 @@ void rfc::gui::RideItem::slotTextChanged()
 			lap->setPenaltyOther(text().toLong());
 			break;
 		case Type::PINS:			/* pushpins */
-			// setText("not ready");
+			// automatical catcher in children class
 			break;
 		case Type::END:             /* last table slot */
 			throw Exception("wrong type");

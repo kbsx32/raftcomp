@@ -12,7 +12,7 @@
 
 #include <QTableWidget>
 
-#include "../core/dispatcher.h"
+#include "../../core/dispatcher.h"
 #include "gui_ride_item.h"
 
 /* 'raftcomp' support namespace */

@@ -27,12 +27,12 @@ SOURCES += \
     src/core/base/exception.cpp \
     src/main.cpp \
     src/core/base/rstring.cpp \
-    src/gui/gui_ride.cpp \
-    src/gui/gui_ride_item.cpp \
     src/core/discipline/ride_team.cpp \
-    src/gui/gui_ride_pushpins.cpp \
     src/gui/mandat/gui_mandat.cpp \
-    src/core/base/memleak.cpp
+    src/core/base/memleak.cpp \
+    src/gui/ridetable/gui_ride.cpp \
+    src/gui/ridetable/gui_ride_item.cpp \
+    src/gui/ridetable/gui_ride_pushpins.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -48,7 +48,9 @@ HEADERS  += \
     src/core/discipline/ride_team.h \
     src/gui/gui_ride_item.h \
     src/gui/mandat/gui_mandat.h \
-    src/core/base/memleak.h
+    src/core/base/memleak.h \
+    src/gui/ridetable/gui_ride.h \
+    src/gui/ridetable/gui_ride_item.h
 
 # FORMS    +=
 

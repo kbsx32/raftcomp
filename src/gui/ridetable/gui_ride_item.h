@@ -15,7 +15,7 @@
 #include <QTextEdit>
 #include <QTableWidget>
 
-#include "../core/dispatcher.h"
+#include "../../core/dispatcher.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
@@ -49,9 +49,16 @@ namespace rfc {
 		{
 			Q_OBJECT
 
+			RideTeam *rideTeam;    /* connected ride team class */
 		public:
 			/* default constructor */
 			PushPins(rfc::RideTeam *rideTeam, QWidget *parent = nullptr);
+
+			/* update all pushpins info */
+			void update();
+
+			/* update all row function */
+			void updateRow();
 		signals:
 			/* signal that pin was changer */
 			void signalPinsChanged();

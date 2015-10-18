@@ -36,12 +36,13 @@ void rfc::gui::Pin::slotTextChanged()
 } /* end of 'Pin::slotTextChanged' function */
 
 /*
- * PushPins global table class functions.
+ * PushPins global table row class functions.
  */
 
 /* default constructor */
 rfc::gui::PushPins::PushPins(rfc::RideTeam *rideTeam, QWidget *parent) :
-	QTableWidget(parent)
+	QTableWidget(parent),
+	rideTeam(rideTeam)
 {
 	/* hide headers */
 	this->verticalHeader()->hide();
@@ -52,6 +53,22 @@ rfc::gui::PushPins::PushPins(rfc::RideTeam *rideTeam, QWidget *parent) :
 	this->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+	updateRow();
+} /* end of 'gui::PushPins' constructor */
+
+/* pins changed slot */
+void rfc::gui::PushPins::slotPinsChanged() {
+	emit signalPinsChanged();
+} /* end of 'gui::PushPins::slotPinsChanged' function */
+
+/* update all pushpins info */
+void rfc::gui::PushPins::update() {
+	if (rideTeam->getPinsCount() != (ulong)this->columnCount())
+		updateRow();
+} /* end of 'gui::PushPins::slotPinsChanged' function */
+
+/* update all row function */
+void rfc::gui::PushPins::updateRow() {
 	/* create new pins fields */
 	ulong pinsCnt = rideTeam->getPinsCount();
 
@@ -69,10 +86,5 @@ rfc::gui::PushPins::PushPins(rfc::RideTeam *rideTeam, QWidget *parent) :
 		/* set new widget */
 		setCellWidget(0, i, pinNew);
 	}
-} /* end of 'gui::PushPins' constructor */
-
-/* pins changed slot */
-void rfc::gui::PushPins::slotPinsChanged() {
-	emit signalPinsChanged();
-} /* end of 'gui::PushPins::slotPinsChanged' function */
+} /* end of 'gui::PushPins::updateRow' function */
 
