@@ -15,9 +15,10 @@
  */
 
 /* construcotr by pin identificator */
-rfc::gui::Pin::Pin(rfc::RideTeam *rideTeam, const int pinNumber) :
+rfc::gui::Pin::Pin(rfc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent) :
 	pinId(pinNumber),
-	rideTeam(rideTeam)
+	rideTeam(rideTeam),
+	QLineEdit(parent)
 {
 	setText(String::number(rideTeam->getPins()[pinNumber]));
 
@@ -59,7 +60,7 @@ rfc::gui::PushPins::PushPins(rfc::RideTeam *rideTeam, QWidget *parent) :
 
 	for (ulong i = 0; i < pinsCnt; ++i) {
 
-		Pin *pinNew = new Pin(rideTeam, i);
+		Pin *pinNew = new Pin(rideTeam, i, this);
 
 		/* connecting pins changing signal */
 		connect(pinNew, SIGNAL(signalPinChanged()),

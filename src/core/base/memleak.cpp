@@ -63,13 +63,21 @@ void rfc::MemLeak::remove(void *allocPtr)
 /* class destructor */
 rfc::MemLeak::~MemLeak()
 {
+	int cnt = _nodes.size(),
+		current = 0;
+
+	qDebug().resetFormat();
+	qDebug().setAutoInsertSpaces(false);
+
+	qDebug() << QString("Memory leaks found : %1").arg(cnt);
+
 	for (const auto &i : _nodes) {
-		qDebug()  << QString("found memory leak : \n")
+		qDebug()  << QString("[%1 / %2] memory leak : \n").arg(current).arg(cnt)
 				  + "    file            : " + "\'" + i.second.file.c_str() + "' \n"
 				  + "    string number   : " + QString::number(i.second.stringNum) + "\n"
 				  + "    function caller : " + i.second.func.c_str() + "\n";
 
-		;
+		++current;
 	}
 } /* end of '~MemLeak' function */
 

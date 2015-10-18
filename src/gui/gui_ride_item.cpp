@@ -9,7 +9,7 @@
 #include <QTableWidgetItem>
 #include <QPushButton>
 #include <QLayout>
-// #include <QVer
+
 #include "gui_ride_item.h"
 
 /* class constructor.
@@ -17,10 +17,18 @@
  *   team : connected team.
  *   lapConnected : lap connected with current element.
  *   controlType : lap subitem to control.
+ *   parent : controller parent widget.
  */
-rfc::gui::RideItem::RideItem(Team *team, RideTeam *lapConnected, Type type) :
-	lap(lapConnected), type(type), team(team)
+rfc::gui::RideItem::RideItem(Team *team, RideTeam *lapConnected, Type type, QWidget *parent) :
+	lap(lapConnected), type(type), team(team),
+	QLineEdit(parent)
 {
+	/* set layout */
+	QVBoxLayout *qlay = new QVBoxLayout(this);
+	qlay->setContentsMargins(0, 0, 0, 0);
+	qlay->setSpacing(0);
+	setLayout(qlay);
+
 	connect(this, SIGNAL(editingFinished()), this, SLOT(slotTextChanged()));
 	update();
 } /* end of 'gui::RideItem::RideItem' constructor */
@@ -30,11 +38,10 @@ void rfc::gui::RideItem::update()
 {
 	PushPins *pins;
 
-	/* set layout */
-	QVBoxLayout *qlay = new QVBoxLayout(this);
-	qlay->setContentsMargins(0, 0, 0, 0);
-	qlay->setSpacing(0);
-	setLayout(qlay);
+
+	/* clearing layout */
+	while (!layout()->isEmpty())
+		layout()->removeItem(layout()->itemAt(0));
 
 	switch (type) {
 		case Type::TEAM_ID:		/* team number */
@@ -77,7 +84,8 @@ void rfc::gui::RideItem::update()
 			break;
 		case Type::PINS:			/* pushpins */
 			pins = new PushPins(lap);
-			qlay->addWidget(pins);
+
+			layout()->addWidget(pins);
 
 			connect(pins, SIGNAL(signalPinsChanged()),
 					this, SLOT(slotTextChanged()));

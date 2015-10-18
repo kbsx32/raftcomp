@@ -44,7 +44,7 @@ rfc::gui::Ride::Ride(
 	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_DISTANCE),	new QTableWidgetItem("lap time on distance"));
 	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_RESULT),		new QTableWidgetItem("result"));
 	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PINS),			new QTableWidgetItem("pins"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::END),				new QTableWidgetItem("other"));
+	// setHorizontalHeaderItem(ENUM_CAST(ColumnType::END),				new QTableWidgetItem("other"));
 
 	/* pins table init */
 	/* ... */
@@ -75,7 +75,7 @@ void rfc::gui::Ride::setItemTime(const ulong row,
 /* create and put to table ride item widget */
 void rfc::gui::Ride::createRideItem(int row, Team *team, RideItem::Type type)
 {
-	RideItem *it = new RideItem(team, dispatcher.getLap(team->id, lapType), type);
+	RideItem *it = new RideItem(team, dispatcher.getLap(team->id, lapType), type, this);
 	setCellWidget(row, ENUM_CAST(type), it);
 	connect(it, SIGNAL(signalTextEdited()), this, SLOT(updateTable()));
 } /* end of 'Ride::createRideItem' function */

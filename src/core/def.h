@@ -16,6 +16,7 @@
 #include <set>
 #include <map>
 #include <QString>
+#include <QLayout>
 
 /* base project classes */
 #include "base/memleak.h"

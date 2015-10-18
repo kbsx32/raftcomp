@@ -27,6 +27,28 @@ rfc::disc::Rides::Rides() {
 	;
 } /* end of 'disc::RidesRides' constructor */
 
+/* removes from memory ride.
+ * need be called for any ride before
+ * class destroys.
+ */
+void rfc::disc::Rides::clearRide(Ride &ride)
+{
+	for (auto & item : ride)
+		delete item.second;
+} /* end of 'disc::Rides::clearRide' function */
+
+/* class destructor */
+rfc::disc::Rides::~Rides() {
+	clearRide(qualify);
+	clearRide(slalom0);
+	clearRide(slalom1);
+
+	for (auto & sprintLap : sprint)
+		clearRide(sprintLap);
+
+	clearRide(longRace);
+} /* end of '~disc::RidesRides' constructor */
+
 /* create or get lap function.
  * automatically creates new RideTeam lap if
  * current wasn't create before.

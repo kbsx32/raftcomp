@@ -21,6 +21,9 @@
 namespace rfc {
 	namespace gui {
 
+		/* forward declaration class */
+		class PushPins;
+
 		/* single pushpin edit */
 		class Pin : public QLineEdit
 		{
@@ -31,7 +34,7 @@ namespace rfc {
 
 		public:
 			/* construcotr by pin identificator */
-			Pin(rfc::RideTeam *rideTeam, const int pinNumber);
+			Pin(rfc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent = nullptr);
 
 		signals:
 			/* signal that pin changed */
@@ -89,8 +92,9 @@ namespace rfc {
 			 *   team : connected team.
 			 *   lapConnected : Lap connected with current element.
 			 *   controlType : Lap subitem to control.
+			 *   parent : controller parent widget.
 			 */
-			RideItem(Team *team, RideTeam *lapConnected, Type controlType);
+			RideItem(Team *team, RideTeam *lapConnected, Type controlType, QWidget *parent = nullptr);
 
 			/* update info function */
 			void update();
@@ -101,6 +105,12 @@ namespace rfc {
 
 			/* capture changed text slot */
 			void slotTextChanged();
+
+		public:
+			~RideItem()
+			{
+				// qDebug() << "closed ride item";
+			}
 		};
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

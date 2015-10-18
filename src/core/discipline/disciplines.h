@@ -66,7 +66,12 @@ namespace rfc {
 			std::vector<Ride> sprint;
 			Ride slalom0, slalom1;
 			Ride longRace;
-
+		private:
+			/* removes from memory ride.
+			 * need be called for any ride before
+			 * class destroys.
+			 */
+			void clearRide(Ride &ride);
 
 			/* create or get lap function.
 			 * automatically creates new RideTeam lap if
@@ -82,6 +87,9 @@ namespace rfc {
 		public:
 			/* class default constructor */
 			Rides();
+
+			/* class destructor */
+			~Rides();
 
 			/* get lap function */
 			RideTeam * getLap(const ulong teamId, const Type type);
