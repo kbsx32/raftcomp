@@ -4,9 +4,14 @@
  * memory leaks catching type declaration file.
  *
  * some notes :
- *   some developers use '::new' instead 'new' or 'operator new'.
+ *   some developers use '::new' instead 'new' or 'operator new',
+ *		(or other variants of 'new').
  *   so if THIS file (memleak.h) includes before that
  *   there can be problem with compiling.
+ *
+ *   If you want to escape such error, include all files with errors
+ *   before this file.
+ *
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
@@ -15,7 +20,6 @@
 #define RFC_MEMLEAK_H
 
 #include <cstdlib>
-
 #include <string>
 #include <map>
 
@@ -41,7 +45,7 @@ namespace rfc
 			const std::string file, func;	 /* file and function names of allocation place. */
 			const ulong stringNum;			 /* string number in file of allocation place. */
 
-			/* leak-node conastructor.
+			/* leak-node constructor.
 			 * arguments:
 			 *   file : allocation file.
 			 *   func : allocation function.

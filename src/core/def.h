@@ -18,6 +18,14 @@
 #include <QString>
 #include <QLayout>
 
+/* Classes which must be included before memleak.
+ * See 'base/memleak.h' file to undarstand why it
+ * is important to include these files before memleak.
+ */
+
+#include <QMap>
+#include <QVariant>
+
 /* base project classes */
 #include "base/memleak.h"
 #include "base/rstring.h"

@@ -20,19 +20,21 @@ release {
 }
 
 SOURCES += \
+    src/main.cpp \
     src/core/team.cpp \
     src/core/dispatcher.cpp \
     src/core/discipline/disciplines.cpp \
     src/core/base/laptime.cpp \
     src/core/base/exception.cpp \
-    src/main.cpp \
     src/core/base/rstring.cpp \
     src/core/discipline/ride_team.cpp \
     src/gui/mandat/gui_mandat.cpp \
     src/core/base/memleak.cpp \
     src/gui/ridetable/gui_ride.cpp \
     src/gui/ridetable/gui_ride_item.cpp \
-    src/gui/ridetable/gui_ride_pushpins.cpp
+    src/gui/ridetable/gui_ride_pushpins.cpp \
+    src/gui/gui_window_main.cpp \
+    src/gui/gui_menu.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -50,7 +52,8 @@ HEADERS  += \
     src/gui/mandat/gui_mandat.h \
     src/core/base/memleak.h \
     src/gui/ridetable/gui_ride.h \
-    src/gui/ridetable/gui_ride_item.h
+    src/gui/ridetable/gui_ride_item.h \
+    src/gui/gui_window_main.h
 
 # FORMS    +=
 

@@ -45,14 +45,23 @@ rfc::gui::RideItem::RideItem(Team *team, RideTeam *lapConnected, Type type, QWid
 /* update info function */
 void rfc::gui::RideItem::update()
 {
+	QTextEdit *qTextEdit;
+
 	switch (type) {
 		case Type::TEAM_ID:		/* team number */
 			setEnabled(false);
 			setText(team->getIdString());
 			break;
 		case Type::TEAM_HUMEN:    /* team humen */
+			/* push pins are on '0' position always */
+			if (layout()->count() > 0)
+				layout()->removeItem(layout()->itemAt(0));
+
 			setEnabled(false);
-			setText(team->getSurnames());
+			qTextEdit = new QTextEdit(team->getSurnames(), this);
+			qTextEdit->setEnabled(false);
+			layout()->addWidget(qTextEdit);
+			// setText(team->getSurnames());
 			break;
 		case Type::TIME_START:   /* summary time */
 			setText(lap->getTimeStart().getTimeString());
