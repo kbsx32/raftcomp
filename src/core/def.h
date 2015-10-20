@@ -46,5 +46,8 @@ namespace rfc {
  */
 #define ENUM_CAST(VALUE) static_cast<ulong>(VALUE)
 
+/* include language translations */
+#include "../lang_translate.h"
+
 #endif /* RFC_DEF_H */
 

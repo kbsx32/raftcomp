@@ -13,23 +13,29 @@
 
 #include <QWidget>
 
+/* include all core dispatcher support */
+#include "../../core/dispatcher.h"
+
 /* 'raftcomp' support namespace */
 namespace rfc {
 	/* graphical user interface elements namespace */
 	namespace gui {
 
+		/* Mandat comission single team drawer class */
 		class MandatTeam : public QWidget
 		{
-			;
+			Q_OBJECT
 		}; /* end of 'MandatTeam' class */
 
 		// class MandatMen
 		class Mandat : public QWidget
 		{
 			Q_OBJECT
+
+			rfc::Dispatcher *dispatcher;
 		public:
 			/* default constructor */
-			explicit Mandat(QWidget *parent = 0);
+			explicit Mandat(rfc::Dispatcher *dispatcher, QWidget *parent = 0);
 
 		signals:
 

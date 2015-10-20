@@ -75,7 +75,7 @@ void rfc::gui::Ride::setItemTime(const ulong row,
 /* create and put to table ride item widget */
 void rfc::gui::Ride::createRideItem(int row, Team *team, RideItem::Type type)
 {
-	RideItem *it = new RideItem(team, dispatcher.getLap(team->id, lapType), type, this);
+	RideItem *it = new RideItem(team, dispatcher.getLap(lapType.getTeamed(team->id)), type, this);
 	setCellWidget(row, ENUM_CAST(type), it);
 	connect(it, SIGNAL(signalTextEdited()), this, SLOT(updateTable()));
 } /* end of 'Ride::createRideItem' function */

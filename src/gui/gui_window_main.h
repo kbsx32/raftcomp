@@ -11,9 +11,13 @@
 #define RFC_GUI_GREET_H
 
 #include <QWidget>
+#include <QSplitter>
 
 #include "../core/dispatcher.h"
 #include "ridetable/gui_ride.h"
+
+#include "gui_menu.h"
+#include "mandat/gui_mandat.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc
@@ -21,18 +25,8 @@ namespace rfc
 	/* graphical user interface elements namespace */
 	namespace gui
 	{
-		/* Left-side menu class */
-		class Menu : public QWidget
-		{
-			Q_OBJECT
-
-		public:
-			/* default constructor */
-			Menu(QWidget *parent = nullptr);
-		}; /* end of 'Menu' class */
-
 		/* main window class */
-		class WindowMain : public QWidget
+		class WindowMain : public QSplitter
 		{
 			Q_OBJECT
 
@@ -40,6 +34,13 @@ namespace rfc
 		public:
 			/* main window constructor */
 			WindowMain(Dispatcher *dispatcher, QWidget *parent = nullptr);
+
+		public slots:
+			/* change right-side window state */
+			void slotChangeDiscipline(rfc::disc::TypeDisc typeNew);
+
+			/* change right-side window state */
+			void slotChangeToMandat();
 		}; /* end of 'WindowMain' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

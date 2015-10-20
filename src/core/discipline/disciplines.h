@@ -45,45 +45,24 @@ namespace rfc {
 		public:
 			TypeDisc typeDisc;
 			TypeSprint typeSprint;
-
+			TeamId teamId;
 		public:
 			/* constructor for usual discipline */
-			Type(const TypeDisc disc);
+			Type(const TypeDisc disc, const TeamId team = 0);
 
 			/* constructor for sprint */
-			Type(const TypeSprint sprint);
+			Type(const TypeSprint sprint, const TeamId team = 0);
+
+			/* get COPY of this Type with inserted team id */
+			Type getTeamed(TeamId team);
+
+			/* comparator */
+			bool operator<(const Type &second) const;
 		}; /* end of 'Type' class */
 
 		/* full competition race info class */
 		class Rides {
-			/* define one 'ride' class */
-			typedef std::map<ulong, RideTeam *> Ride;	/* (ulong) - team id,
-														 * (RideTeam *) - team lap info
-														 */
-
-			/* all disciplines info */
-			Ride qualify;
-			std::vector<Ride> sprint;
-			Ride slalom0, slalom1;
-			Ride longRace;
-		private:
-			/* removes from memory ride.
-			 * need be called for any ride before
-			 * class destroys.
-			 */
-			void clearRide(Ride &ride);
-
-			/* create or get lap function.
-			 * automatically creates new RideTeam lap if
-			 * current wasn't create before.
-			 * arguments:
-			 *   container : 'Ride' map container.
-			 *   teamId : team identificator.
-			 *   type : 'Ride' type. Needs to init new RideTeam.
-			 * returns:
-			 *   pointer to RideTeam.
-			 */
-			rfc::RideTeam* lapCreateOrGet(Ride &container, const ulong teamId, const Type type);
+			std::map<Type, RideTeam *> rides;
 		public:
 			/* class default constructor */
 			Rides();
@@ -92,10 +71,10 @@ namespace rfc {
 			~Rides();
 
 			/* get lap function */
-			RideTeam * getLap(const ulong teamId, const Type type);
+			RideTeam * getLap(const Type type);
 
 			/* add to global tables new lap */
-			void setLap(const ulong teamId, const Type type, const RideTeam &lapNew);
+			void setLap(const Type type, const RideTeam &lapNew);
 		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

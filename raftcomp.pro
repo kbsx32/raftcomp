@@ -34,7 +34,8 @@ SOURCES += \
     src/gui/ridetable/gui_ride_item.cpp \
     src/gui/ridetable/gui_ride_pushpins.cpp \
     src/gui/gui_window_main.cpp \
-    src/gui/gui_menu.cpp
+    src/gui/gui_menu.cpp \
+    src/lang_translate.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -53,7 +54,9 @@ HEADERS  += \
     src/core/base/memleak.h \
     src/gui/ridetable/gui_ride.h \
     src/gui/ridetable/gui_ride_item.h \
-    src/gui/gui_window_main.h
+    src/gui/gui_window_main.h \
+    src/gui/gui_menu.h \
+    src/lang_translate.h
 
 # FORMS    +=
 

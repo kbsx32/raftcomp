@@ -12,22 +12,36 @@
 
 #include "gui_window_main.h"
 
+#include "gui_menu.h"
+
 /* main window constructor */
 rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
-	dispatcher(dispatcher), QWidget(parent)
+	dispatcher(dispatcher), QSplitter(parent)
 {
 	// setSizePolicy(QSizePolicy::Policy::Expanding);
 	setLayout(new QHBoxLayout(this));
 
-	QSplitter *qsplit = new QSplitter(this);
-	layout()->addWidget(qsplit);
+	// QSplitter *qsplit = new QSplitter(this);
+	// layout()->addWidget(qsplit);
 
-	qsplit->addWidget(new Menu(this));
+	gui::Menu *menu = new gui::Menu(this);
+
+	/* connecting menu signals */
+	connect(menu, SIGNAL(signalChangeDiscipline(rfc::disc::TypeDisc)),
+			this, SLOT(slotChangeDiscipline(rfc::disc::TypeDisc)));
+
+	connect(menu, SIGNAL(signalChangeToMandat()),
+			this, SLOT(slotChangeToMandat()));
+
+	addWidget(menu);
 
 	/* init test teams */
+	/*
 	rfc::gui::Ride *ltable = new rfc::gui::Ride(*dispatcher, rfc::disc::TypeDisc::QUALIFY);
 
 	rfc::Team *tm0 = new rfc::Team(16);
+	dispatcher->addTeam(tm0);
+
 	tm0->men.push_back(rfc::Man("feder", "evgeny"));
 	tm0->men.push_back(rfc::Man("ponomareva", "natalia"));
 	tm0->men.push_back(rfc::Man("alexeeva", "valentina"));
@@ -38,6 +52,8 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	ltable->addTeamInfo(tm0);
 
 	rfc::Team *tm1 = new rfc::Team(32);
+	dispatcher->addTeam(tm0);
+
 	tm1->men.push_back(rfc::Man("chuinyshena", "svetlana"));
 	tm1->men.push_back(rfc::Man("smirnova", "anna"));
 	tm1->men.push_back(rfc::Man("belousova", "victoria"));
@@ -48,6 +64,8 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	ltable->addTeamInfo(tm1);
 
 	rfc::Team *tm2 = new rfc::Team(4);
+	dispatcher->addTeam(tm0);
+
 	tm2->men.push_back(rfc::Man("denisov", "pavel"));
 	tm2->men.push_back(rfc::Man("tochyonykh", "ksenia"));
 	tm2->men.push_back(rfc::Man("kuznetsova", "anna"));
@@ -58,6 +76,8 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	ltable->addTeamInfo(tm2);
 
 	rfc::Team *tm3 = new rfc::Team(8);
+	dispatcher->addTeam(tm0);
+
 	tm3->men.push_back(rfc::Man("kislukhina", "katya"));
 	tm3->men.push_back(rfc::Man("sennikov", "ivan"));
 	tm3->men.push_back(rfc::Man("kapralova", "liza"));
@@ -68,5 +88,42 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	ltable->addTeamInfo(tm3);
 
 	qsplit->addWidget(ltable);
+	*/
+
 } /* end of 'WindowMain' constructor */
 
+/* change right-side window state */
+void rfc::gui::WindowMain::slotChangeDiscipline(const rfc::disc::TypeDisc type)
+{
+	widget(1)->deleteLater();
+
+	switch (type) {
+		case disc::TypeDisc::QUALIFY:
+			addWidget(new QLabel("there will be qualify"));
+			break;
+		case disc::TypeDisc::SPRINT:
+			addWidget(new QLabel("there will be sprint"));
+			break;
+		case disc::TypeDisc::SLALOM_0:
+			addWidget(new QLabel("there will be slalom 0"));
+			break;
+		case disc::TypeDisc::SLALOM_1:
+			addWidget(new QLabel("there will be slalom 1"));
+			break;
+		case disc::TypeDisc::LONG_RACE:
+			addWidget(new QLabel("there will be long race"));
+			break;
+	}
+} /* end of 'gui::WindowMain::slotChangeDiscipline' function */
+
+/* change right-side window state */
+void rfc::gui::WindowMain::slotChangeToMandat()
+{
+	/* setting stretch factors.
+	 * set to do not change size when adds new widget.
+	 */
+	setStretchFactor(0, 0);
+
+	widget(1)->deleteLater();
+	insertWidget(1, new gui::Mandat(dispatcher, this));
+} /* end of 'gui::WindowMain::slotChangeToMandat' function */
