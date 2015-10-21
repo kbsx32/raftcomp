@@ -13,6 +13,9 @@ TEMPLATE = app
 
 debug {
 	DEFINES += RFC_DEBUG
+
+	# sets current directory as project directory.
+	DEFINES += RFC_SET_APP_DIR_AS_PROJ
 }
 
 release {
@@ -60,4 +63,4 @@ HEADERS  += \
 
 # FORMS    +=
 
-QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder
+QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder -Wno-unused-parameter

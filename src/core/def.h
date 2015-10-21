@@ -10,19 +10,22 @@
 #ifndef RFC_DEF_H
 #define RFC_DEF_H
 
+#include <cstdio>
 #include <assert.h>
 #include <string>
 #include <vector>
 #include <set>
 #include <map>
-#include <QString>
-#include <QLayout>
 
 /* Classes which must be included before memleak.
  * See 'base/memleak.h' file to undarstand why it
  * is important to include these files before memleak.
  */
 
+#include <qsharedpointer.h>
+#include <QString>
+#include <QLayout>
+#include <QVector>
 #include <QMap>
 #include <QVariant>
 
@@ -38,6 +41,8 @@ typedef unsigned long ulong;
 namespace rfc {
 	/* redifinition of types */
 	typedef ulong TeamId;
+
+	static const ulong STR_MAX = 128;
 } /* end of 'rfc' namespace */
 
 /* Column static cast redefinition

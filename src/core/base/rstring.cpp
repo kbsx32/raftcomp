@@ -53,3 +53,32 @@ rfc::String rfc::String::toString(long number, long signsCnt)
 
 	return String(str);
 } /* end of 'String::toString' function */
+
+/* 'fgets' function.
+ * The problem is fgets doesn't works correctly with
+ * binary opened files. ( WHY ??? ).
+ */
+void rfc::String::fgets(char *data, const ulong maxLen, FILE * &fileIn)
+{
+	char ch;
+	ulong len = 0;
+
+	while (len < maxLen) {
+		ch = fgetc(fileIn);
+		data[len++] = ch;
+
+		if (ch == 0)
+			break;
+	}
+} /* end of 'fileSaveStr' function */
+
+/* 'fputs' function.
+ * The problem is fputs doesn't inserts '\0' symbol at
+ * the line end.
+ * This functions calls fputs and fputc('\0') in the end.
+ */
+void rfc::String::fputs(const char *data, FILE *fileOut)
+{
+	std::fputs(data, fileOut);
+	std::fputc('\0', fileOut);
+} /* end of 'fileSaveStr' function */

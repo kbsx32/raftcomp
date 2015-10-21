@@ -6,21 +6,20 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
-#include <iostream>
 #include <QApplication>
 
-#include <QLabel>
-#include <QTableView>
-#include <QMessageBox>
 #include <QDir>
-#include <QMap>
-
-#include "core/base/memleak.h"
+#include <QMessageBox>
 
 #include "raftcomp.h"
 
 /* entry point function */
 int main(int argc, char *argv[]) {
+
+#ifdef RFC_SET_APP_DIR_AS_PROJ
+	QDir::setCurrent("../raftcomp");
+#endif
+
 	QApplication app(argc, argv);
 
 	try {

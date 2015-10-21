@@ -18,11 +18,8 @@
 rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	dispatcher(dispatcher), QSplitter(parent)
 {
-	// setSizePolicy(QSizePolicy::Policy::Expanding);
+	/* TODO : make not-changing left-menu widget while swaping active windows */
 	setLayout(new QHBoxLayout(this));
-
-	// QSplitter *qsplit = new QSplitter(this);
-	// layout()->addWidget(qsplit);
 
 	gui::Menu *menu = new gui::Menu(this);
 
@@ -36,20 +33,17 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	addWidget(menu);
 
 	/* init test teams */
-	/*
-	rfc::gui::Ride *ltable = new rfc::gui::Ride(*dispatcher, rfc::disc::TypeDisc::QUALIFY);
-
 	rfc::Team *tm0 = new rfc::Team(16);
 	dispatcher->addTeam(tm0);
 
 	tm0->men.push_back(rfc::Man("feder", "evgeny"));
 	tm0->men.push_back(rfc::Man("ponomareva", "natalia"));
 	tm0->men.push_back(rfc::Man("alexeeva", "valentina"));
-	rfc::RideTeam *rt0 = dispatcher->getLap(16, rfc::disc::TypeDisc::QUALIFY);
+	rfc::RideTeam *rt0 = dispatcher->getLap(rfc::disc::Type(rfc::disc::TypeDisc::QUALIFY, 16));
 	rt0->setTimeStart(rfc::Time(1, 11, 59, 0));
 	rt0->setTimeEnd(rfc::Time(1, 30, 58, 0));
 	rt0->setPinsCount(4);
-	ltable->addTeamInfo(tm0);
+	// ltable->addTeamInfo(tm0);
 
 	rfc::Team *tm1 = new rfc::Team(32);
 	dispatcher->addTeam(tm0);
@@ -57,40 +51,38 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	tm1->men.push_back(rfc::Man("chuinyshena", "svetlana"));
 	tm1->men.push_back(rfc::Man("smirnova", "anna"));
 	tm1->men.push_back(rfc::Man("belousova", "victoria"));
-	rfc::RideTeam *rt1 = dispatcher->getLap(32, rfc::disc::TypeDisc::QUALIFY);
+	rfc::RideTeam *rt1 = dispatcher->getLap(rfc::disc::Type(rfc::disc::TypeDisc::QUALIFY, 32));
 	rt1->setTimeStart(rfc::Time(1, 1, 0, 0));
 	rt1->setTimeEnd(rfc::Time(1, 30, 33, 0));
 	rt1->setPinsCount(4);
-	ltable->addTeamInfo(tm1);
+	// ltable->addTeamInfo(tm1);
 
 	rfc::Team *tm2 = new rfc::Team(4);
-	dispatcher->addTeam(tm0);
+	dispatcher->addTeam(tm1);
 
 	tm2->men.push_back(rfc::Man("denisov", "pavel"));
 	tm2->men.push_back(rfc::Man("tochyonykh", "ksenia"));
 	tm2->men.push_back(rfc::Man("kuznetsova", "anna"));
-	rfc::RideTeam *rt2 = dispatcher->getLap(4, rfc::disc::TypeDisc::QUALIFY);
+	rfc::RideTeam *rt2 = dispatcher->getLap(rfc::disc::Type(rfc::disc::TypeDisc::QUALIFY, 4));
 	rt2->setTimeStart(rfc::Time(1, 1, 0, 0));
 	rt2->setTimeEnd(rfc::Time(1, 30, 33, 0));
 	rt2->setPinsCount(4);
-	ltable->addTeamInfo(tm2);
+	// ltable->addTeamInfo(tm2);
 
 	rfc::Team *tm3 = new rfc::Team(8);
-	dispatcher->addTeam(tm0);
+	dispatcher->addTeam(tm3);
 
 	tm3->men.push_back(rfc::Man("kislukhina", "katya"));
 	tm3->men.push_back(rfc::Man("sennikov", "ivan"));
 	tm3->men.push_back(rfc::Man("kapralova", "liza"));
-	rfc::RideTeam *rt3 = dispatcher->getLap(8, rfc::disc::TypeDisc::QUALIFY);
+	rfc::RideTeam *rt3 = dispatcher->getLap(rfc::disc::Type(rfc::disc::TypeDisc::QUALIFY, 8));
 	rt3->setTimeStart(rfc::Time(1, 1, 0, 0));
 	rt3->setTimeEnd(rfc::Time(1, 30, 33, 0));
 	rt3->setPinsCount(4);
-	ltable->addTeamInfo(tm3);
 
-	qsplit->addWidget(ltable);
-	*/
-
-} /* end of 'WindowMain' constructor */
+	dispatcher->save("var/test.db");
+	dispatcher->load("var/test.db");
+	} /* end of 'WindowMain' constructor */
 
 /* change right-side window state */
 void rfc::gui::WindowMain::slotChangeDiscipline(const rfc::disc::TypeDisc type)

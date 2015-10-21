@@ -10,6 +10,7 @@
 #ifndef RFC_RAFTCOMP_H
 #define RFC_RAFTCOMP_H
 
+#include "core/def.h"
 #include "core/dispatcher.h"
 #include "gui/gui.h"
 

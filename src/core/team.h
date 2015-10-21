@@ -10,6 +10,7 @@
 #ifndef RFC_TEAM_H_
 #define RFC_TEAM_H_
 
+#include <cstdio>
 #include <vector>
 #include <string>
 
@@ -29,9 +30,23 @@ namespace rfc {
 		/* default constructor */
 		Man();
 
+		/* load human from file 'kbsx32.raftcomp.db' */
+		Man(FILE *fileIn, const ulong version = 0);
+
 		/* constructor by names */
 		Man(const String &lastName,
 			const String &firstName);
+
+		/* save human to 'kbsx32.raftcomp.db' type file. */
+		const Man& save(FILE *fileOut, const ulong version = 0) const;
+
+		/* load human from 'kbsx32.raftcomp.db' type file.
+		 *   version 0:
+		 *     lastName  : char * : string.
+		 *     firstName : char * : string;
+		 */
+		Man& load(FILE *fileIn, const ulong version = 0);
+
 	}; /* end of 'Man' class */
 
 	/* team class declaration */
@@ -43,15 +58,31 @@ namespace rfc {
 		/* defualt constructor */
 		Team(const ulong teamId = 0);
 
-		/* saving to file full progress */
-		void saveToFile(const String &fileName);
+		/* constructor to load team from
+		 * file 'kbsx32.raftcomp.db' type.
+		 * Type struct see on 'load' function.
+		 */
+		Team(FILE *fileIn, const ulong version = 0);
 
 		/* get surnames string function */
-		String getSurnames();
+		String getSurnames() const;
 
 		/* get team identification string function */
-		String getIdString();
+		String getIdString() const;
 
+		/* save human to 'kbsx32.raftcomp.db' type file. */
+		const Team& save(FILE *fileOut, const ulong version = 0) const;
+
+		/* load from file.
+		 * file formats : (kbsx32.raftcomp.db').
+		 *   version 0:
+		 *     teamId   : 4 bytes (ulong).
+		 *     humanCnt : 4 bytes (ulong).
+		 *     humans[humanCnt] : ???
+		 *
+		 * returns: self-reference.
+		 */
+		Team& load(FILE *fileIn, const ulong version = 0);
 	}; /* end of 'team' class */
 } /* end of 'rfc' namespace' */
 

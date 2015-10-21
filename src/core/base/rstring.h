@@ -44,6 +44,20 @@ namespace rfc {
 		 *   to_string(123, 5) --> "00123";
 		 */
 		static String toString(long number, long signsCnt = 2);
+
+		/* 'fgets' function.
+		 * The problem is fgets doesn't works correctly with
+		 * binary opened files. ( WHY ??? ).
+		 */
+		static void fgets(char *data, const ulong maxLen, FILE *&fileOut);
+
+		/* 'fputs' function.
+		 * The problem is fputs doesn't inserts '\0' symbol at
+		 * the line end.
+		 * This functions calls fputs and fputc('\0') in the end.
+		 */
+		static void fputs(const char *data, FILE *fileOut);
+
 	}; /* end of 'String' class */
 } /* end of 'rfc' namespace */
 
