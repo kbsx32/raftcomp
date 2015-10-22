@@ -30,8 +30,6 @@
 	#define RFC_MEMLEAK_CHECK
 #endif
 
-typedef unsigned long ulong;
-
 /* rafting competition support namespace */
 namespace rfc
 {
@@ -43,7 +41,7 @@ namespace rfc
 		struct Node
 		{
 			const std::string file, func;	 /* file and function names of allocation place. */
-			const ulong stringNum;			 /* string number in file of allocation place. */
+			const uint32_t stringNum;			 /* string number in file of allocation place. */
 
 			/* leak-node constructor.
 			 * arguments:
@@ -53,7 +51,7 @@ namespace rfc
 			 */
 			Node(const char *file,
 				 const char *func,
-				 const ulong stringNum);
+				 const uint32_t stringNum);
 
 			/* leak-node copying constructor */
 			Node(const Node &nodeSrc);

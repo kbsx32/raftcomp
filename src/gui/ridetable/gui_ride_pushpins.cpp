@@ -63,19 +63,19 @@ void rfc::gui::PushPins::slotPinsChanged() {
 
 /* update all pushpins info */
 void rfc::gui::PushPins::update() {
-	if (rideTeam->getPinsCount() != (ulong)this->columnCount())
+	if (rideTeam->getPinsCount() != (uint32_t)this->columnCount())
 		updateRow();
 } /* end of 'gui::PushPins::slotPinsChanged' function */
 
 /* update all row function */
 void rfc::gui::PushPins::updateRow() {
 	/* create new pins fields */
-	ulong pinsCnt = rideTeam->getPinsCount();
+	uint32_t pinsCnt = rideTeam->getPinsCount();
 
 	setRowCount(1);
 	setColumnCount(pinsCnt);
 
-	for (ulong i = 0; i < pinsCnt; ++i) {
+	for (uint32_t i = 0; i < pinsCnt; ++i) {
 
 		Pin *pinNew = new Pin(rideTeam, i, this);
 

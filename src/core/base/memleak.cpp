@@ -22,7 +22,7 @@ rfc::MemLeak rfc::memLeakInstance;
  *   func : allocation function.
  *   stringNum : number of string where called allocation.
  */
-rfc::MemLeak::Node::Node(const char *file, const char *func, const ulong stringNum) :
+rfc::MemLeak::Node::Node(const char *file, const char *func, const uint32_t stringNum) :
 	file(file), func(func), stringNum(stringNum)
 {
 	// void **arr;

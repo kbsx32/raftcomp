@@ -35,21 +35,19 @@
 #include "base/laptime.h"
 #include "base/exception.h"
 
-typedef unsigned long ulong;
-
 /* 'raftcomp' support namespace */
 namespace rfc {
 	/* redifinition of types */
-	typedef ulong TeamId;
+	typedef uint32_t TeamId;
 
-	static const ulong STR_MAX = 128;
+	static const uint32_t STR_MAX = 128;
 } /* end of 'rfc' namespace */
 
 /* Column static cast redefinition
  * argument:
  *		VALUE - column type from enum class.
  */
-#define ENUM_CAST(VALUE) static_cast<ulong>(VALUE)
+#define ENUM_CAST(VALUE) static_cast<uint32_t>(VALUE)
 
 /* include language translations */
 #include "../lang_translate.h"

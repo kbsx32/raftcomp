@@ -46,7 +46,7 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	// ltable->addTeamInfo(tm0);
 
 	rfc::Team *tm1 = new rfc::Team(32);
-	dispatcher->addTeam(tm0);
+	dispatcher->addTeam(tm1);
 
 	tm1->men.push_back(rfc::Man("chuinyshena", "svetlana"));
 	tm1->men.push_back(rfc::Man("smirnova", "anna"));
@@ -58,7 +58,7 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	// ltable->addTeamInfo(tm1);
 
 	rfc::Team *tm2 = new rfc::Team(4);
-	dispatcher->addTeam(tm1);
+	dispatcher->addTeam(tm2);
 
 	tm2->men.push_back(rfc::Man("denisov", "pavel"));
 	tm2->men.push_back(rfc::Man("tochyonykh", "ksenia"));

@@ -56,16 +56,16 @@ void rfc::gui::Ride::eraseTable() {
 } /* end of 'gui::Ride::eraseTable' function */
 
 /* set table item function */
-void rfc::gui::Ride::setItemText(const ulong row,
-									 const ulong column,
+void rfc::gui::Ride::setItemText(const uint32_t row,
+									 const uint32_t column,
 									 const String &string) {
 	QTableWidgetItem *item = new QTableWidgetItem((QString)string);
 	setItem(row, column, item);
 } /* end of 'gui::Ride::setItemText' function */
 
 /* set table item function */
-void rfc::gui::Ride::setItemTime(const ulong row,
-									 const ulong column,
+void rfc::gui::Ride::setItemTime(const uint32_t row,
+									 const uint32_t column,
 									 const Time &time) {
 	QTableWidgetItem *item = new QTableWidgetItem(time.getTimeString());
 
@@ -88,7 +88,7 @@ void rfc::gui::Ride::addTeamInfo(Team *team) {
 	/* import column types */
 	typedef RideItem::Type Type;
 
-	for (ulong i = 0; i < ENUM_CAST(Type::END); ++i)
+	for (uint32_t i = 0; i < ENUM_CAST(Type::END); ++i)
 		createRideItem(row, team, static_cast<Type>(i));
 
 } /* end of 'gui::Ride::addLapInfo' function */

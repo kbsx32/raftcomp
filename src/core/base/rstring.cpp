@@ -58,10 +58,10 @@ rfc::String rfc::String::toString(long number, long signsCnt)
  * The problem is fgets doesn't works correctly with
  * binary opened files. ( WHY ??? ).
  */
-void rfc::String::fgets(char *data, const ulong maxLen, FILE * &fileIn)
+void rfc::String::fgets(char *data, const uint32_t maxLen, FILE * &fileIn)
 {
 	char ch;
-	ulong len = 0;
+	uint32_t len = 0;
 
 	while (len < maxLen) {
 		ch = fgetc(fileIn);

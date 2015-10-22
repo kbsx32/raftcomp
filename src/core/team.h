@@ -31,38 +31,38 @@ namespace rfc {
 		Man();
 
 		/* load human from file 'kbsx32.raftcomp.db' */
-		Man(FILE *fileIn, const ulong version = 0);
+		Man(FILE *fileIn, const uint32_t version = 0);
 
 		/* constructor by names */
 		Man(const String &lastName,
 			const String &firstName);
 
 		/* save human to 'kbsx32.raftcomp.db' type file. */
-		const Man& save(FILE *fileOut, const ulong version = 0) const;
+		const Man& save(FILE *fileOut, const uint32_t version = 0) const;
 
 		/* load human from 'kbsx32.raftcomp.db' type file.
 		 *   version 0:
 		 *     lastName  : char * : string.
 		 *     firstName : char * : string;
 		 */
-		Man& load(FILE *fileIn, const ulong version = 0);
+		Man& load(FILE *fileIn, const uint32_t version = 0);
 
 	}; /* end of 'Man' class */
 
 	/* team class declaration */
 	class Team {
 	public:
-		ulong id;                   /* team number */
+		uint32_t id;                   /* team number */
 		std::vector<Man> men;  		/* team men list */
 
 		/* defualt constructor */
-		Team(const ulong teamId = 0);
+		Team(const uint32_t teamId = 0);
 
 		/* constructor to load team from
 		 * file 'kbsx32.raftcomp.db' type.
 		 * Type struct see on 'load' function.
 		 */
-		Team(FILE *fileIn, const ulong version = 0);
+		Team(FILE *fileIn, const uint32_t version = 0);
 
 		/* get surnames string function */
 		String getSurnames() const;
@@ -71,18 +71,18 @@ namespace rfc {
 		String getIdString() const;
 
 		/* save human to 'kbsx32.raftcomp.db' type file. */
-		const Team& save(FILE *fileOut, const ulong version = 0) const;
+		const Team& save(FILE *fileOut, const uint32_t version = 0) const;
 
 		/* load from file.
 		 * file formats : (kbsx32.raftcomp.db').
 		 *   version 0:
-		 *     teamId   : 4 bytes (ulong).
-		 *     humanCnt : 4 bytes (ulong).
+		 *     teamId   : 4 bytes (uint32_t).
+		 *     humanCnt : 4 bytes (uint32_t).
 		 *     humans[humanCnt] : ???
 		 *
 		 * returns: self-reference.
 		 */
-		Team& load(FILE *fileIn, const ulong version = 0);
+		Team& load(FILE *fileIn, const uint32_t version = 0);
 	}; /* end of 'team' class */
 } /* end of 'rfc' namespace' */
 

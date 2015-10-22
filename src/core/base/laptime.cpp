@@ -50,10 +50,10 @@ rfc::Time::Time(const String &string)
  */
 rfc::Time& rfc::Time::set(const String &string)
 {
-	ulong
+	uint32_t
 		h = 0, m = 0, s = 0, ms = 0;
 
-	std::sscanf(string.data(), "%lu:%lu:%lu'%lu", &h, &m, &s, &ms);
+	std::sscanf(string.data(), "%u:%u:%u'%u", &h, &m, &s, &ms);
 	set(h, m, s, ms);
 
 	return *this;

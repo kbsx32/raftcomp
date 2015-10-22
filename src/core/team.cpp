@@ -24,22 +24,22 @@ rfc::Man::Man(const String &lastName,
 } /* end of 'Man' constructor */
 
 /* load human from file 'kbsx32.raftcomp.db' type */
-rfc::Man::Man(FILE *fileIn, const ulong version)
+rfc::Man::Man(FILE *fileIn, const uint32_t version)
 {
 	load(fileIn, version);
 } /* end of 'Man' constructor */
 
 /* save human to 'kbsx32.raftcomp.db' type file */
-const rfc::Man& rfc::Man::save(FILE *fileOut, const ulong version) const
+const rfc::Man& rfc::Man::save(FILE *fileOut, const uint32_t version) const
 {
 	const char *str;
 
 	/* saving info */
 	str = lastName.data();
-	std::fputs(str, fileOut);
+	String::fputs(str, fileOut);
 
 	str = firstName.data();
-	std::fputs(str, fileOut);
+	String::fputs(str, fileOut);
 
 	return *this;
 } /* end of 'Man::save' function */
@@ -50,17 +50,17 @@ const rfc::Man& rfc::Man::save(FILE *fileOut, const ulong version) const
  *     lastName  : char * : string.
  *     firstName : char * : string;
  */
-rfc::Man& rfc::Man::load(FILE *fileIn, const ulong version)
+rfc::Man& rfc::Man::load(FILE *fileIn, const uint32_t version)
 {
 	// if (version >= 0) {
 
 	/* loading info */
 	char str[STR_MAX];  /* prepared buffer */
 
-	std::fgets(str, STR_MAX, fileIn);
+	String::fgets(str, STR_MAX, fileIn);
 	lastName = str;
 
-	std::fgets(str, STR_MAX, fileIn);
+	String::fgets(str, STR_MAX, fileIn);
 	firstName = str;
 
 	return *this;
@@ -71,7 +71,7 @@ rfc::Man& rfc::Man::load(FILE *fileIn, const ulong version)
  */
 
 /* defualt constructor */
-rfc::Team::Team(const ulong teamId) :
+rfc::Team::Team(const uint32_t teamId) :
 	id(teamId)
 {
 } /* end of 'Team' constructor */
@@ -79,7 +79,7 @@ rfc::Team::Team(const ulong teamId) :
 /* constructor to load team from
  * file 'kbsx32.raftcomp.db' type
  */
-rfc::Team::Team(FILE *fileIn, const ulong version)
+rfc::Team::Team(FILE *fileIn, const uint32_t version)
 {
 	load(fileIn, version);
 } /* end of 'Team' constructor */
@@ -102,12 +102,12 @@ rfc::String rfc::Team::getIdString() const
 } /* end of 'rfc::Team::getSurnames' function */
 
 /* save human to 'kbsx32.raftcomp.db' type file. */
-const rfc::Team & rfc::Team::save(FILE *fileOut, const ulong version) const
+const rfc::Team & rfc::Team::save(FILE *fileOut, const uint32_t version) const
 {
 	/* version 0 implement */
 	std::fwrite(&id, sizeof(id), 1, fileOut);
 
-	const ulong humanCnt = men.size();
+	const uint32_t humanCnt = men.size();
 	std::fwrite(&humanCnt, sizeof(humanCnt), 1, fileOut);
 
 	/* save vector of stupid men */
@@ -120,11 +120,11 @@ const rfc::Team & rfc::Team::save(FILE *fileOut, const ulong version) const
 /* load human from 'kbsx32.raftcomp.db' type file.
  * file formats:
  *   version 0:
- *     teamId   : 4 bytes (ulong).
- *     humanCnt : 4 bytes (ulong).
+ *     teamId   : 4 bytes (uint32_t).
+ *     humanCnt : 4 bytes (uint32_t).
  *     humans[humanCnt] : ???
  */
-rfc::Team & rfc::Team::load(FILE *fileIn, const ulong version)
+rfc::Team & rfc::Team::load(FILE *fileIn, const uint32_t version)
 {
 	/* version 0 implement */
 
@@ -132,10 +132,10 @@ rfc::Team & rfc::Team::load(FILE *fileIn, const ulong version)
 	std::fread(&id, sizeof(id), 1, fileIn);
 
 	/* loading stupid humen */
-	ulong humanCnt;
+	uint32_t humanCnt;
 	std::fread(&humanCnt, sizeof(humanCnt), 1, fileIn);
 
-	for (ulong i = 0; i < humanCnt; ++i)
+	for (uint32_t i = 0; i < humanCnt; ++i)
 		men.push_back(Man(fileIn, version));
 
 	return *this;

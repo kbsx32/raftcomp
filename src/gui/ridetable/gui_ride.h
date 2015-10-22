@@ -37,16 +37,16 @@ namespace rfc {
 			/* set table item function.
 			 * creates QTableWidgetItem. (editable).
 			 */
-			void setItemText(const ulong row,
-							 const ulong column,
+			void setItemText(const uint32_t row,
+							 const uint32_t column,
 							 const String &string);
 
 			/* set table item time function.
 			 * creates QTableWidgetItem. (editable).
 			 * note : later must create QtWidget time-editor.
 			 */
-			void setItemTime(const ulong row,
-							 const ulong column,
+			void setItemTime(const uint32_t row,
+							 const uint32_t column,
 							 const Time &time);
 
 		public:

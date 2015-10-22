@@ -49,7 +49,7 @@ namespace rfc {
 		 * The problem is fgets doesn't works correctly with
 		 * binary opened files. ( WHY ??? ).
 		 */
-		static void fgets(char *data, const ulong maxLen, FILE *&fileOut);
+		static void fgets(char *data, const uint32_t maxLen, FILE *&fileOut);
 
 		/* 'fputs' function.
 		 * The problem is fputs doesn't inserts '\0' symbol at

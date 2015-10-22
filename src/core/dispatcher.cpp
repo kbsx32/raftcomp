@@ -11,7 +11,7 @@
 #include "dispatcher.h"
 
 /* define static members */
-const char rfc::Dispatcher::fileSignature[] = "kbsx32.raftcomp.db";
+const char rfc::Dispatcher::fileSignature[] = "kbsx32.raftcomp.dbc";
 
 /* class destructor */
 rfc::Dispatcher::~Dispatcher() {
@@ -26,7 +26,7 @@ void rfc::Dispatcher::addTeam(Team *teamNew) {
 } /* end of 'Dispatcher::addTeam' function */
 
 /* get team pointer list */
-rfc::Team* rfc::Dispatcher::getTeam(const ulong teamId) {
+rfc::Team* rfc::Dispatcher::getTeam(const uint32_t teamId) {
 	auto item = std::find_if(teams.begin(), teams.end(),
 							 [&](Team *team) {
 								return team->id == teamId;
@@ -39,19 +39,19 @@ rfc::Team* rfc::Dispatcher::getTeam(const ulong teamId) {
 void rfc::Dispatcher::save(const String &fileOutName)
 {
 	/* current saving version */
-	ulong version = 0;
+	uint32_t version = 0;
 
 	FILE *fileOut = std::fopen(fileOutName.data(), "wb");
 
 	/* write signature */
 	// fileSaveStr(fileSignature, fileOut);
-	fputs(fileSignature, fileOut);
+	String::fputs(fileSignature, fileOut);
 
 	/* set current version */
 	std::fwrite(&version, sizeof(version), 1, fileOut);
 
 	/* write all teams */
-	const ulong teamsCnt = teams.size();
+	const uint32_t teamsCnt = teams.size();
 	std::fwrite(&teamsCnt, sizeof(teamsCnt), 1, fileOut);
 	for (const auto &team : teams)
 		team->save(fileOut);
@@ -60,11 +60,11 @@ void rfc::Dispatcher::save(const String &fileOutName)
 } /* end of 'Dispatcher::save' function */
 
 /* save info to file.
- * file formats: 'kbsx32.raftcomp.db'
+ * file formats: 'kbsx32.raftcomp.dbc'
  *   version 0:
- *	   signature : "kbsx32.raftcomp.db";
- *     version : 4 bytes (ulong).
- *     teamsCnt : 4 bytes (ulong).
+ *	   signature : "kbsx32.raftcomp.dbc";
+ *     version : 4 bytes (uint32_t).
+ *     teamsCnt : 4 bytes (uint32_t).
  *     teams[teamsCnt] : ???.
  */
 void rfc::Dispatcher::load(const String &fileInName)
@@ -83,23 +83,26 @@ void rfc::Dispatcher::load(const String &fileInName)
 
 	/* read file version */
 
-	while (true)
-		fgets(signFromFile, STR_MAX, fileIn);
+	// while (true)
+		// fgets(signFromFile, STR_MAX, fileIn);
 		// String::fgets(signFromFile, STR_MAX, fileIn);
 
-	ulong version;
+	uint32_t version;
 	std::fread(&version, sizeof(version), 1, fileIn);
 
 	/* read all teams */
-	ulong teamsCnt;
+	uint32_t teamsCnt;
 	std::fread(&teamsCnt, sizeof(teamsCnt), 1, fileIn);
 
 	/* clear teams array */
+
+	/* clear all teams */
 	for (auto &team : teams)
 		delete team;
+	teams.clear();
 
 	/* fill new teams */
-	for (ulong i = 0; i < teamsCnt; ++i)
+	for (uint32_t i = 0; i < teamsCnt; ++i)
 		teams.push_back(new Team(fileIn));
 
 	fclose(fileIn);

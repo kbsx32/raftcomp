@@ -19,7 +19,7 @@ namespace rfc {
 	/* global class support */
 	class Dispatcher : public disc::Rides {
 	public:
-		static const char fileSignature[]; /* = "kbsx32.rafrcomp.db" */
+		static const char fileSignature[]; /* = "kbsx32.rafrcomp.dbc" */
 
 		/* declared teams */
 		std::vector<Team *> teams;
@@ -29,17 +29,17 @@ namespace rfc {
 		/* add new team to list */
 		void addTeam(Team *teamNew);
 		/* get team pointer from list */
-		Team * getTeam(ulong teamId);
+		Team * getTeam(uint32_t teamId);
 
 		/* save info to file. */
 		void save(const String &fileOutName);
 
 		/* load info from file.
-		 * file formats: 'kbsx32.raftcomp.db'
+		 * file formats: 'kbsx32.raftcomp.dbc'
 		 *   version 0:
-		 *	   signature : "kbsx32.raftcomp.db";
-		 *     version   : 4 bytes (ulong).
-		 *     teamsCnt  : 4 bytes (ulong).
+		 *	   signature : "kbsx32.raftcomp.dbc";
+		 *     version   : 4 bytes (uint32_t).
+		 *     teamsCnt  : 4 bytes (uint32_t).
 		 *     teams[teamsCnt] : ???.
 		 */
 		void load(const String &fileInName);

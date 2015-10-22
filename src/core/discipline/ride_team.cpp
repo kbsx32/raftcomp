@@ -72,16 +72,16 @@ rfc::Time rfc::RideTeam::getTimeResult() const {
 } /* end of 'RideTeam::getTimeResult' function */
 
 /* get pushpins count */
-ulong rfc::RideTeam::getPinsCount() const {
+uint32_t rfc::RideTeam::getPinsCount() const {
 	return pinsPenalty.size();
 } /* end of 'RideTeam::getPinsCount' function */
 
 /* set pushpin by id penalty */
-void rfc::RideTeam::setPenaltyOther(ulong valueNew) {
+void rfc::RideTeam::setPenaltyOther(uint32_t valueNew) {
 	penaltyOther = valueNew;
 } /* end of 'RideTeam::setPenaltyOther' function */
 
 /* set pushpin by id penalty */
-ulong rfc::RideTeam::getPenaltyOther() {
+uint32_t rfc::RideTeam::getPenaltyOther() {
 	return penaltyOther;
 } /* end of 'RideTeam::getPenaltyOther' function */
