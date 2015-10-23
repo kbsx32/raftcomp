@@ -18,7 +18,7 @@
 #include <map>
 
 /* Classes which must be included before memleak.
- * See 'base/memleak.h' file to undarstand why it
+ * See 'base/memleak.h' file to understand why it
  * is important to include these files before memleak.
  */
 
@@ -28,6 +28,10 @@
 #include <QVector>
 #include <QMap>
 #include <QVariant>
+
+/* define global application sets */
+#define RFC_APP_CRATOR "kbsx32"
+#define RFC_APP_NAME "raftcomp"
 
 /* base project classes */
 #include "base/memleak.h"
@@ -43,9 +47,9 @@ namespace rfc {
 	static const uint32_t STR_MAX = 128;
 } /* end of 'rfc' namespace */
 
-/* Column static cast redefinition
+/* static cast redefinition.
  * argument:
- *		VALUE - column type from enum class.
+ *		VALUE - type from enum class.
  */
 #define ENUM_CAST(VALUE) static_cast<uint32_t>(VALUE)
 

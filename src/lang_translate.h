@@ -34,6 +34,10 @@ namespace rfc
 		extern rfc::String slalom0;
 		extern rfc::String slalom1;
 		extern rfc::String longRace;
+
+		extern rfc::String createNewDatabase;
+		extern rfc::String openExistingDatabase;
+		extern rfc::String exit;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

@@ -38,7 +38,8 @@ SOURCES += \
     src/gui/ridetable/gui_ride_pushpins.cpp \
     src/gui/gui_window_main.cpp \
     src/gui/gui_menu.cpp \
-    src/lang_translate.cpp
+    src/lang_translate.cpp \
+    src/gui/gui_greet.cpp
 
 HEADERS  += \
     src/core/team.h \
@@ -59,7 +60,8 @@ HEADERS  += \
     src/gui/ridetable/gui_ride_item.h \
     src/gui/gui_window_main.h \
     src/gui/gui_menu.h \
-    src/lang_translate.h
+    src/lang_translate.h \
+    src/gui/gui_greet.h
 
 # FORMS    +=
 

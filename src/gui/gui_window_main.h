@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef RFC_GUI_GREET_H
-#define RFC_GUI_GREET_H
+#ifndef RFC_GUI_WINDOW_MAIN_H
+#define RFC_GUI_WINDOW_MAIN_H
 
 #include <QWidget>
 #include <QSplitter>
@@ -45,4 +45,4 @@ namespace rfc
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */
 
-#endif /* RFC_GUI_GREET_H */
+#endif /* RFC_GUI_WINDOW_MAIN_H */

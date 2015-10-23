@@ -22,11 +22,19 @@ int main(int argc, char *argv[]) {
 
 	QApplication app(argc, argv);
 
-	try {
-		rfc::Dispatcher dispatcher;
+	/* need to use settings in QSettings */
+	app.setOrganizationName(RFC_APP_CREATOR);
+	app.setApplicationName(RFC_APP_NAME);
 
+	try {
+		rfc::gui::WindowGreet wndGreet;
+		wndGreet.show();
+
+		/*
+		rfc::Dispatcher dispatcher;
 		rfc::gui::WindowMain wndMain(&dispatcher);
 		wndMain.show();
+		*/
 
 		return app.exec();
 	} catch (const rfc::Exception &ex) {

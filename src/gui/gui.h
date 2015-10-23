@@ -10,6 +10,8 @@
 #ifndef RFC_GUI_H
 #define RFC_GUI_H
 
+#include "gui_greet.h"
+
 #include "ridetable/gui_ride.h"
 
 #include "gui_window_main.h"
