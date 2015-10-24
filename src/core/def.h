@@ -30,7 +30,7 @@
 #include <QVariant>
 
 /* define global application sets */
-#define RFC_APP_CRATOR "kbsx32"
+#define RFC_APP_CREATOR "kbsx32"
 #define RFC_APP_NAME "raftcomp"
 
 /* base project classes */

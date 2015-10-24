@@ -25,6 +25,13 @@ namespace rfc {
 		class MandatTeam : public QWidget
 		{
 			Q_OBJECT
+
+			rfc::Dispatcher *dispatcher;
+
+		public:
+			/* default constructor */
+			explicit MandatTeam(QWidget *parent = nullptr);
+		public:
 		}; /* end of 'MandatTeam' class */
 
 		// class MandatMen

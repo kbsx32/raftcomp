@@ -24,7 +24,6 @@ release {
 
 SOURCES += \
     src/main.cpp \
-    src/core/team.cpp \
     src/core/dispatcher.cpp \
     src/core/discipline/disciplines.cpp \
     src/core/base/laptime.cpp \
@@ -39,10 +38,11 @@ SOURCES += \
     src/gui/gui_window_main.cpp \
     src/gui/gui_menu.cpp \
     src/lang_translate.cpp \
-    src/gui/gui_greet.cpp
+    src/gui/gui_greet.cpp \
+    src/core/humen/team.cpp \
+    src/core/humen/human.cpp
 
 HEADERS  += \
-    src/core/team.h \
     src/core/def.h \
     src/core/dispatcher.h \
     src/core/discipline/disciplines.h \
@@ -61,7 +61,9 @@ HEADERS  += \
     src/gui/gui_window_main.h \
     src/gui/gui_menu.h \
     src/lang_translate.h \
-    src/gui/gui_greet.h
+    src/gui/gui_greet.h \
+    src/core/humen/team.h \
+    src/core/humen/human.h
 
 # FORMS    +=
 

@@ -7,7 +7,7 @@
  */
 
 #include <QLabel>
-#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "gui_mandat.h"
 
@@ -15,8 +15,12 @@
 rfc::gui::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 	dispatcher(dispatcher), QWidget(parent)
 {
-	QHBoxLayout *lay = new QHBoxLayout(this);
+	QVBoxLayout *layout = new QVBoxLayout(this);
 
-	lay->addWidget(new QLabel("mandat window"));
+	// lay->addWidget(new QLabel("mandat window"));
+
+	for (const rfc::men::Team *team : dispatcher->teams)
+		layout->addWidget(new QLabel(team->getIdString() + " : " + team->getSurnames()));
+
 } /* end of 'Mandat' constructor */
 

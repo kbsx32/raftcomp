@@ -68,15 +68,14 @@ namespace rfc {
 			void eraseTable();
 
 			/* add new info to table */
-			void addTeamInfo(Team *team);
+			void addTeamInfo(men::Team *team);
 
 			/* create and put to table ride item widget */
-			void createRideItem(int row, Team *team, RideItem::Type type);
+			void createRideItem(int row, men::Team *team, RideItem::Type type);
 
 		public slots:
 			/* update table data info */
 			void updateTable();
-
 		}; /* end of 'Ride' class */
 	} /* end of 'gui' namespace */
 }  /* end of 'rfc' namespace */

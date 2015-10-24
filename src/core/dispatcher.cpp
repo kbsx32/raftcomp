@@ -14,21 +14,24 @@
 const char rfc::Dispatcher::fileSignature[] = "kbsx32.raftcomp.dbc";
 
 /* class destructor */
-rfc::Dispatcher::~Dispatcher() {
+rfc::Dispatcher::~Dispatcher()
+{
 	/* remove all team pointers */
 	for (auto item : teams)
 		delete item;
 } /* end of '~Dispatcher' destructor */
 
 /* add new team to list */
-void rfc::Dispatcher::addTeam(Team *teamNew) {
+void rfc::Dispatcher::addTeam(men::Team *teamNew)
+{
 	teams.push_back(teamNew);
 } /* end of 'Dispatcher::addTeam' function */
 
 /* get team pointer list */
-rfc::Team* rfc::Dispatcher::getTeam(const uint32_t teamId) {
+rfc::men::Team* rfc::Dispatcher::getTeam(const uint32_t teamId)
+{
 	auto item = std::find_if(teams.begin(), teams.end(),
-							 [&](Team *team) {
+							 [&](men::Team *team) {
 								return team->id == teamId;
 							 });
 
@@ -71,6 +74,9 @@ void rfc::Dispatcher::load(const String &fileInName)
 {
 	FILE *fileIn = std::fopen(fileInName.data(), "rb");
 
+	if (fileIn == nullptr)
+		return ;
+
 	/* read signature */
 	char signFromFile[STR_MAX];
 
@@ -103,7 +109,7 @@ void rfc::Dispatcher::load(const String &fileInName)
 
 	/* fill new teams */
 	for (uint32_t i = 0; i < teamsCnt; ++i)
-		teams.push_back(new Team(fileIn));
+		teams.push_back(new men::Team(fileIn));
 
 	fclose(fileIn);
 } /* end of 'Dispatcher::load' function */

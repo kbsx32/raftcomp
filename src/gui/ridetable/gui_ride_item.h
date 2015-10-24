@@ -73,7 +73,7 @@ namespace rfc {
 			Q_OBJECT
 
 			RideTeam *lap;      /* connected to this widget lap */
-			Team *team;         /* connected team */
+			men::Team *team;    /* connected team */
 		public:
 			enum class Type {
 				TEAM_ID,		/* team number */
@@ -101,7 +101,7 @@ namespace rfc {
 			 *   controlType : Lap subitem to control.
 			 *   parent : controller parent widget.
 			 */
-			RideItem(Team *team, RideTeam *lapConnected, Type controlType, QWidget *parent = nullptr);
+			RideItem(men::Team *team, RideTeam *lapConnected, Type controlType, QWidget *parent = nullptr);
 
 			/* update info function */
 			void update();

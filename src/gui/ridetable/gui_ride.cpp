@@ -48,6 +48,10 @@ rfc::gui::Ride::Ride(
 
 	/* pins table init */
 	/* ... */
+
+	/* init all teams */
+	for (const auto &team : dispatcher.teams)
+		addTeamInfo(team);
 } /* end of 'gui::Ride' constructor */
 
 /* erase all data from table */
@@ -73,7 +77,7 @@ void rfc::gui::Ride::setItemTime(const uint32_t row,
 } /* end of 'gui::Ride::setItemTime' function */
 
 /* create and put to table ride item widget */
-void rfc::gui::Ride::createRideItem(int row, Team *team, RideItem::Type type)
+void rfc::gui::Ride::createRideItem(int row, men::Team *team, RideItem::Type type)
 {
 	RideItem *it = new RideItem(team, dispatcher.getLap(lapType.getTeamed(team->id)), type, this);
 	setCellWidget(row, ENUM_CAST(type), it);
@@ -81,7 +85,7 @@ void rfc::gui::Ride::createRideItem(int row, Team *team, RideItem::Type type)
 } /* end of 'Ride::createRideItem' function */
 
 /* add new info to table */
-void rfc::gui::Ride::addTeamInfo(Team *team) {
+void rfc::gui::Ride::addTeamInfo(men::Team *team) {
 	int row = rowCount();
 	setRowCount(row + 1);
 

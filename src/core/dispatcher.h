@@ -10,7 +10,7 @@
 #ifndef RFC_DISPATCHER_H_
 #define RFC_DISPATCHER_H_
 
-#include "team.h"
+#include "humen/team.h"
 #include "discipline/ride_team.h"
 
 /* 'raftcomp' support namespace */
@@ -18,18 +18,17 @@ namespace rfc {
 
 	/* global class support */
 	class Dispatcher : public disc::Rides {
-	public:
+	private:
+		/* signature for saving database-competition files */
 		static const char fileSignature[]; /* = "kbsx32.rafrcomp.dbc" */
-
-		/* declared teams */
-		std::vector<Team *> teams;
-
-		// disc::Rides races; /* all races info */
 	public:
+		/* declared teams */
+		std::vector<men::Team *> teams;
+
 		/* add new team to list */
-		void addTeam(Team *teamNew);
+		void addTeam(men::Team *teamNew);
 		/* get team pointer from list */
-		Team * getTeam(uint32_t teamId);
+		men::Team * getTeam(uint32_t teamId);
 
 		/* save info to file. */
 		void save(const String &fileOutName);

@@ -33,6 +33,7 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	addWidget(menu);
 
 	/* init test teams */
+	/*
 	rfc::Team *tm0 = new rfc::Team(16);
 	dispatcher->addTeam(tm0);
 
@@ -79,9 +80,9 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	rt3->setTimeStart(rfc::Time(1, 1, 0, 0));
 	rt3->setTimeEnd(rfc::Time(1, 30, 33, 0));
 	rt3->setPinsCount(4);
-
-	dispatcher->save("var/test.db");
-	dispatcher->load("var/test.db");
+	*/
+	// dispatcher->save("var/test.dbc");
+	// dispatcher->load("var/test.dbc");
 	} /* end of 'WindowMain' constructor */
 
 /* change right-side window state */
@@ -89,21 +90,28 @@ void rfc::gui::WindowMain::slotChangeDiscipline(const rfc::disc::TypeDisc type)
 {
 	widget(1)->deleteLater();
 
+	typedef disc::Type Type;
+
 	switch (type) {
 		case disc::TypeDisc::QUALIFY:
-			addWidget(new QLabel("there will be qualify"));
+			// addWidget(new QLabel("there will be qualify"));
+			addWidget(new gui::Ride(*dispatcher, Type(disc::TypeDisc::QUALIFY),this));
 			break;
 		case disc::TypeDisc::SPRINT:
-			addWidget(new QLabel("there will be sprint"));
+			addWidget(new gui::Ride(*dispatcher, Type(disc::TypeDisc::SPRINT),this));
+			// addWidget(new QLabel("there will be sprint"));
 			break;
 		case disc::TypeDisc::SLALOM_0:
-			addWidget(new QLabel("there will be slalom 0"));
+			addWidget(new gui::Ride(*dispatcher, Type(disc::TypeDisc::SLALOM_0),this));
+			// addWidget(new QLabel("there will be slalom 0"));
 			break;
 		case disc::TypeDisc::SLALOM_1:
-			addWidget(new QLabel("there will be slalom 1"));
+			addWidget(new gui::Ride(*dispatcher, Type(disc::TypeDisc::SLALOM_1),this));
+			// addWidget(new QLabel("there will be slalom 1"));
 			break;
 		case disc::TypeDisc::LONG_RACE:
-			addWidget(new QLabel("there will be long race"));
+			addWidget(new gui::Ride(*dispatcher, Type(disc::TypeDisc::LONG_RACE),this));
+			// addWidget(new QLabel("there will be long race"));
 			break;
 	}
 } /* end of 'gui::WindowMain::slotChangeDiscipline' function */
