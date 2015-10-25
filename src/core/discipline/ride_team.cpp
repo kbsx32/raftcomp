@@ -9,79 +9,86 @@
 #include "ride_team.h"
 
 /* default constructor */
-rfc::RideTeam::RideTeam(const disc::Type type) :
+rfc::disc::RideTeam::RideTeam(const disc::Type type) :
 	type(type)
 {
 } /* end of 'RideTeam' constructor */
 
 /* set start time */
-void rfc::RideTeam::setTimeStart(const Time &timeStartNew) {
+void rfc::disc::RideTeam::setTimeStart(const Time &timeStartNew)
+{
 	timeStart = timeStartNew;
 } /* end of 'RideTeam::setTimeStart' function */
 
 /* set start time */
-void rfc::RideTeam::setTimeEnd(const Time &timeEndNew) {
+void rfc::disc::RideTeam::setTimeEnd(const Time &timeEndNew)
+{
 	timeEnd = timeEndNew;
 } /* end of 'RideTeam::setTimeEnd' function */
 
-/* set new winner state flag */
-void rfc::RideTeam::setWinnerFlag(const bool newState) {
-	isWinner = newState;
-} /* end of 'RideTeam::setWinnerFlag' function */
-
 /* set pushpin by id penalty */
-void rfc::RideTeam::setPinPenalty(long id, long valueNew) {
+void rfc::disc::RideTeam::setPinPenalty(long id, long valueNew)
+{
 	timePenalty -= Time().setInSeconds(pinsPenalty[id]);
 	timePenalty += Time().setInSeconds(valueNew);
 	pinsPenalty[id] = valueNew;
 } /* end of 'RideTeam::setPinPenalty' function */
 
 /* set pushpin by id penalty */
-void rfc::RideTeam::setPinsCount(int cnt) {
+void rfc::disc::RideTeam::setPinsCount(int cnt)
+{
 	pinsPenalty.resize(cnt);
 } /* end of 'RideTeam::setPinsCount' function */
 
 /* get start lap time */
-const rfc::Time rfc::RideTeam::getTimeStart() const {
+const rfc::Time rfc::disc::RideTeam::getTimeStart() const
+{
 	return timeStart;
 } /* end of 'RideTeam::getTimeStart' function */
 
 /* get end lap time */
-const rfc::Time rfc::RideTeam::getTimeEnd() const {
+const rfc::Time rfc::disc::RideTeam::getTimeEnd() const
+{
 	return timeEnd;
 } /* end of 'RideTeam::getTimeEnd' function */
 
 /* get 'end-start' lap time */
-const rfc::Time rfc::RideTeam::getTimeDistance() const {
+const rfc::Time rfc::disc::RideTeam::getTimeDistance() const
+{
 	return timeEnd - timeStart;
 } /* end of 'RideTeam::getTimeDistance' function */
 
 /* get penalty lap time */
-const rfc::Time rfc::RideTeam::getTimePenalty() const {
+const rfc::Time rfc::disc::RideTeam::getTimePenalty() const
+{
 	return timePenalty + Time().setInSeconds(penaltyOther);
 } /* end of 'rfc::RideTeam::getTimePenalty' function */
 
 /* get pins stats array */
-const std::vector<long>& rfc::RideTeam::getPins() const {
+const std::vector<long>& rfc::disc::RideTeam::getPins() const
+{
 	return pinsPenalty;
 } /* end of 'rfc::RideTeam::getPins' function */
 
 /* get result lap time with penalty statistics */
-rfc::Time rfc::RideTeam::getTimeResult() const {
+rfc::Time rfc::disc::RideTeam::getTimeResult() const
+{
 	return (timeEnd - timeStart) + getTimePenalty();
 } /* end of 'RideTeam::getTimeResult' function */
 
 /* get pushpins count */
-uint32_t rfc::RideTeam::getPinsCount() const {
+uint32_t rfc::disc::RideTeam::getPinsCount() const {
 	return pinsPenalty.size();
 } /* end of 'RideTeam::getPinsCount' function */
 
 /* set pushpin by id penalty */
-void rfc::RideTeam::setPenaltyOther(uint32_t valueNew) {
+void rfc::disc::RideTeam::setPenaltyOther(uint32_t valueNew)
+{
 	penaltyOther = valueNew;
 } /* end of 'RideTeam::setPenaltyOther' function */
 
 /* set pushpin by id penalty */
-uint32_t rfc::RideTeam::getPenaltyOther() {
+uint32_t rfc::disc::RideTeam::getPenaltyOther()
+{
 	return penaltyOther;
 } /* end of 'RideTeam::getPenaltyOther' function */

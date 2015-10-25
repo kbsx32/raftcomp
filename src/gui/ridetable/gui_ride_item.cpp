@@ -19,7 +19,7 @@
  *   controlType : lap subitem to control.
  *   parent : controller parent widget.
  */
-rfc::gui::RideItem::RideItem(men::Team *team, RideTeam *lapConnected, Type type, QWidget *parent) :
+rfc::gui::RideItem::RideItem(men::Team *team, disc::RideTeam *lapConnected, Type type, QWidget *parent) :
 	lap(lapConnected), type(type), team(team),
 	QLineEdit(parent)
 {

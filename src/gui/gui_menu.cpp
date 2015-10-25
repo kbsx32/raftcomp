@@ -27,8 +27,7 @@ rfc::gui::Menu::Menu(QWidget *parent) :
 	/* other buttons */
 	lay->addWidget(new MenuDisciplineItem(lang::qualify,	disc::TypeDisc::QUALIFY,   this));
 	lay->addWidget(new MenuDisciplineItem(lang::sprint,		disc::TypeDisc::SPRINT,	   this));
-	lay->addWidget(new MenuDisciplineItem(lang::slalom0,	disc::TypeDisc::SLALOM_0,  this));
-	lay->addWidget(new MenuDisciplineItem(lang::slalom1,	disc::TypeDisc::SLALOM_1,  this));
+	lay->addWidget(new MenuDisciplineItem(lang::slalom,		disc::TypeDisc::SLALOM,	   this));
 	lay->addWidget(new MenuDisciplineItem(lang::longRace,	disc::TypeDisc::LONG_RACE, this));
 } /* End of 'gui::Menu' constructor */
 

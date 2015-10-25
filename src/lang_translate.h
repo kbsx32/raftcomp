@@ -31,8 +31,9 @@ namespace rfc
 		extern rfc::String mandat;
 		extern rfc::String qualify;
 		extern rfc::String sprint;
-		extern rfc::String slalom0;
+		extern rfc::String slalom;
 		extern rfc::String slalom1;
+		extern rfc::String slalom2;
 		extern rfc::String longRace;
 
 		extern rfc::String createNewDatabase;

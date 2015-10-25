@@ -18,66 +18,66 @@
 /* 'raftcomp' support namespace */
 namespace rfc {
 
-	/* Single template discipline lap class */
-	class RideTeam {
-		disc::Type type;					/* discipline lap type */
+	/* disciplines namespace */
+	namespace disc
+	{
+		/* Single template discipline lap class */
+		class RideTeam {
+			disc::Type type;					/* discipline lap type */
 
-		Time
-			timeStart,						/* start lap time */
-			timeEnd,						/* end lap time */
-			timePenalty;                    /* penalty time */
+			Time
+				timeStart,						/* start lap time */
+				timeEnd,						/* end lap time */
+				timePenalty;                    /* penalty time */
 
-		bool isWinner;                      /* winner flag for parallel sprints */
-		std::vector<long> pinsPenalty;		/* pins penalties */
+			std::vector<long> pinsPenalty;		/* pins penalties */
 
-		uint32_t penaltyOther = 0;             /* other penalties value.
-											 * for example : foulstart, etc.
-											 */
-	public:
-		/* default constructor */
-		RideTeam(const disc::Type type);
+			uint32_t penaltyOther = 0;          /* other penalties value.
+												 * for example : foulstart, etc.
+												 */
+		public:
+			/* default constructor */
+			RideTeam(const disc::Type type);
 
-		/* set start lap time */
-		void setTimeStart(const Time &timeStartNew);
-		/* set end lap time */
-		void setTimeEnd(const Time &timeEndNew);
+			/* set start lap time */
+			void setTimeStart(const Time &timeStartNew);
+			/* set end lap time */
+			void setTimeEnd(const Time &timeEndNew);
 
-		/* set new winner state flag */
-		void setWinnerFlag(const bool newState = true);
+			/* set pushpin by id penalty */
+			void setPinPenalty(long id, long valueNew);
 
-		/* set pushpin by id penalty */
-		void setPinPenalty(long id, long valueNew);
+			/* set pushpin by id penalty */
+			void setPenaltyOther(uint32_t valueNew);
 
-		/* set pushpin by id penalty */
-		void setPenaltyOther(uint32_t valueNew);
+			/* set pushpin by id penalty */
+			uint32_t getPenaltyOther();
 
-		/* set pushpin by id penalty */
-		uint32_t getPenaltyOther();
-
-		/* set pushpins count */
-		void setPinsCount(int cnt);
+			/* set pushpins count */
+			void setPinsCount(int cnt);
 
 
-		/* get pushpins count */
-		uint32_t getPinsCount() const;
+			/* get pushpins count */
+			uint32_t getPinsCount() const;
 
-		/* get start lap time */
-		const Time getTimeStart() const;
-		/* get end lap time */
-		const Time getTimeEnd() const;
+			/* get start lap time */
+			const Time getTimeStart() const;
+			/* get end lap time */
+			const Time getTimeEnd() const;
 
-		/* get 'end-start' lap time */
-		const Time getTimeDistance() const;
+			/* get 'end-start' lap time */
+			const Time getTimeDistance() const;
 
-		/* get penalty lap time */
-		const Time getTimePenalty() const;
+			/* get penalty lap time */
+			const Time getTimePenalty() const;
 
-		/* get result lap time with penalty statistics */
-		Time getTimeResult() const;
+			/* get result lap time with penalty statistics */
+			Time getTimeResult() const;
 
-		/* get pins stats array */
-		const std::vector<long>& getPins() const;
-	}; /* end of 'RideTeam' class */
+			/* get pins stats array */
+			const std::vector<long>& getPins() const;
+		}; /* end of 'RideTeam' class */
+	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
 
 #endif /* RFC_RIDE_TEAM_H_ */

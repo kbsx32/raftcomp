@@ -12,6 +12,7 @@
 
 #include <QWidget>
 #include <QSplitter>
+#include <QStackedWidget>
 
 #include "../core/dispatcher.h"
 #include "ridetable/gui_ride.h"
@@ -30,8 +31,21 @@ namespace rfc
 		{
 			Q_OBJECT
 
+			/* Right-sided discipline widget */
+			QStackedWidget stackWidgetsFields;
+
 			Dispatcher *dispatcher;   /* dispatcher linked to this window */
 		public:
+			/* menu-variants */
+			enum class FieldType
+			{
+				MANDAT,
+				QUALIFY,
+				SPRINT,
+				SLALOM,
+				LONG_RACE,
+			}; /* end of 'FieldType' class */
+
 			/* main window constructor */
 			WindowMain(Dispatcher *dispatcher, QWidget *parent = nullptr);
 

@@ -14,18 +14,16 @@
 
 /* 'raftcomp' support namespace */
 namespace rfc {
-	/* forward declaration of lap class */
-	class RideTeam;
-
 	/* disciplines namespace */
 	namespace disc {
+		/* forward declaration of lap class */
+		class RideTeam;
 
 		/* all disciplines types */
 		enum class TypeDisc {
 			QUALIFY,
 			SPRINT,
-			SLALOM_0,
-			SLALOM_1,
+			SLALOM,
 			LONG_RACE
 		}; /* end of 'LapType' enum class */
 
@@ -40,11 +38,20 @@ namespace rfc {
 			FINAL_A
 		}; /* end of 'TypeSprint' enum class */
 
+		/* sprint lap types */
+		enum class TypeSlalom {
+			SLALOM_1,
+			SLALOM_2
+		}; /* end of 'TypeSlalom' enum class */
+
 		/* class collector for types */
 		class Type {
 		public:
 			TypeDisc typeDisc;
-			TypeSprint typeSprint;
+
+			TypeSprint typeSprint;  /* needs if typeDisc == SPRINT; */
+			TypeSlalom typeSlalom;  /* needs if typeDisc == SLALOM; */
+
 			TeamId teamId;
 		public:
 			/* constructor for usual discipline */
@@ -52,6 +59,9 @@ namespace rfc {
 
 			/* constructor for sprint */
 			Type(const TypeSprint sprint, const TeamId team = 0);
+
+			/* constructor for slalom */
+			Type(const TypeSlalom disc, const TeamId team = 0);
 
 			/* get COPY of this Type with inserted team id */
 			Type getTeamed(TeamId team);

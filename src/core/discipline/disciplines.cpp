@@ -24,6 +24,15 @@ rfc::disc::Type::Type(const TypeSprint sprint, const TeamId team) :
 {
 } /* end of 'disc::Type' constructor */
 
+/* constructor for slalom */
+rfc::disc::Type::Type(const TypeSlalom disc, const TeamId team) :
+	typeDisc(disc::TypeDisc::SLALOM),
+	typeSlalom(disc),
+	teamId(team)
+{
+} /* end of 'disc::Type' constructor */
+
+
 /* get COPY of this Type with inserted team id */
 rfc::disc::Type rfc::disc::Type::getTeamed(TeamId team)
 {
@@ -45,21 +54,27 @@ bool rfc::disc::Type::operator<(const Type &second) const
 	if (typeDisc == disc::TypeDisc::SPRINT)
 		return typeSprint < second.typeSprint;
 
+	if (typeDisc == disc::TypeDisc::SLALOM)
+		return typeSlalom < second.typeSlalom;
+
 	return false;
 } /* end of 'operator<' function */
 
 /* class default constructor */
-rfc::disc::Rides::Rides() {
+rfc::disc::Rides::Rides()
+{
 } /* end of 'disc::Rides::Rides' constructor */
 
 /* class destructor */
-rfc::disc::Rides::~Rides() {
+rfc::disc::Rides::~Rides()
+{
 	for (auto & ride : rides)
 		delete ride.second;
 } /* end of '~disc::RidesRides' constructor */
 
 /* get lap function */
-rfc::RideTeam * rfc::disc::Rides::getLap(const Type type) {
+rfc::disc::RideTeam * rfc::disc::Rides::getLap(const Type type)
+{
 	auto &item = rides[type];
 	if (item == nullptr)
 		item = new RideTeam(type);
@@ -68,6 +83,7 @@ rfc::RideTeam * rfc::disc::Rides::getLap(const Type type) {
 } /* end of 'Rides::getLap' function */
 
 /* set lap function */
-void rfc::disc::Rides::setLap(const Type type, const RideTeam &lapNew) {
+void rfc::disc::Rides::setLap(const Type type, const RideTeam &lapNew)
+{
 	rides[type] = new RideTeam(lapNew);
 } /* end of 'Rides::setLap' function */

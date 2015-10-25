@@ -30,11 +30,11 @@ namespace rfc {
 			Q_OBJECT
 
 			const int pinId;	            /* pushpin identificator */
-			rfc::RideTeam * rideTeam;	    /* connected lap */
+			disc::RideTeam * rideTeam;	    /* connected lap */
 
 		public:
 			/* construcotr by pin identificator */
-			Pin(rfc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent = nullptr);
+			Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent = nullptr);
 
 		signals:
 			/* signal that pin changed */
@@ -49,10 +49,10 @@ namespace rfc {
 		{
 			Q_OBJECT
 
-			RideTeam *rideTeam;    /* connected ride team class */
+			disc::RideTeam *rideTeam;    /* connected ride team class */
 		public:
 			/* default constructor */
-			PushPins(rfc::RideTeam *rideTeam, QWidget *parent = nullptr);
+			PushPins(disc::RideTeam *rideTeam, QWidget *parent = nullptr);
 
 			/* update all pushpins info */
 			void update();
@@ -72,7 +72,7 @@ namespace rfc {
 		{
 			Q_OBJECT
 
-			RideTeam *lap;      /* connected to this widget lap */
+			disc::RideTeam *lap;      /* connected to this widget lap */
 			men::Team *team;    /* connected team */
 		public:
 			enum class Type {
@@ -101,7 +101,8 @@ namespace rfc {
 			 *   controlType : Lap subitem to control.
 			 *   parent : controller parent widget.
 			 */
-			RideItem(men::Team *team, RideTeam *lapConnected, Type controlType, QWidget *parent = nullptr);
+			RideItem(men::Team *team, disc::RideTeam *lapConnected,
+					 Type controlType, QWidget *parent = nullptr);
 
 			/* update info function */
 			void update();
@@ -112,12 +113,6 @@ namespace rfc {
 
 			/* capture changed text slot */
 			void slotTextChanged();
-
-		public:
-			~RideItem()
-			{
-				// qDebug() << "closed ride item";
-			}
 		};
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

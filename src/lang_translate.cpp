@@ -14,8 +14,9 @@
 rfc::String rfc::lang::mandat = "мандатная комиссия";
 rfc::String rfc::lang::qualify = "квалификация";
 rfc::String rfc::lang::sprint = "спринт";
-rfc::String rfc::lang::slalom0 = "слалом. 1.";
-rfc::String rfc::lang::slalom1 = "слалом. 2.";
+rfc::String rfc::lang::slalom = "слалом";
+rfc::String rfc::lang::slalom1 = "слалом. 1.";
+rfc::String rfc::lang::slalom2 = "слалом. 2.";
 rfc::String rfc::lang::longRace = "длинная гонка";
 
 rfc::String rfc::lang::createNewDatabase = "создать новую базу данных";
@@ -27,8 +28,9 @@ rfc::String rfc::lang::exit = "выход";
 rfc::String rfc::lang::mandat = "mandat comission";
 rfc::String rfc::lang::qualify = "qualification";
 rfc::String rfc::lang::sprint = "sprint";
-rfc::String rfc::lang::slalom0 = "slalom. 1.";
-rfc::String rfc::lang::slalom1 = "slalom. 2.";
+rfc::String rfc::lang::slalom = "slalom";
+rfc::String rfc::lang::slalom1 = "slalom. 1.";
+rfc::String rfc::lang::slalom2 = "slalom. 2.";
 rfc::String rfc::lang::longRace = "long race";
 
 rfc::String rfc::lang::createNewDatabase = "create new database";

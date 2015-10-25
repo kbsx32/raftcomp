@@ -15,7 +15,7 @@
  */
 
 /* construcotr by pin identificator */
-rfc::gui::Pin::Pin(rfc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent) :
+rfc::gui::Pin::Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent) :
 	pinId(pinNumber),
 	rideTeam(rideTeam),
 	QLineEdit(parent)
@@ -40,7 +40,7 @@ void rfc::gui::Pin::slotTextChanged()
  */
 
 /* default constructor */
-rfc::gui::PushPins::PushPins(rfc::RideTeam *rideTeam, QWidget *parent) :
+rfc::gui::PushPins::PushPins(disc::RideTeam *rideTeam, QWidget *parent) :
 	QTableWidget(parent),
 	rideTeam(rideTeam)
 {
