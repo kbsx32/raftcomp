@@ -17,7 +17,9 @@
 namespace rfc {
 
 	/* global class support */
-	class Dispatcher : public disc::Rides {
+	class Dispatcher : public disc::Rides,
+					   public men::MenDatabase
+	{
 	private:
 		/* signature for saving database-competition files */
 		static const char fileSignature[]; /* = "kbsx32.rafrcomp.dbc" */
@@ -42,6 +44,9 @@ namespace rfc {
 		 *     teams[teamsCnt] : ???.
 		 */
 		void load(const String &fileInName);
+
+		/* reset all dispatcher info */
+		void reset();
 
 		/* class destructor */
 		~Dispatcher();

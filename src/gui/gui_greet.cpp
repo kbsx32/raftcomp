@@ -66,6 +66,7 @@ void rfc::gui::WindowGreet::runWindowMain()
 /* creating database slot */
 void rfc::gui::WindowGreet::createDatabase()
 {
+	dispatcher.reset();
 	runWindowMain();
 } /* end of 'WindowGreet::createDatabase' function */
 

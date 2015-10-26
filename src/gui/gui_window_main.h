@@ -10,6 +10,7 @@
 #ifndef RFC_GUI_WINDOW_MAIN_H
 #define RFC_GUI_WINDOW_MAIN_H
 
+#include <QMainWindow>
 #include <QWidget>
 #include <QSplitter>
 #include <QStackedWidget>
@@ -27,12 +28,13 @@ namespace rfc
 	namespace gui
 	{
 		/* main window class */
-		class WindowMain : public QSplitter
+		class WindowMain : public QMainWindow
 		{
 			Q_OBJECT
 
 			/* Right-sided discipline widget */
-			QStackedWidget stackWidgetsFields;
+			QStackedWidget *stackWidgetsFields;
+			QSplitter *splitter;
 
 			Dispatcher *dispatcher;   /* dispatcher linked to this window */
 		public:
@@ -49,6 +51,8 @@ namespace rfc
 			/* main window constructor */
 			WindowMain(Dispatcher *dispatcher, QWidget *parent = nullptr);
 
+			/* main window constructor */
+			~WindowMain();
 		public slots:
 			/* change right-side window state */
 			void slotChangeDiscipline(rfc::disc::TypeDisc typeNew);

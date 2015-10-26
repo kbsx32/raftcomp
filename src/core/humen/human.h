@@ -17,8 +17,13 @@ namespace rfc {
 	/* 'all about humans' namespace */
 	namespace men
 	{
+		/* forward declaration */
+		class MenDatabase;
+
 		/* single man class declaration */
 		class Man {
+			/* only men database can create human ( and delete obviosly ) */
+			friend class MenDatabase;
 		public:
 			String
 				lastName,       		/* man family name  */
@@ -41,17 +46,18 @@ namespace rfc {
 				MS
 			} rank = Rank::NO_RANK;		/* End of 'Rank' class */
 
-		public:
+		private:
 			/* default constructor */
 			Man();
 
 			/* load human from file 'kbsx32.raftcomp.db' */
-			Man(FILE *fileIn, const uint32_t version = 0);
+			friend class MenDatabase;
 
-			/* constructor by names */
-			Man(const String &lastName,
-				const String &firstName,
-				const String &secondName = QString());
+			/* set names */
+			void setNames(const String &lastName,
+						  const String &firstName,
+						  const String &secondName = QString());
+		public:
 
 			/* save human to 'kbsx32.raftcomp.db' type file. */
 			const Man& save(FILE *fileOut, const uint32_t version = 0) const;
@@ -61,52 +67,39 @@ namespace rfc {
 			 *     lastName  : char * : string.
 			 *     firstName : char * : string;
 			 */
-			Man& load(FILE *fileIn, const uint32_t version = 0);
+			Man* load(FILE *fileIn, const uint32_t version = 0);
 		}; /* end of 'Man' class */
 
-		/* instructors team class forward decl. */
-		class InstructorsTeam;
-
-		/* Instructor class */
-		class Instructor : public Man
-		{
-			/* only InstructorsTeam can change pointer to
-			 * himself in this class */
-			friend class InstructorsTeam;
-		private:
-			InstructorsTeam *instructorsTeam;
-		public:
-			/* default constructor.
-			 * adds to InstructorsTeam `this class instance.
-			 */
-			explicit Instructor(const String &lastName,
-								const String &firstName,
-								const String &secondName = String());
-
-			/* comparator */
-			bool operator<(const Instructor &inst1) const;
-		}; /* End of 'Instructor' class */
-
-		/* instructors 'database' trainers */
-		class InstructorsTeam
+		/* humen 'database' trainers */
+		class MenDatabase
 		{
 		private:
 			/* all instructors store */
-			std::set<Instructor> _instructors;
+			std::vector<Man *> _men;
 
 		public:
 			/* constant-reference to _instructors list */
-			const std::set<Instructor> & instructors = _instructors;
+			const std::vector<Man *> & men = _men;
+
+			/* destroy class */
+			~MenDatabase();
 
 			/* add instructor.
-			 * returns self-reference.
+			 * returns pointer to created men.
 			 */
-			InstructorsTeam& add(const Instructor &instr);
+			Man* manAdd();
 
-			/* delete instructor.
-			 * returns self-reference.
+			/* get man identificator in MenDatabase
+			 * note :
+			 *   index can change, if you remove some humans
+			 *   from database. So, if you want to correctly save
+			 *   humen index, do not change humans vector
+			 *   in state between saving database and saving current human.
 			 */
-			InstructorsTeam& remove(Instructor &instr);
+			uint32_t getManIndex(const Man *man);
+
+			/* delete human. */
+			void manRemove(const Man *man);
 		}; /* end of 'InstructorsTeam' class */
 
 	} /* end of 'men' namespace */

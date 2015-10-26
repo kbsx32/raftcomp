@@ -18,6 +18,8 @@
 
 /* 'raftcomp' support namespace */
 namespace rfc {
+	class Dispatcher;
+
 	/* 'all about humans' namespace */
 	namespace men
 	{
@@ -25,7 +27,7 @@ namespace rfc {
 		class Team {
 		public:
 			uint32_t id;                   /* team number */
-			std::vector<Man> men;  		   /* team men list */
+			std::vector<Man *> men;		   /* team men list */
 
 			Man *instructorId;			   /* trainer id for team.*/
 
@@ -36,7 +38,7 @@ namespace rfc {
 			 * file 'kbsx32.raftcomp.dbc' type.
 			 * Type struct see on 'load' function.
 			 */
-			Team(FILE *fileIn, const uint32_t version = 0);
+			Team(Dispatcher &dispatcher, FILE *fileIn, const uint32_t version = 0);
 
 			/* get surnames string function */
 			String getSurnames() const;
@@ -56,7 +58,7 @@ namespace rfc {
 			 *
 			 * returns: self-reference.
 			 */
-			Team& load(FILE *fileIn, const uint32_t version = 0);
+			Team& load(rfc::Dispatcher &dispatcher, FILE *fileIn, const uint32_t version = 0);
 		}; /* end of 'team' class */
 	} /* end of 'men' namespace */
 } /* end of 'rfc' namespace' */

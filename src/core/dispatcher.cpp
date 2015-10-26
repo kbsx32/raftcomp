@@ -16,9 +16,7 @@ const char rfc::Dispatcher::fileSignature[] = "kbsx32.raftcomp.dbc";
 /* class destructor */
 rfc::Dispatcher::~Dispatcher()
 {
-	/* remove all team pointers */
-	for (auto item : teams)
-		delete item;
+	reset();
 } /* end of '~Dispatcher' destructor */
 
 /* add new team to list */
@@ -72,6 +70,9 @@ void rfc::Dispatcher::save(const String &fileOutName)
  */
 void rfc::Dispatcher::load(const String &fileInName)
 {
+	/* prepare dispatcher to new actions */
+	reset();
+
 	FILE *fileIn = std::fopen(fileInName.data(), "rb");
 
 	if (fileIn == nullptr)
@@ -100,16 +101,19 @@ void rfc::Dispatcher::load(const String &fileInName)
 	uint32_t teamsCnt;
 	std::fread(&teamsCnt, sizeof(teamsCnt), 1, fileIn);
 
-	/* clear teams array */
-
-	/* clear all teams */
-	for (auto &team : teams)
-		delete team;
-	teams.clear();
-
 	/* fill new teams */
 	for (uint32_t i = 0; i < teamsCnt; ++i)
-		teams.push_back(new men::Team(fileIn));
+		teams.push_back(new men::Team(*this, fileIn));
 
 	fclose(fileIn);
 } /* end of 'Dispatcher::load' function */
+
+/* reset function */
+void rfc::Dispatcher::reset()
+{
+	/* remove all team pointers */
+	for (auto item : teams)
+		delete item;
+
+	teams.clear();
+} /* end of 'reset' function */

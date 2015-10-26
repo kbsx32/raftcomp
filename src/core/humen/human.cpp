@@ -6,19 +6,14 @@ rfc::men::Man::Man() {
 } /* end of 'Man' constructor */
 
 /* constructor by names */
-rfc::men::Man::Man(const String &lastName,
-				   const String &firstName,
-				   const String &secondName) :
-	lastName(lastName), firstName(firstName),
-	secondName(secondName)
+void rfc::men::Man::setNames(const String &lastName,
+							 const String &firstName,
+							 const String &secondName)
 {
-} /* end of 'Man' constructor */
-
-/* load human from file 'kbsx32.raftcomp.db' type */
-rfc::men::Man::Man(FILE *fileIn, const uint32_t version)
-{
-	load(fileIn, version);
-} /* end of 'Man' constructor */
+	this->lastName = lastName;
+	this->firstName = firstName;
+	this->secondName = secondName;
+} /* end of 'Man::setNames' function */
 
 /* save human to 'kbsx32.raftcomp.db' type file */
 const rfc::men::Man& rfc::men::Man::save(FILE *fileOut, const uint32_t version) const
@@ -41,7 +36,7 @@ const rfc::men::Man& rfc::men::Man::save(FILE *fileOut, const uint32_t version) 
  *     lastName  : char * : string.
  *     firstName : char * : string;
  */
-rfc::men::Man& rfc::men::Man::load(FILE *fileIn, const uint32_t version)
+rfc::men::Man* rfc::men::Man::load(FILE *fileIn, const uint32_t version)
 {
 	// if (version >= 0) {
 
@@ -54,65 +49,49 @@ rfc::men::Man& rfc::men::Man::load(FILE *fileIn, const uint32_t version)
 	String::fgets(str, STR_MAX, fileIn);
 	firstName = str;
 
-	return *this;
+	return this;
 } /* end of 'Man::load' function */
 
 /*
- * Instructor class
+ * humans team
  */
 
-/* default constructor.
- * adds to InstructorsTeam `this class instance.
- */
-rfc::men::Instructor::Instructor(const String &lastName,
-								 const String &firstName,
-								 const String &secondName) :
-	Man(lastName, firstName, secondName)
+/* destroy class */
+rfc::men::MenDatabase::~MenDatabase()
 {
-} /* end of 'Instructor' constructor */
+	/* remove all men from database */
+	for (auto &item : _men)
+		delete item;
+} /* end of '~MenDatabase' function */
 
-/* comparator */
-bool rfc::men::Instructor::operator<(const Instructor &inst1) const
-{
-	if (lastName != inst1.lastName)
-		return lastName < inst1.lastName;
-
-	if (firstName != inst1.firstName)
-		return firstName < inst1.firstName;
-
-	return secondName < inst1.secondName;
-} /* end of 'operator<' function */
-
-/*
- * Instructors team
+/* get man identificator in MenDatabase
+ * note :
+ *   index can change, if you remove some humans
+ *   from database. So, if you want to correctly save
+ *   humen index, do not change humans vector
+ *   in state between saving database and saving current human.
  */
+uint32_t rfc::men::MenDatabase::getManIndex(const Man *man)
+{
+	const auto &val = std::find(_men.begin(), _men.end(), man);
+
+	/* return shift of pointer */
+	return &(*val) - &_men[0];
+} /* end of 'MenDatabase::getManIndex' function */
 
 /* add instructor.
- * returns self-reference.
+ * returns reference to created man.
  */
-rfc::men::InstructorsTeam & rfc::men::InstructorsTeam::add(const Instructor &instr)
+rfc::men::Man * rfc::men::MenDatabase::manAdd()
 {
-	Instructor instrNew = instr;
+	Man *manNew = new Man();
+	_men.push_back(manNew);
 
-	instrNew.instructorsTeam = this;
-	_instructors.insert(instrNew);
-
-	return *this;
+	return manNew;
 } /* end of 'InstructorTeam::add' function */
 
-/* add instructor.
- * returns self-reference.
- */
-rfc::men::InstructorsTeam & rfc::men::InstructorsTeam::remove(Instructor &instr)
+/* remove human. */
+void rfc::men::MenDatabase::manRemove(const men::Man *manDel)
 {
-	Instructor instrDel = instr;
-
-	/* remove pointer from instructors team to
-	 * he will not try to delete himself from current stor
-	 */
-	instrDel.instructorsTeam = nullptr;
-
-	_instructors.erase(_instructors.find(instrDel));
-
-	return *this;
+	_men.erase(std::find(_men.begin(), _men.end(), manDel));
 } /* end of 'InstructorTeam::add' function */

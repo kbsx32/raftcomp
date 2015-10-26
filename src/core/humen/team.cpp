@@ -10,6 +10,7 @@
 #include <cstring>
 
 #include "team.h"
+#include "../dispatcher.h"
 
 /*
  * Team functions.
@@ -24,9 +25,9 @@ rfc::men::Team::Team(const uint32_t teamId) :
 /* constructor to load team from
  * file 'kbsx32.raftcomp.db' type
  */
-rfc::men::Team::Team(FILE *fileIn, const uint32_t version)
+rfc::men::Team::Team(Dispatcher &dispatcher, FILE *fileIn, const uint32_t version)
 {
-	load(fileIn, version);
+	load(dispatcher, fileIn, version);
 } /* end of 'Team' constructor */
 
 /* get surnames string function */
@@ -35,7 +36,7 @@ rfc::String rfc::men::Team::getSurnames() const
 	String str;
 
 	for (auto &human : men)
-		str += human.lastName + ", ";
+		str += human->lastName + ", ";
 
 	return str;
 } /* end of 'rfc::Team::getSurnames' function */
@@ -57,7 +58,7 @@ const rfc::men::Team & rfc::men::Team::save(FILE *fileOut, const uint32_t versio
 
 	/* save vector of stupid men */
 	for (const auto &human : men)
-		human.save(fileOut);
+		human->save(fileOut);
 
 	return *this;
 } /* end of 'Team::save' function */
@@ -69,7 +70,7 @@ const rfc::men::Team & rfc::men::Team::save(FILE *fileOut, const uint32_t versio
  *     humanCnt : 4 bytes (uint32_t).
  *     humans[humanCnt] : ???
  */
-rfc::men::Team & rfc::men::Team::load(FILE *fileIn, const uint32_t version)
+rfc::men::Team & rfc::men::Team::load(rfc::Dispatcher &dispatcher, FILE *fileIn, const uint32_t version)
 {
 	/* version 0 implement */
 
@@ -81,7 +82,7 @@ rfc::men::Team & rfc::men::Team::load(FILE *fileIn, const uint32_t version)
 	std::fread(&humanCnt, sizeof(humanCnt), 1, fileIn);
 
 	for (uint32_t i = 0; i < humanCnt; ++i)
-		men.push_back(Man(fileIn, version));
+		men.push_back(dispatcher.manAdd()->load(fileIn, version));
 
 	return *this;
 } /* end of 'Team::load' function */
