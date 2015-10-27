@@ -6,10 +6,14 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QDialog>
 #include <QFileDialog>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QLabel>
+#include <QTextBrowser>
 
 #include "gui_greet.h"
 #include "gui_window_main.h"
@@ -18,8 +22,20 @@
 rfc::gui::WindowGreet::WindowGreet(QWidget *parent) :
 	QWidget(parent)
 {
+	/* moving widget to screen center */
+	QRect scr = QApplication::desktop()->screenGeometry();
+	move(scr.center() - rect().center() / 2);
+
+	/* creating layout for widgets */
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	setLayout(layout);
+
+	/* greeting text */
+	QTextBrowser *welcomeText = new QTextBrowser(this);
+	welcomeText->setText(lang::greetText);
+
+	layout->addWidget(welcomeText);
+
 
 	QPushButton *but;
 
@@ -36,6 +52,9 @@ rfc::gui::WindowGreet::WindowGreet(QWidget *parent) :
 			this, SLOT(loadDatabase()));
 
 	layout->addWidget(but);
+
+	/* set not changeble size for greeting window */
+	setFixedSize(minimumSize());
 } /* end of 'gui::WindowGreet' constructor */
 
 /* window greeting constructor */

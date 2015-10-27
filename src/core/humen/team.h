@@ -27,6 +27,8 @@ namespace rfc {
 		class Team {
 		public:
 			uint32_t id;                   /* team number */
+			String teamName;			   /* name of team */
+
 			std::vector<Man *> men;		   /* team men list */
 
 			Man *instructorId;			   /* trainer id for team.*/

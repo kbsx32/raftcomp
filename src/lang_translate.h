@@ -39,6 +39,10 @@ namespace rfc
 		extern rfc::String createNewDatabase;
 		extern rfc::String openExistingDatabase;
 		extern rfc::String exit;
+		extern rfc::String edit;
+
+		extern rfc::String greetText;
+
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

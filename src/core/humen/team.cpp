@@ -47,7 +47,7 @@ rfc::String rfc::men::Team::getIdString() const
 	return String::number(id);
 } /* end of 'rfc::Team::getSurnames' function */
 
-/* save human to 'kbsx32.raftcomp.db' type file. */
+/* save human to 'kbsx32.raftcomp.dbc' type file. */
 const rfc::men::Team & rfc::men::Team::save(FILE *fileOut, const uint32_t version) const
 {
 	/* version 0 implement */

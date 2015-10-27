@@ -34,7 +34,20 @@ namespace rfc {
 		public:
 		}; /* end of 'MandatTeam' class */
 
-		// class MandatMen
+		/* widgets shows minimal info about team
+		 * and has button 'edit' to change info
+		 * about team.
+		 */
+		class MandatTeamIntro : public QWidget
+		{
+			men::Team *team;  /* pointer to connected team */
+
+		public:
+			/* constructor by pointer of team. */
+			MandatTeamIntro(men::Team *team, QWidget *parent = nullptr);
+		}; /* end of 'MandatTeamMinimal' class */
+
+		/* global mandat-table */
 		class Mandat : public QWidget
 		{
 			Q_OBJECT
