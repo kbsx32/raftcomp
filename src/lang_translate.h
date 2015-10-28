@@ -40,9 +40,43 @@ namespace rfc
 		extern rfc::String openExistingDatabase;
 		extern rfc::String exit;
 		extern rfc::String edit;
+		extern rfc::String apply;
+		extern rfc::String decline;
+
+		extern rfc::String addNewTeam;
 
 		extern rfc::String greetText;
 
+		extern rfc::String teamId;
+		extern rfc::String teamAddress;
+		extern rfc::String teamName;
+
+		extern rfc::String teamAddress;
+		extern rfc::String teamName;
+
+		extern rfc::String lastName;
+		extern rfc::String firstName;
+		extern rfc::String secondName;
+		extern rfc::String age;
+		extern rfc::String birthYear;
+
+		extern rfc::String rank;
+		extern rfc::String rankAbout;
+
+		extern rfc::String rankMS;
+		extern rfc::String rankKMS;
+		extern rfc::String rankAdult1;
+		extern rfc::String rankAdult2;
+		extern rfc::String rankAdult3;
+		extern rfc::String rankJunior1;
+		extern rfc::String rankJunior2;
+		extern rfc::String rankJunior3;
+		extern rfc::String rank0;
+
+		extern rfc::String familyNameSecName;
+
+		extern rfc::String participants;
+		extern rfc::String name;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

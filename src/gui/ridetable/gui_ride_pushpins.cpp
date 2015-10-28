@@ -15,7 +15,7 @@
  */
 
 /* construcotr by pin identificator */
-rfc::gui::Pin::Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent) :
+rfc::gui::ride::Pin::Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::ride::PushPins *parent) :
 	pinId(pinNumber),
 	rideTeam(rideTeam),
 	QLineEdit(parent)
@@ -28,7 +28,7 @@ rfc::gui::Pin::Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::PushPins 
 } /* end of 'Pin' constructor */
 
 /* 'onFinishEdit' catcher slot */
-void rfc::gui::Pin::slotTextChanged()
+void rfc::gui::ride::Pin::slotTextChanged()
 {
 	rideTeam->setPinPenalty(pinId, text().toInt());
 
@@ -40,7 +40,7 @@ void rfc::gui::Pin::slotTextChanged()
  */
 
 /* default constructor */
-rfc::gui::PushPins::PushPins(disc::RideTeam *rideTeam, QWidget *parent) :
+rfc::gui::ride::PushPins::PushPins(disc::RideTeam *rideTeam, QWidget *parent) :
 	QTableWidget(parent),
 	rideTeam(rideTeam)
 {
@@ -57,18 +57,21 @@ rfc::gui::PushPins::PushPins(disc::RideTeam *rideTeam, QWidget *parent) :
 } /* end of 'gui::PushPins' constructor */
 
 /* pins changed slot */
-void rfc::gui::PushPins::slotPinsChanged() {
+void rfc::gui::ride::PushPins::slotPinsChanged()
+{
 	emit signalPinsChanged();
 } /* end of 'gui::PushPins::slotPinsChanged' function */
 
 /* update all pushpins info */
-void rfc::gui::PushPins::update() {
+void rfc::gui::ride::PushPins::update()
+{
 	if (rideTeam->getPinsCount() != (uint32_t)this->columnCount())
 		updateRow();
 } /* end of 'gui::PushPins::slotPinsChanged' function */
 
 /* update all row function */
-void rfc::gui::PushPins::updateRow() {
+void rfc::gui::ride::PushPins::updateRow()
+{
 	/* create new pins fields */
 	uint32_t pinsCnt = rideTeam->getPinsCount();
 

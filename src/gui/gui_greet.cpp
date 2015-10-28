@@ -53,6 +53,12 @@ rfc::gui::WindowGreet::WindowGreet(QWidget *parent) :
 
 	layout->addWidget(but);
 
+	/* exit button */
+	but = new QPushButton(lang::exit, this);
+	connect(but, SIGNAL(clicked(bool)),
+			this, SLOT(close()));
+	layout->addWidget(but);
+
 	/* set not changeble size for greeting window */
 	setFixedSize(minimumSize());
 } /* end of 'gui::WindowGreet' constructor */

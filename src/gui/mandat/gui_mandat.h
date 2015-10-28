@@ -12,6 +12,10 @@
 #define RFC_GUI_MANDAT_H
 
 #include <QWidget>
+#include <QLineEdit>
+#include <QLabel>
+#include <QSignalMapper>
+#include <QPushButton>
 
 /* include all core dispatcher support */
 #include "../../core/dispatcher.h"
@@ -20,47 +24,107 @@
 namespace rfc {
 	/* graphical user interface elements namespace */
 	namespace gui {
-
-		/* Mandat comission single team drawer class */
-		class MandatTeam : public QWidget
+		namespace mandat
 		{
-			Q_OBJECT
+			/* one men widget */
+			class WMan : public QWidget
+			{
+				Q_OBJECT
 
-			rfc::Dispatcher *dispatcher;
+				men::Man *man;
 
-		public:
-			/* default constructor */
-			explicit MandatTeam(QWidget *parent = nullptr);
-		public:
-		}; /* end of 'MandatTeam' class */
+				QLineEdit
+					*widgLastName,
+					*widgFirstName,
+					*widgSecondName,
+					*widgBirthYear,
+					*widgRank;
 
-		/* widgets shows minimal info about team
-		 * and has button 'edit' to change info
-		 * about team.
-		 */
-		class MandatTeamIntro : public QWidget
-		{
-			men::Team *team;  /* pointer to connected team */
+			public:
+				/* constructor */
+				WMan(men::Man *man, QWidget *parent = nullptr);
 
-		public:
-			/* constructor by pointer of team. */
-			MandatTeamIntro(men::Team *team, QWidget *parent = nullptr);
-		}; /* end of 'MandatTeamMinimal' class */
+			public slots:
+				/* apply changes slot */
+				void slotChangesApply();
+			}; /* end of 'MandatMan' class */
 
-		/* global mandat-table */
-		class Mandat : public QWidget
-		{
-			Q_OBJECT
+			/* one men widget */
+			class WManInfo : public QWidget
+			{
+				Q_OBJECT
 
-			rfc::Dispatcher *dispatcher;
-		public:
-			/* default constructor */
-			explicit Mandat(rfc::Dispatcher *dispatcher, QWidget *parent = 0);
+				men::Man *man;
 
-		signals:
+				QPushButton *widgInfo;
 
-		public slots:
-		}; /* end of 'Mandat' class */
+			public:
+				/* constructor */
+				WManInfo(men::Man *man, QWidget *parent = nullptr);
+
+				/* update info */
+				void update();
+			public slots:
+				/* edit human */
+				void slotEditClicked();
+			}; /* end of 'MandatManInfo' class */
+
+			/* Mandat comission single team drawer class */
+			class WTeam : public QWidget
+			{
+				Q_OBJECT
+
+				men::Team *team;  /* connected data for widget */
+
+				/* all values */
+				QLineEdit *widgTeamId;
+				QLineEdit *widgTeamName;
+				QLineEdit *widgTeamAddress;
+			public:
+				/* default constructor */
+				explicit WTeam(men::Team *team, QWidget *parent = nullptr);
+			public slots:
+				/* apply all changes */
+				void slotEditApply();
+			}; /* end of 'MandatTeam' class */
+
+			/* widgets shows minimal info about team
+			 * and has button 'edit' to change info
+			 * about team.
+			 */
+			class WTeamIntro : public QWidget
+			{
+				Q_OBJECT
+
+				men::Team *team;	  /* pointer to connected team */
+				QLabel *teamInfo;     /* info widget */
+			public:
+				/* constructor by pointer of team. */
+				WTeamIntro(men::Team *team, QWidget *parent = nullptr);
+
+			public slots:
+				/* slot that pushed 'edit' button */
+				void slotClickedEditButton();
+
+				/* update all widgets info */
+				void update();
+			}; /* end of 'MandatTeamMinimal' class */
+
+			/* global mandat-table */
+			class Mandat : public QWidget
+			{
+				Q_OBJECT
+
+				rfc::Dispatcher *dispatcher;
+			public:
+				/* default constructor */
+				explicit Mandat(rfc::Dispatcher *dispatcher, QWidget *parent = 0);
+
+			public slots:
+				/* pushed button to create new team */
+				void slotCreateNewTeam();
+			}; /* end of 'Mandat' class */
+		} /* end of 'mandat' namespace */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */
 

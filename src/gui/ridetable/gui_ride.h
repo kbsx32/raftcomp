@@ -19,64 +19,67 @@
 namespace rfc {
 	/* graphical user interface elements namespace */
 	namespace gui {
-		/* 'RideTeam' table gui representation */
-		class Ride : public QTableWidget
+		namespace ride
 		{
-			Q_OBJECT
+			/* 'RideTeam' table gui representation */
+			class Ride : public QTableWidget
+			{
+				Q_OBJECT
 
-		private:
-			friend class RideTeam;			/* get permissions for RideTeam table team */
-			disc::Type lapType;				/* linked to table lap */
-			Dispatcher &dispatcher;         /* connected team dispatcher */
+			private:
+				friend class RideTeam;			/* get permissions for RideTeam table team */
+				disc::Type lapType;				/* linked to table lap */
+				Dispatcher &dispatcher;         /* connected team dispatcher */
 
-		public:
-			/*
-			 * wraps for QtWidgets in table.
-			 */
+			public:
+				/*
+				 * wraps for QtWidgets in table.
+				 */
 
-			/* set table item function.
-			 * creates QTableWidgetItem. (editable).
-			 */
-			void setItemText(const uint32_t row,
-							 const uint32_t column,
-							 const String &string);
+				/* set table item function.
+				 * creates QTableWidgetItem. (editable).
+				 */
+				void setItemText(const uint32_t row,
+								 const uint32_t column,
+								 const String &string);
 
-			/* set table item time function.
-			 * creates QTableWidgetItem. (editable).
-			 * note : later must create QtWidget time-editor.
-			 */
-			void setItemTime(const uint32_t row,
-							 const uint32_t column,
-							 const Time &time);
+				/* set table item time function.
+				 * creates QTableWidgetItem. (editable).
+				 * note : later must create QtWidget time-editor.
+				 */
+				void setItemTime(const uint32_t row,
+								 const uint32_t column,
+								 const Time &time);
 
-		public:
-			/* default constructor.
-			 * arguments:
-			 *   dispatcher : competiotion dispatcher;
-			 *	 lapType : type of lap (QUALIFY, SPRINT, etc.);
-			 *   widgParent : parent Qt Widget;
-			 */
-			explicit Ride(
-					Dispatcher &dispatcher,
-					const disc::Type lapType,
-					QWidget *widgParent = nullptr);
+			public:
+				/* default constructor.
+				 * arguments:
+				 *   dispatcher : competiotion dispatcher;
+				 *	 lapType : type of lap (QUALIFY, SPRINT, etc.);
+				 *   widgParent : parent Qt Widget;
+				 */
+				explicit Ride(
+						Dispatcher &dispatcher,
+						const disc::Type lapType,
+						QWidget *widgParent = nullptr);
 
-			/* class destructor */
-			~Ride();
+				/* class destructor */
+				~Ride();
 
-			/* erase all data from table */
-			void eraseTable();
+				/* erase all data from table */
+				void eraseTable();
 
-			/* add new info to table */
-			void addTeamInfo(men::Team *team);
+				/* add new info to table */
+				void addTeamInfo(men::Team *team);
 
-			/* create and put to table ride item widget */
-			void createRideItem(int row, men::Team *team, RideItem::Type type);
+				/* create and put to table ride item widget */
+				void createRideItem(int row, men::Team *team, RideItem::Type type);
 
-		public slots:
-			/* update table data info */
-			void updateTable();
-		}; /* end of 'Ride' class */
+			public slots:
+				/* update table data info */
+				void updateTable();
+			}; /* end of 'Ride' class */
+		} /* end of 'ride' namespace */
 	} /* end of 'gui' namespace */
 }  /* end of 'rfc' namespace */
 

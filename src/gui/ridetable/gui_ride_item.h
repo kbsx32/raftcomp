@@ -21,99 +21,102 @@
 namespace rfc {
 	namespace gui {
 
-		/* forward declaration class */
-		class PushPins;
-
-		/* single pushpin edit */
-		class Pin : public QLineEdit
+		namespace ride
 		{
-			Q_OBJECT
+			/* forward declaration class */
+			class PushPins;
 
-			const int pinId;	            /* pushpin identificator */
-			disc::RideTeam * rideTeam;	    /* connected lap */
+			/* single pushpin edit */
+			class Pin : public QLineEdit
+			{
+				Q_OBJECT
 
-		public:
-			/* construcotr by pin identificator */
-			Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::PushPins *parent = nullptr);
+				const int pinId;	            /* pushpin identificator */
+				disc::RideTeam * rideTeam;	    /* connected lap */
 
-		signals:
-			/* signal that pin changed */
-			void signalPinChanged();
-		public slots:
-			/* 'onFinishEdit' catcher slot */
-			void slotTextChanged();
-		}; /* end of 'Pin' class */
+			public:
+				/* construcotr by pin identificator */
+				Pin(disc::RideTeam *rideTeam, const int pinNumber, gui::ride::PushPins *parent = nullptr);
 
-		/* pushpins class */
-		class PushPins : public QTableWidget
-		{
-			Q_OBJECT
+			signals:
+				/* signal that pin changed */
+				void signalPinChanged();
+			public slots:
+				/* 'onFinishEdit' catcher slot */
+				void slotTextChanged();
+			}; /* end of 'Pin' class */
 
-			disc::RideTeam *rideTeam;    /* connected ride team class */
-		public:
-			/* default constructor */
-			PushPins(disc::RideTeam *rideTeam, QWidget *parent = nullptr);
+			/* pushpins class */
+			class PushPins : public QTableWidget
+			{
+				Q_OBJECT
 
-			/* update all pushpins info */
-			void update();
+				disc::RideTeam *rideTeam;    /* connected ride team class */
+			public:
+				/* default constructor */
+				PushPins(disc::RideTeam *rideTeam, QWidget *parent = nullptr);
 
-			/* update all row function */
-			void updateRow();
-		signals:
-			/* signal that pin was changer */
-			void signalPinsChanged();
+				/* update all pushpins info */
+				void update();
 
-		public slots:
-			/* pins changed slot */
-			void slotPinsChanged();
-		}; /* end of 'PushPins' class */
+				/* update all row function */
+				void updateRow();
+			signals:
+				/* signal that pin was changer */
+				void signalPinsChanged();
 
-		class RideItem : public QLineEdit
-		{
-			Q_OBJECT
+			public slots:
+				/* pins changed slot */
+				void slotPinsChanged();
+			}; /* end of 'PushPins' class */
 
-			disc::RideTeam *lap;      /* connected to this widget lap */
-			men::Team *team;    /* connected team */
-		public:
-			enum class Type {
-				TEAM_ID,		/* team number */
-				TEAM_HUMEN,     /* team humen */
-				PINS,			/* pushpins */
-				PENALTY_OTHER,	/* other penalties slot
-								 * for example : bad team start, etc.
-								 */
-				PENALTY_SUM,	/* result penalty */
-				TIME_START,		/* start lap time slot */
-				TIME_END,		/* end lap time slot */
-				TIME_DISTANCE,  /* distance time */
-				TIME_RESULT,    /* summary time */
-				PLACE,			/* place in lap */
-				SCORE,			/* score given for that plaguice */
-				END,            /* Last table slot */
-			}; /* end of 'Type' enum class */
+			class RideItem : public QLineEdit
+			{
+				Q_OBJECT
 
-			Type type;					/* global semantics */
+				disc::RideTeam *lap;      /* connected to this widget lap */
+				men::Team *team;    /* connected team */
+			public:
+				enum class Type {
+					TEAM_ID,		/* team number */
+					TEAM_HUMEN,     /* team humen */
+					PINS,			/* pushpins */
+					PENALTY_OTHER,	/* other penalties slot
+									 * for example : bad team start, etc.
+									 */
+					PENALTY_SUM,	/* result penalty */
+					TIME_START,		/* start lap time slot */
+					TIME_END,		/* end lap time slot */
+					TIME_DISTANCE,  /* distance time */
+					TIME_RESULT,    /* summary time */
+					PLACE,			/* place in lap */
+					SCORE,			/* score given for that plaguice */
+					END,            /* Last table slot */
+				}; /* end of 'Type' enum class */
 
-			/* class constructor.
-			 * arguments:
-			 *   team : connected team.
-			 *   lapConnected : Lap connected with current element.
-			 *   controlType : Lap subitem to control.
-			 *   parent : controller parent widget.
-			 */
-			RideItem(men::Team *team, disc::RideTeam *lapConnected,
-					 Type controlType, QWidget *parent = nullptr);
+				Type type;					/* global semantics */
 
-			/* update info function */
-			void update();
-		signals:
-			/* signal editing of text finished */
-			void signalTextEdited();
-		public slots:
+				/* class constructor.
+				 * arguments:
+				 *   team : connected team.
+				 *   lapConnected : Lap connected with current element.
+				 *   controlType : Lap subitem to control.
+				 *   parent : controller parent widget.
+				 */
+				RideItem(men::Team *team, disc::RideTeam *lapConnected,
+						 Type controlType, QWidget *parent = nullptr);
 
-			/* capture changed text slot */
-			void slotTextChanged();
-		};
+				/* update info function */
+				void update();
+			signals:
+				/* signal editing of text finished */
+				void signalTextEdited();
+			public slots:
+
+				/* capture changed text slot */
+				void slotTextChanged();
+			};
+		} /* end of 'ride' namespace */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */
 

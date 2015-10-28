@@ -19,7 +19,7 @@
  *   controlType : lap subitem to control.
  *   parent : controller parent widget.
  */
-rfc::gui::RideItem::RideItem(men::Team *team, disc::RideTeam *lapConnected, Type type, QWidget *parent) :
+rfc::gui::ride::RideItem::RideItem(men::Team *team, disc::RideTeam *lapConnected, Type type, QWidget *parent) :
 	lap(lapConnected), type(type), team(team),
 	QLineEdit(parent)
 {
@@ -43,7 +43,7 @@ rfc::gui::RideItem::RideItem(men::Team *team, disc::RideTeam *lapConnected, Type
 } /* end of 'gui::RideItem::RideItem' constructor */
 
 /* update info function */
-void rfc::gui::RideItem::update()
+void rfc::gui::ride::RideItem::update()
 {
 	QTextEdit *qTextEdit;
 
@@ -109,7 +109,7 @@ void rfc::gui::RideItem::update()
 } /* end of 'gui::RideItem::update' function */
 
 /* capture changed text slot */
-void rfc::gui::RideItem::slotTextChanged()
+void rfc::gui::ride::RideItem::slotTextChanged()
 {
 	switch(type) {
 		case Type::TIME_START:   /* summary time */

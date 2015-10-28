@@ -20,7 +20,7 @@
  *	 lapType : type of lap (QUALIFY, SPRINT, etc.);
  *   widgParent : parent Qt Widget;
  */
-rfc::gui::Ride::Ride(
+rfc::gui::ride::Ride::Ride(
 		Dispatcher &dispatcher,
 		const disc::Type type, QWidget *widgParent) :
 	lapType(type),
@@ -55,12 +55,12 @@ rfc::gui::Ride::Ride(
 } /* end of 'gui::Ride' constructor */
 
 /* erase all data from table */
-void rfc::gui::Ride::eraseTable() {
+void rfc::gui::ride::Ride::eraseTable() {
 	clear();
 } /* end of 'gui::Ride::eraseTable' function */
 
 /* set table item function */
-void rfc::gui::Ride::setItemText(const uint32_t row,
+void rfc::gui::ride::Ride::setItemText(const uint32_t row,
 									 const uint32_t column,
 									 const String &string) {
 	QTableWidgetItem *item = new QTableWidgetItem((QString)string);
@@ -68,7 +68,7 @@ void rfc::gui::Ride::setItemText(const uint32_t row,
 } /* end of 'gui::Ride::setItemText' function */
 
 /* set table item function */
-void rfc::gui::Ride::setItemTime(const uint32_t row,
+void rfc::gui::ride::Ride::setItemTime(const uint32_t row,
 									 const uint32_t column,
 									 const Time &time) {
 	QTableWidgetItem *item = new QTableWidgetItem(time.getTimeString());
@@ -77,7 +77,7 @@ void rfc::gui::Ride::setItemTime(const uint32_t row,
 } /* end of 'gui::Ride::setItemTime' function */
 
 /* create and put to table ride item widget */
-void rfc::gui::Ride::createRideItem(int row, men::Team *team, RideItem::Type type)
+void rfc::gui::ride::Ride::createRideItem(int row, men::Team *team, RideItem::Type type)
 {
 	RideItem *it = new RideItem(team, dispatcher.getLap(lapType.getTeamed(team->id)), type, this);
 	setCellWidget(row, ENUM_CAST(type), it);
@@ -85,7 +85,7 @@ void rfc::gui::Ride::createRideItem(int row, men::Team *team, RideItem::Type typ
 } /* end of 'Ride::createRideItem' function */
 
 /* add new info to table */
-void rfc::gui::Ride::addTeamInfo(men::Team *team) {
+void rfc::gui::ride::Ride::addTeamInfo(men::Team *team) {
 	int row = rowCount();
 	setRowCount(row + 1);
 
@@ -98,7 +98,7 @@ void rfc::gui::Ride::addTeamInfo(men::Team *team) {
 } /* end of 'gui::Ride::addLapInfo' function */
 
 /* update table data info */
-void rfc::gui::Ride::updateTable() {
+void rfc::gui::ride::Ride::updateTable() {
 	long
 		colCnt = columnCount(),
 		rowCnt = rowCount();
@@ -109,7 +109,7 @@ void rfc::gui::Ride::updateTable() {
 } /* end of 'gui::Ride::updateTable' function */
 
 /* class destructor */
-rfc::gui::Ride::~Ride() {
+rfc::gui::ride::Ride::~Ride() {
 } /* End of '~Ride' class destructor */
 
 

@@ -43,9 +43,49 @@ rfc::String rfc::lang::openExistingDatabase = "open existing database";
 
 rfc::String rfc::lang::exit = "exit";
 rfc::String rfc::lang::edit = "edit";
+rfc::String rfc::lang::apply = "apply";
+rfc::String rfc::lang::decline = "decline";
+
+rfc::String rfc::lang::addNewTeam = "add new team";
 
 rfc::String rfc::lang::greetText =
 		"welcome to rafting competition dispatcher application.\n"
-		"&Choose action:";
+		"Choose action:";
+
+rfc::String rfc::lang::teamId = "team identificator";
+
+rfc::String rfc::lang::teamAddress = "team's county, city, etc.";
+rfc::String rfc::lang::teamName = "name of the team";
+
+rfc::String rfc::lang::lastName = "last name";
+rfc::String rfc::lang::firstName = "first name";
+rfc::String rfc::lang::secondName = "second name";
+rfc::String rfc::lang::age = "age";
+rfc::String rfc::lang::birthYear = "year of birth";
+
+rfc::String rfc::lang::rank = "rank";
+
+rfc::String rfc::lang::rankAbout =
+		"Rank values: \n"
+		" MS : sport's master \n"
+		" KMS : sports master candidate, \n"
+		" 1, 2, 3 : adult rank, \n"
+		" 1J, 2J, 3J : junior rank, \n"
+		" 0 : no rank \n";
+
+rfc::String rfc::lang::rankMS = "MS";
+rfc::String rfc::lang::rankKMS = "KMS";
+rfc::String rfc::lang::rankAdult1 = "1";
+rfc::String rfc::lang::rankAdult2 = "2";
+rfc::String rfc::lang::rankAdult3 = "3";
+rfc::String rfc::lang::rankJunior1 = "1J";
+rfc::String rfc::lang::rankJunior2 = "2J";
+rfc::String rfc::lang::rankJunior3 = "3J";
+rfc::String rfc::lang::rank0 = "0";
+
+rfc::String rfc::lang::familyNameSecName = "NFS";
+
+rfc::String rfc::lang::participants = "participants";
+rfc::String rfc::lang::name = "name";
 
 #endif /* end of 'default' */

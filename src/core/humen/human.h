@@ -46,6 +46,24 @@ namespace rfc {
 				MS
 			} rank = Rank::NO_RANK;		/* End of 'Rank' class */
 
+		public:
+			/* parse rank function.
+			 * argument:
+			 * one of the next strings:
+			 *   MS : sports master,
+			 *   KMS : candidate to sports master.
+			 *   1, 2, 3 : adult ranks.
+			 *   1J, 2J, 3J : junior ranks.
+			 *   0 : no rank.
+			 */
+			static Rank parseRank(const String &str);
+
+			/* convert rank to string,
+			 * See string format at function
+			 * 'parseRank'.
+			 */
+			static String stringRank(const Rank rank);
+
 		private:
 			/* default constructor */
 			Man();
