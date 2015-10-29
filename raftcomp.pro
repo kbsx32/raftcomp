@@ -40,7 +40,9 @@ SOURCES += \
     src/lang_translate.cpp \
     src/gui/gui_greet.cpp \
     src/core/humen/team.cpp \
-    src/core/humen/human.cpp
+    src/core/humen/human.cpp \
+    src/gui/mandat/gui_mandat_men.cpp \
+    src/gui/mandat/gui_mandat_team.cpp
 
 HEADERS  += \
     src/core/def.h \
