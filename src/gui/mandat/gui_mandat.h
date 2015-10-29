@@ -16,6 +16,7 @@
 #include <QLabel>
 #include <QSignalMapper>
 #include <QPushButton>
+#include <QFormLayout>
 
 /* include all core dispatcher support */
 #include "../../core/dispatcher.h"
@@ -55,12 +56,12 @@ namespace rfc {
 				Q_OBJECT
 
 				men::Man *man;
+				Dispatcher *dispatcher;
 
 				QPushButton *widgInfo;
-
 			public:
 				/* constructor */
-				WManInfo(men::Man *man, QWidget *parent = nullptr);
+				WManInfo(Dispatcher *dispatcher, men::Man *man, QWidget *parent = nullptr);
 
 				/* update info */
 				void update();
@@ -74,18 +75,34 @@ namespace rfc {
 			{
 				Q_OBJECT
 
+			public:
+				static const uint32_t
+					butSizeX = 200,
+					butSizeY = 100;
+
+			private:
 				men::Team *team;  /* connected data for widget */
+				Dispatcher *dispatcher;
+
+				QFormLayout *layoutHumen;   /* buttons to connect with info about stupid humen */
 
 				/* all values */
 				QLineEdit *widgTeamId;
 				QLineEdit *widgTeamName;
 				QLineEdit *widgTeamAddress;
+
 			public:
 				/* default constructor */
-				explicit WTeam(men::Team *team, QWidget *parent = nullptr);
+				explicit WTeam(Dispatcher *dispatcher, men::Team *team, QWidget *parent = nullptr);
+
+				/* update info function */
+				void update();
 			public slots:
 				/* apply all changes */
 				void slotEditApply();
+
+				/* add new human */
+				void slotHumanAdd();
 			}; /* end of 'MandatTeam' class */
 
 			/* widgets shows minimal info about team
@@ -96,11 +113,12 @@ namespace rfc {
 			{
 				Q_OBJECT
 
-				men::Team *team;	  /* pointer to connected team */
-				QLabel *teamInfo;     /* info widget */
+				men::Team *team;		/* pointer to connected team */
+				Dispatcher *dispatcher; /* dispatcher */
+				QLabel *teamInfo;		/* info widget */
 			public:
 				/* constructor by pointer of team. */
-				WTeamIntro(men::Team *team, QWidget *parent = nullptr);
+				WTeamIntro(Dispatcher *dispatcher, men::Team *team, QWidget *parent = nullptr);
 
 			public slots:
 				/* slot that pushed 'edit' button */

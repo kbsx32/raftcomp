@@ -87,5 +87,6 @@ rfc::String rfc::lang::familyNameSecName = "NFS";
 
 rfc::String rfc::lang::participants = "participants";
 rfc::String rfc::lang::name = "name";
+rfc::String rfc::lang::addNewHuman = "add new human";
 
 #endif /* end of 'default' */

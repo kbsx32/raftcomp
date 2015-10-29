@@ -77,6 +77,8 @@ namespace rfc
 
 		extern rfc::String participants;
 		extern rfc::String name;
+		extern rfc::String addNewHuman;
+
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */
