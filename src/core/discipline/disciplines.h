@@ -73,6 +73,8 @@ namespace rfc {
 		/* full competition race info class */
 		class Rides {
 			std::map<Type, RideTeam *> rides;
+
+			uint32_t slalomPinsCount;  /* count of pushpins in slalom */
 		public:
 			/* class default constructor */
 			Rides();
@@ -85,6 +87,9 @@ namespace rfc {
 
 			/* add to global tables new lap */
 			void setLap(const Type type, const RideTeam &lapNew);
+
+				/* set pins count for all teams */
+				void setPinsCount(uint32_t count);
 		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

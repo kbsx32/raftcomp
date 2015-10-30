@@ -77,7 +77,7 @@ rfc::disc::RideTeam * rfc::disc::Rides::getLap(const Type type)
 {
 	auto &item = rides[type];
 	if (item == nullptr)
-		item = new RideTeam(type);
+		item = new RideTeam(type, slalomPinsCount);
 
 	return item;
 } /* end of 'Rides::getLap' function */
@@ -87,3 +87,8 @@ void rfc::disc::Rides::setLap(const Type type, const RideTeam &lapNew)
 {
 	rides[type] = new RideTeam(lapNew);
 } /* end of 'Rides::setLap' function */
+
+/* set pins count for all teams */
+void setPinsCount(uint32_t count)
+{
+} /* end of 'setPinsCount' function */

@@ -9,8 +9,9 @@
 #include "ride_team.h"
 
 /* default constructor */
-rfc::disc::RideTeam::RideTeam(const disc::Type type) :
-	type(type)
+rfc::disc::RideTeam::RideTeam(const disc::Type type, const uint32 pinsCount) :
+	type(type),
+	pinsPenalty(pinsCount)
 {
 } /* end of 'RideTeam' constructor */
 

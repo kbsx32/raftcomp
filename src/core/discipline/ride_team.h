@@ -30,14 +30,14 @@ namespace rfc {
 				timeEnd,						/* end lap time */
 				timePenalty;                    /* penalty time */
 
-			std::vector<long> pinsPenalty;		/* pins penalties */
+			std::vector<uint32_t> pinsPenalty;		/* pins penalties */
 
 			uint32_t penaltyOther = 0;          /* other penalties value.
 												 * for example : foulstart, etc.
 												 */
 		public:
 			/* default constructor */
-			RideTeam(const disc::Type type);
+			RideTeam(const disc::Type type, const uint32 pinsCount = 0);
 
 			/* set start lap time */
 			void setTimeStart(const Time &timeStartNew);
