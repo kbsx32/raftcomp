@@ -37,7 +37,7 @@ namespace rfc {
 												 */
 		public:
 			/* default constructor */
-			RideTeam(const disc::Type type, const uint32 pinsCount = 0);
+			RideTeam(const disc::Type type, const uint32_t pinsCount = 0);
 
 			/* set start lap time */
 			void setTimeStart(const Time &timeStartNew);
@@ -75,7 +75,7 @@ namespace rfc {
 			Time getTimeResult() const;
 
 			/* get pins stats array */
-			const std::vector<long>& getPins() const;
+			const std::vector<uint32_t>& getPins() const;
 		}; /* end of 'RideTeam' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

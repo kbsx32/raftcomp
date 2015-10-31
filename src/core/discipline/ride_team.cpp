@@ -9,7 +9,7 @@
 #include "ride_team.h"
 
 /* default constructor */
-rfc::disc::RideTeam::RideTeam(const disc::Type type, const uint32 pinsCount) :
+rfc::disc::RideTeam::RideTeam(const disc::Type type, const uint32_t pinsCount) :
 	type(type),
 	pinsPenalty(pinsCount)
 {
@@ -66,7 +66,7 @@ const rfc::Time rfc::disc::RideTeam::getTimePenalty() const
 } /* end of 'rfc::RideTeam::getTimePenalty' function */
 
 /* get pins stats array */
-const std::vector<long>& rfc::disc::RideTeam::getPins() const
+const std::vector<uint32_t>& rfc::disc::RideTeam::getPins() const
 {
 	return pinsPenalty;
 } /* end of 'rfc::RideTeam::getPins' function */

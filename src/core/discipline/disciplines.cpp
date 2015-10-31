@@ -61,7 +61,8 @@ bool rfc::disc::Type::operator<(const Type &second) const
 } /* end of 'operator<' function */
 
 /* class default constructor */
-rfc::disc::Rides::Rides()
+rfc::disc::Rides::Rides() :
+	pinsCount(ENUM_CAST(TypeDisc::COUNT))
 {
 } /* end of 'disc::Rides::Rides' constructor */
 
@@ -77,7 +78,7 @@ rfc::disc::RideTeam * rfc::disc::Rides::getLap(const Type type)
 {
 	auto &item = rides[type];
 	if (item == nullptr)
-		item = new RideTeam(type, slalomPinsCount);
+		item = new RideTeam(type, pinsCount[ENUM_CAST(type.typeDisc)]);
 
 	return item;
 } /* end of 'Rides::getLap' function */
@@ -88,7 +89,19 @@ void rfc::disc::Rides::setLap(const Type type, const RideTeam &lapNew)
 	rides[type] = new RideTeam(lapNew);
 } /* end of 'Rides::setLap' function */
 
-/* set pins count for all teams */
-void setPinsCount(uint32_t count)
+/* set pins count for all teams.
+ * arguments:
+ *   type : discipline to set pushpins;
+ */
+void rfc::disc::Rides::setPinsCount(const TypeDisc type, const uint32_t count)
 {
+	pinsCount[ENUM_CAST(type)] = count;
+
+	// for (auto &ride : rides)
+	for (std::map<Type, RideTeam *>::iterator ride = rides.begin();
+		 ride != rides.end(); ++ride) {
+
+		if (ride->first.typeDisc == type)
+			ride->second->setPinsCount(pinsCount[ENUM_CAST(type)]);
+	}
 } /* end of 'setPinsCount' function */

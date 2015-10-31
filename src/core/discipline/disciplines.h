@@ -24,7 +24,10 @@ namespace rfc {
 			QUALIFY,
 			SPRINT,
 			SLALOM,
-			LONG_RACE
+			LONG_RACE,
+
+			END,			/* fixators to enum */
+			COUNT = END
 		}; /* end of 'LapType' enum class */
 
 		/* sprint lap types */
@@ -74,7 +77,9 @@ namespace rfc {
 		class Rides {
 			std::map<Type, RideTeam *> rides;
 
-			uint32_t slalomPinsCount;  /* count of pushpins in slalom */
+			/* all pushpins default count */
+			std::vector<uint32_t> pinsCount;
+
 		public:
 			/* class default constructor */
 			Rides();
@@ -88,8 +93,11 @@ namespace rfc {
 			/* add to global tables new lap */
 			void setLap(const Type type, const RideTeam &lapNew);
 
-				/* set pins count for all teams */
-				void setPinsCount(uint32_t count);
+			/* set pins count for all teams.
+			 * arguments:
+			 *   type : discipline to set pushpins;
+			 */
+			void setPinsCount(const TypeDisc type, const uint32_t count);
 		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

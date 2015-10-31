@@ -71,6 +71,8 @@ void rfc::gui::WindowMain::slotChangeDiscipline(const rfc::disc::TypeDisc type)
 		case disc::TypeDisc::LONG_RACE:
 			stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::LONG_RACE));
 			break;
+		default:
+			break;
 	}
 } /* end of 'gui::WindowMain::slotChangeDiscipline' function */
 
