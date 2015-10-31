@@ -36,16 +36,19 @@ rfc::men::Team* rfc::Dispatcher::getTeam(const uint32_t teamId)
 	return *item;
 } /* end of 'Dispatcher::addTeam' function */
 
-/* save info to file */
+/* save info to file.
+ * current saving version : 1.
+ * see doc/format-dbc/v*.txt files
+ * to full info about saving format.
+ */
 void rfc::Dispatcher::save(const String &fileOutName)
 {
 	/* current saving version */
-	uint32_t version = 0;
+	uint32_t version = 1;
 
 	FILE *fileOut = std::fopen(fileOutName.data(), "wb");
 
 	/* write signature */
-	// fileSaveStr(fileSignature, fileOut);
 	String::fputs(fileSignature, fileOut);
 
 	/* set current version */
@@ -54,6 +57,7 @@ void rfc::Dispatcher::save(const String &fileOutName)
 	/* write all teams */
 	const uint32_t teamsCnt = teams.size();
 	std::fwrite(&teamsCnt, sizeof(teamsCnt), 1, fileOut);
+
 	for (const auto &team : teams)
 		team->save(fileOut);
 

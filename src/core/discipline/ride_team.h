@@ -36,7 +36,13 @@ namespace rfc {
 												 * for example : foulstart, etc.
 												 */
 		public:
-			/* default constructor */
+			/* void-constructor */
+			RideTeam();
+
+			/* copying constructor */
+			RideTeam(const RideTeam &rideTeam);
+
+			/* constructor */
 			RideTeam(const disc::Type type, const uint32_t pinsCount = 0);
 
 			/* set start lap time */

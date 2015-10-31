@@ -1,0 +1,61 @@
+version 1.
+
+enum class Rank; /* see in code */
+
+class TeamInfo
+{
+	uint32_t teamId;
+	uint32_t humanCnt;
+	
+	/* identificators in array of humen in men database */
+	uint32_t humen[humanCnt];
+};
+
+class HumanInfo
+{
+	char *lastName;  	/* until '\0' */
+	char *firstName; 	/* until '\0' */
+	char *secondName; 	/* until '\0' */
+	
+	uint32_t birthYear; 
+	uchar rank; /* see class 'Rank' */
+};
+	
+class MenDatabase
+{
+	uint32_t humenCnt;
+	HumanInfo humen[humanCnt];
+};
+
+enum class TypeDisc  	/* see in code */
+enum class disc::Type;  /* see in code */
+
+class RideTeam
+{
+  disc::Type type;		/* discipline type info */
+  uint32_t teamId;   	/* identificator of team */
+};
+
+class Rides
+{
+	uint32_t pinsCount[TypeDisc::COUNT];  /* for every discipline 
+										     of TypeDisc */
+	ridesCnt;   				/* count of all rides */
+	RideTeam rides[ridesCnt]; 	/* all rides */
+};
+
+/**** 
+ * start info 
+ ****/
+class LoadInfo ( Dispatcher ).
+{
+	char sinature = "kbsx32.raftcomp.dbc";
+	uint32_t version = 0;
+	
+	MenDatabase menDatabase;
+
+	uint32_t teamsCnt;
+	TeamInfo teams[teamsCnt];
+
+	Rides rides;
+};

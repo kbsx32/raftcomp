@@ -1,0 +1,25 @@
+version 0 (unsupported).
+
+class HumanInfo
+{
+	char *lastName;  /* until '\0' */
+	char *firstName; /* until '\0' */
+};
+
+class TeamInfo
+{
+	uint32_t teamId;
+	uint32_t humanCnt;
+	HumanInfo humen[humanCnt] : ???
+};
+	
+/**** 
+ * start info 
+ ****/
+class LoadInfo
+{
+	char sinature = "kbsx32.raftcomp.dbc";
+	uint32_t version = 0;
+	uint32_t teamsCnt;
+	TeamInfo teams[teamsCnt];
+};

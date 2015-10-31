@@ -9,6 +9,13 @@
 #include "disciplines.h"
 #include "ride_team.h"
 
+/* no parametres type */
+rfc::disc::Type::Type() :
+	typeDisc(TypeDisc::QUALIFY),
+	teamId(0)
+{
+} /* end of 'disc::Type' constructor */
+
 /* default constructor */
 rfc::disc::Type::Type(const TypeDisc disc, const TeamId team) :
 	typeDisc(disc),
@@ -105,3 +112,55 @@ void rfc::disc::Rides::setPinsCount(const TypeDisc type, const uint32_t count)
 			ride->second->setPinsCount(pinsCount[ENUM_CAST(type)]);
 	}
 } /* end of 'setPinsCount' function */
+
+/* save rides info.
+ * available from version 1.
+ * current saving version : 1;
+ */
+void rfc::disc::Rides::save(FILE *fout, const uint32_t version)
+{
+	if (version < 1)
+		return ;
+
+	fwrite(&pinsCount[0], sizeof(uint32_t), ENUM_CAST(TypeDisc::COUNT), fout);
+
+	uint32_t ridesCnt = rides.size();
+	fwrite(&ridesCnt, sizeof(uint32_t), 1, fout);
+	for (auto &ride : rides) {
+
+		const Type *type = &ride.first;
+		RideTeam *rideTeam = ride.second;
+
+		fwrite(type, sizeof(disc::Type), 1, fout);
+		fwrite(rideTeam, sizeof(disc::Type), 1, fout);
+	}
+} /* end of 'save' function */
+
+/* load rides info.
+ * available from version 1.
+ */
+void rfc::disc::Rides::load(FILE *fin, const uint32_t version)
+{
+	if (version < 1)
+		return ;
+
+	/* read all pushpins count */
+	fread(&pinsCount[0], sizeof(uint32_t), ENUM_CAST(TypeDisc::COUNT), fin);
+
+	uint32_t ridesCnt;
+	fread(&ridesCnt, sizeof(uint32_t), 1, fin);
+
+	Type typeNew;
+	RideTeam rideTeamNew;
+
+	/* read all laps */
+	for (uint32_t i = 0; i < ridesCnt; ++i) {
+
+		fwrite(&typeNew, sizeof(disc::Type), 1, fin);
+		fwrite(&rideTeamNew, sizeof(disc::Type), 1, fin);
+
+		rideTeamNew.setPinsCount(pinsCount[ENUM_CAST(typeNew.typeDisc)]);
+
+		rides[typeNew] = new RideTeam(rideTeamNew);
+	}
+} /* end of 'load' function */

@@ -8,10 +8,27 @@
 
 #include "ride_team.h"
 
+/* void-constructor */
+rfc::disc::RideTeam::RideTeam() :
+	type(TypeDisc::QUALIFY)
+{
+} /* end of 'RideTeam' constructor */
+
 /* default constructor */
 rfc::disc::RideTeam::RideTeam(const disc::Type type, const uint32_t pinsCount) :
 	type(type),
 	pinsPenalty(pinsCount)
+{
+} /* end of 'RideTeam' constructor */
+
+/* copying constructor */
+rfc::disc::RideTeam::RideTeam(const RideTeam &rideTeam) :
+	timeStart(rideTeam.timeStart),
+	timePenalty(rideTeam.timePenalty),
+	timeEnd(rideTeam.timeEnd),
+	pinsPenalty(rideTeam.pinsPenalty),
+	penaltyOther(rideTeam.penaltyOther),
+	type(rideTeam.type)
 {
 } /* end of 'RideTeam' constructor */
 

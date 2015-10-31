@@ -9,6 +9,8 @@
 
 #include "lang_translate.h"
 
+using namespace rfc;
+
 #ifdef RFC_LANG_RUSSIAN
 
 rfc::String rfc::lang::mandat = "мандатная комиссия";
@@ -65,14 +67,6 @@ rfc::String rfc::lang::birthYear = "year of birth";
 
 rfc::String rfc::lang::rank = "rank";
 
-rfc::String rfc::lang::rankAbout =
-		"Rank values: \n"
-		" MS : sport's master \n"
-		" KMS : sports master candidate, \n"
-		" 1, 2, 3 : adult rank, \n"
-		" 1J, 2J, 3J : junior rank, \n"
-		" 0 : no rank \n";
-
 rfc::String rfc::lang::rankMS = "MS";
 rfc::String rfc::lang::rankKMS = "KMS";
 rfc::String rfc::lang::rankAdult1 = "1";
@@ -82,6 +76,20 @@ rfc::String rfc::lang::rankJunior1 = "1J";
 rfc::String rfc::lang::rankJunior2 = "2J";
 rfc::String rfc::lang::rankJunior3 = "3J";
 rfc::String rfc::lang::rank0 = "0";
+
+rfc::String rfc::lang::rankAbout =
+		"Rank values: \n"
+		+ lang::rankMS + " : sport's master \n"
+		+ lang::rankKMS + " KMS : sports master candidate, \n"
+			+ lang::rankAdult1 + ","
+			+ lang::rankAdult2 + ","
+			+ lang::rankAdult3 + " : adult rank, \n"
+
+			+ lang::rankJunior1 + ","
+			+ lang::rankJunior2 + ","
+			+ lang::rankJunior3 + " : junior rank, \n"
+		+ lang::rank0 + " : no rank \n";
+
 
 rfc::String rfc::lang::familyNameSecName = "NFS";
 

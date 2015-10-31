@@ -162,3 +162,31 @@ void rfc::men::MenDatabase::manRemove(const men::Man *manDel)
 {
 	_men.erase(std::find(_men.begin(), _men.end(), manDel));
 } /* end of 'InstructorTeam::add' function */
+
+/* save men database */
+void rfc::men::MenDatabase::save(FILE *fout, const uint32_t version)
+{
+	uint32_t cntHumen = _men.size();
+
+	fwrite(&cntHumen, sizeof(uint32_t), 1, fout);
+
+	for (auto &man : _men)
+		fwrite(man, sizeof(Man), 1, fout);
+} /* end of 'save' function */
+
+/* load men database */
+void rfc::men::MenDatabase::load(FILE *fin, const uint32_t version)
+{
+	if (version < 1)
+		return ;
+
+	uint32_t cntHumen;
+
+	fread(&cntHumen, sizeof(uint32_t), 1, fin);
+
+	Man man;
+	for (uint32_t i = 0; i < cntHumen; ++i) {
+		fread(&man, sizeof(Man), 1, fin);
+		_men.push_back(new Man(man));
+	}
+} /* end of 'load' function */

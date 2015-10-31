@@ -57,6 +57,9 @@ namespace rfc {
 
 			TeamId teamId;
 		public:
+			/* default functions */
+			Type();
+
 			/* constructor for usual discipline */
 			Type(const TypeDisc disc, const TeamId team = 0);
 
@@ -98,6 +101,17 @@ namespace rfc {
 			 *   type : discipline to set pushpins;
 			 */
 			void setPinsCount(const TypeDisc type, const uint32_t count);
+
+			/* save rides info.
+			 * available from version 1.
+			 * default saving version : 1;
+			 */
+			void save(FILE *fout, const uint32_t version = 1);
+
+			/* load rides info.
+			 * available from version 1.
+			 */
+			void load(FILE *fin, const uint32_t version = 1);
 		}; /* end of 'Races' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

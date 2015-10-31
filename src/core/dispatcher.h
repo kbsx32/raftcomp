@@ -32,17 +32,14 @@ namespace rfc {
 		/* get team pointer from list */
 		men::Team * getTeam(uint32_t teamId);
 
-		/* save info to file. */
+		/* save info to file.
+		 * current saving version : 1.
+		 * see doc/format-dbc/v*.txt files
+		 * to full info about saving format.
+		 */
 		void save(const String &fileOutName);
 
-		/* load info from file.
-		 * file formats: 'kbsx32.raftcomp.dbc'
-		 *   version 0:
-		 *	   signature : "kbsx32.raftcomp.dbc";
-		 *     version   : 4 bytes (uint32_t).
-		 *     teamsCnt  : 4 bytes (uint32_t).
-		 *     teams[teamsCnt] : ???.
-		 */
+		/* load info from file. */
 		void load(const String &fileInName);
 
 		/* reset all dispatcher info */

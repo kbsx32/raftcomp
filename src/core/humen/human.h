@@ -30,7 +30,7 @@ namespace rfc {
 				firstName,				/*   and first name */
 				secondName;             /*     and second name */
 
-			ulong birthYear;            /* year of mans birth */
+			uint32_t birthYear;         /* year of mans birth */
 
 			/* human ranks variant */
 			enum class Rank
@@ -49,12 +49,7 @@ namespace rfc {
 		public:
 			/* parse rank function.
 			 * argument:
-			 * one of the next strings:
-			 *   MS : sports master,
-			 *   KMS : candidate to sports master.
-			 *   1, 2, 3 : adult ranks.
-			 *   1J, 2J, 3J : junior ranks.
-			 *   0 : no rank.
+			 *   str : see 'lang::rankAbout'.
 			 */
 			static Rank parseRank(const String &str);
 
@@ -118,6 +113,16 @@ namespace rfc {
 
 			/* delete human. */
 			void manRemove(const Man *man);
+
+			/* save men database.
+			 * required minimal version : 1;
+			 */
+			void save(FILE *fout, const uint32_t version = 1);
+
+			/* load men database
+			 * required minimal version : 1;
+			 */
+			void load(FILE *fin, const uint32_t version = 1);
 		}; /* end of 'InstructorsTeam' class */
 
 	} /* end of 'men' namespace */
