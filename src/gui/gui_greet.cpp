@@ -105,5 +105,6 @@ void rfc::gui::WindowGreet::loadDatabase()
 		return ;
 
 	dispatcher.load(fileName);
+
 	runWindowMain();
 } /* end of 'WindowGreet::loadDatabase' function */

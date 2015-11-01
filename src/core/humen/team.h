@@ -41,7 +41,7 @@ namespace rfc {
 			 * file 'kbsx32.raftcomp.dbc' type.
 			 * Type struct see on 'load' function.
 			 */
-			Team(Dispatcher &dispatcher, FILE *fileIn, const uint32_t version = 0);
+			Team(Dispatcher &dispatcher, FILE *fileIn, const uint32_t version);
 
 			/* get surnames string function */
 			String getSurnames() const;
@@ -49,19 +49,13 @@ namespace rfc {
 			/* get team identification string function */
 			String getIdString() const;
 
-			/* save human to 'kbsx32.raftcomp.db' type file. */
-			const Team& save(FILE *fileOut, const uint32_t version = 0) const;
+			/* save human to 'kbsx32.raftcomp.dbc' type file. */
+			const Team& save(FILE *fileOut, const uint32_t version) const;
 
 			/* load from file.
-			 * file formats : (kbsx32.raftcomp.db').
-			 *   version 0:
-			 *     teamId   : 4 bytes (uint32_t).
-			 *     humanCnt : 4 bytes (uint32_t).
-			 *     humans[humanCnt] : ???
-			 *
-			 * returns: self-reference.
+			 * file format : (kbsx32.raftcomp.dbc').
 			 */
-			Team& load(rfc::Dispatcher &dispatcher, FILE *fileIn, const uint32_t version = 0);
+			Team& load(rfc::Dispatcher &dispatcher, FILE *fileIn, const uint32_t version);
 		}; /* end of 'team' class */
 	} /* end of 'men' namespace */
 } /* end of 'rfc' namespace' */

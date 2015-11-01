@@ -5,6 +5,9 @@ enum class Rank; /* see in code */
 class TeamInfo
 {
 	uint32_t teamId;
+	char *teamName;
+	char *address;
+	
 	uint32_t humanCnt;
 	
 	/* identificators in array of humen in men database */

@@ -102,6 +102,7 @@ namespace rfc {
 			 */
 			void setPinsCount(const TypeDisc type, const uint32_t count);
 
+		protected:
 			/* save rides info.
 			 * available from version 1.
 			 * default saving version : 1;

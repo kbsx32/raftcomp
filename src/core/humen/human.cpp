@@ -1,8 +1,10 @@
 #include "human.h"
 
 /* default constructor */
-rfc::men::Man::Man() {
-
+rfc::men::Man::Man(MenDatabase *database) :
+	databaseConnected(database),
+	birthYear(1970)
+{
 } /* end of 'Man' constructor */
 
 /* constructor by names */
@@ -15,39 +17,35 @@ void rfc::men::Man::setNames(const String &lastName,
 	this->secondName = secondName;
 } /* end of 'Man::setNames' function */
 
-/* save human to 'kbsx32.raftcomp.db' type file */
+/* save human to 'kbsx32.raftcomp.dbc' type file */
 const rfc::men::Man& rfc::men::Man::save(FILE *fileOut, const uint32_t version) const
 {
-	const char *str;
-
 	/* saving info */
-	str = lastName.data();
-	String::fputs(str, fileOut);
+	String::putToFile(lastName, fileOut);
+	String::putToFile(firstName, fileOut);
 
-	str = firstName.data();
-	String::fputs(str, fileOut);
-
+	if (version > 0) {
+		String::putToFile(secondName, fileOut);
+		fwrite(&birthYear, sizeof(birthYear), 1, fileOut);
+		fwrite(&rank, sizeof(rank), 1, fileOut);
+	}
 	return *this;
 } /* end of 'Man::save' function */
 
-/* load human from 'kbsx32.raftcomp.db' type file.
- * file formats : (kbsx32.raftcomp.db).
- *   version 0:
- *     lastName  : char * : string.
- *     firstName : char * : string;
- */
+/* load human from 'kbsx32.raftcomp.dbc' type file. */
 rfc::men::Man* rfc::men::Man::load(FILE *fileIn, const uint32_t version)
 {
 	// if (version >= 0) {
 
 	/* loading info */
-	char str[STR_MAX];  /* prepared buffer */
+	lastName = String::getFromFile(fileIn);
+	firstName = String::getFromFile(fileIn);
 
-	String::fgets(str, STR_MAX, fileIn);
-	lastName = str;
-
-	String::fgets(str, STR_MAX, fileIn);
-	firstName = str;
+	if (version > 0) {
+		secondName = String::getFromFile(fileIn);
+		fread(&birthYear, sizeof(birthYear), 1, fileIn);
+		fread(&rank, sizeof(rank), 1, fileIn);
+	}
 
 	return this;
 } /* end of 'Man::load' function */
@@ -119,6 +117,12 @@ rfc::String rfc::men::Man::stringRank(const Rank rank)
 	return "whaaat ?";
 } /* end of 'stringRank' function */
 
+/* get index of human in connected database */
+uint32_t rfc::men::Man::getIndexInDatabase()
+{
+	return databaseConnected->getManIndex(this);
+} /* end of 'getIndexInDatabase' function */
+
 /*
  * humans team
  */
@@ -126,9 +130,7 @@ rfc::String rfc::men::Man::stringRank(const Rank rank)
 /* destroy class */
 rfc::men::MenDatabase::~MenDatabase()
 {
-	/* remove all men from database */
-	for (auto &item : _men)
-		delete item;
+	reset();
 } /* end of '~MenDatabase' function */
 
 /* get man identificator in MenDatabase
@@ -151,7 +153,7 @@ uint32_t rfc::men::MenDatabase::getManIndex(const Man *man)
  */
 rfc::men::Man * rfc::men::MenDatabase::manAdd()
 {
-	Man *manNew = new Man();
+	Man *manNew = new Man(this);
 	_men.push_back(manNew);
 
 	return manNew;
@@ -171,7 +173,7 @@ void rfc::men::MenDatabase::save(FILE *fout, const uint32_t version)
 	fwrite(&cntHumen, sizeof(uint32_t), 1, fout);
 
 	for (auto &man : _men)
-		fwrite(man, sizeof(Man), 1, fout);
+		man->save(fout, version);
 } /* end of 'save' function */
 
 /* load men database */
@@ -184,9 +186,18 @@ void rfc::men::MenDatabase::load(FILE *fin, const uint32_t version)
 
 	fread(&cntHumen, sizeof(uint32_t), 1, fin);
 
-	Man man;
 	for (uint32_t i = 0; i < cntHumen; ++i) {
-		fread(&man, sizeof(Man), 1, fin);
-		_men.push_back(new Man(man));
+		Man *man = new Man(this);
+
+		man->load(fin, version);
+		_men.push_back(man);
 	}
 } /* end of 'load' function */
+
+/* reset all database */
+void rfc::men::MenDatabase::reset()
+{
+	/* remove all men from database */
+	for (auto &item : _men)
+		delete item;
+} /* end of 'reset' function */

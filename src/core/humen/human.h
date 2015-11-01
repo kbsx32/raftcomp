@@ -24,6 +24,10 @@ namespace rfc {
 		class Man {
 			/* only men database can create human ( and delete obviosly ) */
 			friend class MenDatabase;
+
+		private:
+			/* 'creator' database of this human */
+			MenDatabase *databaseConnected;
 		public:
 			String
 				lastName,       		/* man family name  */
@@ -61,26 +65,26 @@ namespace rfc {
 
 		private:
 			/* default constructor */
-			Man();
-
-			/* load human from file 'kbsx32.raftcomp.db' */
-			friend class MenDatabase;
+			Man(MenDatabase *menDatabase);
 
 			/* set names */
 			void setNames(const String &lastName,
 						  const String &firstName,
 						  const String &secondName = QString());
+
+		public:  /* deprecated (version of 'dbc' 0 is deprecated).
+				  * TODO :
+				  *   public --> private.
+				  */
+			/* save human to 'kbsx32.raftcomp.dbc' type file. */
+			const Man& save(FILE *fileOut, const uint32_t version) const;
+
+			/* load human from 'kbsx32.raftcomp.dbc' type file. */
+			Man* load(FILE *fileIn, const uint32_t version);
+
 		public:
-
-			/* save human to 'kbsx32.raftcomp.db' type file. */
-			const Man& save(FILE *fileOut, const uint32_t version = 0) const;
-
-			/* load human from 'kbsx32.raftcomp.db' type file.
-			 *   version 0:
-			 *     lastName  : char * : string.
-			 *     firstName : char * : string;
-			 */
-			Man* load(FILE *fileIn, const uint32_t version = 0);
+			/* get index of human in connected database */
+			uint32_t getIndexInDatabase();
 		}; /* end of 'Man' class */
 
 		/* humen 'database' trainers */
@@ -114,15 +118,18 @@ namespace rfc {
 			/* delete human. */
 			void manRemove(const Man *man);
 
+			/* reset all database */
+			void reset();
+		protected:
 			/* save men database.
 			 * required minimal version : 1;
 			 */
-			void save(FILE *fout, const uint32_t version = 1);
+			void save(FILE *fout, const uint32_t version);
 
 			/* load men database
 			 * required minimal version : 1;
 			 */
-			void load(FILE *fin, const uint32_t version = 1);
+			void load(FILE *fin, const uint32_t version);
 		}; /* end of 'InstructorsTeam' class */
 
 	} /* end of 'men' namespace */

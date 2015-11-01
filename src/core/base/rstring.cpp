@@ -58,7 +58,7 @@ rfc::String rfc::String::toString(long number, long signsCnt)
  * The problem is fgets doesn't works correctly with
  * binary opened files. ( WHY ??? ).
  */
-void rfc::String::fgets(char *data, const uint32_t maxLen, FILE * &fileIn)
+void rfc::String::getFromFile(char *data, const uint32_t maxLen, FILE * &fileIn)
 {
 	char ch;
 	uint32_t len = 0;
@@ -70,6 +70,30 @@ void rfc::String::fgets(char *data, const uint32_t maxLen, FILE * &fileIn)
 		if (ch == 0)
 			break;
 	}
+} /* end of 'getFromFile' function */
+
+/* 'fgets' function.
+ * The problem is fgets doesn't works correctly with
+ * binary opened files. ( WHY ??? ).
+ */
+rfc::String rfc::String::getFromFile(FILE *&fileIn)
+{
+	char str[lengthMax];
+
+	getFromFile(str, lengthMax, fileIn);
+
+	return String(str);
+} /* end of 'getFromFile' function */
+
+/* 'fputs' function.
+ * The problem is fputs doesn't inserts '\0' symbol at
+ * the line end.
+ * This functions calls fputs and fputc('\0') in the end.
+ */
+void rfc::String::putToFile(const char *data, FILE *fileOut)
+{
+	std::fputs(data, fileOut);
+	std::fputc('\0', fileOut);
 } /* end of 'fileSaveStr' function */
 
 /* 'fputs' function.
@@ -77,8 +101,7 @@ void rfc::String::fgets(char *data, const uint32_t maxLen, FILE * &fileIn)
  * the line end.
  * This functions calls fputs and fputc('\0') in the end.
  */
-void rfc::String::fputs(const char *data, FILE *fileOut)
+void rfc::String::putToFile(const String &str, FILE *fileOut)
 {
-	std::fputs(data, fileOut);
-	std::fputc('\0', fileOut);
+	String::putToFile(str.toLatin1().data(), fileOut);
 } /* end of 'fileSaveStr' function */

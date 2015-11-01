@@ -23,6 +23,8 @@ namespace rfc {
 	private:
 		/* signature for saving database-competition files */
 		static const char fileSignature[]; /* = "kbsx32.rafrcomp.dbc" */
+
+		String fileSaving;  /* file to save */
 	public:
 		/* declared teams */
 		std::vector<men::Team *> teams;
@@ -38,6 +40,18 @@ namespace rfc {
 		 * to full info about saving format.
 		 */
 		void save(const String &fileOutName);
+
+		/* save by Dispatcher's current saving file */
+		void save();
+
+		/* set default file to save */
+		void setSavingFile(const String &file);
+
+		/* get exists default saving file flag */
+		bool isSavingFileSet();
+
+		/* get default saving file name */
+		const String getSavingFile();
 
 		/* load info from file. */
 		void load(const String &fileInName);

@@ -19,6 +19,9 @@ namespace rfc {
 	 * QString with copying.
 	 */
 	class String : public QString {
+	private:
+		static const uint32_t lengthMax = 256;
+
 	public:
 		/* default constructor */
 		String();
@@ -49,14 +52,27 @@ namespace rfc {
 		 * The problem is fgets doesn't works correctly with
 		 * binary opened files. ( WHY ??? ).
 		 */
-		static void fgets(char *data, const uint32_t maxLen, FILE *&fileOut);
+		static void getFromFile(char *data, const uint32_t maxLen, FILE *&fileOut);
+
+		/* 'fgets' function.
+		 * The problem is fgets doesn't works correctly with
+		 * binary opened files. ( WHY ??? ).
+		 */
+		static String getFromFile(FILE *&fileIn);
 
 		/* 'fputs' function.
 		 * The problem is fputs doesn't inserts '\0' symbol at
 		 * the line end.
 		 * This functions calls fputs and fputc('\0') in the end.
 		 */
-		static void fputs(const char *data, FILE *fileOut);
+		static void putToFile(const char *data, FILE *fileOut);
+
+		/* 'fputs' function.
+		 * The problem is fputs doesn't inserts '\0' symbol at
+		 * the line end.
+		 * This functions calls fputs and fputc('\0') in the end.
+		 */
+		static void putToFile(const String &str, FILE *fileOut);
 
 	}; /* end of 'String' class */
 } /* end of 'rfc' namespace */
