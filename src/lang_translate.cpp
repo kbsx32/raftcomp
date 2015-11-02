@@ -96,5 +96,6 @@ rfc::String rfc::lang::familyNameSecName = "NFS";
 rfc::String rfc::lang::participants = "participants";
 rfc::String rfc::lang::name = "name";
 rfc::String rfc::lang::addNewHuman = "add new human";
+rfc:;String rgc::lang::tries = "tries";
 
 #endif /* end of 'default' */
