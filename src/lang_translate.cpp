@@ -80,7 +80,7 @@ rfc::String rfc::lang::rank0 = "0";
 rfc::String rfc::lang::rankAbout =
 		"Rank values: \n"
 		+ lang::rankMS + " : sport's master \n"
-		+ lang::rankKMS + " KMS : sports master candidate, \n"
+		+ lang::rankKMS + " sports master candidate, \n"
 			+ lang::rankAdult1 + ","
 			+ lang::rankAdult2 + ","
 			+ lang::rankAdult3 + " : adult rank, \n"
@@ -96,6 +96,6 @@ rfc::String rfc::lang::familyNameSecName = "NFS";
 rfc::String rfc::lang::participants = "participants";
 rfc::String rfc::lang::name = "name";
 rfc::String rfc::lang::addNewHuman = "add new human";
-rfc:;String rgc::lang::tries = "tries";
+rfc::String rfc::lang::tries = "tries";
 
 #endif /* end of 'default' */

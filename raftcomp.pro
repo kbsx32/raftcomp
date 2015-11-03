@@ -42,7 +42,9 @@ SOURCES += \
     src/core/humen/team.cpp \
     src/core/humen/human.cpp \
     src/gui/mandat/gui_mandat_men.cpp \
-    src/gui/mandat/gui_mandat_team.cpp
+    src/gui/mandat/gui_mandat_team.cpp \
+    src/gui/qualify/gui_qualify.cpp \
+    src/core/discipline/disc_abstract.cpp
 
 HEADERS  += \
     src/core/def.h \
@@ -53,9 +55,7 @@ HEADERS  += \
     src/raftcomp.h \
     src/core/base/exception.h \
     src/core/base/rstring.h \
-    src/gui/gui_ride.h \
     src/core/discipline/ride_team.h \
-    src/gui/gui_ride_item.h \
     src/gui/mandat/gui_mandat.h \
     src/core/base/memleak.h \
     src/gui/ridetable/gui_ride.h \
@@ -65,7 +65,8 @@ HEADERS  += \
     src/lang_translate.h \
     src/gui/gui_greet.h \
     src/core/humen/team.h \
-    src/core/humen/human.h
+    src/core/humen/human.h \
+    src/gui/qualify/gui_qualify.h
 
 # FORMS    +=
 

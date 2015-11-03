@@ -114,6 +114,18 @@ namespace rfc {
 			 */
 			void load(FILE *fin, const uint32_t version = 1);
 		}; /* end of 'Races' class */
+
+		/* Abstract discipline class */
+		class Discipline
+		{
+			virtual void getResultProtocol();
+
+			/* sort teams function */
+			virtual void sortTeams();
+
+			/* default destructor */
+			virtual ~Discipline();
+		};
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
 

@@ -64,11 +64,12 @@ namespace rfc {
 						QWidget *widgParent = nullptr);
 
 				/* class destructor */
-				~Ride();
+				virtual ~Ride();
 
 				/* erase all data from table */
 				void eraseTable();
 
+			private:
 				/* add new info to table */
 				void addTeamInfo(men::Team *team);
 
@@ -78,6 +79,10 @@ namespace rfc {
 			public slots:
 				/* update table data info */
 				void updateTable();
+
+			public:
+				/* sorting teams virtual function */
+				virtual void sortTeams();
 			}; /* end of 'Ride' class */
 		} /* end of 'ride' namespace */
 	} /* end of 'gui' namespace */

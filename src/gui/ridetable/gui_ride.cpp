@@ -112,4 +112,12 @@ void rfc::gui::ride::Ride::updateTable() {
 rfc::gui::ride::Ride::~Ride() {
 } /* End of '~Ride' class destructor */
 
+/*
+ * virtalized functions.
+ */
+
+/* sorting teams virtual function */
+void rfc::gui::ride::Ride::sortTeams()
+{
+} /* end of 'sortTeams' function */
 
