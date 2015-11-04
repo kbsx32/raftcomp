@@ -9,8 +9,9 @@
 #include "ride_team.h"
 
 /* void-constructor */
-rfc::disc::RideTeam::RideTeam() :
-	type(TypeDisc::QUALIFY)
+rfc::disc::RideTeam::RideTeam(uint32_t teamId) :
+	type(TypeDisc::QUALIFY),
+	teamId(teamId)
 {
 } /* end of 'RideTeam' constructor */
 
@@ -110,3 +111,9 @@ uint32_t rfc::disc::RideTeam::getPenaltyOther()
 {
 	return penaltyOther;
 } /* end of 'RideTeam::getPenaltyOther' function */
+
+/* get team identificator */
+rfc::TeamId rfc::disc::RideTeam::getTeamId()
+{
+	return teamId;
+} /* end of 'getTeamId' function */

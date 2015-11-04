@@ -13,6 +13,7 @@
 #include <vector>
 #include "../def.h"
 
+#include "disc_type.h"
 #include "disciplines.h"
 
 /* 'raftcomp' support namespace */
@@ -23,6 +24,8 @@ namespace rfc {
 	{
 		/* Single template discipline lap class */
 		class RideTeam {
+			TeamId teamId;
+
 			disc::Type type;					/* discipline lap type */
 
 			Time
@@ -37,7 +40,7 @@ namespace rfc {
 												 */
 		public:
 			/* void-constructor */
-			RideTeam();
+			RideTeam(uint32_t teamId = 0);
 
 			/* copying constructor */
 			RideTeam(const RideTeam &rideTeam);
@@ -79,6 +82,9 @@ namespace rfc {
 
 			/* get result lap time with penalty statistics */
 			Time getTimeResult() const;
+
+			/* get team identificator */
+			TeamId getTeamId();
 
 			/* get pins stats array */
 			const std::vector<uint32_t>& getPins() const;

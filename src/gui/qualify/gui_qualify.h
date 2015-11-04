@@ -1,20 +1,32 @@
 /*
  * Rafting competition dispatcher program.
  *
- * Gui main window class.
+ * Gui qualification window class.
  *
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
-#ifndef QUALIFY_H
-#define QUALIFY_H
+#ifndef RFC_GUI_QUALIFY_H
+#define RFC_GUI_QUALIFY_H
 
 #include <QWidget>
+#include "../../core/dispatcher.h"
 
-class qualify
+/* rafting competition namespace */
+namespace rfc
 {
-public:
-	qualify();
-};
+	/* graphical user interface widgets namespace */
+	namespace gui
+	{
+		/* qualify gui class */
+		class Qualify : public QWidget,
+						public disc::Qualify
+		{
+		public:
+			/* default constructor */
+			Qualify(QWidget *parent = nullptr);
+		}; /* end of 'Qualify' class */
+	} /* end of 'gui' namespace */
+} /* end of 'rfc' namespace */
 
-#endif // QUALIFY_H
+#endif /* RFC_GUI_QUALIFY_H */

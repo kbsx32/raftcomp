@@ -24,32 +24,33 @@ release {
 
 SOURCES += \
     src/main.cpp \
+    src/lang_translate.cpp \
     src/core/dispatcher.cpp \
-    src/core/discipline/disciplines.cpp \
     src/core/base/laptime.cpp \
     src/core/base/exception.cpp \
     src/core/base/rstring.cpp \
     src/core/discipline/ride_team.cpp \
-    src/gui/mandat/gui_mandat.cpp \
+    src/core/discipline/disc_type.cpp \
+    src/core/discipline/disctypes/disc_abstract.cpp \
+    src/core/discipline/protocol.cpp \
+    src/core/humen/team.cpp \
+    src/core/humen/human.cpp \
     src/core/base/memleak.cpp \
     src/gui/ridetable/gui_ride.cpp \
     src/gui/ridetable/gui_ride_item.cpp \
     src/gui/ridetable/gui_ride_pushpins.cpp \
     src/gui/gui_window_main.cpp \
     src/gui/gui_menu.cpp \
-    src/lang_translate.cpp \
     src/gui/gui_greet.cpp \
-    src/core/humen/team.cpp \
-    src/core/humen/human.cpp \
-    src/gui/mandat/gui_mandat_men.cpp \
-    src/gui/mandat/gui_mandat_team.cpp \
     src/gui/qualify/gui_qualify.cpp \
-    src/core/discipline/disc_abstract.cpp
+    src/gui/mandat/gui_mandat_men.cpp \
+    src/gui/mandat/gui_mandat.cpp \
+    src/gui/mandat/gui_mandat_team.cpp \
+    src/core/discipline/disctypes/disc_qualify.cpp
 
 HEADERS  += \
     src/core/def.h \
     src/core/dispatcher.h \
-    src/core/discipline/disciplines.h \
     src/core/base/laptime.h \
     src/gui/gui.h \
     src/raftcomp.h \
@@ -66,7 +67,11 @@ HEADERS  += \
     src/gui/gui_greet.h \
     src/core/humen/team.h \
     src/core/humen/human.h \
-    src/gui/qualify/gui_qualify.h
+    src/gui/qualify/gui_qualify.h \
+    src/core/discipline/ \
+    src/core/discipline/disc_type.h \
+    src/core/discipline/disciplines.h \
+    src/core/discipline/protocol.h
 
 # FORMS    +=
 

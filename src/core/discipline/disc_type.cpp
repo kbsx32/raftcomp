@@ -6,7 +6,7 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
-#include "disciplines.h"
+#include "disc_type.h"
 #include "ride_team.h"
 
 /* no parametres type */
