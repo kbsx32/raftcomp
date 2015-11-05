@@ -10,6 +10,8 @@
 #define RFC_GUI_QUALIFY_H
 
 #include <QWidget>
+#include <QPushButton>
+
 #include "../../core/dispatcher.h"
 
 /* rafting competition namespace */
@@ -22,9 +24,17 @@ namespace rfc
 		class Qualify : public QWidget,
 						public disc::Qualify
 		{
+			Q_OBJECT
+
+			QPushButton *activator;
+
 		public:
 			/* default constructor */
-			Qualify(QWidget *parent = nullptr);
+			Qualify(Dispatcher *dispatcher, QWidget *parent = nullptr);
+
+		public slots:
+			/* activate competition */
+			void slotActivateButtonClicked();
 		}; /* end of 'Qualify' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

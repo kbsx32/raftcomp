@@ -13,19 +13,6 @@ using namespace rfc;
 
 #ifdef RFC_LANG_RUSSIAN
 
-rfc::String rfc::lang::mandat = "мандатная комиссия";
-rfc::String rfc::lang::qualify = "квалификация";
-rfc::String rfc::lang::sprint = "спринт";
-rfc::String rfc::lang::slalom = "слалом";
-rfc::String rfc::lang::slalom1 = "слалом. 1.";
-rfc::String rfc::lang::slalom2 = "слалом. 2.";
-rfc::String rfc::lang::longRace = "длинная гонка";
-
-rfc::String rfc::lang::createNewDatabase = "создать новую базу данных";
-rfc::String rfc::lang::openExistingDatabase = "открыть существующую базу данных";
-rfc::String rfc::lang::exit = "выход";
-rfc::String rfc::lang::edit = "изменить";
-
 rfc::String rfc::lang::greetText =
 		"Добро пожаловать в диспетчер соревнований по рафтингу.\n"
 		"Долбанитесь об стенку, ибо всё находится в процессе разработки и \n";
@@ -97,5 +84,7 @@ rfc::String rfc::lang::participants = "participants";
 rfc::String rfc::lang::name = "name";
 rfc::String rfc::lang::addNewHuman = "add new human";
 rfc::String rfc::lang::tries = "tries";
+
+rfc::String rfc::lang::activate = "activate";
 
 #endif /* end of 'default' */

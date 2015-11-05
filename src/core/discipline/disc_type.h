@@ -77,13 +77,21 @@ namespace rfc {
 		}; /* end of 'Type' class */
 
 		/* full competition race info class */
-		class Rides {
+		class Rides
+		{
 			std::map<Type, RideTeam *> rides;
 
 			/* all pushpins default count */
 			std::vector<uint32_t> pinsCount;
 
+			/* order of rides */
+			std::vector<TypeDisc> ridesOrder;
+
+			TypeDisc _disciplineCurrent;     /* current working discipline */
 		public:
+			/* const-reference */
+			const TypeDisc &disciplineCurrent = _disciplineCurrent;
+
 			/* class default constructor */
 			Rides();
 
@@ -102,18 +110,38 @@ namespace rfc {
 			 */
 			void setPinsCount(const TypeDisc type, const uint32_t count);
 
+			/* set order of all rides.
+			 * note :
+			 *   order can not be changed after 'mandat comission' set.
+			 */
+			void setRidesOrder(const std::vector<TypeDisc> &order);
+
+			/* get previous discipline before current given.
+			 * returns last TypeDisc or TypeDisc::QUALIFY if current discipline is first.
+			 * note :
+			 *   TypeDisc 'current' can be SPRINT, SLALOM or LONG_RACE.
+			 *   Other values will throw exception.
+			 */
+			TypeDisc getPrevDiscipline(const TypeDisc current) const;
+
+			/* set new active discipline.
+			 * returns result of switching.
+			 */
+			bool setActiveDiscipline(const TypeDisc type);
+
 		protected:
 			/* save rides info.
-			 * available from version 1.
-			 * default saving version : 1;
+			 * minimal version : 1;
+			 * maximal version : +INF;
 			 */
-			void save(FILE *fout, const uint32_t version = 1);
+			void save(FILE *fout, const uint32_t version);
 
 			/* load rides info.
-			 * available from version 1.
+			 * minimal version : 1.
+			 * maximal version : +INF.
 			 */
-			void load(FILE *fin, const uint32_t version = 1);
-		}; /* end of 'Races' class */
+			void load(FILE *fin, const uint32_t version);
+		}; /* end of 'Rides' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
 

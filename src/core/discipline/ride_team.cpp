@@ -18,7 +18,8 @@ rfc::disc::RideTeam::RideTeam(uint32_t teamId) :
 /* default constructor */
 rfc::disc::RideTeam::RideTeam(const disc::Type type, const uint32_t pinsCount) :
 	type(type),
-	pinsPenalty(pinsCount)
+	pinsPenalty(pinsCount),
+	teamId(0)
 {
 } /* end of 'RideTeam' constructor */
 
@@ -29,9 +30,16 @@ rfc::disc::RideTeam::RideTeam(const RideTeam &rideTeam) :
 	timeEnd(rideTeam.timeEnd),
 	pinsPenalty(rideTeam.pinsPenalty),
 	penaltyOther(rideTeam.penaltyOther),
-	type(rideTeam.type)
+	type(rideTeam.type),
+	teamId(rideTeam.teamId)
 {
 } /* end of 'RideTeam' constructor */
+
+/* set team id */
+void rfc::disc::RideTeam::setTeamId(const TeamId teamId)
+{
+	this->teamId = teamId;
+} /* end of 'setTeamId' function */
 
 /* set start time */
 void rfc::disc::RideTeam::setTimeStart(const Time &timeStartNew)

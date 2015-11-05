@@ -19,7 +19,9 @@
 #include "ridetable/gui_ride.h"
 
 #include "gui_menu.h"
+
 #include "mandat/gui_mandat.h"
+#include "qualify/gui_qualify.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc

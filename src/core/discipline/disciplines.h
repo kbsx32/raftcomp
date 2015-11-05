@@ -18,18 +18,24 @@
 /* 'raftcomp' support namespace */
 namespace rfc
 {
+	/* forward declaration */
+	class Dispatcher;
+
 	/* disciplines namespace */
 	namespace disc
 	{
+		/* forward declaration */
+		class RideTeam;
 
 		/* Abstract discipline class */
 		class DisciplineAbstract
 		{
 		protected:
 			TypeDisc type;
+			Dispatcher *dispatcher;
 
 			/* constructor with type.*/
-			DisciplineAbstract(const TypeDisc typeDisc);
+			DisciplineAbstract(Dispatcher *dispatcher, const TypeDisc typeDisc);
 
 			/* get result table protocol.
 			 * note :
@@ -44,18 +50,16 @@ namespace rfc
 			virtual ~DisciplineAbstract();
 		}; /* end of 'Discipline' class */
 
-		/* forward declaration */
-		class RideTeam;
-
 		/* Qualification controller class */
 		class Qualify : public DisciplineAbstract
 		{
+		protected:
 			/* rides for current discipline */
 			std::vector<RideTeam *> rides;
 
 		public:
 			/* default constructor */
-			Qualify();
+			Qualify(Dispatcher *dispatcher);
 
 			/* ger result table protocol.
 			 * note :

@@ -8,17 +8,26 @@
 
 #include "../disciplines.h"
 #include "../ride_team.h"
+#include "../../dispatcher.h"
 
 /* default destructor */
-rfc::disc::Qualify::Qualify() :
-	DisciplineAbstract(TypeDisc::QUALIFY)
+rfc::disc::Qualify::Qualify(Dispatcher *dispatcher) :
+	DisciplineAbstract(dispatcher, TypeDisc::QUALIFY)
 {
-} /* end of 'DisciplineAbstract' destructor */
+} /* end of 'Discipline' destructor */
 
 /* default destructor */
 rfc::disc::Qualify::~Qualify()
 {
 } /* end of 'DisciplineAbstract' destructor */
+
+/* sort teams function */
+void rfc::disc::Qualify::sortStartTeams()
+{
+	/* get result from mandat comission */
+	for (const men::Team *team : dispatcher->teams)
+		rides.push_back(dispatcher->getLap(Type(TypeDisc::QUALIFY, team->id)));
+} /* end of 'sortTeams' function */
 
 /* ger result table protocol.
  * note :
@@ -39,15 +48,10 @@ const rfc::disc::Protocol rfc::disc::Qualify::getResultProtocol()
 	const uint32_t scoreShift = 5;
 
 	for (auto const &ride : rides) {
-		prot.score.push_back(Protocol::TeamScore(ride->getTeamId(), score));
+		prot.score[ride->getTeamId()] = score;
 
 		score -= scoreShift;
 	}
 
 	return prot;
 } /* end of 'getResultProtocol' function */
-
-/* sort teams function */
-void rfc::disc::Qualify::sortStartTeams()
-{
-} /* end of 'sortTeams' function */

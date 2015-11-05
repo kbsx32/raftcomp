@@ -48,15 +48,30 @@ rfc::gui::ride::Ride::Ride(
 
 	/* pins table init */
 	/* ... */
-
-	/* init all teams */
-	for (const auto &team : dispatcher.teams)
-		addTeamInfo(team);
 } /* end of 'gui::Ride' constructor */
 
+/* add teams from dispatcher */
+void rfc::gui::ride::Ride::addTeamsFromDispatcher()
+{
+	reset();
+	for (const auto &team : dispatcher.teams)
+		addTeamInfo(team);
+} /* end of 'addTeamsFromDispatcher' function */
+
+/* add teams from dispatcher */
+void rfc::gui::ride::Ride::addTeams(const std::vector<disc::RideTeam *> &rides)
+{
+	resetTable();
+
+	/* add all teams */
+	for (disc::RideTeam *ride : rides)
+		addTeamInfo(dispatcher.getTeam(ride->getTeamId()));
+} /* end of 'addTeamsFromDispatcher' function */
+
 /* erase all data from table */
-void rfc::gui::ride::Ride::eraseTable() {
+void rfc::gui::ride::Ride::resetTable() {
 	clear();
+
 } /* end of 'gui::Ride::eraseTable' function */
 
 /* set table item function */
@@ -69,8 +84,8 @@ void rfc::gui::ride::Ride::setItemText(const uint32_t row,
 
 /* set table item function */
 void rfc::gui::ride::Ride::setItemTime(const uint32_t row,
-									 const uint32_t column,
-									 const Time &time) {
+									   const uint32_t column,
+									   const Time &time) {
 	QTableWidgetItem *item = new QTableWidgetItem(time.getTimeString());
 
 	setItem(row, column, item);
@@ -94,7 +109,6 @@ void rfc::gui::ride::Ride::addTeamInfo(men::Team *team) {
 
 	for (uint32_t i = 0; i < ENUM_CAST(Type::END); ++i)
 		createRideItem(row, team, static_cast<Type>(i));
-
 } /* end of 'gui::Ride::addLapInfo' function */
 
 /* update table data info */
@@ -111,13 +125,3 @@ void rfc::gui::ride::Ride::updateTable() {
 /* class destructor */
 rfc::gui::ride::Ride::~Ride() {
 } /* End of '~Ride' class destructor */
-
-/*
- * virtalized functions.
- */
-
-/* sorting teams virtual function */
-void rfc::gui::ride::Ride::sortTeams()
-{
-} /* end of 'sortTeams' function */
-

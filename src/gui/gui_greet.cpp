@@ -14,6 +14,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QTextBrowser>
+#include <QSettings>
 
 #include "gui_greet.h"
 #include "gui_window_main.h"
@@ -22,6 +23,8 @@
 rfc::gui::WindowGreet::WindowGreet(QWidget *parent) :
 	QWidget(parent)
 {
+	QSettings qsets(RFC_APP_CREATOR, RFC_APP_NAME);
+
 	/* moving widget to screen center */
 	QRect scr = QApplication::desktop()->screenGeometry();
 	move(scr.center() - rect().center() / 2);
@@ -50,6 +53,21 @@ rfc::gui::WindowGreet::WindowGreet(QWidget *parent) :
 	but = new QPushButton(lang::openExistingDatabase, this);
 	connect(but, SIGNAL(clicked(bool)),
 			this, SLOT(loadDatabase()));
+
+	layout->addWidget(but);
+
+
+
+	/* open previous database */
+	openedPreviousFile = qsets.value(keysetOpenedPrevFile).toString();
+	but = new QPushButton(lang::openExistingDatabase + " : \n" + openedPreviousFile, this);
+
+	connect(but, SIGNAL(clicked(bool)),
+			this, SLOT(loadDatabasePrev()));
+
+	/* disable button if no file loaded */
+	if (openedPreviousFile == "")
+		but->setEnabled(false);
 
 	layout->addWidget(but);
 
@@ -106,5 +124,16 @@ void rfc::gui::WindowGreet::loadDatabase()
 
 	dispatcher.load(fileName);
 
+	/* save new loading file */
+	QSettings qsets(RFC_APP_CREATOR, RFC_APP_NAME);
+	qsets.setValue(keysetOpenedPrevFile, QVariant(fileName));
+
+	runWindowMain();
+} /* end of 'WindowGreet::loadDatabase' function */
+
+/* loading database slot */
+void rfc::gui::WindowGreet::loadDatabasePrev()
+{
+	dispatcher.load(openedPreviousFile);
 	runWindowMain();
 } /* end of 'WindowGreet::loadDatabase' function */

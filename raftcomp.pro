@@ -1,8 +1,10 @@
-#-------------------------------------------------
 #
-# Project created by QtCreator 2015-08-14T20:55:57
+# Rafting competition dispatcher program.
 #
-#-------------------------------------------------
+# Gui qualification window class.
+#
+# kbsx32. <kbsx32@yandex.ru>.
+#
 
 QT       += core gui
 
@@ -21,6 +23,9 @@ debug {
 release {
 	DEFINES += RFC_RELEASE RFC_NO_DEBUG
 }
+
+INCLUDEPATH += .
+QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder -Wno-unused-parameter
 
 SOURCES += \
     src/main.cpp \
@@ -46,33 +51,31 @@ SOURCES += \
     src/gui/mandat/gui_mandat_men.cpp \
     src/gui/mandat/gui_mandat.cpp \
     src/gui/mandat/gui_mandat_team.cpp \
-    src/core/discipline/disctypes/disc_qualify.cpp
+    src/core/discipline/disctypes/disc_qualify.cpp \
+    src/gui/discabstr/gui_disc_abstract.cpp
 
 HEADERS  += \
+    src/raftcomp.h \
+    src/lang_translate.h \
     src/core/def.h \
     src/core/dispatcher.h \
     src/core/base/laptime.h \
-    src/gui/gui.h \
-    src/raftcomp.h \
     src/core/base/exception.h \
     src/core/base/rstring.h \
     src/core/discipline/ride_team.h \
-    src/gui/mandat/gui_mandat.h \
     src/core/base/memleak.h \
-    src/gui/ridetable/gui_ride.h \
-    src/gui/ridetable/gui_ride_item.h \
-    src/gui/gui_window_main.h \
-    src/gui/gui_menu.h \
-    src/lang_translate.h \
-    src/gui/gui_greet.h \
     src/core/humen/team.h \
     src/core/humen/human.h \
-    src/gui/qualify/gui_qualify.h \
     src/core/discipline/ \
     src/core/discipline/disc_type.h \
     src/core/discipline/disciplines.h \
-    src/core/discipline/protocol.h
-
-# FORMS    +=
-
-QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder -Wno-unused-parameter
+    src/core/discipline/protocol.h \
+    src/gui/gui.h \
+    src/gui/gui_window_main.h \
+    src/gui/gui_menu.h \
+    src/gui/mandat/gui_mandat.h \
+    src/gui/ridetable/gui_ride.h \
+    src/gui/ridetable/gui_ride_item.h \
+    src/gui/gui_greet.h \
+    src/gui/qualify/gui_qualify.h \
+    src/gui/discabstr/gui_disc_abstract.h

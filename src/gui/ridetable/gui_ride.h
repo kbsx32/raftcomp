@@ -64,25 +64,29 @@ namespace rfc {
 						QWidget *widgParent = nullptr);
 
 				/* class destructor */
-				virtual ~Ride();
+				~Ride();
 
 				/* erase all data from table */
-				void eraseTable();
+				void resetTable();
 
-			private:
 				/* add new info to table */
 				void addTeamInfo(men::Team *team);
+				/* add new info to table */
+				void addTeamInfo(disc::RideTeam *team);
 
+				/* add teams from dispatcher */
+				void addTeamsFromDispatcher();
+
+				/* add new info about teams to table */
+				void addTeams(const std::vector<disc::RideTeam *> &rides);
+
+			private:
 				/* create and put to table ride item widget */
 				void createRideItem(int row, men::Team *team, RideItem::Type type);
 
 			public slots:
 				/* update table data info */
 				void updateTable();
-
-			public:
-				/* sorting teams virtual function */
-				virtual void sortTeams();
 			}; /* end of 'Ride' class */
 		} /* end of 'ride' namespace */
 	} /* end of 'gui' namespace */

@@ -84,8 +84,10 @@ rfc::disc::Rides::~Rides()
 rfc::disc::RideTeam * rfc::disc::Rides::getLap(const Type type)
 {
 	auto &item = rides[type];
-	if (item == nullptr)
+	if (item == nullptr) {
 		item = new RideTeam(type, pinsCount[ENUM_CAST(type.typeDisc)]);
+		item->setTeamId(type.teamId);
+	}
 
 	return item;
 } /* end of 'Rides::getLap' function */
@@ -93,7 +95,10 @@ rfc::disc::RideTeam * rfc::disc::Rides::getLap(const Type type)
 /* set lap function */
 void rfc::disc::Rides::setLap(const Type type, const RideTeam &lapNew)
 {
-	rides[type] = new RideTeam(lapNew);
+	RideTeam *added = new RideTeam(lapNew);
+	added->setTeamId(type.teamId);
+
+	rides[type] = added;
 } /* end of 'Rides::setLap' function */
 
 /* set pins count for all teams.
@@ -164,3 +169,48 @@ void rfc::disc::Rides::load(FILE *fin, const uint32_t version)
 		rides[typeNew] = new RideTeam(rideTeamNew);
 	}
 } /* end of 'load' function */
+
+/* set order of all rides.
+ * note :
+ *   order can not be changed after 'mandat comission' set.
+ */
+void rfc::disc::Rides::setRidesOrder(const std::vector<TypeDisc> &order)
+{
+	ridesOrder = order;
+} /* end of 'setRidesOrder' function */
+
+/* get previous discipline before current given.
+ * returns last TypeDisc or TypeDisc::QUALIFY if current discipline is first.
+ * note :
+ *   TypeDisc 'current' can be SPRINT, SLALOM or LONG_RACE.
+ *   Other values will throw exception.
+ */
+rfc::disc::TypeDisc rfc::disc::Rides::getPrevDiscipline(const TypeDisc current) const
+{
+	uint32_t vecSize = ridesOrder.size();
+
+	for (uint32_t i = 0; i < vecSize; ++i) {
+		if (current == ridesOrder[i]) {
+			if (i == 0)
+				return TypeDisc::QUALIFY;
+			return ridesOrder[i - 1];
+		}
+	}
+
+	throw Exception("wrong rides order. Error in code.");
+} /* end of 'getPrevDiscipline' function */
+
+/* set new active discipline.
+ * returns result of switching.
+ */
+bool rfc::disc::Rides::setActiveDiscipline(const TypeDisc type)
+{
+	auto rideNew = std::find(ridesOrder.begin(), ridesOrder.end(), type);
+	auto rideOld = std::find(ridesOrder.begin(), ridesOrder.end(), _disciplineCurrent);
+
+	if (&(*rideOld) - &(*rideNew) != 1)
+		return false;
+
+	_disciplineCurrent = type;
+	return true;
+} /* end of 'setActiveDiscipline' function */

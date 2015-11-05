@@ -48,6 +48,9 @@ namespace rfc {
 			/* constructor */
 			RideTeam(const disc::Type type, const uint32_t pinsCount = 0);
 
+			/* set team id */
+			void setTeamId(const TeamId teamId);
+
 			/* set start lap time */
 			void setTimeStart(const Time &timeStartNew);
 			/* set end lap time */

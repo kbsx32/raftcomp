@@ -10,8 +10,9 @@
 #include "../protocol.h"
 
 /* default destructor */
-rfc::disc::DisciplineAbstract::DisciplineAbstract(const TypeDisc typeDisc) :
-	type(typeDisc)
+rfc::disc::DisciplineAbstract::DisciplineAbstract(Dispatcher *dispatcher, const TypeDisc typeDisc) :
+	type(typeDisc),
+	dispatcher(dispatcher)
 {
 } /* end of 'DisciplineAbstract' destructor */
 

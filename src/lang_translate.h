@@ -80,6 +80,7 @@ namespace rfc
 		extern rfc::String addNewHuman;
 		
 		extern rfc::String tries;
+		extern rfc::String activate;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

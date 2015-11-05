@@ -34,6 +34,10 @@ namespace rfc
 
 			rfc::Dispatcher dispatcher;    /* project main dispatcher */
 			WindowMain *windowMain = nullptr;
+
+			String openedPreviousFile;		/* previous opened database */
+			const String keysetOpenedPrevFile = "openedPrevFile";
+
 		public:
 			/* window greet constructor */
 			WindowGreet(QWidget *parent = nullptr);
@@ -53,6 +57,10 @@ namespace rfc
 
 			/* loading database slot */
 			void loadDatabase();
+
+			/* loading database slot */
+			void loadDatabasePrev();
+
 		}; /* end of 'WindowMain' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

@@ -45,7 +45,9 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	splitter->addWidget(stackWidgetsFields);
 
 	stackWidgetsFields->addWidget(new gui::mandat::Mandat(dispatcher, this));
-	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY),		this));
+	// stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY),		this));
+
+	stackWidgetsFields->addWidget(new gui::Qualify(dispatcher, this));
 	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SPRINT),		this));
 	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SLALOM),		this));
 	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::LONG_RACE),	this));

@@ -12,13 +12,15 @@
 
 #include "humen/team.h"
 #include "discipline/ride_team.h"
+#include "discipline/disciplines.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc {
 
 	/* global class support */
 	class Dispatcher : public disc::Rides,
-					   public men::MenDatabase
+					   public men::MenDatabase,
+					   public disc::CompScore
 	{
 	private:
 		/* signature for saving database-competition files */
