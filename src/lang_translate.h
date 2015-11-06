@@ -81,6 +81,23 @@ namespace rfc
 		
 		extern rfc::String tries;
 		extern rfc::String activate;
+
+		extern rfc::String id;
+		extern rfc::String team;
+		extern rfc::String timeStart;
+		extern rfc::String penaltyOther;
+		extern rfc::String penaltySummary;
+		extern rfc::String place;
+		extern rfc::String timeStart;
+		extern rfc::String timeEnd;
+		extern rfc::String timeOnDistance;
+		extern rfc::String score;
+		extern rfc::String pins;
+		extern rfc::String timeResult;
+
+		extern rfc::String finalize;
+
+		extern rfc::String cantActivateDiscipline;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

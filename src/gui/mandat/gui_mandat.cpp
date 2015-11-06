@@ -27,6 +27,11 @@ rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
 
+	QPushButton *buttonFinalize = new QPushButton(lang::finalize);
+	connect(buttonFinalize, SIGNAL(clicked(bool)),
+			this, SLOT(slotFinalize()));
+	layout->addWidget(buttonFinalize);
+
 	/* add new team button */
 	QPushButton *addTeamBut = new QPushButton(lang::addNewTeam, this);
 	connect(addTeamBut, SIGNAL(clicked(bool)),
@@ -35,6 +40,12 @@ rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 
 	for (rfc::men::Team *team : dispatcher->teams)
 		layout->addWidget(new WTeamIntro(dispatcher, team, this));
+
+	/* check if mandat comission already done */
+	// if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::QUALIFY) <= 0)
+		// slotFinalize();
+	/* this stage is first, so there can't be any compare > 0... */
+
 } /* end of 'Mandat' constructor */
 
 /* pushed button to create new team */
@@ -51,3 +62,11 @@ void rfc::gui::mandat::Mandat::slotCreateNewTeam()
 	/* add widget, connected with this team */
 	layout()->addWidget(teamIntro);
 } /* end of 'slotCreateNewTeam' slot */
+
+/* applying mandat comission */
+void rfc::gui::mandat::Mandat::slotFinalize()
+{
+	dispatcher->setNextDiscipline();
+
+	setEnabled(false);
+} /* end of 'slotFinalize' function */

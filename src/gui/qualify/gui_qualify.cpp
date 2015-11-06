@@ -8,32 +8,54 @@
 
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QSpinBox>
+
 #include "gui_qualify.h"
 #include "../gui.h"
 
 /* default constructor */
 rfc::gui::Qualify::Qualify(Dispatcher *dispatcher, QWidget *parent) :
-	QWidget(parent),
-	rfc::disc::Qualify(dispatcher)
+	rfc::disc::Qualify(dispatcher),
+	DiscAbstract(parent)
 {
-	QLayout *lay = new QVBoxLayout(this);
-
-	activator = new QPushButton(lang::activate, this);
-	connect(activator, SIGNAL(clicked(bool)),
-			this, SLOT(slotActivateButtonClicked()));
-
-	lay->addWidget(activator);
+	setSizePolicy(QSizePolicy::Minimum,
+				  QSizePolicy::Minimum);
 } /* end of 'Qualify' constructor */
 
 /* activate competition */
-void rfc::gui::Qualify::slotActivateButtonClicked()
+void rfc::gui::Qualify::activateDiscipline()
 {
-	activator->hide();
+	/* check if previous stage is finalized */
+	if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::QUALIFY) > 0) {
 
-	gui::ride::Ride *guiRide = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY), this);
+		DiscAbstract::showMessageNotReady();
+		return ;
+	}
+
+	DiscAbstract::hideButtons();
+
+	/* pushpins changer */
+	QSpinBox *spinBox = new QSpinBox(this);
+	spinBox->setPrefix("pushpins : ");
+	spinBox->setRange(0, 30);
+	spinBox->setButtonSymbols(QSpinBox::PlusMinus);
+	connect(spinBox, SIGNAL(valueChanged(int)),
+			this, SLOT(slotChangePushpinsCount(int)));
+
+	layout()->addWidget(spinBox);
+
+	/* main table */
+	rideTable = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY), this);
 
 	sortStartTeams();
-	guiRide->addTeams(rides);
+	rideTable->addTeams(rides);
 
-	layout()->addWidget(guiRide);
+	layout()->addWidget(rideTable);
 } /* end of 'slotActivateButtonClicked' slot */
+
+void rfc::gui::Qualify::slotChangePushpinsCount(int countNew)
+{
+	dispatcher->setPinsCount(disc::TypeDisc::QUALIFY, countNew);
+
+	rideTable->updateTable();
+} /* end of 'slotChangePushpinsCount' function */

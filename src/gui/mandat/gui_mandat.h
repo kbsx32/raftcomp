@@ -141,6 +141,9 @@ namespace rfc {
 			public slots:
 				/* pushed button to create new team */
 				void slotCreateNewTeam();
+
+				/* applying mandat comission */
+				void slotFinalize();
 			}; /* end of 'Mandat' class */
 		} /* end of 'mandat' namespace */
 	} /* end of 'gui' namespace */

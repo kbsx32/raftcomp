@@ -87,7 +87,7 @@ namespace rfc {
 			/* order of rides */
 			std::vector<TypeDisc> ridesOrder;
 
-			TypeDisc _disciplineCurrent;     /* current working discipline */
+			TypeDisc _disciplineCurrent = TypeDisc::END;    /* current working discipline */
 		public:
 			/* const-reference */
 			const TypeDisc &disciplineCurrent = _disciplineCurrent;
@@ -124,10 +124,19 @@ namespace rfc {
 			 */
 			TypeDisc getPrevDiscipline(const TypeDisc current) const;
 
-			/* set new active discipline.
-			 * returns result of switching.
+			/* get result of comparing two disciplines order.
+			 * returns :
+			 *   if result < 0 : given discipline already been finalized.
+			 *      result == 0 : now it's time to given discipline.
+			 *      result > 0 : given discipline wasn't started.
 			 */
-			bool setActiveDiscipline(const TypeDisc type);
+			int32_t compareDisciplinesOrder(const TypeDisc current) const;
+
+			/* set new active discipline.
+			 * returns false, if reacher
+			 * end of the list.
+			 */
+			bool setNextDiscipline();
 
 		protected:
 			/* save rides info.

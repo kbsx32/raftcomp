@@ -8,6 +8,8 @@
 
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QKeyEvent>
+
 #include "gui_menu.h"
 
 /* default constructor */
@@ -22,6 +24,9 @@ rfc::gui::Menu::Menu(QWidget *parent) :
 	QPushButton *butMandat = new QPushButton(lang::mandat, this);
 	connect(butMandat, SIGNAL(clicked(bool)),
 			this, SLOT(slotChangeToMandat()));
+
+	butMandat->setFocusPolicy(Qt::NoFocus);
+
 	lay->addWidget(butMandat);
 
 	/* other buttons */
@@ -74,3 +79,11 @@ void rfc::gui::MenuDisciplineItem::slotClicked()
 {
 	emit signalChangeDiscipline(discipline);
 } /* end of 'gui::MenuDisciplineItem::slotClicked' function */
+
+/* slot key pressed event.
+ * needs to unfocus 'return' button.
+ */
+void rfc::gui::Menu::keyPressEvent(QKeyEvent *keyEvent)
+{
+	QWidget::keyPressEvent(keyEvent);
+} /* end of 'keyPressEvent' slot */

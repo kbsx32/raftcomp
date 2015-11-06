@@ -10,6 +10,7 @@
 #include <QHBoxLayout>
 #include <QMenuBar>
 #include <QMessageBox>
+
 #include "gui_window_main.h"
 
 #include "gui_menu.h"
@@ -40,6 +41,11 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 
 	connect(menu, SIGNAL(signalChangeToMandat()),
 			this, SLOT(slotChangeToMandat()));
+
+	/*
+	connect(menu, SIGNAL(signalChangeToMandat()),
+			this, SLOT(slotChangeToMandat()));
+	*/
 
 	splitter->addWidget(menu);
 	splitter->addWidget(stackWidgetsFields);

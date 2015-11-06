@@ -201,16 +201,42 @@ rfc::disc::TypeDisc rfc::disc::Rides::getPrevDiscipline(const TypeDisc current) 
 } /* end of 'getPrevDiscipline' function */
 
 /* set new active discipline.
- * returns result of switching.
+ * returns false, if reached
+ * end of the list.
  */
-bool rfc::disc::Rides::setActiveDiscipline(const TypeDisc type)
+bool rfc::disc::Rides::setNextDiscipline()
 {
-	auto rideNew = std::find(ridesOrder.begin(), ridesOrder.end(), type);
+	/* check if discipline is first. */
+	if (_disciplineCurrent == TypeDisc::END) {
+		_disciplineCurrent = TypeDisc::QUALIFY;
+		return true;
+	}
+
 	auto rideOld = std::find(ridesOrder.begin(), ridesOrder.end(), _disciplineCurrent);
 
-	if (&(*rideOld) - &(*rideNew) != 1)
+	if (rideOld == ridesOrder.end())
 		return false;
 
-	_disciplineCurrent = type;
+	/* shift to next position */
+	_disciplineCurrent = *(&(*rideOld) + 1);
+
 	return true;
 } /* end of 'setActiveDiscipline' function */
+
+/* get result of comparing two disciplines order.
+ * returns :
+ *   if result < 0 : given discipline already been finalized.
+ *      result == 0 : now it's time to given discipline.
+ *      result > 0 : given discipline wasn't started.
+ */
+int32_t rfc::disc::Rides::compareDisciplinesOrder(const TypeDisc type) const
+{
+	// if (ridesOrder.size() == 0)
+		// return 1;
+
+	auto rideGiven = std::find(ridesOrder.begin(), ridesOrder.end(), type);
+	auto rideCurrent = std::find(ridesOrder.begin(), ridesOrder.end(), _disciplineCurrent);
+
+	/* all in array */
+	return &(*rideGiven) - &(*rideCurrent);
+} /* end of 'compareDisciplinesOrder' function */

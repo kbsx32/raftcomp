@@ -79,6 +79,11 @@ namespace rfc
 
 			/* recapturer of changing slot */
 			void slotChangeToMandat();
+
+			/* slot key pressed event.
+			 * needs to unfocus 'return' button.
+			 */
+			void keyPressEvent(QKeyEvent *key);
 		}; /* end of 'Menu' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

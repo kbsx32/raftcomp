@@ -13,6 +13,8 @@
 #include <QPushButton>
 
 #include "../../core/dispatcher.h"
+#include "../ridetable/gui_ride.h"
+#include "../discabstr/gui_disc_abstract.h"
 
 /* rafting competition namespace */
 namespace rfc
@@ -21,20 +23,24 @@ namespace rfc
 	namespace gui
 	{
 		/* qualify gui class */
-		class Qualify : public QWidget,
+		class Qualify : public gui::DiscAbstract,
 						public disc::Qualify
 		{
 			Q_OBJECT
 
-			QPushButton *activator;
+			/* main info */
+			gui::ride::Ride *rideTable = nullptr;
 
 		public:
 			/* default constructor */
 			Qualify(Dispatcher *dispatcher, QWidget *parent = nullptr);
 
+			void activateDiscipline();
+
 		public slots:
-			/* activate competition */
-			void slotActivateButtonClicked();
+			/* change count of pushpins slot */
+			void slotChangePushpinsCount(int countNew);
+
 		}; /* end of 'Qualify' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

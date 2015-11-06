@@ -27,27 +27,7 @@ rfc::gui::ride::Ride::Ride(
 	QTableWidget(widgParent),
 	dispatcher(dispatcher)
 {
-	/* import column types */
-	typedef RideItem::Type ColumnType;
-
-	setColumnCount(ENUM_CAST(ColumnType::END));
-
-	/* set headers */
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TEAM_ID),			new QTableWidgetItem("id"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TEAM_HUMEN),		new QTableWidgetItem("team"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_START),		new QTableWidgetItem("time start"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PENALTY_OTHER),	new QTableWidgetItem("other penalties"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PENALTY_SUM),		new QTableWidgetItem("penalties summary"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PLACE),			new QTableWidgetItem("place"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_START),		new QTableWidgetItem("lap time start"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_END),		new QTableWidgetItem("lap time end"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_DISTANCE),	new QTableWidgetItem("lap time on distance"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_RESULT),		new QTableWidgetItem("result"));
-	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PINS),			new QTableWidgetItem("pins"));
-	// setHorizontalHeaderItem(ENUM_CAST(ColumnType::END),				new QTableWidgetItem("other"));
-
-	/* pins table init */
-	/* ... */
+	updateTable();
 } /* end of 'gui::Ride' constructor */
 
 /* add teams from dispatcher */
@@ -66,6 +46,8 @@ void rfc::gui::ride::Ride::addTeams(const std::vector<disc::RideTeam *> &rides)
 	/* add all teams */
 	for (disc::RideTeam *ride : rides)
 		addTeamInfo(dispatcher.getTeam(ride->getTeamId()));
+
+	updateTable();
 } /* end of 'addTeamsFromDispatcher' function */
 
 /* erase all data from table */
@@ -113,6 +95,28 @@ void rfc::gui::ride::Ride::addTeamInfo(men::Team *team) {
 
 /* update table data info */
 void rfc::gui::ride::Ride::updateTable() {
+	/* import column types */
+	typedef RideItem::Type ColumnType;
+
+	setColumnCount(ENUM_CAST(ColumnType::END));
+
+	/* set headers */
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TEAM_ID),			new QTableWidgetItem(lang::id));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TEAM_HUMEN),		new QTableWidgetItem(lang::team));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PENALTY_OTHER),	new QTableWidgetItem(lang::penaltyOther));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PENALTY_SUM),		new QTableWidgetItem(lang::penaltySummary));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_START),		new QTableWidgetItem(lang::timeStart));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_END),		new QTableWidgetItem(lang::timeEnd));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_RESULT),		new QTableWidgetItem(lang::timeResult));
+
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::TIME_DISTANCE),	new QTableWidgetItem(lang::timeOnDistance));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PLACE),			new QTableWidgetItem(lang::place));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::SCORE),			new QTableWidgetItem(lang::score));
+	setHorizontalHeaderItem(ENUM_CAST(ColumnType::PINS),			new QTableWidgetItem(lang::pins));
+
+	/* pins table init */
+	/* ... */
+
 	long
 		colCnt = columnCount(),
 		rowCnt = rowCount();

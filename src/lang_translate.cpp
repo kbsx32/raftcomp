@@ -87,4 +87,23 @@ rfc::String rfc::lang::tries = "tries";
 
 rfc::String rfc::lang::activate = "activate";
 
+rfc::String rfc::lang::id = "id";
+rfc::String rfc::lang::team  ="team";
+rfc::String rfc::lang::timeStart = "time start";
+rfc::String rfc::lang::penaltyOther = "other penalties";
+rfc::String rfc::lang::penaltySummary = "penalties summary";
+rfc::String rfc::lang::place = "place";
+rfc::String rfc::lang::timeEnd = "finish";
+rfc::String rfc::lang::timeOnDistance = "time";
+rfc::String rfc::lang::score = "result";
+rfc::String rfc::lang::pins = "pins";
+rfc::String rfc::lang::timeResult = "time result";
+
+rfc::String rfc::lang::finalize = "finalize";
+
+rfc::String rfc::lang::cantActivateDiscipline =
+		"You can't change discipline because previous wasn't finished. \n"
+		"Please, finalize other discipline to start such";
+
+
 #endif /* end of 'default' */
