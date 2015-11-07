@@ -48,6 +48,7 @@ namespace rfc
 			 * widgets to set disabled or hided.
 			 */
 			void finalizeDiscipline();
+
 		public slots:
 			/* change count of pushpins slot */
 			void slotChangePushpinsCount(int countNew);

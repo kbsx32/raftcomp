@@ -8,9 +8,38 @@
 
 #include "protocol.h"
 
+/* constructor */
+rfc::disc::Protocol::TeamScore::TeamScore(const TeamId teamId, const uint32_t score) :
+	teamId(teamId),
+	score(score)
+{
+} /* end of 'TeamScore' constructor */
+
+/* comparator */
+bool rfc::disc::Protocol::TeamScore::operator<(const TeamScore &second) const
+{
+	if (score != second.score)
+		return score < second.score;
+
+	return teamId < second.teamId;
+} /* end of 'operator<' function */
+
+/*
+ * protocol functions.
+ */
+
 /* default constructor */
 rfc::disc::Protocol::Protocol()
 {
+} /* end of 'Protocol' constructor */
+
+/* constructor by rides array */
+rfc::disc::Protocol::Protocol(const std::vector<RideTeam *> &vec)
+{
+	/*
+	for (const auto &item : vec)
+		score[((RideTeam *)item)->getItemId()]
+	*/
 } /* end of 'Protocol' constructor */
 
 /* copying constructor */
@@ -24,8 +53,21 @@ rfc::disc::Protocol::Protocol(const Protocol &src) :
  */
 rfc::disc::Protocol & rfc::disc::Protocol::operator+=(const Protocol &prot1)
 {
-	for (const auto &val : prot1.score)
-		score[val.first] += val.second; /* val.first is team identificator */
+	for (const auto &val : prot1.score) {
+		/* find given team element in vector */
+		const auto &item = std::find_if(score.begin(), score.end(),
+										[&](const TeamScore &score)
+										{
+											return score.teamId == val.teamId;
+										});
+
+		/* if protocol is empty now */
+		if (item == score.end())
+			score.push_back(val);
+		else
+			/* get value from iterator */
+			(*item).score += val.score;
+	}
 
 	return *this;
 } /* end of 'operator+=' function */
@@ -47,34 +89,28 @@ void rfc::disc::CompScore::addProtocol(const TypeDisc type, const Protocol &prot
 /* return protocol.
  * if protocol doesn't exists - throws exception.
  */
-const rfc::disc::Protocol rfc::disc::CompScore::getProtocol(const TypeDisc type)
+rfc::disc::Protocol rfc::disc::CompScore::getProtocol(const TypeDisc type)
 {
 	return scores[ENUM_CAST(type)];
 } /* end of 'getProtocol' function */
 
 /* return full competition result */
-const rfc::disc::Protocol rfc::disc::CompScore::getResultProtocol()
+rfc::disc::Protocol rfc::disc::CompScore::getResultProtocol()
 {
+	resultProt.sort();
 	return resultProt;
 } /* end of 'getResultProtocol' function */
 
 /* return sorted array of
  * all teams.
  */
-const rfc::disc::Protocol::TeamsArray rfc::disc::Protocol::getSortedTeamsVector() const
+void rfc::disc::Protocol::sort()
 {
-	TeamsArray teams;
-
-	for (const auto &item : score)
-		teams.push_back(item.first);
-
 	/* sorting result vector */
-	std::sort(teams.begin(), teams.end(),
-			  [&](const TeamId t0, const TeamId t1)
+	std::sort(score.begin(), score.end(),
+			  [&](const TeamScore &t0, const TeamScore &t1)
 			  {
-				return teams[t0] < teams[t1];
+				return t0.score < t1.score;
 			  }
 	);
-
-	return teams;
 } /* end of 'getSortedTeamsVector' function */

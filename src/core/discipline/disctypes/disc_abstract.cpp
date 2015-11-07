@@ -9,6 +9,7 @@
 #include "../disciplines.h"
 #include "../protocol.h"
 #include "../ride_team.h"
+#include "../../dispatcher.h"
 
 /* default destructor */
 rfc::disc::DisciplineAbstract::DisciplineAbstract(Dispatcher *dispatcher, const TypeDisc typeDisc) :
@@ -20,23 +21,22 @@ rfc::disc::DisciplineAbstract::DisciplineAbstract(Dispatcher *dispatcher, const 
 /* default destructor */
 rfc::disc::DisciplineAbstract::~DisciplineAbstract()
 {
+	/* it is just virtual function */
 } /* end of 'DisciplineAbstract' destructor */
-
-/* ger result table protocol.
- * note :
- *   gives sorted protocol for current competition only !
- */
-const rfc::disc::Protocol rfc::disc::DisciplineAbstract::getResultProtocol()
-{
-	const Protocol prot;
-
-	return prot;
-} /* end of 'getResultProtocol' function */
 
 /* sort teams function */
 void rfc::disc::DisciplineAbstract::sortStartTeams()
 {
+	/* it is just virtual function */
 } /* end of 'sortTeams' function */
+
+/* sort teams function */
+const rfc::disc::Protocol rfc::disc::DisciplineAbstract::getProtocol()
+{
+	/* it is just virtual function */
+
+	return Protocol();
+} /* end of 'get protocol' function */
 
 /* comparator for teams results */
 bool rfc::disc::DisciplineAbstract::sortTeamsResultComparator(const RideTeam *ride0, const RideTeam *ride1)
@@ -63,10 +63,29 @@ rfc::disc::Protocol rfc::disc::DisciplineAbstract::setScores
 	uint32_t score = startScore;
 
 	for (auto const &ride : rides) {
-		prot.score[ride->getTeamId()] =  score;
+		prot.score.push_back(Protocol::TeamScore(ride->getTeamId(), score));
 
 		score -= scoreShift;
 	}
 
 	return prot;
 } /* end of 'setScores' function */
+
+/* sort teams by default.
+ * takes info about teams from
+ * current result protocol and
+ * sorts them.
+ *
+ * arguments:
+ *   ridesDest : destination array. (as return value).
+ *   dispatcher : source dispatcher.
+ */
+void rfc::disc::DisciplineAbstract::sortStartTeamsDefault(
+			std::vector<RideTeam *> &ridesDest,
+			Dispatcher *dispatcher)
+{
+	const Protocol::TeamsArray arr = dispatcher->getResultProtocol().score;
+
+	for (const Protocol::TeamScore &score : arr)
+		ridesDest.push_back(dispatcher->getLap(Type(TypeDisc::LONG_RACE, score.teamId)));
+} /* end of 'sortStartTeamsDefault' function */

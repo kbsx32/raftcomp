@@ -24,17 +24,14 @@ rfc::disc::LongRace::~LongRace()
 /* sort teams function */
 void rfc::disc::LongRace::sortStartTeams()
 {
-	const Protocol::TeamsArray arr = dispatcher->getResultProtocol().getSortedTeamsVector();
-
-	for (const TeamId id : arr)
-		rides.push_back(dispatcher->getLap(Type(TypeDisc::LONG_RACE, id)));
+	DisciplineAbstract::sortStartTeamsDefault(rides, dispatcher);
 } /* end of 'sortTeams' function */
 
-/* ger result table protocol.
+/* get result table protocol.
  * note :
  *   gives sorted protocol for current competition only !
  */
-const rfc::disc::Protocol rfc::disc::LongRace::getResultProtocol()
+const rfc::disc::Protocol rfc::disc::LongRace::getProtocol()
 {
 	std::sort(rides.begin(), rides.end(), DisciplineAbstract::sortTeamsResultComparator);
 

@@ -105,3 +105,4 @@ void rfc::gui::DiscAbstract::slotFinalize()
 	if (showMessageSureToFinalize())
 		finalizeDiscipline();
 } /* end of 'slotFinalize' function */
+

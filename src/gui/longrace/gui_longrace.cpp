@@ -32,6 +32,7 @@ void rfc::gui::LongRace::activateDiscipline()
 		return ;
 	}
 
+	// LongRace::
 	DiscAbstract::setActivated();
 
 	/* main table */
@@ -52,5 +53,6 @@ void rfc::gui::LongRace::finalizeDiscipline()
 	/* set disabled all widgets */
 	setEnabled(false);
 
+	dispatcher->addProtocol(disc::TypeDisc::LONG_RACE, getProtocol());
 	dispatcher->setNextDiscipline();
 } /* end of 'finalizeDiscipline' function */

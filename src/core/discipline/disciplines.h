@@ -38,6 +38,18 @@ namespace rfc
 			DisciplineAbstract(Dispatcher *dispatcher, const TypeDisc typeDisc);
 
 		public:
+			/* sort teams by default.
+			 * takes info about teams from
+			 * current result protocol and
+			 * sorts them.
+			 *
+			 * arguments:
+			 *   ridesDest : destination array. (as return value).
+			 *   dispatcher : source dispatcher.
+			 */
+			static void sortStartTeamsDefault(std::vector<RideTeam *> &ridesDest,
+											  Dispatcher *dispatcher);
+
 			/* comparator for teams results */
 			static bool sortTeamsResultComparator(const RideTeam *team0, const RideTeam *team1);
 
@@ -53,14 +65,11 @@ namespace rfc
 									  const uint32_t startScore,
 									  const uint32_t scoreShift);
 		protected:
-			/* get result table protocol.
-			 * note :
-			 *   gives sorted protocol for current competition only !
-			 */
-			virtual const Protocol getResultProtocol();
-
 			/* sort teams function */
 			virtual void sortStartTeams();
+
+			/* get result protocol function */
+			virtual const Protocol getProtocol();
 
 			/* virtual destructor */
 			virtual ~DisciplineAbstract();
@@ -81,7 +90,7 @@ namespace rfc
 			 * note :
 			 *   gives sorted protocol for current competition only !
 			 */
-			const Protocol getResultProtocol();
+			const Protocol getProtocol();
 
 			/* sort teams function */
 			void sortStartTeams();
@@ -105,7 +114,7 @@ namespace rfc
 			 * note :
 			 *   gives sorted protocol for current competition only !
 			 */
-			const Protocol getResultProtocol();
+			const Protocol getProtocol();
 
 			/* sort teams function */
 			void sortStartTeams();

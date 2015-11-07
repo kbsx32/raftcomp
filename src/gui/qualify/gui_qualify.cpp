@@ -69,5 +69,6 @@ void rfc::gui::Qualify::finalizeDiscipline()
 	/* set disabled all widgets */
 	setEnabled(false);
 
+	dispatcher->addProtocol(disc::TypeDisc::QUALIFY, getProtocol());
 	dispatcher->setNextDiscipline();
 } /* end of 'finalizeDiscipline' function */

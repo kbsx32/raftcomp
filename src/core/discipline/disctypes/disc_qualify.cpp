@@ -33,10 +33,8 @@ void rfc::disc::Qualify::sortStartTeams()
  * note :
  *   gives sorted protocol for current competition only !
  */
-const rfc::disc::Protocol rfc::disc::Qualify::getResultProtocol()
+const rfc::disc::Protocol rfc::disc::Qualify::getProtocol()
 {
-	Protocol prot;
-
 	std::sort(rides.begin(), rides.end(), DisciplineAbstract::sortTeamsResultComparator);
 
 	return DisciplineAbstract::setScores(rides, 100, 5);

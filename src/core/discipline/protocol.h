@@ -25,17 +25,34 @@ namespace rfc
 		class Protocol
 		{
 		public:
+			/* struct to save all in vector */
+			class TeamScore
+			{
+			public:
+				TeamId teamId;
+				uint32_t score;
+
+			public:
+				/* constructor */
+				TeamScore(const TeamId teamId = 0, const uint32_t score = 0);
+
+				/* comparator */
+				bool operator<(const TeamScore &scoreSecond) const;
+			}; /* end of 'TeamScore' class */
+
+			typedef std::vector<TeamScore> TeamsArray;
+
 			/* all result for discipline.
 			 * sets by discipline, who answered for this protocol.
 			 */
-			typedef std::map<TeamId, uint32_t> TeamScore;
-			typedef std::vector<TeamId> TeamsArray;
-
-			TeamScore score;
+			TeamsArray score;
 
 		public:
 			/* default constructor */
 			Protocol();
+
+			/* constructor by rides array */
+			Protocol(const std::vector<RideTeam *> &vec);
 
 			/* copying constructor */
 			Protocol(const Protocol &src);
@@ -48,7 +65,7 @@ namespace rfc
 			/* return sorted array of
 			 * all teams.
 			 */
-			const TeamsArray getSortedTeamsVector() const;
+			void sort();
 		}; /* end of 'Protocol' class */
 
 		/* full competition score class */
@@ -66,17 +83,17 @@ namespace rfc
 			CompScore();
 
 		protected:
-			/* add info to map */
-			void addProtocol(const TypeDisc type, const Protocol &prot);
-
 			/* return protocol.
 			 * if protocol doesn't exists - throws exception.
 			 */
-			const Protocol getProtocol(const TypeDisc type);
+			Protocol getProtocol(const TypeDisc type);
 
 		public:
+			/* add info to map */
+			void addProtocol(const TypeDisc type, const Protocol &prot);
+
 			/* return full competition result */
-			const Protocol getResultProtocol();
+			Protocol getResultProtocol();
 		}; /* end of 'CompScore' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
