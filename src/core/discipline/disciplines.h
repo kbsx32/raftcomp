@@ -37,6 +37,22 @@ namespace rfc
 			/* constructor with type.*/
 			DisciplineAbstract(Dispatcher *dispatcher, const TypeDisc typeDisc);
 
+		public:
+			/* comparator for teams results */
+			static bool sortTeamsResultComparator(const RideTeam *team0, const RideTeam *team1);
+
+			/* set scores function.
+			 * arguments:
+			 *   rides : source rides. (must be sorted !).
+			 *   startScore : score to first team.
+			 *   scoreShift : delta in scores.
+			 * returns:
+			 *   result protocol
+			 */
+			static Protocol setScores(const std::vector<RideTeam *> &rides,
+									  const uint32_t startScore,
+									  const uint32_t scoreShift);
+		protected:
 			/* get result table protocol.
 			 * note :
 			 *   gives sorted protocol for current competition only !
@@ -73,6 +89,31 @@ namespace rfc
 			/* destructor */
 			~Qualify();
 		}; /* end of 'Qualify' class */
+
+		/* Qualification controller class */
+		class LongRace : public DisciplineAbstract
+		{
+		protected:
+			/* rides for current discipline */
+			std::vector<RideTeam *> rides;
+
+		public:
+			/* default constructor */
+			LongRace(Dispatcher *dispatcher);
+
+			/* ger result table protocol.
+			 * note :
+			 *   gives sorted protocol for current competition only !
+			 */
+			const Protocol getResultProtocol();
+
+			/* sort teams function */
+			void sortStartTeams();
+
+			/* destructor */
+			~LongRace();
+		}; /* end of 'Qualify' class */
+
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */
 

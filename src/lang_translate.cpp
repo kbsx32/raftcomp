@@ -105,5 +105,14 @@ rfc::String rfc::lang::cantActivateDiscipline =
 		"You can't change discipline because previous wasn't finished. \n"
 		"Please, finalize other discipline to start such";
 
+rfc::String rfc::lang::mandatComissionAlreadyFinished =
+		"You can't change disciplines order because mandat comission already finished.";
+
+rfc::String rfc::lang::sureToFinalizeStage =
+		"Are you sure you wan't to finalize current stage.\n"
+		"You won't be able to return this stage if you push 'Yes'";
+
+rfc::String rfc::lang::menuFile = "&File";
+rfc::String rfc::lang::save = "&Save";
 
 #endif /* end of 'default' */

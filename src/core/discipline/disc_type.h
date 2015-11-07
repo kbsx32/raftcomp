@@ -88,6 +88,9 @@ namespace rfc {
 			std::vector<TypeDisc> ridesOrder;
 
 			TypeDisc _disciplineCurrent = TypeDisc::END;    /* current working discipline */
+
+			bool mandatFinished = false;					/* mandat comission done flag */
+
 		public:
 			/* const-reference */
 			const TypeDisc &disciplineCurrent = _disciplineCurrent;
@@ -137,6 +140,9 @@ namespace rfc {
 			 * end of the list.
 			 */
 			bool setNextDiscipline();
+
+			/* finish mandat comission */
+			void setMandatComissionFinished();
 
 		protected:
 			/* save rides info.

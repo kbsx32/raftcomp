@@ -28,7 +28,10 @@ namespace rfc
 			/* all result for discipline.
 			 * sets by discipline, who answered for this protocol.
 			 */
-			std::map<TeamId, uint32_t> score;
+			typedef std::map<TeamId, uint32_t> TeamScore;
+			typedef std::vector<TeamId> TeamsArray;
+
+			TeamScore score;
 
 		public:
 			/* default constructor */
@@ -41,6 +44,11 @@ namespace rfc
 			 * returns self-reference.
 			 */
 			Protocol& operator+=(const Protocol &prot1);
+
+			/* return sorted array of
+			 * all teams.
+			 */
+			const TeamsArray getSortedTeamsVector() const;
 		}; /* end of 'Protocol' class */
 
 		/* full competition score class */
@@ -66,6 +74,7 @@ namespace rfc
 			 */
 			const Protocol getProtocol(const TypeDisc type);
 
+		public:
 			/* return full competition result */
 			const Protocol getResultProtocol();
 		}; /* end of 'CompScore' class */

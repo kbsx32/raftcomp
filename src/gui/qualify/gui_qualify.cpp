@@ -32,7 +32,7 @@ void rfc::gui::Qualify::activateDiscipline()
 		return ;
 	}
 
-	DiscAbstract::hideButtons();
+	DiscAbstract::setActivated();
 
 	/* pushpins changer */
 	QSpinBox *spinBox = new QSpinBox(this);
@@ -59,3 +59,15 @@ void rfc::gui::Qualify::slotChangePushpinsCount(int countNew)
 
 	rideTable->updateTable();
 } /* end of 'slotChangePushpinsCount' function */
+
+/* finalization virtual function.
+ * get signal to prepare child-class
+ * widgets to set disabled or hided.
+ */
+void rfc::gui::Qualify::finalizeDiscipline()
+{
+	/* set disabled all widgets */
+	setEnabled(false);
+
+	dispatcher->setNextDiscipline();
+} /* end of 'finalizeDiscipline' function */

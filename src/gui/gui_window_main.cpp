@@ -22,13 +22,16 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	splitter(new QSplitter(this))
 {
 	/* add splitter to widget */
-	// setLayout(new QHBoxLayout(this));
 	setCentralWidget(splitter);
-	// 	layout()->addWidget(&splitter);
 
 	/* add menu */
 	QMenuBar *qMenuBar = new QMenuBar(this);
-	qMenuBar->addAction("ducks section");
+
+	/* create 'save' button */
+	QAction *act = new QAction(lang::save, qMenuBar);
+	connect(act, SIGNAL(triggered(bool)),
+			this, SLOT(slotSavePushed()));
+	qMenuBar->addAction(act);
 
 	setMenuBar(qMenuBar);
 
@@ -42,21 +45,15 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	connect(menu, SIGNAL(signalChangeToMandat()),
 			this, SLOT(slotChangeToMandat()));
 
-	/*
-	connect(menu, SIGNAL(signalChangeToMandat()),
-			this, SLOT(slotChangeToMandat()));
-	*/
-
 	splitter->addWidget(menu);
 	splitter->addWidget(stackWidgetsFields);
 
 	stackWidgetsFields->addWidget(new gui::mandat::Mandat(dispatcher, this));
-	// stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY),		this));
 
 	stackWidgetsFields->addWidget(new gui::Qualify(dispatcher, this));
 	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SPRINT),		this));
 	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SLALOM),		this));
-	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::LONG_RACE),	this));
+	stackWidgetsFields->addWidget(new gui::LongRace(dispatcher, this));
 } /* end of 'WindowMain' constructor */
 
 rfc::gui::WindowMain::~WindowMain()
@@ -89,3 +86,9 @@ void rfc::gui::WindowMain::slotChangeToMandat()
 {
 	stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::MANDAT));
 } /* end of 'gui::WindowMain::slotChangeToMandat' function */
+
+/* saving dispatcher state slot */
+void rfc::gui::WindowMain::slotSavePushed()
+{
+	dispatcher->save();
+} /* end of 'slotSavePushed' function */

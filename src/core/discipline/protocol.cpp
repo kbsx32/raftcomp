@@ -57,3 +57,24 @@ const rfc::disc::Protocol rfc::disc::CompScore::getResultProtocol()
 {
 	return resultProt;
 } /* end of 'getResultProtocol' function */
+
+/* return sorted array of
+ * all teams.
+ */
+const rfc::disc::Protocol::TeamsArray rfc::disc::Protocol::getSortedTeamsVector() const
+{
+	TeamsArray teams;
+
+	for (const auto &item : score)
+		teams.push_back(item.first);
+
+	/* sorting result vector */
+	std::sort(teams.begin(), teams.end(),
+			  [&](const TeamId t0, const TeamId t1)
+			  {
+				return teams[t0] < teams[t1];
+			  }
+	);
+
+	return teams;
+} /* end of 'getSortedTeamsVector' function */

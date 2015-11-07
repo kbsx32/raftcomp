@@ -11,33 +11,32 @@
 #include "../../dispatcher.h"
 
 /* default destructor */
-rfc::disc::Qualify::Qualify(Dispatcher *dispatcher) :
-	DisciplineAbstract(dispatcher, TypeDisc::QUALIFY)
+rfc::disc::LongRace::LongRace(Dispatcher *dispatcher) :
+	DisciplineAbstract(dispatcher, TypeDisc::LONG_RACE)
 {
 } /* end of 'Discipline' destructor */
 
 /* default destructor */
-rfc::disc::Qualify::~Qualify()
+rfc::disc::LongRace::~LongRace()
 {
 } /* end of 'DisciplineAbstract' destructor */
 
 /* sort teams function */
-void rfc::disc::Qualify::sortStartTeams()
+void rfc::disc::LongRace::sortStartTeams()
 {
-	/* get result from mandat comission */
-	for (const men::Team *team : dispatcher->teams)
-		rides.push_back(dispatcher->getLap(Type(TypeDisc::QUALIFY, team->id)));
+	const Protocol::TeamsArray arr = dispatcher->getResultProtocol().getSortedTeamsVector();
+
+	for (const TeamId id : arr)
+		rides.push_back(dispatcher->getLap(Type(TypeDisc::LONG_RACE, id)));
 } /* end of 'sortTeams' function */
 
 /* ger result table protocol.
  * note :
  *   gives sorted protocol for current competition only !
  */
-const rfc::disc::Protocol rfc::disc::Qualify::getResultProtocol()
+const rfc::disc::Protocol rfc::disc::LongRace::getResultProtocol()
 {
-	Protocol prot;
-
 	std::sort(rides.begin(), rides.end(), DisciplineAbstract::sortTeamsResultComparator);
 
-	return DisciplineAbstract::setScores(rides, 100, 5);
+	return DisciplineAbstract::setScores(rides, 400, 20);
 } /* end of 'getResultProtocol' function */

@@ -138,6 +138,8 @@ namespace rfc {
 				/* default constructor */
 				explicit Mandat(rfc::Dispatcher *dispatcher, QWidget *parent = 0);
 
+				/* finalize Mandat comission */
+				void finalize();
 			public slots:
 				/* pushed button to create new team */
 				void slotCreateNewTeam();

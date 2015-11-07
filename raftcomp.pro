@@ -52,7 +52,9 @@ SOURCES += \
     src/gui/mandat/gui_mandat.cpp \
     src/gui/mandat/gui_mandat_team.cpp \
     src/core/discipline/disctypes/disc_qualify.cpp \
-    src/gui/discabstr/gui_disc_abstract.cpp
+    src/gui/discabstr/gui_disc_abstract.cpp \
+    src/gui/longrace/gui_longrace.cpp \
+    src/core/discipline/disctypes/disc_longrace.cpp
 
 HEADERS  += \
     src/raftcomp.h \
@@ -78,4 +80,5 @@ HEADERS  += \
     src/gui/ridetable/gui_ride_item.h \
     src/gui/gui_greet.h \
     src/gui/qualify/gui_qualify.h \
-    src/gui/discabstr/gui_disc_abstract.h
+    src/gui/discabstr/gui_disc_abstract.h \
+    src/gui/longrace/gui_longrace.h

@@ -6,20 +6,16 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QTextEdit>
 #include <QFormLayout>
 #include <QDialog>
-#include <QIntValidator>
 #include <QLineEdit>
 #include <QLayout>
-#include <QTreeWidget>
-
-#include "../../core/dispatcher.h"
 
 #include "gui_mandat.h"
+#include "../discabstr/gui_disc_abstract.h"
 
 /* default constructor */
 rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
@@ -42,8 +38,8 @@ rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 		layout->addWidget(new WTeamIntro(dispatcher, team, this));
 
 	/* check if mandat comission already done */
-	// if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::QUALIFY) <= 0)
-		// slotFinalize();
+	if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::QUALIFY) <= 0)
+		finalize();
 	/* this stage is first, so there can't be any compare > 0... */
 
 } /* end of 'Mandat' constructor */
@@ -64,9 +60,17 @@ void rfc::gui::mandat::Mandat::slotCreateNewTeam()
 } /* end of 'slotCreateNewTeam' slot */
 
 /* applying mandat comission */
-void rfc::gui::mandat::Mandat::slotFinalize()
+void rfc::gui::mandat::Mandat::finalize()
 {
-	dispatcher->setNextDiscipline();
+	dispatcher->setMandatComissionFinished();
 
 	setEnabled(false);
+} /* end of 'slotFinalize' function */
+
+/* applying mandat comission */
+void rfc::gui::mandat::Mandat::slotFinalize()
+{
+	/* confirm */
+	if (DiscAbstract::showMessageSureToFinalize())
+		finalize();
 } /* end of 'slotFinalize' function */

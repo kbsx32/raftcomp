@@ -22,6 +22,7 @@
 
 #include "mandat/gui_mandat.h"
 #include "qualify/gui_qualify.h"
+#include "longrace/gui_longrace.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc
@@ -61,6 +62,9 @@ namespace rfc
 
 			/* change right-side window state */
 			void slotChangeToMandat();
+
+			/* saving dispatcher state slot */
+			void slotSavePushed();
 		}; /* end of 'WindowMain' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

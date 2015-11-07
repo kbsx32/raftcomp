@@ -69,7 +69,21 @@ bool rfc::disc::Type::operator<(const Type &second) const
 
 /* class default constructor */
 rfc::disc::Rides::Rides() :
-	pinsCount(ENUM_CAST(TypeDisc::COUNT))
+	pinsCount(ENUM_CAST(TypeDisc::COUNT)),
+	/*
+	ridesOrder({TypeDisc::QUALIFY,
+				TypeDisc::SPRINT,
+				TypeDisc::SLALOM,
+				TypeDisc::LONG_RACE})
+	*/
+
+	/* debugging. TODO : remove this order. */
+	ridesOrder({TypeDisc::QUALIFY,
+				TypeDisc::LONG_RACE,
+				TypeDisc::SPRINT,
+				TypeDisc::SLALOM
+				})
+
 {
 } /* end of 'disc::Rides::Rides' constructor */
 
@@ -176,6 +190,9 @@ void rfc::disc::Rides::load(FILE *fin, const uint32_t version)
  */
 void rfc::disc::Rides::setRidesOrder(const std::vector<TypeDisc> &order)
 {
+	if (mandatFinished)
+		throw Exception(lang::mandatComissionAlreadyFinished);
+
 	ridesOrder = order;
 } /* end of 'setRidesOrder' function */
 
@@ -191,7 +208,7 @@ rfc::disc::TypeDisc rfc::disc::Rides::getPrevDiscipline(const TypeDisc current) 
 
 	for (uint32_t i = 0; i < vecSize; ++i) {
 		if (current == ridesOrder[i]) {
-			if (i == 0)
+			if (i == 0) /* check if current discipline is first in array */
 				return TypeDisc::QUALIFY;
 			return ridesOrder[i - 1];
 		}
@@ -207,8 +224,8 @@ rfc::disc::TypeDisc rfc::disc::Rides::getPrevDiscipline(const TypeDisc current) 
 bool rfc::disc::Rides::setNextDiscipline()
 {
 	/* check if discipline is first. */
-	if (_disciplineCurrent == TypeDisc::END) {
-		_disciplineCurrent = TypeDisc::QUALIFY;
+	if (!mandatFinished) {
+		setMandatComissionFinished();
 		return true;
 	}
 
@@ -231,8 +248,8 @@ bool rfc::disc::Rides::setNextDiscipline()
  */
 int32_t rfc::disc::Rides::compareDisciplinesOrder(const TypeDisc type) const
 {
-	// if (ridesOrder.size() == 0)
-		// return 1;
+	if (!mandatFinished)
+		return 1;   /* mandat comission is not finished yet */
 
 	auto rideGiven = std::find(ridesOrder.begin(), ridesOrder.end(), type);
 	auto rideCurrent = std::find(ridesOrder.begin(), ridesOrder.end(), _disciplineCurrent);
@@ -240,3 +257,10 @@ int32_t rfc::disc::Rides::compareDisciplinesOrder(const TypeDisc type) const
 	/* all in array */
 	return &(*rideGiven) - &(*rideCurrent);
 } /* end of 'compareDisciplinesOrder' function */
+
+/* finish mandat comission */
+void rfc::disc::Rides::setMandatComissionFinished()
+{
+	mandatFinished = true;
+	_disciplineCurrent = TypeDisc::QUALIFY;
+} /* end of 'setMandatComissionFinished' function */

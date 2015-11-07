@@ -29,8 +29,9 @@ namespace rfc
 			Q_OBJECT
 
 		private:
-			QPushButton *activator;
-
+			QPushButton
+				*activator,
+				*finalizer;			/* start and finish discipline buttons */
 		public:
 			/* default constructor */
 			DiscAbstract(QWidget *parent = nullptr);
@@ -38,19 +39,43 @@ namespace rfc
 			/* virtualized destructor */
 			virtual ~DiscAbstract();
 
-			/* hide 'accept' and other buttons */
-			void hideButtons();
+			/* change 'accept' button to disabled.
+			 * add 'finalizer' button.
+			 */
+			void setActivated();
 
+			/* virtualized discipline activation.
+			 * if activation already done
+			 * without problem, child class
+			 * must call 'setActivated' to
+			 * accept this.
+			 */
 			virtual void activateDiscipline();
+
+			/* finalization virtual function.
+			 * get signal to prepare child-class
+			 * widgets to set disabled or hided.
+			 */
+			virtual void finalizeDiscipline();
 
 			/* show message that there is no
 			 * possibilities to change discipline.
 			 */
 			static void showMessageNotReady();
+
+			/* show confirm question message
+			 * that user wants to finalize.
+			 * returns result of confirmation.
+			 * (true if user answered to finish).
+			 */
+			static bool showMessageSureToFinalize();
 		public slots:
 			/* activate distance */
 			void slotActivateDiscipline();
-		}; /* end of 'Qualify' class */
+
+			/* activate distance */
+			void slotFinalize();
+		}; /* end of 'DiscAbstract' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */
 

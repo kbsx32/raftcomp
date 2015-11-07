@@ -18,11 +18,23 @@ rfc::gui::DiscAbstract::DiscAbstract(QWidget *parent) :
 {
 	QVBoxLayout *lay = new QVBoxLayout(this);
 
-	activator = new QPushButton(lang::activate);
+	QHBoxLayout *butsLay = new QHBoxLayout;
+
+	activator = new QPushButton(lang::activate, this);
 	connect(activator, SIGNAL(clicked(bool)),
 			this, SLOT(slotActivateDiscipline()));
 
-	lay->addWidget(activator);
+	butsLay->addWidget(activator);
+
+	/* finalizer button */
+	finalizer = new QPushButton(lang::finalize, this);
+	finalizer->setEnabled(false);
+	connect(finalizer, SIGNAL(clicked(bool)),
+			this, SLOT(slotFinalize()));
+
+	butsLay->addWidget(finalizer);
+
+	lay->addLayout(butsLay);
 } /* end of 'Qualify' constructor */
 
 /* activate distance */
@@ -43,9 +55,10 @@ rfc::gui::DiscAbstract::~DiscAbstract()
 } /* end of 'DiscAbstract' destructor */
 
 /* hide 'accept' and other buttons */
-void rfc::gui::DiscAbstract::hideButtons()
+void rfc::gui::DiscAbstract::setActivated()
 {
-	activator->hide();
+	activator->setEnabled(false);
+	finalizer->setEnabled(true);
 } /* end of 'hideButton' function */
 
 /* show message that there is no
@@ -58,3 +71,37 @@ void rfc::gui::DiscAbstract::showMessageNotReady()
 	qmbox.setText(lang::cantActivateDiscipline);
 	qmbox.exec();
 } /* end of 'showMessageNotReady' function */
+
+/* show confirm question message
+ * that user wants to finalize.
+ * returns result of confirmation.
+ * (true if user answered to finish).
+ */
+bool rfc::gui::DiscAbstract::showMessageSureToFinalize()
+{
+	QMessageBox qmbox;
+
+	qmbox.setText(lang::sureToFinalizeStage);
+	qmbox.addButton(QMessageBox::Yes);
+	qmbox.addButton(QMessageBox::No);
+
+	/* return result */
+	return qmbox.exec() == QMessageBox::Yes;
+} /* end of 'showMessageNotReady' function */
+
+void rfc::gui::DiscAbstract::finalizeDiscipline()
+{
+	/* it's just virtual function =) */
+} /* end of 'finalize' function */
+
+/* activate distance */
+void rfc::gui::DiscAbstract::slotFinalize()
+{
+	/* it is better to don't use virtual slots
+	 * somebody talks.
+	 */
+
+	/* check users brain */
+	if (showMessageSureToFinalize())
+		finalizeDiscipline();
+} /* end of 'slotFinalize' function */

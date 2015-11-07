@@ -98,6 +98,12 @@ namespace rfc
 		extern rfc::String finalize;
 
 		extern rfc::String cantActivateDiscipline;
+		extern rfc::String mandatComissionAlreadyFinished;
+		extern rfc::String sureToFinalizeStage;
+
+		extern rfc::String menuFile;
+		extern rfc::String save;
+
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */
