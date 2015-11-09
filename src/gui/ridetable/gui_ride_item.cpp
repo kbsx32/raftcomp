@@ -29,7 +29,11 @@ rfc::gui::ride::RideItem::RideItem(men::Team *team, disc::RideTeam *lapConnected
 	qlay->setSpacing(0);
 	setLayout(qlay);
 
+	disconnect(this, SIGNAL(returnPressed()));
+	disconnect(this, SIGNAL(editingFinished()));
+	// disconnect(this, SIGNAL());
 	connect(this, SIGNAL(editingFinished()), this, SLOT(slotTextChanged()));
+
 	update();
 
 	if (type == Type::PINS)

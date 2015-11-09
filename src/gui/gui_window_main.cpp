@@ -12,8 +12,12 @@
 #include <QMessageBox>
 
 #include "gui_window_main.h"
-
 #include "gui_menu.h"
+
+#include "mandat/gui_mandat.h"
+#include "qualify/gui_qualify.h"
+#include "longrace/gui_longrace.h"
+#include "slalom/gui_slalom.h"
 
 /* main window constructor */
 rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
@@ -52,7 +56,7 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 
 	stackWidgetsFields->addWidget(new gui::Qualify(dispatcher, this));
 	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SPRINT),		this));
-	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SLALOM),		this));
+	stackWidgetsFields->addWidget(new gui::Slalom(dispatcher, this));
 	stackWidgetsFields->addWidget(new gui::LongRace(dispatcher, this));
 } /* end of 'WindowMain' constructor */
 

@@ -36,7 +36,7 @@ void rfc::gui::Qualify::activateDiscipline()
 
 	/* pushpins changer */
 	QSpinBox *spinBox = new QSpinBox(this);
-	spinBox->setPrefix("pushpins : ");
+	spinBox->setPrefix(lang::pins);
 	spinBox->setRange(0, 30);
 	spinBox->setButtonSymbols(QSpinBox::PlusMinus);
 	connect(spinBox, SIGNAL(valueChanged(int)),

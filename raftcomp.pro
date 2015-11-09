@@ -54,7 +54,9 @@ SOURCES += \
     src/core/discipline/disctypes/disc_qualify.cpp \
     src/gui/discabstr/gui_disc_abstract.cpp \
     src/gui/longrace/gui_longrace.cpp \
-    src/core/discipline/disctypes/disc_longrace.cpp
+    src/core/discipline/disctypes/disc_longrace.cpp \
+    src/core/discipline/disctypes/disc_slalom.cpp \
+    src/gui/slalom/gui_slalom.cpp
 
 HEADERS  += \
     src/raftcomp.h \
@@ -81,4 +83,5 @@ HEADERS  += \
     src/gui/gui_greet.h \
     src/gui/qualify/gui_qualify.h \
     src/gui/discabstr/gui_disc_abstract.h \
-    src/gui/longrace/gui_longrace.h
+    src/gui/longrace/gui_longrace.h \
+    src/gui/slalom/gui_slalom.h

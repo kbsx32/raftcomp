@@ -96,7 +96,7 @@ rfc::String rfc::lang::place = "place";
 rfc::String rfc::lang::timeEnd = "finish";
 rfc::String rfc::lang::timeOnDistance = "time";
 rfc::String rfc::lang::score = "result";
-rfc::String rfc::lang::pins = "pins";
+rfc::String rfc::lang::pins = "pins ";
 rfc::String rfc::lang::timeResult = "time result";
 
 rfc::String rfc::lang::finalize = "finalize";
@@ -114,5 +114,7 @@ rfc::String rfc::lang::sureToFinalizeStage =
 
 rfc::String rfc::lang::menuFile = "&File";
 rfc::String rfc::lang::save = "&Save";
+
+rfc::String rfc::lang::rfcError = "&rfc : error";
 
 #endif /* end of 'default' */

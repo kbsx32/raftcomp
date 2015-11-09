@@ -128,12 +128,14 @@ rfc::Time& rfc::Time::operator-=(const Time &timeSub) {
 } /* end of 'operator-=' function */
 
 /* compare times operator */
-bool rfc::Time::operator>(const Time &time1) {
+bool rfc::Time::operator>(const Time &time1) const
+{
 	return milliSeconds > time1.milliSeconds;
 } /* end of 'Time::operator>' function */
 
 /* compare times operator */
-bool rfc::Time::operator<(const Time &time1) {
+bool rfc::Time::operator<(const Time &time1) const
+{
 	return milliSeconds < time1.milliSeconds;
 } /* end of 'Time::operator<' function */
 
@@ -167,3 +169,9 @@ rfc::Time &rfc::Time::setInSeconds(long seconds) {
 
 	return *this;
 } /* end of 'rfc::Time::setInSeconds' function */
+
+/* get minimal from two times */
+rfc::Time rfc::Time::getMin(const Time &time0, const Time &time1)
+{
+	return time0 < time1 ? time0 : time1;
+} /* end of 'getMin' function */

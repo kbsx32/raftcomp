@@ -79,10 +79,10 @@ rfc::disc::Rides::Rides() :
 
 	/* debugging. TODO : remove this order. */
 	ridesOrder({TypeDisc::QUALIFY,
+				TypeDisc::SLALOM,
 				TypeDisc::LONG_RACE,
-				TypeDisc::SPRINT,
-				TypeDisc::SLALOM
-				})
+				TypeDisc::SPRINT
+			   })
 
 {
 } /* end of 'disc::Rides::Rides' constructor */
@@ -123,7 +123,6 @@ void rfc::disc::Rides::setPinsCount(const TypeDisc type, const uint32_t count)
 {
 	pinsCount[ENUM_CAST(type)] = count;
 
-	// for (auto &ride : rides)
 	for (std::map<Type, RideTeam *>::iterator ride = rides.begin();
 		 ride != rides.end(); ++ride) {
 

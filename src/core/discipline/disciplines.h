@@ -100,6 +100,32 @@ namespace rfc
 		}; /* end of 'Qualify' class */
 
 		/* Qualification controller class */
+		class Slalom : public DisciplineAbstract
+		{
+		protected:
+			/* rides for current discipline */
+			typedef std::vector<RideTeam *> RideGroup;
+
+			std::vector<RideGroup> rides;
+
+		public:
+			/* default constructor */
+			Slalom(Dispatcher *dispatcher);
+
+			/* get result table protocol.
+			 * note :
+			 *   gives sorted protocol for current competition only !
+			 */
+			const Protocol getProtocol();
+
+			/* sort teams function */
+			void sortStartTeams();
+
+			/* destructor */
+			~Slalom();
+		}; /* end of 'Qualify' class */
+
+		/* Qualification controller class */
 		class LongRace : public DisciplineAbstract
 		{
 		protected:

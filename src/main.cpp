@@ -38,14 +38,11 @@ int main(int argc, char *argv[]) {
 
 		return app.exec();
 	} catch (const rfc::Exception &ex) {
-		QMessageBox *qmb =
-				new QMessageBox(QString("rfc error"),
+		QMessageBox qmb(QString(rfc::lang::rfcError),
 						(QString)ex.getText(),
 						QMessageBox::Icon::Critical,
 						QMessageBox::Button::Ok, 0, 0);
-		qmb->exec();
-
-		delete qmb;
+		qmb.exec();
 	}
 
 	return 0;

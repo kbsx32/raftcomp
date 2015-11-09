@@ -20,10 +20,6 @@
 
 #include "gui_menu.h"
 
-#include "mandat/gui_mandat.h"
-#include "qualify/gui_qualify.h"
-#include "longrace/gui_longrace.h"
-
 /* 'raftcomp' support namespace */
 namespace rfc
 {

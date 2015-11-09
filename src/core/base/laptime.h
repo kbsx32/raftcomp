@@ -76,9 +76,9 @@ namespace rfc {
 		Time& operator-=(const Time &timeSub);
 
 		/* compare times operator */
-		bool operator>(const Time &time1);
+		bool operator>(const Time &time1) const;
 		/* compare times operator */
-		bool operator<(const Time &time1);
+		bool operator<(const Time &time1) const;
 
 		/*
 		 * get values functions
@@ -120,6 +120,9 @@ namespace rfc {
 		 *		ddd - miliseconds.
 		 */
 		String getTimeString() const;
+
+		/* get minimal from two times */
+		static Time getMin(const Time &time0, const Time &time1);
 	}; /* end of 'time' class */
 } /* end of 'rfc' namespace */
 

@@ -104,6 +104,7 @@ namespace rfc
 		extern rfc::String menuFile;
 		extern rfc::String save;
 
+		extern rfc::String rfcError;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */
