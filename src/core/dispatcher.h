@@ -28,6 +28,9 @@ namespace rfc {
 
 		String fileSaving;  /* file to save */
 	public:
+		/* extension for saving format */
+		static const String fileExt; /*  = String(".dbc"); */
+
 		/* declared teams */
 		std::vector<men::Team *> teams;
 

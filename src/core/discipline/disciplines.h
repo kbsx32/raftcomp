@@ -27,6 +27,9 @@ namespace rfc
 		/* forward declaration */
 		class RideTeam;
 
+		/* rides for one discipline */
+		typedef std::vector<RideTeam *> RideGroup;
+
 		/* Abstract discipline class */
 		class DisciplineAbstract
 		{
@@ -103,9 +106,6 @@ namespace rfc
 		class Slalom : public DisciplineAbstract
 		{
 		protected:
-			/* rides for current discipline */
-			typedef std::vector<RideTeam *> RideGroup;
-
 			std::vector<RideGroup> rides;
 
 		public:
@@ -147,6 +147,42 @@ namespace rfc
 
 			/* destructor */
 			~LongRace();
+		}; /* end of 'LongRace' class */
+
+		/* Qualification controller class */
+		class Sprint : public DisciplineAbstract
+		{
+		protected:
+			/* rides for current discipline */
+			std::map<TypeSprint, RideGroup> rides;
+
+			TypeSprint currentStage; /* sets on constructor by count of teams */
+
+		public:
+			/* default constructor */
+			Sprint(Dispatcher *dispatcher);
+
+			/* switching to next stage sprint.
+			 * returns false if there no more
+			 * chanses to next stages
+			 * ( all stages passed ).
+			 */
+			bool switchNextStage();
+
+			/* set order for given stage of sprint */
+			void setOrder(const TypeSprint sprint);
+
+			/* get result table protocol.
+			 * note :
+			 *   gives sorted protocol for current competition only !
+			 */
+			const Protocol getProtocol();
+
+			/* sort teams function */
+			void sortStartTeams();
+
+			/* destructor */
+			~Sprint();
 		}; /* end of 'Qualify' class */
 
 	} /* end of 'disc' namespace */

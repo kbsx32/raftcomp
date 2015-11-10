@@ -10,6 +10,8 @@
 #include <QHBoxLayout>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QTabWidget>
+#include <QFileDialog>
 
 #include "gui_window_main.h"
 #include "gui_menu.h"
@@ -18,6 +20,7 @@
 #include "qualify/gui_qualify.h"
 #include "longrace/gui_longrace.h"
 #include "slalom/gui_slalom.h"
+#include "sprint/gui_sprint.h"
 
 /* main window constructor */
 rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
@@ -39,60 +42,36 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 
 	setMenuBar(qMenuBar);
 
-	/* create all child widgets */
-	gui::Menu *menu = new gui::Menu(this);
+	/* all rules tabs */
+	QTabWidget *tabWidget = new QTabWidget(this);
+	splitter->addWidget(tabWidget);
 
-	/* connecting menu signals */
-	connect(menu, SIGNAL(signalChangeDiscipline(rfc::disc::TypeDisc)),
-			this, SLOT(slotChangeDiscipline(rfc::disc::TypeDisc)));
+	tabWidget->addTab(new gui::mandat::Mandat(dispatcher, this), lang::mandat);
 
-	connect(menu, SIGNAL(signalChangeToMandat()),
-			this, SLOT(slotChangeToMandat()));
-
-	splitter->addWidget(menu);
-	splitter->addWidget(stackWidgetsFields);
-
-	stackWidgetsFields->addWidget(new gui::mandat::Mandat(dispatcher, this));
-
-	stackWidgetsFields->addWidget(new gui::Qualify(dispatcher, this));
-	stackWidgetsFields->addWidget(new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::SPRINT),		this));
-	stackWidgetsFields->addWidget(new gui::Slalom(dispatcher, this));
-	stackWidgetsFields->addWidget(new gui::LongRace(dispatcher, this));
+	tabWidget->addTab(new gui::Qualify(dispatcher,  this),	lang::qualify);
+	tabWidget->addTab(new gui::Sprint(dispatcher,   this),	lang::sprint);
+	tabWidget->addTab(new gui::Slalom(dispatcher,	this),	lang::slalom);
+	tabWidget->addTab(new gui::LongRace(dispatcher, this),	lang::longRace);
 } /* end of 'WindowMain' constructor */
-
-rfc::gui::WindowMain::~WindowMain()
-{
-} /* end of '~WindowMain' function */
-
-/* change right-side window state */
-void rfc::gui::WindowMain::slotChangeDiscipline(const rfc::disc::TypeDisc type)
-{
-	switch (type) {
-		case disc::TypeDisc::QUALIFY:
-			stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::QUALIFY));
-			break;
-		case disc::TypeDisc::SPRINT:
-			stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::SPRINT));
-			break;
-		case disc::TypeDisc::SLALOM:
-			stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::SLALOM));
-			break;
-		case disc::TypeDisc::LONG_RACE:
-			stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::LONG_RACE));
-			break;
-		default:
-			break;
-	}
-} /* end of 'gui::WindowMain::slotChangeDiscipline' function */
-
-/* change right-side window state */
-void rfc::gui::WindowMain::slotChangeToMandat()
-{
-	stackWidgetsFields->setCurrentIndex(ENUM_CAST(FieldType::MANDAT));
-} /* end of 'gui::WindowMain::slotChangeToMandat' function */
 
 /* saving dispatcher state slot */
 void rfc::gui::WindowMain::slotSavePushed()
 {
+	if (dispatcher->getSavingFile() == QString()) {
+		/* if no previous saving file */
+		QString saveFileName = QFileDialog::getSaveFileName(this, lang::competitionDatabase,
+											QString(), String("*") + Dispatcher::fileExt);
+		/* if user didn't choose any saving file or pushed 'ESC' */
+		if (saveFileName == QString())
+			return ;
+
+		/* check is added 'extension to end of the file name */
+		if (saveFileName.indexOf(Dispatcher::fileExt) == -1)
+			saveFileName += Dispatcher::fileExt;
+
+		dispatcher->setSavingFile(saveFileName);
+
+	}
+
 	dispatcher->save();
 } /* end of 'slotSavePushed' function */

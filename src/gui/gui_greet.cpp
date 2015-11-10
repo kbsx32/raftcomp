@@ -116,7 +116,8 @@ void rfc::gui::WindowGreet::createDatabase()
 /* loading database slot */
 void rfc::gui::WindowGreet::loadDatabase()
 {
-	QString fileName = QFileDialog::getOpenFileName(this, "competition databse", QString(), "*.dbc");
+	QString fileName = QFileDialog::getOpenFileName(this, lang::competitionDatabase,
+													QString(), String("*") + Dispatcher::fileExt);
 
 	/* there are no choose */
 	if (fileName.isEmpty())

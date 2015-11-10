@@ -87,7 +87,7 @@ namespace rfc {
 			/* order of rides */
 			std::vector<TypeDisc> ridesOrder;
 
-			TypeDisc _disciplineCurrent = TypeDisc::END;    /* current working discipline */
+			TypeDisc _disciplineCurrent;				    /* current working discipline */
 
 			bool mandatFinished = false;					/* mandat comission done flag */
 
@@ -156,6 +156,9 @@ namespace rfc {
 			 * maximal version : +INF.
 			 */
 			void load(FILE *fin, const uint32_t version);
+
+			/* reset info */
+			void reset();
 		}; /* end of 'Rides' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

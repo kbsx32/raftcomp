@@ -1,7 +1,7 @@
 #
 # Rafting competition dispatcher program.
 #
-# Gui qualification window class.
+# Qt '.pro' file.
 #
 # kbsx32. <kbsx32@yandex.ru>.
 #
@@ -56,7 +56,9 @@ SOURCES += \
     src/gui/longrace/gui_longrace.cpp \
     src/core/discipline/disctypes/disc_longrace.cpp \
     src/core/discipline/disctypes/disc_slalom.cpp \
-    src/gui/slalom/gui_slalom.cpp
+    src/gui/slalom/gui_slalom.cpp \
+    src/core/discipline/disctypes/disc_sprint.cpp \
+    src/gui/sprint/gui_sprint.cpp
 
 HEADERS  += \
     src/raftcomp.h \
@@ -84,4 +86,5 @@ HEADERS  += \
     src/gui/qualify/gui_qualify.h \
     src/gui/discabstr/gui_disc_abstract.h \
     src/gui/longrace/gui_longrace.h \
-    src/gui/slalom/gui_slalom.h
+    src/gui/slalom/gui_slalom.h \
+    src/gui/sprint/gui_sprint.h

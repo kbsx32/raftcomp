@@ -105,6 +105,8 @@ namespace rfc
 		extern rfc::String save;
 
 		extern rfc::String rfcError;
+		extern rfc::String competitionDatabase;
+		extern rfc::String errorLogical;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

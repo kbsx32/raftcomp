@@ -68,23 +68,9 @@ bool rfc::disc::Type::operator<(const Type &second) const
 } /* end of 'operator<' function */
 
 /* class default constructor */
-rfc::disc::Rides::Rides() :
-	pinsCount(ENUM_CAST(TypeDisc::COUNT)),
-	/*
-	ridesOrder({TypeDisc::QUALIFY,
-				TypeDisc::SPRINT,
-				TypeDisc::SLALOM,
-				TypeDisc::LONG_RACE})
-	*/
-
-	/* debugging. TODO : remove this order. */
-	ridesOrder({TypeDisc::QUALIFY,
-				TypeDisc::SLALOM,
-				TypeDisc::LONG_RACE,
-				TypeDisc::SPRINT
-			   })
-
+rfc::disc::Rides::Rides()
 {
+	reset();
 } /* end of 'disc::Rides::Rides' constructor */
 
 /* class destructor */
@@ -263,3 +249,29 @@ void rfc::disc::Rides::setMandatComissionFinished()
 	mandatFinished = true;
 	_disciplineCurrent = TypeDisc::QUALIFY;
 } /* end of 'setMandatComissionFinished' function */
+
+/* reset info */
+void rfc::disc::Rides::reset()
+{
+	pinsCount = std::vector<uint32_t>(ENUM_CAST(TypeDisc::COUNT));
+
+	ridesOrder = std::vector<TypeDisc>
+				({
+					TypeDisc::QUALIFY,
+					TypeDisc::SPRINT,
+					TypeDisc::SLALOM,
+					TypeDisc::LONG_RACE
+				});
+
+	/*
+	ridesOrder = std::vector<TypeDisc>(
+			   {TypeDisc::QUALIFY,
+				TypeDisc::SLALOM,
+				TypeDisc::LONG_RACE,
+				TypeDisc::SPRINT
+			   });
+	*/
+
+	mandatFinished = false;
+	_disciplineCurrent = TypeDisc::END;
+} /* end of 'reset' function */

@@ -49,16 +49,7 @@ namespace rfc
 
 			/* main window constructor */
 			WindowMain(Dispatcher *dispatcher, QWidget *parent = nullptr);
-
-			/* main window constructor */
-			~WindowMain();
 		public slots:
-			/* change right-side window state */
-			void slotChangeDiscipline(rfc::disc::TypeDisc typeNew);
-
-			/* change right-side window state */
-			void slotChangeToMandat();
-
 			/* saving dispatcher state slot */
 			void slotSavePushed();
 		}; /* end of 'WindowMain' class */

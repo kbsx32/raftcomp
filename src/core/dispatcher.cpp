@@ -12,6 +12,7 @@
 
 /* define static members */
 const char rfc::Dispatcher::fileSignature[] = "kbsx32.raftcomp.dbc";
+const rfc::String rfc::Dispatcher::fileExt(".dbc");
 
 /* class destructor */
 rfc::Dispatcher::~Dispatcher()
@@ -157,4 +158,6 @@ void rfc::Dispatcher::reset()
 
 	teams.clear();
 	fileSaving = String();
+
+	Rides::reset();
 } /* end of 'reset' function */

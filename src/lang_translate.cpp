@@ -117,4 +117,10 @@ rfc::String rfc::lang::save = "&Save";
 
 rfc::String rfc::lang::rfcError = "&rfc : error";
 
+rfc::String rfc::lang::competitionDatabase = "competition database";
+
+rfc::String rfc::lang::errorLogical
+					= "i don't understand, what the fucking hell "
+					  "is going there.";
+
 #endif /* end of 'default' */
