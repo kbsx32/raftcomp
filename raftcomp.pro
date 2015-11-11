@@ -45,7 +45,6 @@ SOURCES += \
     src/gui/ridetable/gui_ride_item.cpp \
     src/gui/ridetable/gui_ride_pushpins.cpp \
     src/gui/gui_window_main.cpp \
-    src/gui/gui_menu.cpp \
     src/gui/gui_greet.cpp \
     src/gui/qualify/gui_qualify.cpp \
     src/gui/mandat/gui_mandat_men.cpp \
@@ -78,7 +77,6 @@ HEADERS  += \
     src/core/discipline/protocol.h \
     src/gui/gui.h \
     src/gui/gui_window_main.h \
-    src/gui/gui_menu.h \
     src/gui/mandat/gui_mandat.h \
     src/gui/ridetable/gui_ride.h \
     src/gui/ridetable/gui_ride_item.h \

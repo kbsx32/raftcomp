@@ -13,10 +13,6 @@
 #include <QWidget>
 
 #include "../core/dispatcher.h"
-#include "ridetable/gui_ride.h"
-
-#include "gui_menu.h"
-#include "mandat/gui_mandat.h"
 
 /* 'raftcomp' support namespace */
 namespace rfc

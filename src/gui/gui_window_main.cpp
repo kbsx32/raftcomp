@@ -14,7 +14,6 @@
 #include <QFileDialog>
 
 #include "gui_window_main.h"
-#include "gui_menu.h"
 
 #include "mandat/gui_mandat.h"
 #include "qualify/gui_qualify.h"
