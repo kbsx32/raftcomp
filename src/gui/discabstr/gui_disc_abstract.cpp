@@ -106,3 +106,11 @@ void rfc::gui::DiscAbstract::slotFinalize()
 		finalizeDiscipline();
 } /* end of 'slotFinalize' function */
 
+/* hide finalizer button.
+ * it can give manual disable
+ * for some disciplines.
+ */
+void rfc::gui::DiscAbstract::hideFinalizer()
+{
+	finalizer->hide();
+} /* end of 'hideFinalizer' function */

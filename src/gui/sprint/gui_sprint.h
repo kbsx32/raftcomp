@@ -11,6 +11,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QTabWidget>
 
 #include "../../core/dispatcher.h"
 #include "../ridetable/gui_ride.h"
@@ -28,9 +29,8 @@ namespace rfc
 		{
 			Q_OBJECT
 
-			/* main info */
-			gui::ride::Ride *rideTable = nullptr;
-
+			QTabWidget *tabWidget;		 /* union of all rides */
+			QPushButton *butNextStage;   /* switch to next stage */
 		public:
 			/* default constructor */
 			Sprint(Dispatcher *dispatcher, QWidget *parent = nullptr);
@@ -50,8 +50,8 @@ namespace rfc
 			void finalizeDiscipline();
 
 		public slots:
-			/* change count of pushpins slot */
-			void slotChangePushpinsCount(int countNew);
+			/* switching button */
+			void slotSwitchStage();
 		}; /* end of 'Sprint' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

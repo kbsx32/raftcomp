@@ -107,6 +107,15 @@ namespace rfc
 		extern rfc::String rfcError;
 		extern rfc::String competitionDatabase;
 		extern rfc::String errorLogical;
+
+		extern rfc::String sprint_1_32;
+		extern rfc::String sprint_1_16;
+		extern rfc::String sprint_1_8;
+		extern rfc::String sprint_1_4;
+		extern rfc::String sprint_1_2;
+		extern rfc::String sprint_final_b;
+		extern rfc::String sprint_final_a;
+
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

@@ -69,6 +69,13 @@ namespace rfc
 			 * (true if user answered to finish).
 			 */
 			static bool showMessageSureToFinalize();
+
+			/* hide finalizer button.
+			 * it can give manual disable
+			 * for some disciplines.
+			 */
+			void hideFinalizer();
+
 		public slots:
 			/* activate distance */
 			void slotActivateDiscipline();

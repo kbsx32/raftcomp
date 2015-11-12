@@ -123,4 +123,12 @@ rfc::String rfc::lang::errorLogical
 					= "i don't understand, what the fucking hell "
 					  "is going there.";
 
+rfc::String rfc::lang::sprint_1_32 = "1 / 32";
+rfc::String rfc::lang::sprint_1_16 = "1 / 16";
+rfc::String rfc::lang::sprint_1_8 = "1 / 8";
+rfc::String rfc::lang::sprint_1_4 = "1 / 4";
+rfc::String rfc::lang::sprint_1_2 = "1 / 2";
+rfc::String rfc::lang::sprint_final_b = "final b";
+rfc::String rfc::lang::sprint_final_a = "final a";
+
 #endif /* end of 'default' */
