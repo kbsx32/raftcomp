@@ -38,6 +38,7 @@ namespace rfc {
 			uint32_t penaltyOther = 0;          /* other penalties value.
 												 * for example : foulstart, etc.
 												 */
+
 		public:
 			/* void-constructor */
 			RideTeam(uint32_t teamId = 0);

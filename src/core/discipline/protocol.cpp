@@ -19,7 +19,7 @@ rfc::disc::Protocol::TeamScore::TeamScore(const TeamId teamId, const uint32_t sc
 bool rfc::disc::Protocol::TeamScore::operator<(const TeamScore &second) const
 {
 	if (score != second.score)
-		return score < second.score;
+		return score > second.score;
 
 	return teamId < second.teamId;
 } /* end of 'operator<' function */
@@ -107,10 +107,5 @@ rfc::disc::Protocol rfc::disc::CompScore::getResultProtocol()
 void rfc::disc::Protocol::sort()
 {
 	/* sorting result vector */
-	std::sort(score.begin(), score.end(),
-			  [&](const TeamScore &t0, const TeamScore &t1)
-			  {
-				return t0.score < t1.score;
-			  }
-	);
+	std::sort(score.begin(), score.end());
 } /* end of 'getSortedTeamsVector' function */

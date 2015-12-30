@@ -23,6 +23,8 @@ namespace rfc {
 	/* 'all about humans' namespace */
 	namespace men
 	{
+		static const TeamId NoTeam = -1;
+
 		/* team class declaration */
 		class Team {
 		public:

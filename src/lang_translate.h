@@ -116,6 +116,8 @@ namespace rfc
 		extern rfc::String sprint_final_b;
 		extern rfc::String sprint_final_a;
 
+		extern rfc::String nextStage;
+		extern rfc::String sprintLap;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

@@ -76,6 +76,11 @@ namespace rfc
 			 */
 			void hideFinalizer();
 
+			/* hide activator button.
+			 * it can give manual disable
+			 * for some disciplines.
+			 */
+			void hideActivator();
 		public slots:
 			/* activate distance */
 			void slotActivateDiscipline();

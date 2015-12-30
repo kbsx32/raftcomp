@@ -263,15 +263,11 @@ void rfc::disc::Rides::reset()
 					TypeDisc::LONG_RACE
 				});
 
+	/* clearing */
 	/*
-	ridesOrder = std::vector<TypeDisc>(
-			   {TypeDisc::QUALIFY,
-				TypeDisc::SLALOM,
-				TypeDisc::LONG_RACE,
-				TypeDisc::SPRINT
-			   });
+	for (const auto &it : rides)
+		delete it.second;
 	*/
-
 	mandatFinished = false;
 	_disciplineCurrent = TypeDisc::END;
 } /* end of 'reset' function */

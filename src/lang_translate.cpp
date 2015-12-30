@@ -129,6 +129,10 @@ rfc::String rfc::lang::sprint_1_8 = "1 / 8";
 rfc::String rfc::lang::sprint_1_4 = "1 / 4";
 rfc::String rfc::lang::sprint_1_2 = "1 / 2";
 rfc::String rfc::lang::sprint_final_b = "final b";
+
+rfc::String rfc::lang::nextStage = "next stage";
+
 rfc::String rfc::lang::sprint_final_a = "final a";
+rfc::String rfc::lang::sprintLap = "sprint lap";
 
 #endif /* end of 'default' */

@@ -32,13 +32,19 @@ namespace rfc {
 
 		/* sprint lap types */
 		enum class TypeSprint {
+			/* it is important an order of enums
+			 * in this category.
+			 * The last must be finals
+			 */
 			SPRINT_1_32,
 			SPRINT_1_16,
 			SPRINT_1_8,
 			SPRINT_1_4,
 			SPRINT_1_2,
 			FINAL_B,
-			FINAL_A
+			FINAL_A,
+
+			END,	/* fixator */
 		}; /* end of 'TypeSprint' enum class */
 
 		/* sprint lap types */

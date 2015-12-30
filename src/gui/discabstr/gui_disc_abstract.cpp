@@ -114,3 +114,12 @@ void rfc::gui::DiscAbstract::hideFinalizer()
 {
 	finalizer->hide();
 } /* end of 'hideFinalizer' function */
+
+/* hide activator button.
+ * it can give manual disable
+ * for some disciplines.
+ */
+void rfc::gui::DiscAbstract::hideActivator()
+{
+	activator->hide();
+} /* end of 'hideFinalizer' function */

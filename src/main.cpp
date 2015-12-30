@@ -14,7 +14,8 @@
 #include "raftcomp.h"
 
 /* entry point function */
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
 #ifdef RFC_SET_APP_DIR_AS_PROJ
 	QDir::setCurrent("../raftcomp");

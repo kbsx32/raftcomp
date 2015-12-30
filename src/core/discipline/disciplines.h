@@ -153,14 +153,43 @@ namespace rfc
 		class Sprint : public DisciplineAbstract
 		{
 		protected:
-			/* rides for current discipline */
-			std::map<TypeSprint, RideGroup> rides;
+			/* single lap between two teams */
+			struct Duel {
+				/* by default first team is
+				 * team who starts first
+				 * in duel race.
+				 */
+				RideTeam *teams[2];
+			}; /* end of 'Duel' class */
 
-			TypeSprint currentStage; /* sets on constructor by count of teams */
+			/* duel vector subscript */
+			typedef std::vector<Duel> DuelGroup;
+
+			/* rides for current discipline */
+			std::map<TypeSprint, DuelGroup> rides;
+
+			TypeSprint
+				currentStage;	/* sets on constructor by count of teams */
+
+			/* team who shift and miss
+			 * duels if count of teams is odd.
+			 * By default : -1.
+			 */
+			TeamId teamShifter = men::NoTeam;
+
+			/* result protocol (builds dynamically.
+			 * ( inversed ).
+			 * In inversed protocol it is better
+			 * to add all result winners.
+			 */
+			Protocol protocolInversed;
 
 		public:
 			/* default constructor */
 			Sprint(Dispatcher *dispatcher);
+
+			/* destructor */
+			~Sprint();
 
 			/* switching to next stage sprint.
 			 * returns false if there no more
@@ -168,9 +197,6 @@ namespace rfc
 			 * ( all stages passed ).
 			 */
 			bool switchNextStage();
-
-			/* set order for given stage of sprint */
-			void setOrder(const TypeSprint sprint);
 
 			/* get result table protocol.
 			 * note :
@@ -181,8 +207,14 @@ namespace rfc
 			/* sort teams function */
 			void sortStartTeams();
 
-			/* destructor */
-			~Sprint();
+		private:
+			/* sorting by time result */
+			static bool sortRideTeams(const RideTeam *rd0, const RideTeam *rd1);
+
+			/* comparing duel results and
+			 * commiting it to protocol
+			 */
+			void addToProtocolTwoTeams(RideTeam *team0, RideTeam *team1);
 		}; /* end of 'Qualify' class */
 
 	} /* end of 'disc' namespace */

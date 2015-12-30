@@ -49,6 +49,12 @@ namespace rfc
 			 */
 			void finalizeDiscipline();
 
+		private:
+			/* adding new table */
+			void addDuelTables(QWidget *widget, const DuelGroup &duels);
+
+			/* get stage name by type sprint */
+			rfc::String stageName(const disc::TypeSprint type);
 		public slots:
 			/* switching button */
 			void slotSwitchStage();

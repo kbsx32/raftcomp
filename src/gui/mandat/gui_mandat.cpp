@@ -42,6 +42,7 @@ rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 		finalize();
 	/* this stage is first, so there can't be any compare > 0... */
 
+	setMouseTracking(true);
 } /* end of 'Mandat' constructor */
 
 /* pushed button to create new team */
