@@ -29,7 +29,6 @@ QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder -Wno-unused-parameter
 
 SOURCES += \
     src/main.cpp \
-    src/lang_translate.cpp \
     src/core/dispatcher.cpp \
     src/core/base/laptime.cpp \
     src/core/base/exception.cpp \
@@ -57,11 +56,12 @@ SOURCES += \
     src/core/discipline/disctypes/disc_slalom.cpp \
     src/gui/slalom/gui_slalom.cpp \
     src/core/discipline/disctypes/disc_sprint.cpp \
-    src/gui/sprint/gui_sprint.cpp
+    src/gui/sprint/gui_sprint.cpp \
+    src/lang/lang_translate_en.cpp \
+    src/lang/lang_translate_ru.cpp
 
 HEADERS  += \
     src/raftcomp.h \
-    src/lang_translate.h \
     src/core/def.h \
     src/core/dispatcher.h \
     src/core/base/laptime.h \
@@ -85,4 +85,5 @@ HEADERS  += \
     src/gui/discabstr/gui_disc_abstract.h \
     src/gui/longrace/gui_longrace.h \
     src/gui/slalom/gui_slalom.h \
-    src/gui/sprint/gui_sprint.h
+    src/gui/sprint/gui_sprint.h \
+    src/lang/lang_translate.h

@@ -20,7 +20,10 @@
 #ifndef RFC_LANG_TRANSLATE_H
 #define RFC_LANG_TRANSLATE_H
 
-#include "core/base/rstring.h"
+#include "../core/base/rstring.h"
+
+// #define RFC_LANG_ENGLISH
+#define RFC_LANG_RUSSIAN
 
 /* 'raftcomp' namespace */
 namespace rfc

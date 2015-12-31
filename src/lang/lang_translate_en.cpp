@@ -9,15 +9,10 @@
 
 #include "lang_translate.h"
 
+/* english language */
+#ifdef RFC_LANG_ENGLISH
+
 using namespace rfc;
-
-#ifdef RFC_LANG_RUSSIAN
-
-rfc::String rfc::lang::greetText =
-		"Добро пожаловать в диспетчер соревнований по рафтингу.\n"
-		"Долбанитесь об стенку, ибо всё находится в процессе разработки и \n";
-
-#else /* default */
 
 rfc::String rfc::lang::mandat = "mandat comission";
 rfc::String rfc::lang::qualify = "qualification";

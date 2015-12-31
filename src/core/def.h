@@ -54,7 +54,7 @@ namespace rfc {
 #define ENUM_CAST(VALUE) static_cast<uint32_t>(VALUE)
 
 /* include language translations */
-#include "../lang_translate.h"
+#include "../lang/lang_translate.h"
 
 #endif /* RFC_DEF_H */
 
