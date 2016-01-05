@@ -22,7 +22,7 @@ rfc::disc::Sprint::~Sprint()
 } /* end of 'DisciplineAbstract' destructor */
 
 /* sort teams function */
-void rfc::disc::Sprint::sortStartTeams()
+void rfc::disc::Sprint::init()
 {
 	/* set start stage */
 	uint32_t teamCnt = dispatcher->teams.size();

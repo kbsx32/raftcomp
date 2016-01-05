@@ -13,6 +13,7 @@
 #include <QDialog>
 #include <QLineEdit>
 #include <QLayout>
+#include <QScrollArea>
 
 #include "gui_mandat.h"
 #include "../discabstr/gui_disc_abstract.h"

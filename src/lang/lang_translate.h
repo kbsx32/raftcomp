@@ -22,8 +22,8 @@
 
 #include "../core/base/rstring.h"
 
-// #define RFC_LANG_ENGLISH
-#define RFC_LANG_RUSSIAN
+#define RFC_LANG_ENGLISH
+// #define RFC_LANG_RUSSIAN
 
 /* 'raftcomp' namespace */
 namespace rfc

@@ -38,7 +38,7 @@ void rfc::gui::LongRace::activateDiscipline()
 	/* main table */
 	rideTable = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::LONG_RACE), this);
 
-	sortStartTeams();
+	init();
 	rideTable->addTeams(rides);
 
 	layout()->addWidget(rideTable);

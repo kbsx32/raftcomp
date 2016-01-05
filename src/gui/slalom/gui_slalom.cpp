@@ -54,7 +54,7 @@ void rfc::gui::Slalom::activateDiscipline()
 	layout()->addWidget(tabWidget);
 
 	/* main tables */
-	sortStartTeams();
+	init();
 
 	rideTable1 = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeSlalom::SLALOM_1), this);
 	rideTable1->addTeams(rides[0]);

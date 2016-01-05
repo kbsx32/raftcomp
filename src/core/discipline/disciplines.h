@@ -68,8 +68,12 @@ namespace rfc
 									  const uint32_t startScore,
 									  const uint32_t scoreShift);
 		protected:
-			/* sort teams function */
-			virtual void sortStartTeams();
+			/* sort teams function.
+			 * this function must to
+			 * handle case if competition
+			 * stage already started.
+			 */
+			virtual void init();
 
 			/* get result protocol function */
 			virtual const Protocol getProtocol();
@@ -96,7 +100,7 @@ namespace rfc
 			const Protocol getProtocol();
 
 			/* sort teams function */
-			void sortStartTeams();
+			void init();
 
 			/* destructor */
 			~Qualify();
@@ -119,7 +123,7 @@ namespace rfc
 			const Protocol getProtocol();
 
 			/* sort teams function */
-			void sortStartTeams();
+			void init();
 
 			/* destructor */
 			~Slalom();
@@ -143,7 +147,7 @@ namespace rfc
 			const Protocol getProtocol();
 
 			/* sort teams function */
-			void sortStartTeams();
+			void init();
 
 			/* destructor */
 			~LongRace();
@@ -205,7 +209,7 @@ namespace rfc
 			const Protocol getProtocol();
 
 			/* sort teams function */
-			void sortStartTeams();
+			void init();
 
 		private:
 			/* sorting by time result */

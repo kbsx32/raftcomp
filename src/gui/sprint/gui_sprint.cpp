@@ -9,6 +9,8 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QScrollArea>
+#include <QScrollBar>
 
 #include "gui_sprint.h"
 #include "../gui.h"
@@ -69,7 +71,13 @@ void rfc::gui::Sprint::activateDiscipline()
 	DiscAbstract::setActivated();
 
 	/* creating widget for current table */
-	QWidget *qRideCurrent = new QWidget(this);
+	QScrollArea *qRideCurrent = new QScrollArea(this);
+	layout()->addWidget(qRideCurrent);
+
+	// QScrollBar *qSCroll = new QScrollBar(qRideCurrent);
+	qRideCurrent->addScrollBarWidget(
+				new QScrollBar(Qt::Vertical, this), Qt::AlignRight);
+
 	qRideCurrent->setLayout(new QVBoxLayout);
 	qRideCurrent->setMouseTracking(true);
 
@@ -83,7 +91,7 @@ void rfc::gui::Sprint::activateDiscipline()
 	tabWidget->setCurrentIndex(0);
 
 	/* generating first list of teams */
-	sortStartTeams();
+	init();
 
 	addDuelTables(qRideCurrent, rides[currentStage]);
 

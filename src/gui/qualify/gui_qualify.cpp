@@ -47,7 +47,7 @@ void rfc::gui::Qualify::activateDiscipline()
 	/* main table */
 	rideTable = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY), this);
 
-	sortStartTeams();
+	init();
 	rideTable->addTeams(rides);
 
 	layout()->addWidget(rideTable);

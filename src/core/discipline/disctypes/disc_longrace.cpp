@@ -22,7 +22,7 @@ rfc::disc::LongRace::~LongRace()
 } /* end of 'DisciplineAbstract' destructor */
 
 /* sort teams function */
-void rfc::disc::LongRace::sortStartTeams()
+void rfc::disc::LongRace::init()
 {
 	DisciplineAbstract::sortStartTeamsDefault(rides, dispatcher);
 } /* end of 'sortTeams' function */

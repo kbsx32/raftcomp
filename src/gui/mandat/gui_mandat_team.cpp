@@ -184,7 +184,7 @@ rfc::gui::mandat::WTeamIntro::WTeamIntro(Dispatcher *dispatcher, men::Team *team
 /* update all widgets info */
 void rfc::gui::mandat::WTeamIntro::update()
 {
-	teamInfo->setText(team->getIdString() + " : " + team->getSurnames());
+	teamInfo->setText(team->getIdString() + " : " + team->teamName);
 } /* end of 'update' function */
 
 /* slot that pushed 'edit' button */

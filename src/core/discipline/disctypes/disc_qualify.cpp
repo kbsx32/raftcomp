@@ -22,7 +22,7 @@ rfc::disc::Qualify::~Qualify()
 } /* end of 'DisciplineAbstract' destructor */
 
 /* sort teams function */
-void rfc::disc::Qualify::sortStartTeams()
+void rfc::disc::Qualify::init()
 {
 	/* get result from mandat comission */
 	for (const men::Team *team : dispatcher->teams)

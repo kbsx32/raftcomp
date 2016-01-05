@@ -69,7 +69,7 @@ const rfc::String rfc::Dispatcher::getSavingFile()
 void rfc::Dispatcher::save(const String &fileOutName)
 {
 	/* current saving version */
-	uint32_t version = 1;
+	uint32_t version = 2;
 
 	FILE *fileOut = std::fopen(fileOutName.data(), "wb");
 
@@ -131,7 +131,7 @@ void rfc::Dispatcher::load(const String &fileInName)
 		/* fill new teams */
 		for (uint32_t i = 0; i < teamsCnt; ++i)
 			teams.push_back(new men::Team(*this, fileIn, version));
-	} else if (version == 1) {
+	} else if (version > 1) {
 
 		men::MenDatabase::load(fileIn, version);
 

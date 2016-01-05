@@ -60,16 +60,7 @@ rfc::String rfc::String::toString(long number, long signsCnt)
  */
 void rfc::String::getFromFile(char *data, const uint32_t maxLen, FILE * &fileIn)
 {
-	char ch;
-	uint32_t len = 0;
-
-	while (len < maxLen) {
-		ch = fgetc(fileIn);
-		data[len++] = ch;
-
-		if (ch == 0)
-			break;
-	}
+	strcpy(data, getFromFile(fileIn).toLatin1());
 } /* end of 'getFromFile' function */
 
 /* 'fgets' function.
@@ -78,11 +69,20 @@ void rfc::String::getFromFile(char *data, const uint32_t maxLen, FILE * &fileIn)
  */
 rfc::String rfc::String::getFromFile(FILE *&fileIn)
 {
-	char str[lengthMax];
+	char data[lengthMax];
 
-	getFromFile(str, lengthMax, fileIn);
+	char ch;
+	uint32_t len = 0;
 
-	return String(str);
+	while (len < lengthMax) {
+		ch = fgetc(fileIn);
+		data[len++] = ch;
+
+		if (ch == 0)
+			break;
+	}
+
+	return QString::fromUtf8(data);
 } /* end of 'getFromFile' function */
 
 /* 'fputs' function.
@@ -92,8 +92,9 @@ rfc::String rfc::String::getFromFile(FILE *&fileIn)
  */
 void rfc::String::putToFile(const char *data, FILE *fileOut)
 {
-	std::fputs(data, fileOut);
-	std::fputc('\0', fileOut);
+	putToFile(QString::fromLatin1(data), fileOut);
+	// std::fputs(data, fileOut);
+	// std::fputc('\0', fileOut);
 } /* end of 'fileSaveStr' function */
 
 /* 'fputs' function.
@@ -103,5 +104,11 @@ void rfc::String::putToFile(const char *data, FILE *fileOut)
  */
 void rfc::String::putToFile(const String &str, FILE *fileOut)
 {
-	String::putToFile(str.toLatin1().data(), fileOut);
+	std::string stdStr = str.toStdString();
+
+	std::fputs(str.toUtf8().constData(), fileOut);
+	std::fputc('\0', fileOut);
+
+	// const char *s = str.toUtf8().constData();
+	// String::putToFile(str., fileOut);
 } /* end of 'fileSaveStr' function */

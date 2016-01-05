@@ -25,7 +25,7 @@ rfc::disc::DisciplineAbstract::~DisciplineAbstract()
 } /* end of 'DisciplineAbstract' destructor */
 
 /* sort teams function */
-void rfc::disc::DisciplineAbstract::sortStartTeams()
+void rfc::disc::DisciplineAbstract::init()
 {
 	/* it is just virtual function */
 } /* end of 'sortTeams' function */
