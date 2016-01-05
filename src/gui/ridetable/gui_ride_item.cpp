@@ -54,7 +54,8 @@ void rfc::gui::ride::RideItem::update()
 	switch (type) {
 		case Type::TEAM_ID:		/* team number */
 			setEnabled(false);
-			setText(team->getIdString());
+			setText(team->getIdString() + "\n" +
+					team->teamName);
 			break;
 		case Type::TEAM_HUMEN:    /* team humen */
 			/* push pins are on '0' position always */

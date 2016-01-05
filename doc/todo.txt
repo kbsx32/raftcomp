@@ -1,0 +1,21 @@
+* fix loading rides.
+* sprint : fatal error.
+* sprint : priority-player ( swap second and first player )
+* sprint : inverse start order.
+* gui : scroll area
+* block 'esc'
+* fix memory leaks
+* weak-order.
+* save order to file
+* pushpins update after loading
+* sprint fix ending block table
+* mandat comission : lock only 'add' or 'delete' team button.
+* mandat comission : if declined adding - not to add anything.
+* disqualify button at any start.
+* time : chance to start entering from seconds.
+* time : kill 'infinity' labels ( or when clicked hide )
+* time : QWidget use.
+* time : in milliseconds : if enter '3' -> '30, not to '03
+* keyboard walking by ride table
+* hide table columns...
+* add button 'show / hide' not editable columns
