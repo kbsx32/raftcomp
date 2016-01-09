@@ -35,6 +35,44 @@ rfc::disc::RideTeam::RideTeam(const RideTeam &rideTeam) :
 {
 } /* end of 'RideTeam' constructor */
 
+/* constructor */
+void rfc::disc::RideTeam::load(FILE *fIn, const uint32_t version)
+{
+	if (version < 2)
+		return ;
+
+	fread(&teamId, sizeof(teamId), 1, fIn);
+	fread(&type, sizeof(type), 1, fIn);
+	fread(&timeStart, sizeof(timeStart), 1, fIn);
+	fread(&timeEnd, sizeof(timeEnd), 1, fIn);
+	fread(&timePenalty, sizeof(timePenalty), 1, fIn);
+
+	uint32_t cntPushPins;
+	fread(&cntPushPins, sizeof(cntPushPins), 1, fIn);
+	pinsPenalty.resize(cntPushPins);
+
+	fread(&pinsPenalty[0], sizeof(pinsPenalty[0]) * cntPushPins, 1, fIn);
+	fread(&penaltyOther, sizeof(penaltyOther), 1, fIn);
+} /* end of 'constructor' function */
+
+/* save to file info */
+void rfc::disc::RideTeam::save(FILE *fOut, const uint32_t version)
+{
+	if (version < 2)
+		return ;
+
+	fwrite(&teamId, sizeof(teamId), 1, fOut);
+	fwrite(&type, sizeof(type), 1, fOut);
+	fwrite(&timeStart, sizeof(timeStart), 1, fOut);
+	fwrite(&timeEnd, sizeof(timeEnd), 1, fOut);
+	fwrite(&timePenalty, sizeof(timePenalty), 1, fOut);
+
+	uint32_t cntPushPins = pinsPenalty.size();
+	fwrite(&cntPushPins, sizeof(cntPushPins), 1, fOut);
+	fwrite(&pinsPenalty[0], sizeof(pinsPenalty[0]) * cntPushPins, 1, fOut);
+	fwrite(&penaltyOther, sizeof(penaltyOther), 1, fOut);
+} /* end of 'save' function */
+
 /* set team id */
 void rfc::disc::RideTeam::setTeamId(const TeamId teamId)
 {

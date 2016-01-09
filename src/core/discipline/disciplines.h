@@ -188,6 +188,16 @@ namespace rfc
 			 */
 			Protocol protocolInversed;
 
+			/* get current stage results */
+			uint32_t stageTeamsMax(const TypeSprint stage);
+
+			/* get current stage results */
+			RideGroup stageResult(const TypeSprint stage);
+
+			/* drop all results from choosed
+			 * index to inversed protocol
+			 */
+			void dropToProtocolInversed(const RideGroup &prot, uint32_t startPosition);
 		public:
 			/* default constructor */
 			Sprint(Dispatcher *dispatcher);

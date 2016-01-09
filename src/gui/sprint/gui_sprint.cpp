@@ -144,7 +144,7 @@ rfc::String rfc::gui::Sprint::stageName(const disc::TypeSprint type)
 		case disc::TypeSprint::FINAL_A:
 			return lang::sprint_final_a;
 		case disc::TypeSprint::END:
-			return "wtf ???";
+			return lang::errorLogical;
 
 	}
 

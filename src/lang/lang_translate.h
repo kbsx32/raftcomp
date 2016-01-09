@@ -121,6 +121,8 @@ namespace rfc
 
 		extern rfc::String nextStage;
 		extern rfc::String sprintLap;
+
+		extern rfc::String impossible;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

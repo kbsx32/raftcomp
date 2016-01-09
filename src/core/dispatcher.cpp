@@ -23,6 +23,14 @@ rfc::Dispatcher::~Dispatcher()
 /* add new team to list */
 void rfc::Dispatcher::addTeam(men::Team *teamNew)
 {
+	// teamNew->
+	std::find_if(teams.begin(), teams.end(),
+				 [&](const auto &team)
+		{
+			// team.
+			return false;
+		});
+
 	teams.push_back(teamNew);
 } /* end of 'Dispatcher::addTeam' function */
 

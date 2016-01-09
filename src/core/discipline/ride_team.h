@@ -33,7 +33,7 @@ namespace rfc {
 				timeEnd,						/* end lap time */
 				timePenalty;                    /* penalty time */
 
-			std::vector<uint32_t> pinsPenalty;		/* pins penalties */
+			std::vector<uint32_t> pinsPenalty;	/* pins penalties */
 
 			uint32_t penaltyOther = 0;          /* other penalties value.
 												 * for example : foulstart, etc.
@@ -48,6 +48,12 @@ namespace rfc {
 
 			/* constructor */
 			RideTeam(const disc::Type type, const uint32_t pinsCount = 0);
+
+			/* constructor */
+			void load(FILE *fIn, const uint32_t version);
+
+			/* save to file info */
+			void save(FILE *fOut, const uint32_t version);
 
 			/* set team id */
 			void setTeamId(const TeamId teamId);

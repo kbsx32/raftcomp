@@ -130,4 +130,6 @@ rfc::String rfc::lang::nextStage = "next stage";
 rfc::String rfc::lang::sprint_final_a = "final a";
 rfc::String rfc::lang::sprintLap = "sprint lap";
 
+rfc::String rfc::lang::impossible = "it is impossible";
+
 #endif /* end of 'default' */

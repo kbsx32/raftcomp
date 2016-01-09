@@ -31,7 +31,7 @@ void rfc::disc::Sprint::init()
 		currentStage = TypeSprint::SPRINT_1_16;
 	else if (teamCnt > 8)
 		currentStage = TypeSprint::SPRINT_1_8;
-	else if (teamCnt > 4)
+	else if (teamCnt >= 4)
 		currentStage = TypeSprint::SPRINT_1_4;
 	else if (teamCnt > 2)
 		currentStage = TypeSprint::SPRINT_1_2;
@@ -57,10 +57,11 @@ void rfc::disc::Sprint::init()
 
 	uint32_t teamHalf = teamCnt / 2;
 
-	for (int32_t i = teamHalf - 1; i >= 0; --i) {
+	for (uint32_t i = 0; i < teamHalf; ++i) {
 		Duel duel;
-		duel.teams[0] = dispatcher->getLap(Type(currentStage, arrScores[i + isOddCount].teamId));
-		duel.teams[1] = dispatcher->getLap(Type(currentStage, arrScores[teamHalf + i + isOddCount].teamId));
+		/* zero player has priority */
+		duel.teams[0] = dispatcher->getLap(Type(currentStage, arrScores[teamHalf + i + isOddCount].teamId));
+		duel.teams[1] = dispatcher->getLap(Type(currentStage, arrScores[i + isOddCount].teamId));
 
 		currentDuels.push_back(duel);
 	}
@@ -74,9 +75,13 @@ const rfc::disc::Protocol rfc::disc::Sprint::getProtocol()
 {
 	/* making uninversing */
 	uint32_t size = protocolInversed.score.size();
-	for (uint32_t i = 0; i < size; ++i)
-		std::swap(protocolInversed.score[i], protocolInversed.score[size - i - 1]);
 
+	/* give scores */
+
+	for (int32_t i = size - 1; i >= 0; --i)
+		protocolInversed.score[i] = 200 - (size - i) * 10;
+
+	// DisciplineAbstract::setScores(200, 10)
 	return protocolInversed;
 } /* end of 'getResultProtocol' function */
 
@@ -100,6 +105,76 @@ void rfc::disc::Sprint::addToProtocolTwoTeams(RideTeam *team0, RideTeam *team1)
 	protocolInversed.score.push_back(teamLooser);
 	protocolInversed.score.push_back(teamWinner);
 } /* end of 'addToProtocolTwoTeams' function */
+
+/* get stage maximal teams count */
+uint32_t rfc::disc::Sprint::stageTeamsMax(const TypeSprint stage)
+{
+	switch (stage) {
+		case TypeSprint::FINAL_B:
+		case TypeSprint::FINAL_A:
+			return 2;
+		case TypeSprint::SPRINT_1_2:
+			return 4;
+		case TypeSprint::SPRINT_1_4:
+			return 8;
+		case TypeSprint::SPRINT_1_8:
+			return 16;
+		case TypeSprint::SPRINT_1_16:
+			return 32;
+		default:
+			Exception(lang::errorLogical);
+	}
+
+	return 0;
+} /* end of 'stageTeamsMax */
+
+/* get current stage results */
+rfc::disc::RideGroup rfc::disc::Sprint::stageResult(const TypeSprint stage)
+{
+	DuelGroup duels = rides[stage];
+	uint32_t duelsCnt = duels.size();
+
+	RideGroup winners, loosers;
+
+	/* separating duel information for winners and loosers */
+	for (uint32_t i = 0; i < duelsCnt; ++i) {
+		RideTeam *winner, *looser;
+		if (duels[i].teams[0]->getTimeResult() > duels[i].teams[1]->getTimeResult()) {
+			winner = duels[i].teams[1];
+			looser = duels[i].teams[0];
+		} else {
+			winner = duels[i].teams[0];
+			looser = duels[i].teams[1];
+		}
+
+		winners.push_back(winner);
+		loosers.push_back(looser);
+	}
+
+	/* sorting results */
+	std::sort(winners.begin(), winners.end(), sortRideTeams);
+	std::sort(loosers.begin(), loosers.end(), sortRideTeams);
+
+	/* include to vector 'shifter' team */
+	if (teamShifter != men::NoTeam) {
+		winners.insert(winners.begin(), dispatcher->getLap(Type(stage, teamShifter)));
+		teamShifter = men::NoTeam;
+	}
+
+	RideGroup result = winners;
+	result.insert(result.end(), loosers.begin(), loosers.end());
+	return result;	/* it is cat-vector */
+} /* end of 'stageResult' function */
+
+/* drop all results from choosed
+ * index to inversed protocol
+ */
+void rfc::disc::Sprint::dropToProtocolInversed(const RideGroup &prot, uint32_t startPosition)
+{
+	uint32_t loosersCnt = prot.size();
+	for (uint32_t i = startPosition; i < loosersCnt; ++i)
+		protocolInversed.score.push_back(prot[i]->getTeamId());
+} /* end of 'dropToProtocol' function */
 
 /* switching to next stage sprint.
  * returns false if there no more
@@ -131,51 +206,7 @@ bool rfc::disc::Sprint::switchNextStage()
 		return false;
 	}
 
-	/* pre-save constants */
-	std::vector<Duel> duelsWas = rides[prevStage];
-	uint32_t duelsWasCnt = duelsWas.size();
-
-	std::vector<RideTeam *> winners, loosers;
-
-	/* separating duel information for winners and loosers */
-	for (uint32_t i = 0; i < duelsWasCnt; ++i) {
-		RideTeam *winner, *looser;
-		if (duelsWas[i].teams[0]->getTimeResult() > duelsWas[i].teams[1]->getTimeResult()) {
-			winner = duelsWas[i].teams[1];
-			looser = duelsWas[i].teams[0];
-		} else {
-			winner = duelsWas[i].teams[0];
-			looser = duelsWas[i].teams[1];
-		}
-
-		winners.push_back(winner);
-		loosers.push_back(looser);
-	}
-
-	/* sorting results */
-	std::sort(winners.begin(), winners.end(), sortRideTeams);
-	std::sort(loosers.begin(), loosers.end(), sortRideTeams);
-
-	/* include to vector 'shifter' team */
-	if (teamShifter != men::NoTeam) {
-		winners.push_back(dispatcher->getLap(Type(prevStage, teamShifter)));
-		teamShifter = men::NoTeam;
-		++duelsWasCnt;
-	}
-
-	/* if count of winners isn't odd, we must add
-	 * one team from loosers
-	 */
-	if (duelsWasCnt % 2) {
-		winners.insert(winners.begin(), loosers[0]);
-		loosers.erase(loosers.begin());
-		++duelsWasCnt;
-	}
-
-	/* loosers including to protocol */
-	uint32_t loosersCnt = loosers.size();
-	for (uint32_t i = 0; i < loosersCnt; ++i)
-		protocolInversed.score.push_back(loosers[i]->getTeamId());
+	RideGroup stageProt = stageResult(prevStage);
 
 	/* partial situations : finals handling */
 	if (ENUM_CAST(currentStage) >= ENUM_CAST(TypeSprint::FINAL_B))
@@ -186,38 +217,38 @@ bool rfc::disc::Sprint::switchNextStage()
 		Duel duel;
 		switch (currentStage) {
 			case TypeSprint::FINAL_B:
-				duel.teams[0] = loosers[0];
-				duel.teams[1] = loosers[1];
+				duel.teams[0] = stageProt[2];
+				duel.teams[1] = stageProt[3];
 				break;
 			case TypeSprint::FINAL_A:
-				duel.teams[0] = winners[0];
-				duel.teams[1] = winners[1];
+				duel.teams[0] = stageProt[0];
+				duel.teams[1] = stageProt[1];
 				break;
 			default:
-				throw Exception("wtf ???");
+				throw Exception(lang::impossible);
 		}
 		currentDuel.push_back(duel);
-
 	} else { /* not finals */
-		/* half is always dividable by 2 :
-		 * we handled it before by
-		 * adding participiants from
-		 * previous stages.
-		 */
-		uint32_t half = duelsWasCnt / 2;
 		DuelGroup &currentDuels = rides[currentStage];
 
-		for (uint32_t i = 0; i < half; ++i) {
+		/* count of maximal team count is always dividible
+		 * by 2.
+		 */
+		uint32_t duelsCnt = stageTeamsMax(currentStage) / 2;
+
+		for (int32_t i = duelsCnt - 1; i >= 0; --i) {
 			Duel duel;
 
 			/* array was sorted by result growing,
 			 * so first starts who is bette.
 			 */
-			duel.teams[0] = winners[i * 2 + 1];
-			duel.teams[1] = winners[i * 2];
+			duel.teams[0] = dispatcher->getLap(Type(currentStage, stageProt[i]->getTeamId()));
+			duel.teams[1] = dispatcher->getLap(Type(currentStage, stageProt[duelsCnt + i]->getTeamId()));
 
 			currentDuels.push_back(duel);
 		}
+
+		dropToProtocolInversed(stageProt, duelsCnt * 2);
 	}
 
 	return true;

@@ -136,7 +136,8 @@ void rfc::disc::Rides::save(FILE *fout, const uint32_t version)
 		RideTeam *rideTeam = ride.second;
 
 		fwrite(type, sizeof(disc::Type), 1, fout);
-		fwrite(rideTeam, sizeof(disc::Type), 1, fout);
+		rideTeam->save(fout, version);
+		// fwrite(rideTeam, sizeof(disc::RideTeam), 1, fout);
 	}
 } /* end of 'save' function */
 
@@ -160,8 +161,9 @@ void rfc::disc::Rides::load(FILE *fin, const uint32_t version)
 	/* read all laps */
 	for (uint32_t i = 0; i < ridesCnt; ++i) {
 
-		fwrite(&typeNew, sizeof(disc::Type), 1, fin);
-		fwrite(&rideTeamNew, sizeof(disc::Type), 1, fin);
+		fread(&typeNew, sizeof(disc::Type), 1, fin);
+		rideTeamNew.load(fin, version);
+		// fwrite(&rideTeamNew, sizeof(disc::RideTeam), 1, fin);
 
 		rideTeamNew.setPinsCount(pinsCount[ENUM_CAST(typeNew.typeDisc)]);
 

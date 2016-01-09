@@ -149,8 +149,10 @@ bool rfc::Time::operator<(const Time &time1) const
  *		ddd - miliseconds.
  */
 rfc::String rfc::Time::getTimeString() const {
+	/*
 	if (isInfinity)
 		return QString("infinity");
+	*/
 
 	return
 		String::toString(getHours())	+ QString(":")

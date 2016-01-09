@@ -1,21 +1,40 @@
-* fix loading rides.
-* sprint : fatal error.
-* sprint : priority-player ( swap second and first player )
-* sprint : inverse start order.
-* gui : scroll area
-* block 'esc'
-* fix memory leaks
-* weak-order.
-* save order to file
-* pushpins update after loading
-* sprint fix ending block table
-* mandat comission : lock only 'add' or 'delete' team button.
-* mandat comission : if declined adding - not to add anything.
-* disqualify button at any start.
-* time : chance to start entering from seconds.
-* time : kill 'infinity' labels ( or when clicked hide )
-* time : QWidget use.
-* time : in milliseconds : if enter '3' -> '30, not to '03
-* keyboard walking by ride table
-* hide table columns...
-* add button 'show / hide' not editable columns
+E : error
+M : must be
+S : not dangerous
+A : add later
+
+M weak-order.
+M save order to file.
+M current result protocol
+M mandat team count borders
+
+S pushpins update after loading
+S mandat comission : if declined adding - not to add anything.
+
+
+A ride table : duels support create 
+A gui : scroll area
+A block 'esc'
+A sprint fix ending block table
+A mandat comission : lock only 'add' or 'delete' team button.
+A disqualify button at any start.
+A time : chance to start entering from seconds.
+A time : kill 'infinity' labels ( or when clicked hide )
+A time : QWidget use.
+A time : in milliseconds : if enter '3' -> '30, not to '03
+A keyboard walking by ride table
+A hide table columns...
+A add button 'show / hide' not editable columns
+A tab walking by table
+
+##############
+# done
+##############
+
+#E fix loading rides.
+#E sprint : priority-player ( swap second and first player )
+#E sprint : inverse start order.
+#E fix memory leaks
+#E sprint : fatal error.
+
+#M id team repeating disable. => memory leaks.
