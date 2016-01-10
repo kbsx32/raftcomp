@@ -3,15 +3,20 @@ M : must be
 S : not dangerous
 A : add later
 
-M weak-order.
-M save order to file.
-M current result protocol
-M mandat team count borders
+###########
+
+ME : something wrong with slalom
+
+M correct work in weak order uploading from file.
+M current result protocol.
+M mandat team count borders.
+M id team repeating disable. => memory leaks.
 
 S pushpins update after loading
 S mandat comission : if declined adding - not to add anything.
+S when can't set discipline : change text error.
 
-
+A unattach global depend of team-id
 A ride table : duels support create 
 A gui : scroll area
 A block 'esc'
@@ -25,7 +30,7 @@ A time : in milliseconds : if enter '3' -> '30, not to '03
 A keyboard walking by ride table
 A hide table columns...
 A add button 'show / hide' not editable columns
-A tab walking by table
+A tab walking by table + arrow-walking
 
 ##############
 # done
@@ -37,4 +42,5 @@ A tab walking by table
 #E fix memory leaks
 #E sprint : fatal error.
 
-#M id team repeating disable. => memory leaks.
+#M weak-order.
+#M save order to file.

@@ -26,7 +26,7 @@ rfc::gui::LongRace::LongRace(Dispatcher *dispatcher, QWidget *parent) :
 void rfc::gui::LongRace::activateDiscipline()
 {
 	/* check if previous stage is finalized */
-	if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::LONG_RACE) > 0) {
+	if (!dispatcher->setDiscipline(disc::TypeDisc::LONG_RACE)) {
 
 		DiscAbstract::showMessageNotReady();
 		return ;
@@ -54,5 +54,5 @@ void rfc::gui::LongRace::finalizeDiscipline()
 	setEnabled(false);
 
 	dispatcher->addProtocol(disc::TypeDisc::LONG_RACE, getProtocol());
-	dispatcher->setNextDiscipline();
+	dispatcher->finishDiscipline();
 } /* end of 'finalizeDiscipline' function */

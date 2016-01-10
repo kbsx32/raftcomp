@@ -27,7 +27,7 @@ rfc::gui::Slalom::Slalom(Dispatcher *dispatcher, QWidget *parent) :
 void rfc::gui::Slalom::activateDiscipline()
 {
 	/* check if previous stage is finalized */
-	if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::SLALOM) > 0) {
+	if (!dispatcher->setDiscipline(disc::TypeDisc::SLALOM)) {
 
 		DiscAbstract::showMessageNotReady();
 		return ;
@@ -83,5 +83,5 @@ void rfc::gui::Slalom::finalizeDiscipline()
 	setEnabled(false);
 
 	dispatcher->addProtocol(disc::TypeDisc::SLALOM, getProtocol());
-	dispatcher->setNextDiscipline();
+	dispatcher->finishDiscipline();
 } /* end of 'finalizeDiscipline' function */

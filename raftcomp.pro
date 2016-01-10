@@ -13,6 +13,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = raftcomp
 TEMPLATE = app
 
+VERSION = 0.0.0.0
+
 debug {
 	DEFINES += RFC_DEBUG
 

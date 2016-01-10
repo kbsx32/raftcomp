@@ -27,7 +27,10 @@ namespace rfc {
 			LONG_RACE,
 
 			END,			/* fixators to enum */
-			COUNT = END
+			COUNT = END,
+			NO_DISCIPLINE	/* type to show that there are no
+							 * active disciplines
+							 */
 		}; /* end of 'LapType' enum class */
 
 		/* sprint lap types */
@@ -119,33 +122,24 @@ namespace rfc {
 			 */
 			void setPinsCount(const TypeDisc type, const uint32_t count);
 
-			/* set order of all rides.
-			 * note :
-			 *   order can not be changed after 'mandat comission' set.
-			 */
-			void setRidesOrder(const std::vector<TypeDisc> &order);
-
-			/* get previous discipline before current given.
-			 * returns last TypeDisc or TypeDisc::QUALIFY if current discipline is first.
-			 * note :
-			 *   TypeDisc 'current' can be SPRINT, SLALOM or LONG_RACE.
-			 *   Other values will throw exception.
-			 */
-			TypeDisc getPrevDiscipline(const TypeDisc current) const;
-
-			/* get result of comparing two disciplines order.
-			 * returns :
-			 *   if result < 0 : given discipline already been finalized.
-			 *      result == 0 : now it's time to given discipline.
-			 *      result > 0 : given discipline wasn't started.
-			 */
-			int32_t compareDisciplinesOrder(const TypeDisc current) const;
-
 			/* set new active discipline.
 			 * returns false, if reacher
-			 * end of the list.
+			 * end of the list or it is not
+			 * time reached.
 			 */
-			bool setNextDiscipline();
+			bool setDiscipline(const disc::TypeDisc type);
+
+			/* close discipline. */
+			void finishDiscipline();
+
+			/* returns discipline status.
+			 * returns true if discipline is already started and
+			 * finished.
+			 */
+			bool checkIsDisciplineFinished(const disc::TypeDisc type);
+
+			/* returns current discipline */
+			disc::TypeDisc getCurrentDiscipline();
 
 			/* finish mandat comission */
 			void setMandatComissionFinished();

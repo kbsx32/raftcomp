@@ -39,7 +39,7 @@ rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 		layout->addWidget(new WTeamIntro(dispatcher, team, this));
 
 	/* check if mandat comission already done */
-	if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::QUALIFY) <= 0)
+	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::QUALIFY))
 		finalize();
 	/* this stage is first, so there can't be any compare > 0... */
 

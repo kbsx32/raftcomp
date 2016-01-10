@@ -34,8 +34,9 @@ namespace rfc {
 		/* declared teams */
 		std::vector<men::Team *> teams;
 
-		/* add new team to list */
+		/* add new team to list. */
 		void addTeam(men::Team *teamNew);
+
 		/* get team pointer from list */
 		men::Team * getTeam(uint32_t teamId);
 

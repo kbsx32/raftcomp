@@ -25,9 +25,7 @@ rfc::gui::Qualify::Qualify(Dispatcher *dispatcher, QWidget *parent) :
 /* activate competition */
 void rfc::gui::Qualify::activateDiscipline()
 {
-	/* check if previous stage is finalized */
-	if (dispatcher->compareDisciplinesOrder(disc::TypeDisc::QUALIFY) > 0) {
-
+	if (!dispatcher->setDiscipline(disc::TypeDisc::QUALIFY)) {
 		DiscAbstract::showMessageNotReady();
 		return ;
 	}
@@ -70,5 +68,5 @@ void rfc::gui::Qualify::finalizeDiscipline()
 	setEnabled(false);
 
 	dispatcher->addProtocol(disc::TypeDisc::QUALIFY, getProtocol());
-	dispatcher->setNextDiscipline();
+	dispatcher->finishDiscipline();
 } /* end of 'finalizeDiscipline' function */

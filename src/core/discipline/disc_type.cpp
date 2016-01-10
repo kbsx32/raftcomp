@@ -139,6 +139,15 @@ void rfc::disc::Rides::save(FILE *fout, const uint32_t version)
 		rideTeam->save(fout, version);
 		// fwrite(rideTeam, sizeof(disc::RideTeam), 1, fout);
 	}
+
+	if (version > 3) {
+		uint32_t cntDisc = ridesOrder.size();
+		fwrite(&cntDisc, sizeof(cntDisc), 1, fout);
+		fwrite(&ridesOrder[0], sizeof(ridesOrder[0]) * cntDisc, 1, fout);
+
+		fwrite(&_disciplineCurrent, sizeof(_disciplineCurrent), 1, fout);
+		fwrite(&mandatFinished, sizeof(mandatFinished), 1, fout);
+	}
 } /* end of 'save' function */
 
 /* load rides info.
@@ -169,87 +178,87 @@ void rfc::disc::Rides::load(FILE *fin, const uint32_t version)
 
 		rides[typeNew] = new RideTeam(rideTeamNew);
 	}
+
+	if (version > 3) {
+		uint32_t cntDisc;
+		fread(&cntDisc, sizeof(cntDisc), 1, fin);
+		ridesOrder.resize(cntDisc);
+		fread(&ridesOrder[0], sizeof(ridesOrder[0]) * cntDisc, 1, fin);
+
+		fread(&_disciplineCurrent, sizeof(_disciplineCurrent), 1, fin);
+		fread(&mandatFinished, sizeof(mandatFinished), 1, fin);
+	} else {
+		ridesOrder.clear();
+		mandatFinished = false;
+		_disciplineCurrent = TypeDisc::NO_DISCIPLINE;
+	}
 } /* end of 'load' function */
 
-/* set order of all rides.
- * note :
- *   order can not be changed after 'mandat comission' set.
+/* returns discipline status.
+ * returns true if discipline is already started and finished.
  */
-void rfc::disc::Rides::setRidesOrder(const std::vector<TypeDisc> &order)
+bool rfc::disc::Rides::checkIsDisciplineFinished(const disc::TypeDisc type)
 {
-	if (mandatFinished)
-		throw Exception(lang::mandatComissionAlreadyFinished);
+	if (!mandatFinished)
+		return false;
 
-	ridesOrder = order;
-} /* end of 'setRidesOrder' function */
+	const auto &iter = std::find(ridesOrder.begin(), ridesOrder.end(), type);
 
-/* get previous discipline before current given.
- * returns last TypeDisc or TypeDisc::QUALIFY if current discipline is first.
- * note :
- *   TypeDisc 'current' can be SPRINT, SLALOM or LONG_RACE.
- *   Other values will throw exception.
- */
-rfc::disc::TypeDisc rfc::disc::Rides::getPrevDiscipline(const TypeDisc current) const
+	return _disciplineCurrent != type && iter != ridesOrder.end();
+} /* end of 'checkIsDisciplineWas' function */
+
+/* returns current discipline */
+rfc::disc::TypeDisc rfc::disc::Rides::getCurrentDiscipline()
 {
-	uint32_t vecSize = ridesOrder.size();
+	return _disciplineCurrent;
+} /* end of 'getCurrentDiscipline' function */
 
-	for (uint32_t i = 0; i < vecSize; ++i) {
-		if (current == ridesOrder[i]) {
-			if (i == 0) /* check if current discipline is first in array */
-				return TypeDisc::QUALIFY;
-			return ridesOrder[i - 1];
-		}
-	}
-
-	throw Exception("wrong rides order. Error in code.");
-} /* end of 'getPrevDiscipline' function */
+/* close discipline. */
+void rfc::disc::Rides::finishDiscipline()
+{
+	_disciplineCurrent = TypeDisc::NO_DISCIPLINE;
+} /* end of 'finishDiscipline' */
 
 /* set new active discipline.
  * returns false, if reached
- * end of the list.
+ * end of the list or it is not
+ * time reached.
  */
-bool rfc::disc::Rides::setNextDiscipline()
+bool rfc::disc::Rides::setDiscipline(const disc::TypeDisc type)
 {
+	/* there is another active discipline */
+	if (_disciplineCurrent != TypeDisc::NO_DISCIPLINE)
+		return false;
+
+	/* if discipline was */
+	if (checkIsDisciplineFinished(type) && _disciplineCurrent != type)
+		return false;
+
+	if (type != TypeDisc::QUALIFY && !checkIsDisciplineFinished(TypeDisc::QUALIFY))
+		return false;
+	else if (!mandatFinished)
+		return false;
+
 	/* check if discipline is first. */
 	if (!mandatFinished) {
 		setMandatComissionFinished();
-		return true;
+		return (type == disc::TypeDisc::QUALIFY);
 	}
 
-	auto rideOld = std::find(ridesOrder.begin(), ridesOrder.end(), _disciplineCurrent);
-
-	if (rideOld == ridesOrder.end())
-		return false;
-
 	/* shift to next position */
-	_disciplineCurrent = *(&(*rideOld) + 1);
+	_disciplineCurrent = type;
+
+	/* set progress */
+	ridesOrder.push_back(type);
 
 	return true;
 } /* end of 'setActiveDiscipline' function */
-
-/* get result of comparing two disciplines order.
- * returns :
- *   if result < 0 : given discipline already been finalized.
- *      result == 0 : now it's time to given discipline.
- *      result > 0 : given discipline wasn't started.
- */
-int32_t rfc::disc::Rides::compareDisciplinesOrder(const TypeDisc type) const
-{
-	if (!mandatFinished)
-		return 1;   /* mandat comission is not finished yet */
-
-	auto rideGiven = std::find(ridesOrder.begin(), ridesOrder.end(), type);
-	auto rideCurrent = std::find(ridesOrder.begin(), ridesOrder.end(), _disciplineCurrent);
-
-	/* all in array */
-	return &(*rideGiven) - &(*rideCurrent);
-} /* end of 'compareDisciplinesOrder' function */
 
 /* finish mandat comission */
 void rfc::disc::Rides::setMandatComissionFinished()
 {
 	mandatFinished = true;
-	_disciplineCurrent = TypeDisc::QUALIFY;
+	_disciplineCurrent = TypeDisc::NO_DISCIPLINE;
 } /* end of 'setMandatComissionFinished' function */
 
 /* reset info */
@@ -257,19 +266,14 @@ void rfc::disc::Rides::reset()
 {
 	pinsCount = std::vector<uint32_t>(ENUM_CAST(TypeDisc::COUNT));
 
-	ridesOrder = std::vector<TypeDisc>
-				({
-					TypeDisc::QUALIFY,
-					TypeDisc::SPRINT,
-					TypeDisc::SLALOM,
-					TypeDisc::LONG_RACE
-				});
+	ridesOrder.clear();
 
 	/* clearing */
 	/*
 	for (const auto &it : rides)
 		delete it.second;
 	*/
+
 	mandatFinished = false;
-	_disciplineCurrent = TypeDisc::END;
+	_disciplineCurrent = TypeDisc::NO_DISCIPLINE;
 } /* end of 'reset' function */
