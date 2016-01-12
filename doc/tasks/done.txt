@@ -1,0 +1,14 @@
+##############
+# done
+##############
+
+#E fix loading rides.
+#E sprint : priority-player ( swap second and first player )
+#E sprint : inverse start order.
+#E fix memory leaks
+#E sprint : fatal error.
+
+#M weak-order.
+#M save order to file.
+
+#ME : something wrong with slalom ( sprint writes protocol very badly )

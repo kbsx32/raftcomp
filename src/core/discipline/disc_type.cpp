@@ -41,7 +41,7 @@ rfc::disc::Type::Type(const TypeSlalom disc, const TeamId team) :
 
 
 /* get COPY of this Type with inserted team id */
-rfc::disc::Type rfc::disc::Type::getTeamed(TeamId team)
+rfc::disc::Type rfc::disc::Type::getTeamed(TeamId team) const
 {
 	Type typeNew = *this;
 	typeNew.teamId = team;
@@ -140,7 +140,7 @@ void rfc::disc::Rides::save(FILE *fout, const uint32_t version)
 		// fwrite(rideTeam, sizeof(disc::RideTeam), 1, fout);
 	}
 
-	if (version > 3) {
+	if (version >= 3) {
 		uint32_t cntDisc = ridesOrder.size();
 		fwrite(&cntDisc, sizeof(cntDisc), 1, fout);
 		fwrite(&ridesOrder[0], sizeof(ridesOrder[0]) * cntDisc, 1, fout);
@@ -179,7 +179,7 @@ void rfc::disc::Rides::load(FILE *fin, const uint32_t version)
 		rides[typeNew] = new RideTeam(rideTeamNew);
 	}
 
-	if (version > 3) {
+	if (version >= 3) {
 		uint32_t cntDisc;
 		fread(&cntDisc, sizeof(cntDisc), 1, fin);
 		ridesOrder.resize(cntDisc);
@@ -226,12 +226,15 @@ void rfc::disc::Rides::finishDiscipline()
  */
 bool rfc::disc::Rides::setDiscipline(const disc::TypeDisc type)
 {
+	if (_disciplineCurrent == type)
+		return true;
+
 	/* there is another active discipline */
 	if (_disciplineCurrent != TypeDisc::NO_DISCIPLINE)
 		return false;
 
 	/* if discipline was */
-	if (checkIsDisciplineFinished(type) && _disciplineCurrent != type)
+	if (checkIsDisciplineFinished(type))
 		return false;
 
 	if (type != TypeDisc::QUALIFY && !checkIsDisciplineFinished(TypeDisc::QUALIFY))
@@ -257,9 +260,17 @@ bool rfc::disc::Rides::setDiscipline(const disc::TypeDisc type)
 /* finish mandat comission */
 void rfc::disc::Rides::setMandatComissionFinished()
 {
-	mandatFinished = true;
-	_disciplineCurrent = TypeDisc::NO_DISCIPLINE;
+	if (!mandatFinished) {
+		mandatFinished = true;
+		_disciplineCurrent = TypeDisc::NO_DISCIPLINE;
+	}
 } /* end of 'setMandatComissionFinished' function */
+
+/* finish flag mandat comission get */
+bool rfc::disc::Rides::isMandatFinished()
+{
+	return mandatFinished;
+} /* end of 'isMandatFinished' funciton */
 
 /* reset info */
 void rfc::disc::Rides::reset()

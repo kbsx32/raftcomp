@@ -49,6 +49,9 @@ void rfc::gui::Qualify::activateDiscipline()
 	rideTable->addTeams(rides);
 
 	layout()->addWidget(rideTable);
+
+	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::QUALIFY))
+		finalizeDiscipline();
 } /* end of 'slotActivateButtonClicked' slot */
 
 void rfc::gui::Qualify::slotChangePushpinsCount(int countNew)

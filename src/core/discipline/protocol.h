@@ -34,7 +34,10 @@ namespace rfc
 
 			public:
 				/* constructor */
-				TeamScore(const TeamId teamId = 0, const uint32_t score = 0);
+				explicit TeamScore(const TeamId teamId, const uint32_t score);
+
+				/* explicitted constructor */
+				explicit TeamScore(const TeamId id);
 
 				/* comparator */
 				bool operator<(const TeamScore &scoreSecond) const;

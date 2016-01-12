@@ -82,10 +82,11 @@ rfc::disc::Protocol rfc::disc::DisciplineAbstract::setScores
  */
 void rfc::disc::DisciplineAbstract::sortStartTeamsDefault(
 			std::vector<RideTeam *> &ridesDest,
-			Dispatcher *dispatcher)
+			Dispatcher *dispatcher,
+			const disc::Type &type)
 {
 	const Protocol::TeamsArray arr = dispatcher->getResultProtocol().score;
 
 	for (const Protocol::TeamScore &score : arr)
-		ridesDest.push_back(dispatcher->getLap(Type(TypeDisc::LONG_RACE, score.teamId)));
+		ridesDest.push_back(dispatcher->getLap(type.getTeamed(score.teamId)));
 } /* end of 'sortStartTeamsDefault' function */

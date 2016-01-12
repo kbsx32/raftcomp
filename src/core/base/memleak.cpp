@@ -66,8 +66,12 @@ rfc::MemLeak::~MemLeak()
 	int cnt = _nodes.size(),
 		current = 0;
 
+	/*
+#ifdef __WIN32__
 	qDebug().resetFormat();
 	qDebug().setAutoInsertSpaces(false);
+#endif
+	*/
 
 	qDebug() << QString("Memory leaks found : %1").arg(cnt);
 

@@ -79,7 +79,7 @@ const rfc::disc::Protocol rfc::disc::Sprint::getProtocol()
 	/* give scores */
 
 	for (int32_t i = size - 1; i >= 0; --i)
-		protocolInversed.score[i] = 200 - (size - i) * 10;
+		protocolInversed.score[i].score = 200 - (size - i) * 10;
 
 	// DisciplineAbstract::setScores(200, 10)
 	return protocolInversed;
@@ -102,8 +102,8 @@ void rfc::disc::Sprint::addToProtocolTwoTeams(RideTeam *team0, RideTeam *team1)
 		teamLooser = team0->getTeamId();
 	}
 
-	protocolInversed.score.push_back(teamLooser);
-	protocolInversed.score.push_back(teamWinner);
+	protocolInversed.score.push_back(Protocol::TeamScore(teamLooser));
+	protocolInversed.score.push_back(Protocol::TeamScore(teamWinner));
 } /* end of 'addToProtocolTwoTeams' function */
 
 /* get stage maximal teams count */
@@ -172,8 +172,8 @@ rfc::disc::RideGroup rfc::disc::Sprint::stageResult(const TypeSprint stage)
 void rfc::disc::Sprint::dropToProtocolInversed(const RideGroup &prot, uint32_t startPosition)
 {
 	uint32_t loosersCnt = prot.size();
-	for (uint32_t i = startPosition; i < loosersCnt; ++i)
-		protocolInversed.score.push_back(prot[i]->getTeamId());
+	for (uint32_t i = loosersCnt - 1; i >= startPosition; --i)
+		protocolInversed.score.push_back(Protocol::TeamScore(prot[i]->getTeamId()));
 } /* end of 'dropToProtocol' function */
 
 /* switching to next stage sprint.

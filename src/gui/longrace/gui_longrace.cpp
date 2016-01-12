@@ -42,6 +42,9 @@ void rfc::gui::LongRace::activateDiscipline()
 	rideTable->addTeams(rides);
 
 	layout()->addWidget(rideTable);
+
+	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::LONG_RACE))
+		finalizeDiscipline();
 } /* end of 'activateDiscipline' slot */
 
 /* finalization virtual function.

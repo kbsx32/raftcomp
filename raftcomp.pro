@@ -27,7 +27,7 @@ release {
 }
 
 INCLUDEPATH += .
-QMAKE_CXXFLAGS += -std=c++14 -msse2 -Wno-reorder -Wno-unused-parameter -Wno-sized-deallocation
+QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder -Wno-unused-parameter -Wno-sized-deallocation
 
 SOURCES += \
     src/main.cpp \

@@ -96,6 +96,10 @@ void rfc::gui::Sprint::activateDiscipline()
 	addDuelTables(qRideCurrent, rides[currentStage]);
 
 	tabWidget->addTab(qRideCurrent, stageName(currentStage));
+
+	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::SPRINT))
+		finalizeDiscipline();
+
 } /* end of 'slotActivateButtonClicked' slot */
 
 /* finalization virtual function.

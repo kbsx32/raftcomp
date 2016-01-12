@@ -5,8 +5,6 @@ A : add later
 
 ###########
 
-ME : something wrong with slalom
-
 M correct work in weak order uploading from file.
 M current result protocol.
 M mandat team count borders.
@@ -15,8 +13,9 @@ M id team repeating disable. => memory leaks.
 S pushpins update after loading
 S mandat comission : if declined adding - not to add anything.
 S when can't set discipline : change text error.
+S check for changing team id number 
+S memory leaks
 
-A unattach global depend of team-id
 A ride table : duels support create 
 A gui : scroll area
 A block 'esc'
@@ -31,16 +30,4 @@ A keyboard walking by ride table
 A hide table columns...
 A add button 'show / hide' not editable columns
 A tab walking by table + arrow-walking
-
-##############
-# done
-##############
-
-#E fix loading rides.
-#E sprint : priority-player ( swap second and first player )
-#E sprint : inverse start order.
-#E fix memory leaks
-#E sprint : fatal error.
-
-#M weak-order.
-#M save order to file.
+A disqualify button

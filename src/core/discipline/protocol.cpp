@@ -15,6 +15,13 @@ rfc::disc::Protocol::TeamScore::TeamScore(const TeamId teamId, const uint32_t sc
 {
 } /* end of 'TeamScore' constructor */
 
+/* explicitted constructor */
+rfc::disc::Protocol::TeamScore::TeamScore(const TeamId id) :
+	teamId(id),
+	score(0)
+{
+} /* end of 'TeamScore' constructor */
+
 /* comparator */
 bool rfc::disc::Protocol::TeamScore::operator<(const TeamScore &second) const
 {

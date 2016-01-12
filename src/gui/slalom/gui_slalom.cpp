@@ -63,6 +63,9 @@ void rfc::gui::Slalom::activateDiscipline()
 	rideTable2 = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeSlalom::SLALOM_2), this);
 	rideTable2->addTeams(rides[1]);
 	tabWidget->addTab(rideTable2, lang::slalom2);
+
+	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::SLALOM))
+		finalizeDiscipline();
 } /* end of 'slotActivateButtonClicked' slot */
 
 void rfc::gui::Slalom::slotChangePushpinsCount(int countNew)

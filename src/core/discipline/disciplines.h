@@ -51,7 +51,8 @@ namespace rfc
 			 *   dispatcher : source dispatcher.
 			 */
 			static void sortStartTeamsDefault(std::vector<RideTeam *> &ridesDest,
-											  Dispatcher *dispatcher);
+											  Dispatcher *dispatcher,
+											  const disc::Type &type);
 
 			/* comparator for teams results */
 			static bool sortTeamsResultComparator(const RideTeam *team0, const RideTeam *team1);

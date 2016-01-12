@@ -24,7 +24,8 @@ rfc::disc::LongRace::~LongRace()
 /* sort teams function */
 void rfc::disc::LongRace::init()
 {
-	DisciplineAbstract::sortStartTeamsDefault(rides, dispatcher);
+	DisciplineAbstract::sortStartTeamsDefault(rides, dispatcher,
+											  Type(TypeDisc::LONG_RACE));
 } /* end of 'sortTeams' function */
 
 /* get result table protocol.

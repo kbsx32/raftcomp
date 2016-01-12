@@ -79,7 +79,7 @@ namespace rfc {
 			Type(const TypeSlalom disc, const TeamId team = 0);
 
 			/* get COPY of this Type with inserted team id */
-			Type getTeamed(TeamId team);
+			Type getTeamed(TeamId team) const;
 
 			/* comparator */
 			bool operator<(const Type &second) const;
@@ -143,6 +143,9 @@ namespace rfc {
 
 			/* finish mandat comission */
 			void setMandatComissionFinished();
+
+			/* finish flag mandat comission get */
+			bool isMandatFinished();
 
 		protected:
 			/* save rides info.

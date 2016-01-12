@@ -25,12 +25,8 @@ rfc::disc::Slalom::~Slalom()
 /* sort teams function */
 void rfc::disc::Slalom::init()
 {
-	DisciplineAbstract::sortStartTeamsDefault(rides[0], dispatcher);
-
-	/* copying order to second try
-	 * ( order in both is similar )
-	 */
-	rides[1] = rides[0];
+	sortStartTeamsDefault(rides[0], dispatcher, Type(TypeSlalom::SLALOM_1));
+	sortStartTeamsDefault(rides[1], dispatcher, Type(TypeSlalom::SLALOM_2));
 } /* end of 'sortTeams' function */
 
 /* ger result table protocol.
