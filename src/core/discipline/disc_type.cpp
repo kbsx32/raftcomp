@@ -224,28 +224,31 @@ void rfc::disc::Rides::finishDiscipline()
  * end of the list or it is not
  * time reached.
  */
-bool rfc::disc::Rides::setDiscipline(const disc::TypeDisc type)
+rfc::disc::Rides::DiscState rfc::disc::Rides::setDiscipline(const disc::TypeDisc type)
 {
 	if (_disciplineCurrent == type)
-		return true;
+		return DiscState::CURRENT;
 
 	/* there is another active discipline */
 	if (_disciplineCurrent != TypeDisc::NO_DISCIPLINE)
-		return false;
+		return DiscState::WAS_NOT;
 
 	/* if discipline was */
 	if (checkIsDisciplineFinished(type))
-		return false;
+		return DiscState::FINISHED;
 
+	/* qualify must be first */
 	if (type != TypeDisc::QUALIFY && !checkIsDisciplineFinished(TypeDisc::QUALIFY))
-		return false;
+		return DiscState::WAS_NOT;
 	else if (!mandatFinished)
-		return false;
+		return DiscState::WAS_NOT;
 
 	/* check if discipline is first. */
 	if (!mandatFinished) {
 		setMandatComissionFinished();
-		return (type == disc::TypeDisc::QUALIFY);
+
+		if (type != disc::TypeDisc::QUALIFY)
+			return DiscState::WAS_NOT;
 	}
 
 	/* shift to next position */
@@ -254,7 +257,7 @@ bool rfc::disc::Rides::setDiscipline(const disc::TypeDisc type)
 	/* set progress */
 	ridesOrder.push_back(type);
 
-	return true;
+	return DiscState::CURRENT;
 } /* end of 'setActiveDiscipline' function */
 
 /* finish mandat comission */

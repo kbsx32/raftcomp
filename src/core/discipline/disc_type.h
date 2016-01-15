@@ -122,12 +122,20 @@ namespace rfc {
 			 */
 			void setPinsCount(const TypeDisc type, const uint32_t count);
 
+			/* discipline state return value class.	*/
+			enum class DiscState
+			{
+				WAS_NOT,	/* discipline wasn't been activated */
+				CURRENT,	/* at this time this discipline */
+				FINISHED	/* already done */
+			}; /* end of 'DiscState' class */
+
 			/* set new active discipline.
 			 * returns false, if reacher
 			 * end of the list or it is not
 			 * time reached.
 			 */
-			bool setDiscipline(const disc::TypeDisc type);
+			DiscState setDiscipline(const disc::TypeDisc type);
 
 			/* close discipline. */
 			void finishDiscipline();

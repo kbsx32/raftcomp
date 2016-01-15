@@ -62,7 +62,7 @@ void rfc::gui::Sprint::addDuelTables(QWidget *widget, const DuelGroup &duels)
 void rfc::gui::Sprint::activateDiscipline()
 {
 	/* check if previous stage is finalized */
-	if (!dispatcher->setDiscipline(disc::TypeDisc::SPRINT)) {
+	if (dispatcher->setDiscipline(disc::TypeDisc::SPRINT) == disc::Rides::DiscState::WAS_NOT) {
 
 		DiscAbstract::showMessageNotReady();
 		return ;

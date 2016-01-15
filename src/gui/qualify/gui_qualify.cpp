@@ -25,7 +25,7 @@ rfc::gui::Qualify::Qualify(Dispatcher *dispatcher, QWidget *parent) :
 /* activate competition */
 void rfc::gui::Qualify::activateDiscipline()
 {
-	if (!dispatcher->setDiscipline(disc::TypeDisc::QUALIFY)) {
+	if (dispatcher->setDiscipline(disc::TypeDisc::QUALIFY) == disc::Rides::DiscState::WAS_NOT) {
 		DiscAbstract::showMessageNotReady();
 		return ;
 	}

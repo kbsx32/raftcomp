@@ -26,7 +26,7 @@ rfc::gui::LongRace::LongRace(Dispatcher *dispatcher, QWidget *parent) :
 void rfc::gui::LongRace::activateDiscipline()
 {
 	/* check if previous stage is finalized */
-	if (!dispatcher->setDiscipline(disc::TypeDisc::LONG_RACE)) {
+	if (dispatcher->setDiscipline(disc::TypeDisc::LONG_RACE) == disc::Rides::DiscState::WAS_NOT) {
 
 		DiscAbstract::showMessageNotReady();
 		return ;

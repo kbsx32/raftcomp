@@ -27,7 +27,7 @@ rfc::gui::Slalom::Slalom(Dispatcher *dispatcher, QWidget *parent) :
 void rfc::gui::Slalom::activateDiscipline()
 {
 	/* check if previous stage is finalized */
-	if (!dispatcher->setDiscipline(disc::TypeDisc::SLALOM)) {
+	if (dispatcher->setDiscipline(disc::TypeDisc::SLALOM) == disc::Rides::DiscState::WAS_NOT) {
 
 		DiscAbstract::showMessageNotReady();
 		return ;
