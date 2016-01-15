@@ -51,7 +51,15 @@ namespace rfc {
  * argument:
  *		VALUE - type from enum class.
  */
-#define ENUM_CAST(VALUE) static_cast<uint32_t>(VALUE)
+#define ENUM_CAST(VALUE) (static_cast<uint32_t>(VALUE))
+
+/* static cast and shifting enum value.
+ * argument:
+ *		VALUE - type from enum class.
+ *      SHIFT - shifting result.
+ */
+#define ENUM_SHIFTED(VALUE, SHIFT) \
+	decltype(VALUE)(ENUM_CAST(VALUE) + SHIFT)
 
 /* include language translations */
 #include "../lang/lang_translate.h"

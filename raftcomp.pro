@@ -60,7 +60,8 @@ SOURCES += \
     src/core/discipline/disctypes/disc_sprint.cpp \
     src/gui/sprint/gui_sprint.cpp \
     src/lang/lang_translate_en.cpp \
-    src/lang/lang_translate_ru.cpp
+    src/lang/lang_translate_ru.cpp \
+    src/gui/protocol/gui_protocol.cpp
 
 HEADERS  += \
     src/raftcomp.h \
@@ -88,4 +89,5 @@ HEADERS  += \
     src/gui/longrace/gui_longrace.h \
     src/gui/slalom/gui_slalom.h \
     src/gui/sprint/gui_sprint.h \
-    src/lang/lang_translate.h
+    src/lang/lang_translate.h \
+    src/gui/protocol/gui_protocol.h

@@ -123,6 +123,8 @@ namespace rfc
 		extern rfc::String sprintLap;
 
 		extern rfc::String impossible;
+
+		extern rfc::String protocol;
 	} /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

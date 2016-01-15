@@ -102,11 +102,17 @@ rfc::disc::Protocol rfc::disc::CompScore::getProtocol(const TypeDisc type)
 } /* end of 'getProtocol' function */
 
 /* return full competition result */
-rfc::disc::Protocol rfc::disc::CompScore::getResultProtocol()
+rfc::disc::Protocol &rfc::disc::CompScore::getResultProtocol()
 {
 	resultProt.sort();
 	return resultProt;
 } /* end of 'getResultProtocol' function */
+
+/* return all protocols */
+const rfc::disc::CompScore::ProtGroup & rfc::disc::CompScore::getProtocols()
+{
+	return scores;
+} /* end of 'getResultProtocols' function */
 
 /* return sorted array of
  * all teams.
@@ -116,3 +122,23 @@ void rfc::disc::Protocol::sort()
 	/* sorting result vector */
 	std::sort(score.begin(), score.end());
 } /* end of 'getSortedTeamsVector' function */
+
+/* get score of team in protocol */
+uint32_t rfc::disc::CompScore::findTeamResult(const disc::Type &type)
+{
+	Protocol &findAr = scores[ENUM_CAST(type.typeDisc)];
+
+	Protocol::TeamScore const * tmRes = nullptr;
+
+	for (const Protocol::TeamScore &tm : findAr.score)
+		if (tm.teamId == type.teamId) {
+			tmRes = &tm;
+			break;
+		}
+
+	/* if can't find team */
+	if (tmRes == nullptr)
+		return 0; // throw Exception(lang::errorLogical);
+
+	return tmRes->score;
+} /* end of 'findTeamResult' function */

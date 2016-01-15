@@ -79,24 +79,30 @@ namespace rfc
 			Protocol resultProt;			 /* result protocol values */
 
 		public:
+			typedef std::vector<Protocol> ProtGroup;
 
 			/* constructor.
 			 * inits 'scores' vector.
 			 */
 			CompScore();
 
-		protected:
+		public:
 			/* return protocol.
 			 * if protocol doesn't exists - throws exception.
 			 */
 			Protocol getProtocol(const TypeDisc type);
 
-		public:
+			/* return all protocols */
+			const ProtGroup & getProtocols();
+
 			/* add info to map */
 			void addProtocol(const TypeDisc type, const Protocol &prot);
 
 			/* return full competition result */
-			Protocol getResultProtocol();
+			Protocol &getResultProtocol();
+
+			/* get score of team in protocol */
+			uint32_t findTeamResult(const disc::Type &type);
 		}; /* end of 'CompScore' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

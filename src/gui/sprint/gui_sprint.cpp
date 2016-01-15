@@ -108,6 +108,10 @@ void rfc::gui::Sprint::activateDiscipline()
  */
 void rfc::gui::Sprint::finalizeDiscipline()
 {
+	/* restoring protocol */
+	while (switchNextStage())
+		;
+
 	/* set disabled all widgets */
 	setEnabled(false);
 
@@ -152,5 +156,5 @@ rfc::String rfc::gui::Sprint::stageName(const disc::TypeSprint type)
 
 	}
 
-	return "wtf ???";
+	return lang::errorLogical;
 } /* end of 'stageName' function */

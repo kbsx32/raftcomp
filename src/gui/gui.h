@@ -16,6 +16,7 @@
 
 #include "gui_window_main.h"
 #include "mandat/gui_mandat.h"
+#include "protocol/gui_protocol.h"
 
 #endif /* RFC_GUI_H */
 

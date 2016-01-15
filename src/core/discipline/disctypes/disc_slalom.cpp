@@ -48,5 +48,5 @@ const rfc::disc::Protocol rfc::disc::Slalom::getProtocol()
 	/* sorting result */
 	std::sort(rideResult.begin(), rideResult.end(), DisciplineAbstract::sortTeamsResultComparator);
 
-	return DisciplineAbstract::setScores(rideResult, 100, 5);
+	return DisciplineAbstract::setScores(rideResult, 300, 15);
 } /* end of 'getResultProtocol' function */

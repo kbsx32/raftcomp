@@ -20,6 +20,7 @@
 #include "longrace/gui_longrace.h"
 #include "slalom/gui_slalom.h"
 #include "sprint/gui_sprint.h"
+#include "protocol/gui_protocol.h"
 
 /* main window constructor */
 rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
@@ -51,6 +52,7 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	tabWidget->addTab(new gui::Sprint(dispatcher,   this),	lang::sprint);
 	tabWidget->addTab(new gui::Slalom(dispatcher,	this),	lang::slalom);
 	tabWidget->addTab(new gui::LongRace(dispatcher, this),	lang::longRace);
+	tabWidget->addTab(new gui::Protocol(dispatcher, this),	lang::protocol);
 } /* end of 'WindowMain' constructor */
 
 /* saving dispatcher state slot */

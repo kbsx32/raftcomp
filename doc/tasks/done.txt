@@ -2,13 +2,21 @@
 # done
 ##############
 
-#E fix loading rides.
-#E sprint : priority-player ( swap second and first player )
-#E sprint : inverse start order.
-#E fix memory leaks
-#E sprint : fatal error.
+## 16.01.2015. ( Happy birthday, chusa, my best friend. )
+M current result protocol ( first version ).
 
-#M weak-order.
-#M save order to file.
+## before :
 
-#ME : something wrong with slalom ( sprint writes protocol very badly )
+M correct work in weak order uploading from file.
+
+M weak-order.
+M save order to file.
+
+ME : something wrong with slalom ( sprint writes protocol very badly )
+
+E fix loading rides.
+E sprint : priority-player ( swap second and first player )
+E sprint : inverse start order.
+E fix memory leaks
+E sprint : fatal error.
+
