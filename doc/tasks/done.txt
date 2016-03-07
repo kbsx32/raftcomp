@@ -2,7 +2,13 @@
 # done
 ##############
 
-## 16.01.2015. ( Happy birthday, chusa, my best friend. )
+
+## 07.03.2016
+M save protocol to file.
+M correct protocol restoring after uploading. 
+A autofinalizing when discpiline was end
+
+## 16.01.2016. ( Happy birthday, chusa, my best friend. )
 M current result protocol ( first version ).
 
 ## before :

@@ -21,6 +21,9 @@ rfc::gui::Slalom::Slalom(Dispatcher *dispatcher, QWidget *parent) :
 {
 	setSizePolicy(QSizePolicy::Minimum,
 				  QSizePolicy::Minimum);
+
+    if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::SLALOM))
+        activateDiscipline();
 } /* end of 'Qualify' constructor */
 
 /* activate competition */

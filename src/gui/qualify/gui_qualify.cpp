@@ -20,6 +20,9 @@ rfc::gui::Qualify::Qualify(Dispatcher *dispatcher, QWidget *parent) :
 {
 	setSizePolicy(QSizePolicy::Minimum,
 				  QSizePolicy::Minimum);
+
+    if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::QUALIFY))
+        activateDiscipline();
 } /* end of 'Qualify' constructor */
 
 /* activate competition */

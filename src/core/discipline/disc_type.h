@@ -149,6 +149,9 @@ namespace rfc {
 			/* returns current discipline */
 			disc::TypeDisc getCurrentDiscipline();
 
+            /* returns current discipline */
+            disc::TypeDisc getPreviousDiscipline(const disc::TypeDisc type);
+
 			/* finish mandat comission */
 			void setMandatComissionFinished();
 

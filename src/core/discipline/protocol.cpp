@@ -22,6 +22,13 @@ rfc::disc::Protocol::TeamScore::TeamScore(const TeamId id) :
 {
 } /* end of 'TeamScore' constructor */
 
+/* explicitted constructor */
+rfc::disc::Protocol::TeamScore::TeamScore() :
+    teamId(0),
+    score(0)
+{
+} /* end of 'TeamScore' constructor */
+
 /* comparator */
 bool rfc::disc::Protocol::TeamScore::operator<(const TeamScore &second) const
 {
@@ -55,6 +62,31 @@ rfc::disc::Protocol::Protocol(const Protocol &src) :
 {
 } /* end of 'Protocol' constructor */
 
+/* loading proto from file */
+rfc::disc::Protocol::Protocol(FILE *fileIn, const uint32_t version)
+{
+    if (version < 56)
+        return ;
+
+    uint32_t sz;
+    fread(&sz, sizeof(sz), 1, fileIn);
+    score.resize(sz);
+    if (sz > 0)
+        fread(&score[0], sizeof(score[0]), sz, fileIn);
+} /* end of 'Protocol' constructor */
+
+/* saving proto to file */
+void rfc::disc::Protocol::save(FILE *fileOut, const uint32_t version)
+{
+    if (version < 56)
+        return ;
+
+    uint32_t sz = score.size();
+
+    fwrite(&sz, sizeof(sz), 1, fileOut);
+    fwrite(&score[0], sizeof(score[0]), sz, fileOut);
+} /* end of 'save' function */
+
 /* sum all results from protocols
  * returns self-reference.
  */
@@ -81,7 +113,8 @@ rfc::disc::Protocol & rfc::disc::Protocol::operator+=(const Protocol &prot1)
 
 /* add info to map */
 rfc::disc::CompScore::CompScore() :
-	scores(ENUM_CAST(disc::TypeDisc::COUNT))
+    scores(ENUM_CAST(disc::TypeDisc::COUNT)),
+    typeSnapshots(ENUM_CAST(disc::TypeDisc::COUNT))
 {
 } /* end of 'addProtocol' function */
 
@@ -91,6 +124,8 @@ void rfc::disc::CompScore::addProtocol(const TypeDisc type, const Protocol &prot
 	scores[ENUM_CAST(type)] = prot;
 
 	resultProt += prot;
+
+    typeSnapshots[ENUM_CAST(type)] = resultProt;
 } /* end of 'addProtocol' function */
 
 /* return protocol.
@@ -106,6 +141,13 @@ rfc::disc::Protocol &rfc::disc::CompScore::getResultProtocol()
 {
 	resultProt.sort();
 	return resultProt;
+} /* end of 'getResultProtocol' function */
+
+/* return full competition result for choosed moment */
+rfc::disc::Protocol &rfc::disc::CompScore::getResultProtocol(const TypeDisc type)
+{
+    typeSnapshots[ENUM_CAST(type)].sort();
+    return typeSnapshots[ENUM_CAST(type)];
 } /* end of 'getResultProtocol' function */
 
 /* return all protocols */
@@ -142,3 +184,34 @@ uint32_t rfc::disc::CompScore::findTeamResult(const disc::Type &type)
 
 	return tmRes->score;
 } /* end of 'findTeamResult' function */
+
+/* save all protocols to file */
+void rfc::disc::CompScore::save(FILE *fileOut, const uint32_t version)
+{
+    if (version < 56)
+        return ;
+
+    for (Protocol &prot : scores)
+        prot.save(fileOut, version);
+    for (Protocol &prot : typeSnapshots)
+        prot.save(fileOut, version);
+
+    resultProt.save(fileOut, version);
+}
+
+/* load all protocols from file */
+void rfc::disc::CompScore::load(FILE *fileIn, const uint32_t version)
+{
+    if (version < 56)
+        return ;
+
+    scores.resize(ENUM_CAST(TypeDisc::COUNT));
+    typeSnapshots.resize(ENUM_CAST(TypeDisc::COUNT));
+
+    for (Protocol &prot : scores)
+        prot = Protocol(fileIn, version);
+    for (Protocol &prot : typeSnapshots)
+        prot = Protocol(fileIn, version);
+
+    resultProt = Protocol(fileIn, version);
+}

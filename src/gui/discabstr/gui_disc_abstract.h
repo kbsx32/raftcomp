@@ -24,7 +24,7 @@ namespace rfc
 		 * note :
 		 *   this widget already has layout.
 		 */
-		class DiscAbstract: public QWidget
+        class DiscAbstract: public QWidget
 		{
 			Q_OBJECT
 

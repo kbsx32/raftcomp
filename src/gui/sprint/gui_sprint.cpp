@@ -39,6 +39,10 @@ rfc::gui::Sprint::Sprint(Dispatcher *dispatcher, QWidget *parent) :
 	/* connecting 'next stage' button */
 	connect(butNextStage, SIGNAL(clicked(bool)),
 			this, SLOT(slotSwitchStage()));
+
+
+    if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::SPRINT))
+        activateDiscipline();
 } /* end of 'Qualify' constructor */
 
 /* adding new table */

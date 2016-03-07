@@ -41,7 +41,7 @@ namespace rfc {
 		men::Team * getTeam(uint32_t teamId);
 
 		/* save info to file.
-		 * current saving version : 1.
+         * current saving version : 56.
 		 * see doc/format-dbc/v*.txt files
 		 * to full info about saving format.
 		 */
@@ -64,6 +64,9 @@ namespace rfc {
 
 		/* reset all dispatcher info */
 		void reset();
+
+        /* get result protocol snapshot */
+        disc::Protocol &getResultProtocolSnapshot(const disc::TypeDisc type);
 
 		/* class destructor */
 		~Dispatcher();

@@ -29,6 +29,8 @@ release {
 INCLUDEPATH += .
 QMAKE_CXXFLAGS += -std=c++11 -msse2 -Wno-reorder -Wno-unused-parameter -Wno-sized-deallocation
 
+# QMAKE_CXXFLAGS += -MP 2
+
 SOURCES += \
     src/main.cpp \
     src/core/dispatcher.cpp \

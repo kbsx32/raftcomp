@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
 	QApplication app(argc, argv);
 
-	/* need to use settings in QSettings */
+    /* need to use settings in QSettings */
 	app.setOrganizationName(RFC_APP_CREATOR);
 	app.setApplicationName(RFC_APP_NAME);
 

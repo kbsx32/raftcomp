@@ -33,6 +33,9 @@ namespace rfc
 				uint32_t score;
 
 			public:
+                /* default constructor */
+                explicit TeamScore();
+
 				/* constructor */
 				explicit TeamScore(const TeamId teamId, const uint32_t score);
 
@@ -41,7 +44,17 @@ namespace rfc
 
 				/* comparator */
 				bool operator<(const TeamScore &scoreSecond) const;
-			}; /* end of 'TeamScore' class */
+
+                /* file-constructor.
+                 * available from v4.
+                 */
+                explicit TeamScore(FILE *fileIn, const uint32_t version);
+
+                /* save team score.
+                 * available from v4.
+                 */
+                void save(FILE *fileOut, const uint32_t version);
+            }; /* end of 'TeamScore' class */
 
 			typedef std::vector<TeamScore> TeamsArray;
 
@@ -69,18 +82,24 @@ namespace rfc
 			 * all teams.
 			 */
 			void sort();
+
+            /* fs-synchro */
+            Protocol(FILE *fileIn, const uint32_t version);
+            void save(FILE *fileOut, const uint32_t version);
 		}; /* end of 'Protocol' class */
 
 		/* full competition score class */
 		class CompScore
 		{
 		private:
-			std::vector<Protocol> scores;
+            typedef std::vector<Protocol> ProtGroup;
+
+            ProtGroup
+                scores,
+                typeSnapshots;
+
 			Protocol resultProt;			 /* result protocol values */
-
 		public:
-			typedef std::vector<Protocol> ProtGroup;
-
 			/* constructor.
 			 * inits 'scores' vector.
 			 */
@@ -101,8 +120,16 @@ namespace rfc
 			/* return full competition result */
 			Protocol &getResultProtocol();
 
+            /* return full competition result for choosed moment */
+            Protocol &getResultProtocol(const TypeDisc type);
+
 			/* get score of team in protocol */
 			uint32_t findTeamResult(const disc::Type &type);
+
+            /* save all protocols to file */
+            void save(FILE *fileOut, const uint32_t version);
+            /* load all protocols from file */
+            void load(FILE *fileIn, const uint32_t version);
 		}; /* end of 'CompScore' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

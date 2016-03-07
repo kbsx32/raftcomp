@@ -22,7 +22,10 @@
 rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 	dispatcher(dispatcher), QWidget(parent)
 {
-	QVBoxLayout *layout = new QVBoxLayout(this);
+    QScrollArea *scroll = new QScrollArea;
+    scroll->setWidget(this);
+
+    QVBoxLayout *layout = new QVBoxLayout(this);
 
 	QPushButton *buttonFinalize = new QPushButton(lang::finalize);
 	connect(buttonFinalize, SIGNAL(clicked(bool)),
@@ -42,7 +45,7 @@ rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
 	if (dispatcher->isMandatFinished())
 		finalize();
 
-	setMouseTracking(true);
+    // setMouseTracking(true);
 } /* end of 'Mandat' constructor */
 
 /* pushed button to create new team */

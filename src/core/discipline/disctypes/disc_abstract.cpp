@@ -85,7 +85,7 @@ void rfc::disc::DisciplineAbstract::sortStartTeamsDefault(
 			Dispatcher *dispatcher,
 			const disc::Type &type)
 {
-	const Protocol::TeamsArray arr = dispatcher->getResultProtocol().score;
+    const Protocol::TeamsArray arr = dispatcher->getResultProtocolSnapshot(type.typeDisc).score;
 
 	for (const Protocol::TeamScore &score : arr)
 		ridesDest.push_back(dispatcher->getLap(type.getTeamed(score.teamId)));

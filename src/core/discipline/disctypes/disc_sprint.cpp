@@ -42,7 +42,8 @@ void rfc::disc::Sprint::init()
 	/* init first rides */
 
 	/* sorting teams by sprint rules */
-	const Protocol::TeamsArray arrScores = dispatcher->getResultProtocol().score;
+    const Protocol::TeamsArray
+            arrScores = dispatcher->getResultProtocolSnapshot(TypeDisc::SPRINT).score;
 
 	DuelGroup &currentDuels = rides[currentStage];
 
@@ -198,7 +199,7 @@ bool rfc::disc::Sprint::switchNextStage()
 	}
 
 	/* check if any more stages exist */
-	if (currentStage == TypeSprint::END) {
+    if (prevStage == TypeSprint::END || currentStage == TypeSprint::END) {
 		/* we must commit results of FINAL_A */
 		Duel finalA = rides[TypeSprint::FINAL_A][0];
 		addToProtocolTwoTeams(finalA.teams[0], finalA.teams[1]);

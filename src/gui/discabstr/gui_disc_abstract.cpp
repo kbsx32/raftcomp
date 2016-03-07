@@ -9,6 +9,7 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QScrollArea>
 
 #include "gui_disc_abstract.h"
 
@@ -16,7 +17,9 @@
 rfc::gui::DiscAbstract::DiscAbstract(QWidget *parent) :
 	QWidget(parent)
 {
-	QVBoxLayout *lay = new QVBoxLayout(this);
+    QScrollArea *scroll = new QScrollArea(this);
+
+    QVBoxLayout *lay = new QVBoxLayout(this);
 
 	QHBoxLayout *butsLay = new QHBoxLayout;
 

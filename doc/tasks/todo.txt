@@ -7,18 +7,19 @@ A : add later
 
 ## for release 0.0 :
 
-M save protocol to file.
-M correct protocol restroing after uploading. 
 M clear in restore dispatcher protocol.
 M mandat team count borders.
 
 S pushpins update after loading
 
-S memory leaks
-
 A gui : scroll area
+S gui : if finished - show all needed info
+S gui : update protocol info
+S gui : protocol : name columns. --> get good view
 
 ## for next releases 
+
+S memory leaks
 
 M id team repeating disable. => memory leaks.
 

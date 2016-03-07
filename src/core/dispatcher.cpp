@@ -69,7 +69,7 @@ const rfc::String rfc::Dispatcher::getSavingFile()
 void rfc::Dispatcher::save(const String &fileOutName)
 {
 	/* current saving version */
-	uint32_t version = 3;
+    uint32_t version = 56;
 
 	FILE *fileOut = std::fopen(fileOutName.data(), "wb");
 
@@ -91,6 +91,8 @@ void rfc::Dispatcher::save(const String &fileOutName)
 
 	/* save rides */
 	disc::Rides::save(fileOut, version);
+
+    CompScore::save(fileOut, version);
 
 	fclose(fileOut);
 } /* end of 'Dispatcher::save' function */
@@ -131,7 +133,7 @@ void rfc::Dispatcher::load(const String &fileInName)
 		/* fill new teams */
 		for (uint32_t i = 0; i < teamsCnt; ++i)
 			teams.push_back(new men::Team(*this, fileIn, version));
-	} else if (version > 1) {
+    } else {
 
 		men::MenDatabase::load(fileIn, version);
 
@@ -144,7 +146,11 @@ void rfc::Dispatcher::load(const String &fileInName)
 			teams.push_back(new men::Team(*this, fileIn, version));
 
 		disc::Rides::load(fileIn, version);
-	}
+
+    }
+
+    if (version >= 56)
+        CompScore::load(fileIn, version);
 
 	fclose(fileIn);
 } /* end of 'Dispatcher::load' function */
@@ -160,4 +166,12 @@ void rfc::Dispatcher::reset()
 	fileSaving = String();
 
 	Rides::reset();
+    // TODO : CompScore::reset();
 } /* end of 'reset' function */
+
+/* get result protocol snapshot */
+rfc::disc::Protocol &rfc::Dispatcher::getResultProtocolSnapshot(const disc::TypeDisc type)
+{
+    auto typeDst = getPreviousDiscipline(type);
+    return getResultProtocol(typeDst);
+}

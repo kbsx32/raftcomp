@@ -213,6 +213,21 @@ rfc::disc::TypeDisc rfc::disc::Rides::getCurrentDiscipline()
 	return _disciplineCurrent;
 } /* end of 'getCurrentDiscipline' function */
 
+/* returns current discipline */
+rfc::disc::TypeDisc rfc::disc::Rides::getPreviousDiscipline(const disc::TypeDisc type)
+{
+    uint32_t sz = ridesOrder.size(), i;
+
+    for (i = 0; i < sz; ++i)
+        if (ridesOrder[i] == type)
+            break;
+    if (i == sz)
+        throw Exception(lang::errorLogical); // wtf ???asn't such discipl
+
+    /* returning previous discpiline */
+    return ridesOrder[i - 1];
+} /* end of 'getCurrentDiscipline' function */
+
 /* close discipline. */
 void rfc::disc::Rides::finishDiscipline()
 {
