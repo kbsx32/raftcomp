@@ -80,7 +80,7 @@ const rfc::disc::Protocol rfc::disc::Sprint::getProtocol()
 	/* give scores */
 
 	for (int32_t i = size - 1; i >= 0; --i)
-		protocolInversed.score[i].score = 200 - (size - i) * 10;
+        protocolInversed.score[i].score = 200 - (size - i - 1) * 10;
 
 	// DisciplineAbstract::setScores(200, 10)
 	return protocolInversed;
@@ -94,8 +94,7 @@ void rfc::disc::Sprint::addToProtocolTwoTeams(RideTeam *team0, RideTeam *team1)
 	/* we must commit results of FINAL_B before */
 	TeamId teamWinner, teamLooser;
 
-	Duel finalB = rides[TypeSprint::FINAL_B][0];
-	if (finalB.teams[0]->getTimeResult() < finalB.teams[1]->getTimeResult()) {
+    if (team0->getTimeResult() < team1->getTimeResult()) {
 		teamWinner = team0->getTeamId();
 		teamLooser = team1->getTeamId();
 	} else {
@@ -198,8 +197,11 @@ bool rfc::disc::Sprint::switchNextStage()
 		addToProtocolTwoTeams(finalB.teams[0], finalB.teams[1]);
 	}
 
+    if (prevStage == TypeSprint::END)
+        return false;
+
 	/* check if any more stages exist */
-    if (prevStage == TypeSprint::END || currentStage == TypeSprint::END) {
+    if (currentStage == TypeSprint::END) {
 		/* we must commit results of FINAL_A */
 		Duel finalA = rides[TypeSprint::FINAL_A][0];
 		addToProtocolTwoTeams(finalA.teams[0], finalA.teams[1]);

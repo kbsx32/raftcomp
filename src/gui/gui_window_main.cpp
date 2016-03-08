@@ -25,10 +25,13 @@
 /* main window constructor */
 rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	dispatcher(dispatcher), QMainWindow(parent),
-	stackWidgetsFields(new QStackedWidget(this)),
+    tabWidget(new QTabWidget(this)),
 	splitter(new QSplitter(this))
 {
-	/* add splitter to widget */
+    this->setWindowTitle(
+      QString("raftcomp - ") + dispatcher->getSavingFile());
+
+    /* add splitter to widget */
 	setCentralWidget(splitter);
 
 	/* add menu */
@@ -43,16 +46,18 @@ rfc::gui::WindowMain::WindowMain(Dispatcher *dispatcher, QWidget *parent) :
 	setMenuBar(qMenuBar);
 
 	/* all rules tabs */
-	QTabWidget *tabWidget = new QTabWidget(this);
+    // QTabWidget *tabWidget = new QTabWidget(this);
 	splitter->addWidget(tabWidget);
 
 	tabWidget->addTab(new gui::mandat::Mandat(dispatcher, this), lang::mandat);
 
-	tabWidget->addTab(new gui::Qualify(dispatcher,  this),	lang::qualify);
-	tabWidget->addTab(new gui::Sprint(dispatcher,   this),	lang::sprint);
-	tabWidget->addTab(new gui::Slalom(dispatcher,	this),	lang::slalom);
-	tabWidget->addTab(new gui::LongRace(dispatcher, this),	lang::longRace);
-	tabWidget->addTab(new gui::Protocol(dispatcher, this),	lang::protocol);
+    addDisciplineToTab(new gui::Qualify(dispatcher,  this),	lang::qualify);
+    addDisciplineToTab(new gui::Sprint(dispatcher,   this),	lang::sprint);
+    addDisciplineToTab(new gui::Slalom(dispatcher,	this),	lang::slalom);
+    addDisciplineToTab(new gui::LongRace(dispatcher, this),	lang::longRace);
+
+    protocol = new gui::Protocol(dispatcher, this);
+    tabWidget->addTab(protocol,	lang::protocol);
 } /* end of 'WindowMain' constructor */
 
 /* saving dispatcher state slot */
@@ -66,6 +71,9 @@ void rfc::gui::WindowMain::slotSavePushed()
 		if (saveFileName == QString())
 			return ;
 
+        if (!saveFileName.contains(".dbc"))
+            saveFileName += ".dbc";
+
 		/* check is added 'extension to end of the file name */
 		if (saveFileName.indexOf(Dispatcher::fileExt) == -1)
 			saveFileName += Dispatcher::fileExt;
@@ -76,3 +84,21 @@ void rfc::gui::WindowMain::slotSavePushed()
 
 	dispatcher->save();
 } /* end of 'slotSavePushed' function */
+
+/* protocol updating */
+void rfc::gui::WindowMain::slotProtocolUpdate()
+{
+    protocol->update();
+} /* end if 'slotProtocolUpdate' funciton */
+
+
+/* add new discipline,
+ * connect signals
+ * and add to tab-widget
+ */
+void rfc::gui::WindowMain::addDisciplineToTab(gui::DiscAbstract *disc, const String &tabTitle)
+{
+    connect(disc, SIGNAL(signalDisciplineFinished()),
+            this, SLOT(slotProtocolUpdate()));
+    tabWidget->addTab(disc, tabTitle);
+}

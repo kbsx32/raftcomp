@@ -108,8 +108,16 @@ rfc::disc::Protocol & rfc::disc::Protocol::operator+=(const Protocol &prot1)
 			(*item).score += val.score;
 	}
 
+    std::sort(score.begin(), score.end());
 	return *this;
 } /* end of 'operator+=' function */
+
+
+/* check is protocol is empty */
+bool rfc::disc::Protocol::isClear()
+{
+    return score.size() == 0;
+}
 
 /* add info to map */
 rfc::disc::CompScore::CompScore() :
@@ -121,9 +129,16 @@ rfc::disc::CompScore::CompScore() :
 /* add info to map */
 void rfc::disc::CompScore::addProtocol(const TypeDisc type, const Protocol &prot)
 {
+    /* if protocol is not clear we can't
+     * change it again
+     */
+    if (!scores[ENUM_CAST(type)].isClear())
+        return ;
+
 	scores[ENUM_CAST(type)] = prot;
 
 	resultProt += prot;
+    // resultProt.sort();
 
     typeSnapshots[ENUM_CAST(type)] = resultProt;
 } /* end of 'addProtocol' function */
@@ -164,6 +179,14 @@ void rfc::disc::Protocol::sort()
 	/* sorting result vector */
 	std::sort(score.begin(), score.end());
 } /* end of 'getSortedTeamsVector' function */
+
+/* return sorted array of
+ * all teams.
+ */
+void rfc::disc::Protocol::reset()
+{
+    score.clear();
+} /* end of 'reset' function */
 
 /* get score of team in protocol */
 uint32_t rfc::disc::CompScore::findTeamResult(const disc::Type &type)
@@ -214,4 +237,15 @@ void rfc::disc::CompScore::load(FILE *fileIn, const uint32_t version)
         prot = Protocol(fileIn, version);
 
     resultProt = Protocol(fileIn, version);
+}
+
+/* reset protocol info */
+void rfc::disc::CompScore::reset()
+{
+    for (Protocol &prot : scores)
+        prot.reset();
+    for (Protocol &prot : typeSnapshots)
+        prot.reset();
+
+    resultProt.reset();
 }

@@ -41,7 +41,7 @@ const rfc::disc::Protocol rfc::disc::DisciplineAbstract::getProtocol()
 /* comparator for teams results */
 bool rfc::disc::DisciplineAbstract::sortTeamsResultComparator(const RideTeam *ride0, const RideTeam *ride1)
 {
-	return ride0->getTimeResult() > ride1->getTimeResult();
+    return ride0->getTimeResult() < ride1->getTimeResult();
 } /* end of 'sortTeamsResultComparator' function */
 
 /* set scores function.

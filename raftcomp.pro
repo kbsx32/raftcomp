@@ -93,3 +93,5 @@ HEADERS  += \
     src/gui/sprint/gui_sprint.h \
     src/lang/lang_translate.h \
     src/gui/protocol/gui_protocol.h
+
+PRECOMPILED_HEADER = src/raftcomp.h

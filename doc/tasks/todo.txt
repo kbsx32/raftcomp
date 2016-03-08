@@ -6,18 +6,12 @@ A : add later
 ###########
 
 ## for release 0.0 :
+ 
+## for next releases 
 
-M clear in restore dispatcher protocol.
 M mandat team count borders.
 
-S pushpins update after loading
-
-A gui : scroll area
-S gui : if finished - show all needed info
-S gui : update protocol info
-S gui : protocol : name columns. --> get good view
-
-## for next releases 
+A change 'last opened database' if created and saved new.
 
 S memory leaks
 

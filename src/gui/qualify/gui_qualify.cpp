@@ -36,14 +36,16 @@ void rfc::gui::Qualify::activateDiscipline()
 	DiscAbstract::setActivated();
 
 	/* pushpins changer */
-	QSpinBox *spinBox = new QSpinBox(this);
-	spinBox->setPrefix(lang::pins);
-	spinBox->setRange(0, 30);
-	spinBox->setButtonSymbols(QSpinBox::PlusMinus);
-	connect(spinBox, SIGNAL(valueChanged(int)),
+    pushPins = new QSpinBox(this);
+    pushPins->setPrefix(lang::pins);
+    pushPins->setRange(0, 30);
+    pushPins->setButtonSymbols(QSpinBox::PlusMinus);
+    connect(pushPins, SIGNAL(valueChanged(int)),
 			this, SLOT(slotChangePushpinsCount(int)));
+    pushPins->setValue(getPinsCount());
+    pushPins->update();
 
-	layout()->addWidget(spinBox);
+    widget()->layout()->addWidget(pushPins);
 
 	/* main table */
 	rideTable = new gui::ride::Ride(*dispatcher, disc::Type(disc::TypeDisc::QUALIFY), this);
@@ -51,7 +53,7 @@ void rfc::gui::Qualify::activateDiscipline()
 	init();
 	rideTable->addTeams(rides);
 
-	layout()->addWidget(rideTable);
+    widget()->layout()->addWidget(rideTable);
 
 	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::QUALIFY))
 		finalizeDiscipline();
@@ -71,8 +73,12 @@ void rfc::gui::Qualify::slotChangePushpinsCount(int countNew)
 void rfc::gui::Qualify::finalizeDiscipline()
 {
 	/* set disabled all widgets */
-	setEnabled(false);
+    // setEnabled(false);
 
+    pushPins->setEnabled(false);
+    widget()->setEnabled(false);
 	dispatcher->addProtocol(disc::TypeDisc::QUALIFY, getProtocol());
 	dispatcher->finishDiscipline();
+
+    setFinished();
 } /* end of 'finalizeDiscipline' function */

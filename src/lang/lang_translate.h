@@ -125,6 +125,7 @@ namespace rfc
 		extern rfc::String impossible;
 
 		extern rfc::String protocol;
-	} /* end of 'lang' namespace */
+        extern rfc::String people;
+    } /* end of 'lang' namespace */
 }
 #endif /* RFC_LANG_TRANSLATE_H */

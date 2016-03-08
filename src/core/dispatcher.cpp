@@ -166,7 +166,7 @@ void rfc::Dispatcher::reset()
 	fileSaving = String();
 
 	Rides::reset();
-    // TODO : CompScore::reset();
+    CompScore::reset();
 } /* end of 'reset' function */
 
 /* get result protocol snapshot */

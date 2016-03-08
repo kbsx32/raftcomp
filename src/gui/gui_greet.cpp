@@ -99,7 +99,8 @@ void rfc::gui::WindowGreet::runWindowMain()
 
 	/* creating dialog with main-window */
 	QDialog qdial;
-	qdial.setLayout(new QHBoxLayout);
+    qdial.setWindowTitle(windowMain->windowTitle());
+    qdial.setLayout(new QHBoxLayout);
 	qdial.layout()->addWidget(windowMain);
 	qdial.exec();
 

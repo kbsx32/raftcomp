@@ -39,3 +39,11 @@ const rfc::disc::Protocol rfc::disc::Qualify::getProtocol()
 
 	return DisciplineAbstract::setScores(rides, 100, 5);
 } /* end of 'getResultProtocol' function */
+
+uint32_t rfc::disc::Qualify::getPinsCount()
+{
+    if (rides.size() > 0)
+        return rides[0]->getPinsCount();
+    else
+        return 0;
+}

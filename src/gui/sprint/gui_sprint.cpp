@@ -28,8 +28,8 @@ rfc::gui::Sprint::Sprint(Dispatcher *dispatcher, QWidget *parent) :
 
 	/* layout already created on parent-class widget */
 	// setLayout(new QVBoxLayout);
-	layout()->addWidget(butNextStage);
-	layout()->addWidget(tabWidget);
+    widget()->layout()->addWidget(butNextStage);
+    widget()->layout()->addWidget(tabWidget);
 
 	/* disable finalizer button */
 	hideFinalizer();
@@ -76,7 +76,7 @@ void rfc::gui::Sprint::activateDiscipline()
 
 	/* creating widget for current table */
 	QScrollArea *qRideCurrent = new QScrollArea(this);
-	layout()->addWidget(qRideCurrent);
+    widget()->layout()->addWidget(qRideCurrent);
 
 	// QScrollBar *qSCroll = new QScrollBar(qRideCurrent);
 	qRideCurrent->addScrollBarWidget(
@@ -103,7 +103,6 @@ void rfc::gui::Sprint::activateDiscipline()
 
 	if (dispatcher->checkIsDisciplineFinished(disc::TypeDisc::SPRINT))
 		finalizeDiscipline();
-
 } /* end of 'slotActivateButtonClicked' slot */
 
 /* finalization virtual function.
@@ -113,28 +112,41 @@ void rfc::gui::Sprint::activateDiscipline()
 void rfc::gui::Sprint::finalizeDiscipline()
 {
 	/* restoring protocol */
-	while (switchNextStage())
-		;
+    while (switchNextStage())
+        activateGuiNextStage();
 
 	/* set disabled all widgets */
-	setEnabled(false);
+    tabWidget->widget(tabWidget->count() - 1)->setEnabled(false);
+    butNextStage->setEnabled(false);
 
 	dispatcher->addProtocol(disc::TypeDisc::SPRINT, getProtocol());
 	dispatcher->finishDiscipline();
+
+    setFinished();
 } /* end of 'finalizeDiscipline' function */
 
+void rfc::gui::Sprint::activateGuiNextStage()
+{
+    tabWidget->widget(tabWidget->count() - 1)->setEnabled(false);
+
+    QWidget *widgCurrent = new QWidget(this);
+    widgCurrent->setLayout(new QVBoxLayout);
+    addDuelTables(widgCurrent, rides[currentStage]);
+
+    tabWidget->addTab(widgCurrent, stageName(currentStage));
+}
+
 /* switching button */
-void rfc::gui::Sprint::slotSwitchStage()
+bool rfc::gui::Sprint::slotSwitchStage()
 {
 	if (!switchNextStage())
-		slotFinalize(); /* finish if there no more stages */
-	else {
-		QWidget *widgCurrent = new QWidget(this);
-		widgCurrent->setLayout(new QVBoxLayout);
-		addDuelTables(widgCurrent, rides[currentStage]);
+    {
+        slotFinalize(); /* finish if there no more stages */
+        return false;
+    }
+    activateGuiNextStage();
 
-		tabWidget->addTab(widgCurrent, stageName(currentStage));
-	}
+    return true;
 } /* end of 'slotSwitchStage' function */
 
 /* get stage name by type sprint */

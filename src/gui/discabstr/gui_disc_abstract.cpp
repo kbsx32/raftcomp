@@ -12,15 +12,18 @@
 #include <QScrollArea>
 
 #include "gui_disc_abstract.h"
+#include "../gui_window_main.h"
 
 /* default constructor */
 rfc::gui::DiscAbstract::DiscAbstract(QWidget *parent) :
-	QWidget(parent)
+    QScrollArea(parent)
 {
-    QScrollArea *scroll = new QScrollArea(this);
+    QWidget *widg = new QWidget();
 
-    QVBoxLayout *lay = new QVBoxLayout(this);
+    setWidgetResizable(true);
+    setWidget(widg);
 
+    QVBoxLayout *lay = new QVBoxLayout(widg);
 	QHBoxLayout *butsLay = new QHBoxLayout;
 
 	activator = new QPushButton(lang::activate, this);
@@ -104,8 +107,8 @@ void rfc::gui::DiscAbstract::slotFinalize()
 	 * somebody talks.
 	 */
 
-	/* check users brain */
-	if (showMessageSureToFinalize())
+    /* check users brain */
+    if (showMessageSureToFinalize())
 		finalizeDiscipline();
 } /* end of 'slotFinalize' function */
 
@@ -126,3 +129,10 @@ void rfc::gui::DiscAbstract::hideActivator()
 {
 	activator->hide();
 } /* end of 'hideFinalizer' function */
+
+
+/* emit finish-signal. */
+void rfc::gui::DiscAbstract::setFinished()
+{
+    emit signalDisciplineFinished();
+}

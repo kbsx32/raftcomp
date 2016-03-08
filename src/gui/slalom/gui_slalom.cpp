@@ -39,14 +39,17 @@ void rfc::gui::Slalom::activateDiscipline()
 	DiscAbstract::setActivated();
 
 	/* pushpins changer */
-	QSpinBox *spinBox = new QSpinBox(this);
-	spinBox->setPrefix(lang::pins);
-	spinBox->setRange(0, 30);
-	spinBox->setButtonSymbols(QSpinBox::PlusMinus);
-	connect(spinBox, SIGNAL(valueChanged(int)),
+    pushPins = new QSpinBox(this);
+    pushPins->setPrefix(lang::pins);
+    pushPins->setRange(0, 30);
+    pushPins->setButtonSymbols(QSpinBox::PlusMinus);
+    connect(pushPins , SIGNAL(valueChanged(int)),
 			this, SLOT(slotChangePushpinsCount(int)));
 
-	layout()->addWidget(spinBox);
+    pushPins->setValue(getPinsCount());
+    pushPins->update();
+
+    widget()->layout()->addWidget(pushPins);
 
 	/* switcher between two tries */
 	QTabWidget *tabWidget = new QTabWidget;
@@ -54,7 +57,7 @@ void rfc::gui::Slalom::activateDiscipline()
 	/* disconnecting auto calling higher widgets */
 	// disconnect((QAbstractButton *)tabWidget, SIGNAL(clicked(bool)));
 
-	layout()->addWidget(tabWidget);
+    widget()->layout()->addWidget(tabWidget);
 
 	/* main tables */
 	init();
@@ -86,8 +89,13 @@ void rfc::gui::Slalom::slotChangePushpinsCount(int countNew)
 void rfc::gui::Slalom::finalizeDiscipline()
 {
 	/* set disabled all widgets */
-	setEnabled(false);
+    rideTable1->setEnabled(false);
+    rideTable2->setEnabled(false);
+    pushPins->setEnabled(false);
 
 	dispatcher->addProtocol(disc::TypeDisc::SLALOM, getProtocol());
 	dispatcher->finishDiscipline();
+
+    hideFinalizer();
+    setFinished();
 } /* end of 'finalizeDiscipline' function */

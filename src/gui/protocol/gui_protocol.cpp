@@ -6,6 +6,8 @@
  * kbsx32. <kbsx32@yandex.ru>.
  */
 
+#include <QHeaderView>
+
 #include "gui_protocol.h"
 
 rfc::gui::Protocol::Protocol(Dispatcher *disp, QWidget *parent) :
@@ -32,9 +34,9 @@ void rfc::gui::Protocol::update()
 		DISCIPLINES_BEGIN = 3,
 		DISCIPLINES_END = ENUM_CAST(disc::TypeDisc::COUNT)
 						  - ENUM_CAST(disc::TypeDisc::QUALIFY)
-						  + ENUM_CAST(Columns::DISCIPLINES_BEGIN),
+                          + ENUM_CAST(Columns::DISCIPLINES_BEGIN),
 
-		SCORE_RESULT,
+        SCORE_RESULT = DISCIPLINES_END,
 		PLACE,
 		END,
 		COUNT = END,
@@ -47,7 +49,20 @@ void rfc::gui::Protocol::update()
 	uint32_t teamsCnt = resProt.score.size();
 
 	this->setColumnCount(ENUM_CAST(Columns::COUNT));
-	this->setRowCount(teamsCnt);
+    // this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    this->setRowCount(teamsCnt);
+
+    /* init table headers */
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::ID),              new QTableWidgetItem(lang::id));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::NAME),            new QTableWidgetItem(lang::name));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::PEOPLE),          new QTableWidgetItem(lang::people));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::SCORE_RESULT),    new QTableWidgetItem(lang::score));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::PLACE),           new QTableWidgetItem(lang::place));
+
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::DISCIPLINES_BEGIN) + 0, new QTableWidgetItem(lang::qualify));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::DISCIPLINES_BEGIN) + 1, new QTableWidgetItem(lang::sprint));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::DISCIPLINES_BEGIN) + 2, new QTableWidgetItem(lang::slalom));
+    this->setHorizontalHeaderItem(ENUM_CAST(Columns::DISCIPLINES_BEGIN) + 3, new QTableWidgetItem(lang::longRace));
 
 	/* generating table */
 	uint32_t
@@ -75,7 +90,11 @@ void rfc::gui::Protocol::update()
 			setItem(teamInd, ENUM_CAST(Columns::ID),
 					new QTableWidgetItem(QString::number(resProt.score[teamInd].teamId)));
 
-		}
+            men::Team *team = dispatcher->getTeam(resProt.score[teamInd].teamId);
+            setItem(teamInd, ENUM_CAST(Columns::NAME), new QTableWidgetItem(team->teamName));
+            setItem(teamInd, ENUM_CAST(Columns::PEOPLE), new QTableWidgetItem(team->getSurnames()));
+            setItem(teamInd, ENUM_CAST(Columns::PLACE), new QTableWidgetItem(QString::number(teamInd + 1)));
+        }
 } /* end of 'update' function */
 
 /* activated window slot.

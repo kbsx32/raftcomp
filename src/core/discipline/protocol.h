@@ -86,6 +86,12 @@ namespace rfc
             /* fs-synchro */
             Protocol(FILE *fileIn, const uint32_t version);
             void save(FILE *fileOut, const uint32_t version);
+
+            /* reset protocol info */
+            void reset();
+
+            /* check is protocol is empty */
+            bool isClear();
 		}; /* end of 'Protocol' class */
 
 		/* full competition score class */
@@ -130,6 +136,9 @@ namespace rfc
             void save(FILE *fileOut, const uint32_t version);
             /* load all protocols from file */
             void load(FILE *fileIn, const uint32_t version);
+
+            /* reset protocol info */
+            void reset();
 		}; /* end of 'CompScore' class */
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

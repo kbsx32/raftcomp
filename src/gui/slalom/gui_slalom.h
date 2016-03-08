@@ -11,6 +11,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QSpinBox>
 
 #include "../../core/dispatcher.h"
 #include "../ridetable/gui_ride.h"
@@ -31,6 +32,7 @@ namespace rfc
 			/* main info */
 			gui::ride::Ride *rideTable1 = nullptr;
 			gui::ride::Ride *rideTable2 = nullptr;
+            QSpinBox *pushPins;
 
 		public:
 			/* default constructor */

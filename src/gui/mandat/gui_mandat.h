@@ -17,6 +17,7 @@
 #include <QSignalMapper>
 #include <QPushButton>
 #include <QFormLayout>
+#include <QScrollArea>
 
 /* include all core dispatcher support */
 #include "../../core/dispatcher.h"
@@ -129,7 +130,7 @@ namespace rfc {
 			}; /* end of 'MandatTeamMinimal' class */
 
 			/* global mandat-table */
-			class Mandat : public QWidget
+            class Mandat : public QScrollArea
 			{
 				Q_OBJECT
 

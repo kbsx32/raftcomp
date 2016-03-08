@@ -28,8 +28,8 @@ namespace rfc
 		public:
 			explicit Protocol(Dispatcher *disp, QWidget *parent = nullptr);
 
-			/* reinitting info in table */
-			void update();
+            /* reinitting info in table */
+            void update();
 
 		public slots:
 			/* activated window slot.

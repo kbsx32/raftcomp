@@ -133,5 +133,6 @@ rfc::String rfc::lang::sprintLap = "sprint lap";
 rfc::String rfc::lang::impossible = "it is impossible";
 
 rfc::String rfc::lang::protocol = "protocol";
+rfc::String rfc::lang::people = "people";
 
 #endif /* end of 'default' */

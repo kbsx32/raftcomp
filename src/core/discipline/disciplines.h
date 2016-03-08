@@ -105,7 +105,9 @@ namespace rfc
 
 			/* destructor */
 			~Qualify();
-		}; /* end of 'Qualify' class */
+
+            uint32_t getPinsCount();
+        }; /* end of 'Qualify' class */
 
 		/* Qualification controller class */
 		class Slalom : public DisciplineAbstract
@@ -128,6 +130,8 @@ namespace rfc
 
 			/* destructor */
 			~Slalom();
+
+            uint32_t getPinsCount();
 		}; /* end of 'Qualify' class */
 
 		/* Qualification controller class */
@@ -230,7 +234,7 @@ namespace rfc
 			 * commiting it to protocol
 			 */
 			void addToProtocolTwoTeams(RideTeam *team0, RideTeam *team1);
-		}; /* end of 'Qualify' class */
+        }; /* end of 'Sprint' class */
 
 	} /* end of 'disc' namespace */
 } /* end of 'rfc' namespace */

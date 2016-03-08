@@ -20,17 +20,19 @@
 
 /* default constructor */
 rfc::gui::mandat::Mandat::Mandat(rfc::Dispatcher *dispatcher, QWidget *parent) :
-	dispatcher(dispatcher), QWidget(parent)
+    dispatcher(dispatcher), QScrollArea(parent)
 {
-    QScrollArea *scroll = new QScrollArea;
-    scroll->setWidget(this);
+    QWidget *widg = new QWidget();
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    setWidgetResizable(true);
+    setWidget(widg);
+
+    QVBoxLayout *layout = new QVBoxLayout(widg);
 
 	QPushButton *buttonFinalize = new QPushButton(lang::finalize);
 	connect(buttonFinalize, SIGNAL(clicked(bool)),
-			this, SLOT(slotFinalize()));
-	layout->addWidget(buttonFinalize);
+            this, SLOT(slotFinalize()));
+    layout->addWidget(buttonFinalize);
 
 	/* add new team button */
 	QPushButton *addTeamBut = new QPushButton(lang::addNewTeam, this);
@@ -60,7 +62,7 @@ void rfc::gui::mandat::Mandat::slotCreateNewTeam()
 	emit teamIntro->slotClickedEditButton();
 
 	/* add widget, connected with this team */
-	layout()->addWidget(teamIntro);
+    widget()->layout()->addWidget(teamIntro);
 } /* end of 'slotCreateNewTeam' slot */
 
 /* applying mandat comission */
@@ -68,7 +70,7 @@ void rfc::gui::mandat::Mandat::finalize()
 {
 	dispatcher->setMandatComissionFinished();
 
-	setEnabled(false);
+    widget()->setEnabled(false);
 } /* end of 'slotFinalize' function */
 
 /* applying mandat comission */

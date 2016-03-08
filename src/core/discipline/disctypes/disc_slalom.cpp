@@ -50,3 +50,11 @@ const rfc::disc::Protocol rfc::disc::Slalom::getProtocol()
 
 	return DisciplineAbstract::setScores(rideResult, 300, 15);
 } /* end of 'getResultProtocol' function */
+
+uint32_t rfc::disc::Slalom::getPinsCount()
+{
+    if (rides[0].size() > 0)
+        return rides[0][0]->getPinsCount();
+    else
+        return 0;
+}

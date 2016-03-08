@@ -2,13 +2,25 @@
 # done
 ##############
 
+## 08.03.2016
+A gui : scroll area
+M clear in restore dispatcher protocol.
+E sprint score swapping fix ( always used finalB results )
+S gui : protocol : name columns. --> get good view
+S pushpins update after loading
+S reset sprint tabs
+S gui : update protocol info
+S gui : if finished - show all needed info
+
+A current changed database name
+S autoindent '.dbc' in saving format if doesn't entered by user
 
 ## 07.03.2016
 M save protocol to file.
 M correct protocol restoring after uploading. 
 A autofinalizing when discpiline was end
 
-## 16.01.2016. ( Happy birthday, chusa, my best friend. )
+## 16.01.2016. ( happy birthday, chusa, my best friend. )
 M current result protocol ( first version ).
 
 ## before :

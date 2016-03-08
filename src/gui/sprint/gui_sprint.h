@@ -55,9 +55,11 @@ namespace rfc
 
 			/* get stage name by type sprint */
 			rfc::String stageName(const disc::TypeSprint type);
+
+            void activateGuiNextStage();
 		public slots:
 			/* switching button */
-			void slotSwitchStage();
+            bool slotSwitchStage();
 		}; /* end of 'Sprint' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */

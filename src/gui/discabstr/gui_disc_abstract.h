@@ -11,6 +11,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QScrollArea>
 
 #include "../../core/dispatcher.h"
 
@@ -24,7 +25,7 @@ namespace rfc
 		 * note :
 		 *   this widget already has layout.
 		 */
-        class DiscAbstract: public QWidget
+        class DiscAbstract: public QScrollArea
 		{
 			Q_OBJECT
 
@@ -43,6 +44,9 @@ namespace rfc
 			 * add 'finalizer' button.
 			 */
 			void setActivated();
+
+            /* emit finish-signal. */
+            void setFinished();
 
 			/* virtualized discipline activation.
 			 * if activation already done
@@ -81,12 +85,16 @@ namespace rfc
 			 * for some disciplines.
 			 */
 			void hideActivator();
+
+        signals:
+            void signalDisciplineFinished();
+
 		public slots:
 			/* activate distance */
 			void slotActivateDiscipline();
 
 			/* activate distance */
-			void slotFinalize();
+            void slotFinalize();
 		}; /* end of 'DiscAbstract' class */
 	} /* end of 'gui' namespace */
 } /* end of 'rfc' namespace */
